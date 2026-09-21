@@ -325,7 +325,7 @@ export const RizheenaShopPage: React.FC = () => {
           <div className="shop-hero-right">
             <div className="shop-hero-image-wrapper">
               <img
-                src="/images/catalogue/gift-sets/grooming-products-display.jpg"
+                src="/images/shop/hero_products.jpg"
                 alt="Rizheena Professional Grooming Collection"
                 className="shop-hero-img"
                 loading="eager"
