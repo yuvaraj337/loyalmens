@@ -1,0 +1,422 @@
+/* ======================================================
+   LOYAL PROFESSIONAL MEN'S PARLOUR
+   Footer — Exact Reference Implementation
+   Background: public/images/footer/footer_bg.png
+   ====================================================== */
+
+.luxury-footer {
+  position: relative;
+  width: 100%;
+  background: #F7EFE5 url('/images/footer/footer_bg.png') center bottom / cover no-repeat;
+  padding: 80px 48px 28px 48px;
+  color: var(--text-dark);
+  overflow: hidden;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.footer-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* ======================================================
+   5-Column Composition Grid
+   ====================================================== */
+.footer-main-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.9fr 1.15fr 1.35fr 1.35fr;
+  gap: 32px;
+  margin-bottom: 54px;
+  align-items: flex-start;
+}
+
+/* ------------------------------------------------------
+   Column 1: Brand & Socials
+   ------------------------------------------------------ */
+.footer-col-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-logo-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-decoration: none;
+  margin-bottom: 12px;
+}
+
+.footer-crown-icon {
+  width: 46px;
+  height: auto;
+  margin-bottom: 6px;
+}
+
+.footer-brand-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #161513;
+  line-height: 1.1;
+}
+
+.footer-brand-sub {
+  font-family: var(--font-sans);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #726A5E;
+  margin-top: 2px;
+}
+
+.footer-tagline {
+  font-family: var(--font-sans);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #8C8477;
+  margin-bottom: 14px;
+}
+
+.footer-description {
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #554F47;
+  max-width: 230px;
+  margin-bottom: 22px;
+}
+
+.footer-social-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(181, 135, 76, 0.4);
+  background: rgba(255, 255, 255, 0.55);
+  color: #161513;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-smooth);
+}
+
+.footer-social-btn:hover {
+  background: #161513;
+  color: #FFFFFF;
+  border-color: #161513;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.footer-social-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ------------------------------------------------------
+   Columns 2 & 3: Nav & Service Links
+   ------------------------------------------------------ */
+.footer-col-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #161513;
+  margin-bottom: 8px;
+}
+
+.footer-col-title-line {
+  width: 28px;
+  height: 1px;
+  background: rgba(181, 135, 76, 0.5);
+  margin-bottom: 18px;
+}
+
+.footer-link-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.footer-nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 170px;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #4A443D;
+  text-decoration: none;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.footer-nav-link:hover {
+  color: #987138;
+  transform: translateX(2px);
+}
+
+.footer-nav-link svg {
+  width: 12px;
+  height: 12px;
+  color: #8C8477;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.footer-nav-link:hover svg {
+  color: #987138;
+  transform: translateX(3px);
+}
+
+/* ------------------------------------------------------
+   Column 4: Contact Us
+   ------------------------------------------------------ */
+.footer-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.footer-contact-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(181, 135, 76, 0.4);
+  background: rgba(255, 255, 255, 0.55);
+  color: #8F6932;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.footer-contact-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.footer-contact-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-contact-label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  color: #161513;
+  margin-bottom: 2px;
+}
+
+.footer-contact-val {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: #554F47;
+  text-decoration: none;
+}
+
+a.footer-contact-val:hover {
+  color: #987138;
+}
+
+/* ------------------------------------------------------
+   Column 5: Stay Connected & Newsletter
+   ------------------------------------------------------ */
+.footer-newsletter-desc {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 1.55;
+  color: #554F47;
+  margin-bottom: 16px;
+  max-width: 220px;
+}
+
+.footer-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 230px;
+  margin-bottom: 12px;
+}
+
+.footer-email-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 46px 0 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(181, 135, 76, 0.45);
+  background: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  color: #161513;
+  outline: none;
+  transition: all var(--transition-smooth);
+}
+
+.footer-email-input::placeholder {
+  color: #8C8477;
+}
+
+.footer-email-input:focus {
+  background: #FFFFFF;
+  border-color: #987138;
+  box-shadow: 0 0 12px rgba(181, 135, 76, 0.2);
+}
+
+.footer-submit-btn {
+  position: absolute;
+  right: 4px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #161513;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-smooth);
+}
+
+.footer-submit-btn:hover {
+  background: #000000;
+  transform: scale(1.05);
+}
+
+.footer-submit-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.footer-consent-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.footer-consent-checkbox {
+  width: 13px;
+  height: 13px;
+  accent-color: #987138;
+  cursor: pointer;
+}
+
+.footer-consent-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  color: #6E665C;
+  cursor: pointer;
+}
+
+.footer-script-signature {
+  font-family: var(--font-script);
+  font-size: 32px;
+  color: #987138;
+  line-height: 1.05;
+  transform: rotate(-6deg);
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  opacity: 0.95;
+}
+
+/* ======================================================
+   Bottom Legal Bar
+   ====================================================== */
+.footer-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 22px;
+  border-top: 1px solid rgba(181, 135, 76, 0.3);
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  color: #726A5E;
+}
+
+.footer-copyright {
+  font-weight: 400;
+}
+
+.footer-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-legal-link {
+  color: #726A5E;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.footer-legal-link:hover {
+  color: #161513;
+}
+
+.footer-legal-divider {
+  color: rgba(181, 135, 76, 0.45);
+}
+
+.footer-brand-motto {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #726A5E;
+}
+
+/* ------------------------------------------------------
+   Responsive Adjustments
+   ------------------------------------------------------ */
+@media (max-width: 1100px) {
+  .footer-main-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .luxury-footer {
+    padding: 56px 24px 24px 24px;
+  }
+
+  .footer-main-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-bottom-bar {
+    flex-direction: column;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .footer-legal-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

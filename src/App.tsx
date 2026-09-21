@@ -1,8 +1,10 @@
 import React from 'react';
 import { Navbar } from './components/navigation/Navbar';
 import { CinematicHero } from './components/hero/CinematicHero';
-import { LoyalExperienceSection } from './components/space/LoyalExperienceSection';
 import { ExperienceSection } from './components/experience/ExperienceSection';
+import { LoyalExperienceSection } from './components/space/LoyalExperienceSection';
+import { LocationSection } from './components/location/LocationSection';
+import { Footer } from './components/footer/Footer';
 import './styles/variables.css';
 
 export function App() {
@@ -20,7 +22,13 @@ export function App() {
 
         {/* Section 3: Choose Your Experience with 4 Arched Cards & Trust Strip */}
         <ExperienceSection />
+
+        {/* Section 4: Location & Parlour Information */}
+        <LocationSection />
       </main>
+
+      {/* Global Footer */}
+      <Footer />
     </div>
   );
 }
