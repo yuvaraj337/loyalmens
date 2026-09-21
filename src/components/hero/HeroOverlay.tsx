@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import { Play } from 'lucide-react';
 
 interface HeroOverlayProps {
   onStoryClick?: () => void;
@@ -20,24 +19,6 @@ export const HeroOverlay = forwardRef<HTMLDivElement, HeroOverlayProps>(({ onSto
         <p className="hero-subtitle">
           Precision. Style. Self-Care.
         </p>
-
-        <button
-          className="hero-story-btn"
-          aria-label="Watch our salon story"
-          onClick={() => {
-            if (onStoryClick) {
-              onStoryClick();
-            } else {
-              const exp = document.getElementById('experience-section');
-              if (exp) exp.scrollIntoView({ behavior: 'smooth' });
-            }
-          }}
-        >
-          <div className="play-circle">
-            <Play size={16} fill="currentColor" strokeWidth={1} style={{ marginLeft: '2px' }} />
-          </div>
-          <span>Watch Our Story</span>
-        </button>
 
         {/* Social Proof */}
         <div className="hero-social-proof">
