@@ -259,23 +259,8 @@ export const HairColourTreatmentPage: React.FC = () => {
           </div>
         </section>
 
-        {/* ==================================================================
-            5. LARGE BOTTOM BANNER
-            ================================================================== */}
-        <section className="haircut-banner-section" aria-label="Hair Colour & Treatment Banner">
-          <a
-            href="/booking?service=Hair%20Colour%20%26%20Treatment"
-            className="haircut-banner-link"
-            aria-label="Book a hair colour or treatment session"
-          >
-            <img
-              src="/images/colour/bottom_banner.jpg"
-              alt="A New Look A Bolder You - Book your hair colour or treatment session now"
-              className="haircut-banner-img"
-              loading="lazy"
-            />
-          </a>
-        </section>
+
+
       </main>
 
       {/* ==================================================================

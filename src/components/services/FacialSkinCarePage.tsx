@@ -241,23 +241,8 @@ export const FacialSkinCarePage: React.FC = () => {
           </div>
         </section>
 
-        {/* ==================================================================
-            6. LARGE BOTTOM BANNER
-            ================================================================== */}
-        <section className="haircut-banner-section" aria-label="Facial Session Banner">
-          <a
-            href="/booking?service=Facial%20%26%20Skin%20Care"
-            className="haircut-banner-link"
-            aria-label="Book a facial session"
-          >
-            <img
-              src="/images/facial/bottom_banner.jpg"
-              alt="Healthy Skin A Confident You - Book your facial session now"
-              className="haircut-banner-img"
-              loading="lazy"
-            />
-          </a>
-        </section>
+
+
       </main>
 
       {/* ==================================================================

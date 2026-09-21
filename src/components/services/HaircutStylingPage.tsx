@@ -292,23 +292,7 @@ export const HaircutStylingPage: React.FC = () => {
           </div>
         </section>
 
-        {/* ==================================================================
-            5. LARGE BOTTOM BANNER
-            ================================================================== */}
-        <section className="haircut-banner-section" aria-label="Salon Experience Banner">
-          <a
-            href="/booking?service=Haircut%20%26%20Styling"
-            className="haircut-banner-link"
-            aria-label="Book an appointment for Haircut & Styling"
-          >
-            <img
-              src="/images/haircut/bottom_banner.jpg"
-              alt="A Great Look For A Brighter Tomorrow - Rizheena Professional Men's Parlour"
-              className="haircut-banner-img"
-              loading="lazy"
-            />
-          </a>
-        </section>
+
       </main>
 
       {/* ==================================================================
@@ -412,14 +396,7 @@ export const HaircutStylingPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Col 5: Script note */}
-            <div className="haircut-footer-col" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <img
-                src="/images/haircut/stay_groomed_script.png"
-                alt="Stay Groomed Stay Confident"
-                className="haircut-footer-script-img"
-              />
-            </div>
+
           </div>
 
           {/* Bottom Bar */}

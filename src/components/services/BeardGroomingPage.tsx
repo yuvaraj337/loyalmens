@@ -248,23 +248,7 @@ export const BeardGroomingPage: React.FC = () => {
           </div>
         </section>
 
-        {/* ==================================================================
-            5. LARGE BOTTOM BANNER
-            ================================================================== */}
-        <section className="haircut-banner-section" aria-label="Beard Care Products Banner">
-          <a
-            href="/shop"
-            className="haircut-banner-link"
-            aria-label="Explore Beard Care Products"
-          >
-            <img
-              src="/images/beard/bottom_banner.jpg"
-              alt="A Sharper You Everyday - Premium Beard Care Products"
-              className="haircut-banner-img"
-              loading="lazy"
-            />
-          </a>
-        </section>
+
       </main>
 
       {/* ==================================================================
@@ -368,14 +352,7 @@ export const BeardGroomingPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Col 5: Script note */}
-            <div className="haircut-footer-col" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <img
-                src="/images/haircut/stay_groomed_script.png"
-                alt="Stay Groomed Stay Confident"
-                className="haircut-footer-script-img"
-              />
-            </div>
+
           </div>
 
           {/* Bottom Bar */}

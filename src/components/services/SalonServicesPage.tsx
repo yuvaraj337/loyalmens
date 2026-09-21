@@ -353,18 +353,8 @@ export const SalonServicesPage: React.FC = () => {
             <div className="salon-quote-underline" />
           </div>
 
-          {/* Center: EXPLORE ALL SERVICES Pill CTA + RIZHEENA PROFESSIONAL */}
+          {/* Center: Brand Line */}
           <div className="salon-bottom-center-block">
-            <button
-              type="button"
-              className="salon-explore-all-btn"
-              onClick={handleExploreAll}
-              aria-label="Explore all services"
-            >
-              <span>EXPLORE ALL SERVICES</span>
-              <span aria-hidden="true">→</span>
-            </button>
-
             <div className="salon-brand-line-wrapper">
               <span className="salon-brand-line" />
               <span className="salon-brand-text">RIZHEENA PROFESSIONAL</span>
