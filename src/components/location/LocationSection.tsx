@@ -36,6 +36,14 @@ export const LocationSection: React.FC<{ data?: LocationData }> = ({
       className="location-section"
       aria-label="Loyal Professional Men's Parlour Location and Contact Information"
     >
+      {/* Ambient Silk & Shadow Fronds Decorations */}
+      <div className="location-bg-decorations" aria-hidden="true">
+        <div className="location-silk-light" />
+        <div className="location-leaf-top-left" />
+        <div className="location-leaf-top-right" />
+        <div className="location-leaf-bottom-right" />
+      </div>
+
       <div className="location-container">
         {/* Top 2-Column Grid: Info Left | Map Right */}
         <div className="location-grid">
@@ -198,6 +206,22 @@ export const LocationSection: React.FC<{ data?: LocationData }> = ({
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
               />
+
+              {/* Open in Maps interactive pill badge (matching Reference 2) */}
+              <a
+                href={data.directionsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="map-open-pill"
+                aria-label="Open in Google Maps"
+              >
+                <span>Open in Maps</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
               
               {/* Visual Brand Pin */}
               <div className="map-brand-pin" aria-hidden="true">

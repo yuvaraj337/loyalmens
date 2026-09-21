@@ -41,16 +41,6 @@ const EXPERIENCE_CARDS: ExperienceCardData[] = [
   },
   {
     number: '03',
-    titleLines: ['BOOK AN', 'APPOINTMENT'],
-    descriptionLines: ['Your time.', 'Our care.'],
-    ctaLabel: 'BOOK NOW',
-    href: '/booking',
-    image: '/images/cards/card_03_booking.png',
-    hasEmbeddedIcon: true,
-    icon: null,
-  },
-  {
-    number: '04',
     titleLines: ['RIZHEENA', 'AT HOME'],
     descriptionLines: ['Premium grooming.', 'At your doorstep.'],
     ctaLabel: 'BOOK HOME →',
@@ -86,7 +76,7 @@ export const ExperienceSection: React.FC = () => {
         {/* Section Header with Eyebrow, Title, and Carousel Navigation Controls */}
         <ExperienceHeader onPrev={handlePrev} onNext={handleNext} />
 
-        {/* 4 Cards in One Row matching 10000% reference design */}
+        {/* 4 Cards in One Row matching reference design */}
         <ExperienceCarousel ref={carouselRef} cards={EXPERIENCE_CARDS} />
       </div>
 

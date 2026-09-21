@@ -1,14 +1,20 @@
 /* ======================================================
    LOYAL PROFESSIONAL MEN'S PARLOUR
    Footer — Exact Reference Implementation
-   Background: public/images/footer/footer_bg.png
+   Matching Second Reference Image
    ====================================================== */
 
 .luxury-footer {
   position: relative;
   width: 100%;
-  background: #F7EFE5 url('/images/footer/footer_bg.png') center bottom / cover no-repeat;
-  padding: 80px 48px 28px 48px;
+  background: 
+    linear-gradient(180deg, 
+      rgba(255, 253, 249, 0.94) 0%, 
+      rgba(247, 239, 229, 0.88) 40%, 
+      rgba(247, 239, 229, 0.65) 75%, 
+      rgba(247, 239, 229, 0.15) 100%), 
+    url('/images/footer/footer_bg.png') center bottom / cover no-repeat;
+  padding: 68px 48px 24px 48px;
   color: var(--text-dark);
   overflow: hidden;
   z-index: 10;
@@ -23,13 +29,13 @@
 }
 
 /* ======================================================
-   5-Column Composition Grid
+   5-Column Composition Grid with Vertical Separators
    ====================================================== */
 .footer-main-grid {
   display: grid;
-  grid-template-columns: 1.25fr 0.9fr 1.15fr 1.35fr 1.35fr;
-  gap: 32px;
-  margin-bottom: 54px;
+  grid-template-columns: 1.35fr 0.95fr 1.15fr 1.35fr 1.35fr;
+  gap: 0;
+  margin-bottom: 48px;
   align-items: flex-start;
 }
 
@@ -39,6 +45,7 @@
 .footer-col-brand {
   display: flex;
   flex-direction: column;
+  padding-right: 32px;
 }
 
 .footer-logo-link {
@@ -46,18 +53,18 @@
   flex-direction: column;
   align-items: flex-start;
   text-decoration: none;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .footer-crown-icon {
-  width: 46px;
+  width: 44px;
   height: auto;
   margin-bottom: 6px;
 }
 
 .footer-brand-title {
   font-family: 'Playfair Display', serif;
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: #161513;
@@ -66,9 +73,9 @@
 
 .footer-brand-sub {
   font-family: var(--font-sans);
-  font-size: 8.5px;
+  font-size: 8px;
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: #726A5E;
   margin-top: 2px;
@@ -76,21 +83,21 @@
 
 .footer-tagline {
   font-family: var(--font-sans);
-  font-size: 8.5px;
+  font-size: 8px;
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #8C8477;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .footer-description {
   font-family: var(--font-sans);
-  font-size: 12.5px;
+  font-size: 12px;
   line-height: 1.6;
   color: #554F47;
   max-width: 230px;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 
 .footer-social-row {
@@ -100,11 +107,11 @@
 }
 
 .footer-social-btn {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  border: 1px solid rgba(181, 135, 76, 0.4);
-  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(181, 135, 76, 0.35);
+  background: rgba(255, 255, 255, 0.65);
   color: #161513;
   display: flex;
   align-items: center;
@@ -121,33 +128,46 @@
 }
 
 .footer-social-btn svg {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
 }
 
 /* ------------------------------------------------------
    Columns 2 & 3: Nav & Service Links
    ------------------------------------------------------ */
+.footer-col-nav,
+.footer-col-services,
+.footer-col-contact,
+.footer-col-subscribe {
+  border-left: 1px solid rgba(181, 135, 76, 0.22);
+  padding-left: 28px;
+  padding-right: 20px;
+}
+
+.footer-col-subscribe {
+  padding-right: 0;
+}
+
 .footer-col-title {
   font-family: 'Playfair Display', serif;
-  font-size: 17px;
+  font-size: 16.5px;
   font-weight: 600;
   color: #161513;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .footer-col-title-line {
   width: 28px;
   height: 1px;
-  background: rgba(181, 135, 76, 0.5);
-  margin-bottom: 18px;
+  background: rgba(181, 135, 76, 0.45);
+  margin-bottom: 16px;
 }
 
 .footer-link-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 11px;
+  gap: 10px;
 }
 
 .footer-nav-link {
@@ -155,9 +175,9 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 170px;
+  max-width: 155px;
   font-family: var(--font-sans);
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 500;
   color: #4A443D;
   text-decoration: none;
@@ -170,8 +190,8 @@
 }
 
 .footer-nav-link svg {
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   color: #8C8477;
   transition: transform var(--transition-fast), color var(--transition-fast);
 }
@@ -187,21 +207,21 @@
 .footer-contact-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .footer-contact-item {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 11px;
 }
 
 .footer-contact-icon {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  border: 1px solid rgba(181, 135, 76, 0.4);
-  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(181, 135, 76, 0.35);
+  background: rgba(255, 255, 255, 0.65);
   color: #8F6932;
   display: flex;
   align-items: center;
@@ -211,8 +231,8 @@
 }
 
 .footer-contact-icon svg {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
 }
 
 .footer-contact-info {
@@ -222,7 +242,7 @@
 
 .footer-contact-label {
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 700;
   color: #161513;
   margin-bottom: 2px;
@@ -230,7 +250,7 @@
 
 .footer-contact-val {
   font-family: var(--font-sans);
-  font-size: 11.5px;
+  font-size: 11px;
   line-height: 1.45;
   color: #554F47;
   text-decoration: none;
@@ -245,10 +265,10 @@ a.footer-contact-val:hover {
    ------------------------------------------------------ */
 .footer-newsletter-desc {
   font-family: var(--font-sans);
-  font-size: 12px;
-  line-height: 1.55;
+  font-size: 11.5px;
+  line-height: 1.5;
   color: #554F47;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   max-width: 220px;
 }
 
@@ -263,13 +283,13 @@ a.footer-contact-val:hover {
 
 .footer-email-input {
   width: 100%;
-  height: 42px;
-  padding: 0 46px 0 16px;
-  border-radius: 999px;
-  border: 1px solid rgba(181, 135, 76, 0.45);
-  background: rgba(255, 255, 255, 0.7);
+  height: 40px;
+  padding: 0 44px 0 16px;
+  border-radius: 9999px;
+  border: 1px solid rgba(181, 135, 76, 0.4);
+  background: rgba(255, 255, 255, 0.75);
   font-family: var(--font-sans);
-  font-size: 11.5px;
+  font-size: 11px;
   color: #161513;
   outline: none;
   transition: all var(--transition-smooth);
@@ -288,8 +308,8 @@ a.footer-contact-val:hover {
 .footer-submit-btn {
   position: absolute;
   right: 4px;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: #161513;
   color: #FFFFFF;
@@ -305,15 +325,15 @@ a.footer-contact-val:hover {
 }
 
 .footer-submit-btn svg {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
 }
 
 .footer-consent-wrapper {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .footer-consent-checkbox {
@@ -325,7 +345,7 @@ a.footer-contact-val:hover {
 
 .footer-consent-label {
   font-family: var(--font-sans);
-  font-size: 10px;
+  font-size: 9.5px;
   color: #6E665C;
   cursor: pointer;
 }
@@ -335,8 +355,8 @@ a.footer-contact-val:hover {
   font-size: 32px;
   color: #987138;
   line-height: 1.05;
-  transform: rotate(-6deg);
-  margin-top: 14px;
+  transform: rotate(-5deg);
+  margin-top: 12px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -350,10 +370,10 @@ a.footer-contact-val:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 22px;
-  border-top: 1px solid rgba(181, 135, 76, 0.3);
+  padding-top: 20px;
+  border-top: 1px solid rgba(181, 135, 76, 0.25);
   font-family: var(--font-sans);
-  font-size: 10.5px;
+  font-size: 10px;
   color: #726A5E;
 }
 
@@ -378,13 +398,13 @@ a.footer-contact-val:hover {
 }
 
 .footer-legal-divider {
-  color: rgba(181, 135, 76, 0.45);
+  color: rgba(181, 135, 76, 0.4);
 }
 
 .footer-brand-motto {
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #726A5E;
 }
@@ -395,7 +415,16 @@ a.footer-contact-val:hover {
 @media (max-width: 1100px) {
   .footer-main-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 36px;
+    gap: 32px;
+  }
+
+  .footer-col-nav,
+  .footer-col-services,
+  .footer-col-contact,
+  .footer-col-subscribe {
+    border-left: none;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
@@ -406,7 +435,15 @@ a.footer-contact-val:hover {
 
   .footer-main-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
+  }
+
+  .footer-col-nav,
+  .footer-col-services,
+  .footer-col-contact,
+  .footer-col-subscribe {
+    border-left: none;
+    padding-left: 0;
   }
 
   .footer-bottom-bar {

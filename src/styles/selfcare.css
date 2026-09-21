@@ -1,0 +1,166 @@
+/* ======================================================
+   RIZHEENA PROFESSIONAL MEN'S PARLOUR
+   Section 2 — Self-Care: Looks Good On You
+   Dark Cinematic Editorial Transition Section
+   ====================================================== */
+
+.selfcare-section {
+  position: relative;
+  width: 100%;
+  background-color: #090807;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 84px 48px 96px 48px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Subtle cinematic background ambient glow & noise/texture */
+.selfcare-backdrop {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 18% 45%, rgba(152, 113, 56, 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 65%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.selfcare-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Left Column: Eyebrow + Display Heading + Gold Divider */
+.selfcare-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.selfcare-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #987138;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.selfcare-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: #987138;
+}
+
+.selfcare-heading-wrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 36px;
+}
+
+.selfcare-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 3.8vw, 54px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.selfcare-title-accent {
+  color: #D4AF37;
+  font-style: italic;
+}
+
+.selfcare-line {
+  width: 80px;
+  height: 1px;
+  background: rgba(212, 175, 55, 0.35);
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+/* Right Column: Brand Accent & Aesthetic Indicator Dots */
+.selfcare-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.selfcare-brand-block {
+  text-align: right;
+}
+
+.selfcare-brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #E6D7C8;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.selfcare-brand-sub {
+  font-family: var(--font-sans);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  color: #8C847A;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.selfcare-dots {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.selfcare-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.selfcare-dot.active {
+  background: #987138;
+  box-shadow: 0 0 8px rgba(152, 113, 56, 0.8);
+  transform: scale(1.25);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .selfcare-section {
+    padding: 64px 28px;
+  }
+
+  .selfcare-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 36px;
+  }
+
+  .selfcare-right {
+    align-items: flex-start;
+  }
+
+  .selfcare-brand-block {
+    text-align: left;
+  }
+}

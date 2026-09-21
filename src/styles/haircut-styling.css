@@ -1,0 +1,716 @@
+/* ==========================================================================
+   HAIRCUT & STYLING DESTINATION PAGE STYLING
+   Pixel-Accurate Recreation of Reference Image (media_1789986238061.jpg)
+   ========================================================================== */
+
+.haircut-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #FAF5EE;
+  color: #161513;
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  overflow-x: hidden;
+}
+
+/* Container */
+.haircut-container {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 44px;
+}
+
+/* ==========================================================================
+   1. LIGHT LUXURY HEADER
+   ========================================================================== */
+
+.haircut-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background: #FAF5EE;
+  border-bottom: 1px solid rgba(216, 206, 194, 0.45);
+  padding: 16px 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.haircut-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.haircut-header-crown {
+  width: 36px;
+  height: 26px;
+  color: #B3874B;
+  flex-shrink: 0;
+}
+
+.haircut-header-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.haircut-header-brand-title {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #161513;
+  line-height: 1.1;
+}
+
+.haircut-header-brand-sub {
+  font-family: var(--font-sans);
+  font-size: 7.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: #7E7468;
+  text-transform: uppercase;
+}
+
+.haircut-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  list-style: none;
+}
+
+.haircut-header-nav-link {
+  position: relative;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: #4A443D;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  padding: 4px 0;
+}
+
+.haircut-header-nav-link:hover,
+.haircut-header-nav-link.active {
+  color: #161513;
+}
+
+.haircut-header-nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #161513;
+}
+
+.haircut-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.haircut-header-icon-btn {
+  color: #4A443D;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.haircut-header-icon-btn:hover {
+  color: #161513;
+}
+
+.haircut-cart-badge {
+  position: absolute;
+  top: -7px;
+  right: -8px;
+  background: #161513;
+  color: #FAF5EE;
+  font-size: 9px;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.haircut-header-book-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #161513;
+  color: #FAF5EE;
+  padding: 9px 22px;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.haircut-header-book-btn:hover {
+  background: #2D2721;
+}
+
+/* ==========================================================================
+   2. HERO SECTION
+   ========================================================================== */
+
+.haircut-hero-section {
+  position: relative;
+  padding: 44px 0 24px 0;
+}
+
+.haircut-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.38fr;
+  align-items: center;
+  gap: 36px;
+}
+
+/* Left Hero Column */
+.haircut-hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 460px;
+}
+
+.haircut-hero-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  color: #8C8276;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.haircut-hero-heading {
+  font-family: var(--font-serif, "Playfair Display", Georgia, serif);
+  font-size: clamp(42px, 4.2vw, 56px);
+  font-weight: 500;
+  line-height: 1.08;
+  color: #161513;
+  margin-bottom: 18px;
+}
+
+.haircut-heading-line {
+  display: block;
+}
+
+.haircut-heading-accent {
+  color: #B3874B;
+}
+
+.haircut-hero-desc {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #58514A;
+  margin-bottom: 26px;
+}
+
+.haircut-book-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #161513;
+  color: #FFFFFF;
+  padding: 12px 30px;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(22, 21, 19, 0.2);
+  transition: all 0.25s ease;
+}
+
+.haircut-book-cta-btn:hover {
+  background: #2D2721;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(22, 21, 19, 0.28);
+}
+
+/* Right Hero Column */
+.haircut-hero-right {
+  position: relative;
+  width: 100%;
+}
+
+.haircut-hero-img-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px -10px rgba(50, 35, 20, 0.12);
+}
+
+.haircut-hero-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   3. HERO BENEFIT STRIP
+   ========================================================================== */
+
+.haircut-benefit-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0 32px 0;
+  border-bottom: 1px solid rgba(216, 206, 194, 0.5);
+  margin-bottom: 38px;
+}
+
+.haircut-tagline-motto {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  color: #8C8276;
+  text-transform: uppercase;
+}
+
+.haircut-benefit-items-row {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.haircut-benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.haircut-benefit-icon {
+  color: #8C8276;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.haircut-benefit-text {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: #4A443D;
+}
+
+/* ==========================================================================
+   4. OUR HAIR SERVICES SECTION
+   ========================================================================== */
+
+.haircut-services-section {
+  position: relative;
+  margin-bottom: 42px;
+}
+
+.haircut-services-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.haircut-services-title-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.haircut-services-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  color: #8C8276;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.haircut-services-heading-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 6px;
+}
+
+.haircut-services-heading {
+  font-family: var(--font-serif, "Playfair Display", Georgia, serif);
+  font-size: 28px;
+  font-weight: 600;
+  color: #161513;
+}
+
+.haircut-services-heading-line {
+  width: 80px;
+  height: 1px;
+  background: rgba(168, 155, 142, 0.6);
+}
+
+.haircut-services-subtitle {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  color: #665F57;
+}
+
+.haircut-view-all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: #161513;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.haircut-view-all-link:hover {
+  color: #B3874B;
+}
+
+/* 2-Column Services List */
+.haircut-services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 28px;
+}
+
+.haircut-service-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 16px;
+  background-color: rgba(238, 230, 219, 0.4);
+  border: 1px solid rgba(216, 206, 194, 0.45);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.haircut-service-row:hover {
+  background-color: rgba(235, 225, 212, 0.7);
+  border-color: rgba(179, 135, 75, 0.4);
+}
+
+.haircut-service-left-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+}
+
+.haircut-service-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.haircut-service-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.haircut-service-name {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #161513;
+  line-height: 1.25;
+}
+
+.haircut-service-desc {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: #7A7064;
+  line-height: 1.35;
+}
+
+.haircut-service-right-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.haircut-service-price {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #161513;
+  white-space: nowrap;
+}
+
+.haircut-service-book-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 18px;
+  background: #161513;
+  color: #FFFFFF;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.haircut-service-book-btn:hover {
+  background: #3B332B;
+}
+
+/* ==========================================================================
+   5. LARGE BOTTOM BANNER
+   ========================================================================== */
+
+.haircut-banner-section {
+  position: relative;
+  width: 100%;
+  margin-bottom: 44px;
+}
+
+.haircut-banner-link {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.haircut-banner-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.22);
+}
+
+.haircut-banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   6. LUXURY LIGHT FOOTER
+   ========================================================================== */
+
+.haircut-footer {
+  position: relative;
+  background: #FAF5EE;
+  border-top: 1px solid rgba(216, 206, 194, 0.6);
+  padding: 40px 0 24px 0;
+}
+
+.haircut-footer-top-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr 1.6fr 1fr 1.2fr;
+  gap: 28px;
+  margin-bottom: 32px;
+}
+
+.haircut-footer-col-title {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #161513;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.haircut-footer-links-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0;
+  margin: 0;
+}
+
+.haircut-footer-link {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  color: #665F57;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.haircut-footer-link:hover {
+  color: #161513;
+}
+
+.haircut-footer-branches {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.haircut-branch-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: #665F57;
+  line-height: 1.35;
+}
+
+.haircut-branch-pin {
+  color: #161513;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.haircut-footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.haircut-social-icon-link {
+  color: #161513;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.haircut-social-icon-link:hover {
+  color: #B3874B;
+}
+
+.haircut-footer-script-img {
+  width: 140px;
+  height: auto;
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+
+.haircut-footer-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 18px;
+  border-top: 1px solid rgba(216, 206, 194, 0.5);
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  color: #7E7468;
+}
+
+.haircut-footer-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.haircut-footer-legal-link {
+  color: #7E7468;
+  text-decoration: none;
+}
+
+.haircut-footer-legal-link:hover {
+  color: #161513;
+}
+
+.haircut-footer-bottom-motto {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.haircut-motto-line {
+  width: 32px;
+  height: 1px;
+  background: rgba(168, 155, 142, 0.6);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .haircut-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .haircut-services-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .haircut-footer-top-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .haircut-benefit-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .haircut-benefit-items-row {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .haircut-header {
+    padding: 12px 20px;
+  }
+
+  .haircut-header-nav {
+    display: none;
+  }
+
+  .haircut-container {
+    padding: 0 20px;
+  }
+
+  .haircut-footer-top-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .haircut-footer-bottom-bar {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}
