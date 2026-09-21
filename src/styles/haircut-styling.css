@@ -1,6 +1,7 @@
 /* ==========================================================================
-   HAIRCUT & STYLING DESTINATION PAGE STYLING
-   Pixel-Accurate Recreation of Reference Image (media_1789986238061.jpg)
+   SERVICE CATEGORY DESTINATION PAGES STYLING
+   Rizheena Professional Men's Parlour
+   Pixel-Accurate Recreation of Reference Designs
    ========================================================================== */
 
 .haircut-page {
@@ -168,12 +169,46 @@
 }
 
 /* ==========================================================================
-   2. HERO SECTION
+   2. BREADCRUMB
+   ========================================================================== */
+
+.category-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  color: #8C8276;
+  padding-top: 24px;
+}
+
+.category-breadcrumb a {
+  color: #665F57;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.category-breadcrumb a:hover {
+  color: #161513;
+}
+
+.category-breadcrumb-current {
+  color: #161513;
+  font-weight: 500;
+}
+
+.category-breadcrumb-sep {
+  color: #A89B8E;
+  font-size: 10px;
+}
+
+/* ==========================================================================
+   3. HERO SECTION
    ========================================================================== */
 
 .haircut-hero-section {
   position: relative;
-  padding: 44px 0 24px 0;
+  padding: 24px 0 20px 0;
 }
 
 .haircut-hero-grid {
@@ -188,7 +223,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 460px;
+  max-width: 480px;
 }
 
 .haircut-hero-eyebrow {
@@ -224,7 +259,17 @@
   font-weight: 400;
   line-height: 1.6;
   color: #58514A;
-  margin-bottom: 26px;
+  margin-bottom: 20px;
+}
+
+.haircut-hero-editorial-line {
+  font-family: var(--font-sans);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: #8C8276;
+  text-transform: uppercase;
+  margin-bottom: 24px;
 }
 
 .haircut-book-cta-btn {
@@ -272,13 +317,50 @@
 }
 
 /* ==========================================================================
-   3. HERO BENEFIT STRIP
+   4. INLINE HERO BENEFITS (FOR BEARD & COLOUR PAGES)
+   ========================================================================== */
+
+.hero-inline-benefits {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+.hero-inline-benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-inline-benefit-icon {
+  color: #8C8276;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hero-inline-benefit-text {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: #4A443D;
+}
+
+/* ==========================================================================
+   5. HORIZONTAL BENEFIT STRIP (FOR FACIAL & HAIRCUT PAGES)
    ========================================================================== */
 
 .haircut-benefit-strip {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 50px;
   padding: 24px 0 32px 0;
   border-bottom: 1px solid rgba(216, 206, 194, 0.5);
   margin-bottom: 38px;
@@ -296,7 +378,7 @@
 .haircut-benefit-items-row {
   display: flex;
   align-items: center;
-  gap: 34px;
+  gap: 40px;
 }
 
 .haircut-benefit-item {
@@ -324,7 +406,7 @@
 }
 
 /* ==========================================================================
-   4. OUR HAIR SERVICES SECTION
+   6. SERVICES SECTION (SHARED HEADER)
    ========================================================================== */
 
 .haircut-services-section {
@@ -397,7 +479,7 @@
   color: #B3874B;
 }
 
-/* 2-Column Services List */
+/* 2-Column Services List (Beard, Colour, Haircut) */
 .haircut-services-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -492,7 +574,98 @@
 }
 
 /* ==========================================================================
-   5. LARGE BOTTOM BANNER
+   7. 3-COLUMN HORIZONTAL CARDS (FOR FACIAL PAGE)
+   ========================================================================== */
+
+.facial-services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.facial-service-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 18px;
+  background-color: rgba(238, 230, 219, 0.4);
+  border: 1px solid rgba(216, 206, 194, 0.45);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.facial-service-card:hover {
+  background-color: rgba(235, 225, 212, 0.7);
+  border-color: rgba(179, 135, 75, 0.4);
+}
+
+.facial-card-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+}
+
+.facial-card-thumb {
+  width: 54px;
+  height: 54px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.facial-card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.facial-card-title {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: #161513;
+  margin-bottom: 2px;
+}
+
+.facial-card-desc {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: #7A7064;
+  margin-bottom: 6px;
+}
+
+.facial-card-price {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #161513;
+}
+
+.facial-card-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 20px;
+  background: #161513;
+  color: #FFFFFF;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  cursor: pointer;
+  border: none;
+  flex-shrink: 0;
+}
+
+.facial-card-btn:hover {
+  background: #3B332B;
+}
+
+/* ==========================================================================
+   8. LARGE BOTTOM BANNER
    ========================================================================== */
 
 .haircut-banner-section {
@@ -526,7 +699,7 @@
 }
 
 /* ==========================================================================
-   6. LUXURY LIGHT FOOTER
+   9. LUXURY LIGHT FOOTER
    ========================================================================== */
 
 .haircut-footer {
@@ -663,6 +836,13 @@
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .facial-services-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
 @media (max-width: 992px) {
   .haircut-hero-grid {
     grid-template-columns: 1fr;
@@ -686,6 +866,11 @@
   }
 
   .haircut-benefit-items-row {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .hero-inline-benefits {
     flex-wrap: wrap;
     gap: 16px;
   }

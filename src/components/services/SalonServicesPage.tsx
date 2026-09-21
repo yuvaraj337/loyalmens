@@ -203,8 +203,14 @@ export const SalonServicesPage: React.FC = () => {
   }, []);
 
   const handleCardClick = (cat: ServiceCategory) => {
-    if (cat.id === 'haircut') {
-      window.history.pushState({}, '', '/services/haircut-styling');
+    let route = '';
+    if (cat.id === 'haircut') route = '/services/haircut-styling';
+    else if (cat.id === 'beard') route = '/services/beard-grooming';
+    else if (cat.id === 'facial') route = '/services/facial-skin-care';
+    else if (cat.id === 'colour') route = '/services/hair-colour-treatment';
+
+    if (route) {
+      window.history.pushState({}, '', route);
       window.dispatchEvent(new PopStateEvent('popstate'));
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
