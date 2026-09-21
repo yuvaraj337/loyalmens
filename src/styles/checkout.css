@@ -162,15 +162,20 @@
 }
 
 /* ======================================================================
-   SUBHEADER: BREADCRUMB & CONFIDENCE TAGLINE
+   SUBHEADER: BREADCRUMB, PROGRESS BAR & CONFIDENCE TAGLINE
    ====================================================================== */
 .checkout-subheader {
   max-width: 1280px;
   width: 100%;
   margin: 0 auto;
-  padding: 24px 28px 12px 28px;
-  display: flex;
+  padding: 24px 28px 20px 28px;
+  display: grid;
+  grid-template-columns: 240px 1fr 240px;
   align-items: center;
+}
+
+.checkout-subheader.checkout-subheader--confirmed {
+  display: flex;
   justify-content: space-between;
 }
 
@@ -180,6 +185,7 @@
   gap: 8px;
   font-size: 13px;
   color: var(--checkout-text-muted);
+  white-space: nowrap;
 }
 
 .checkout-breadcrumbs a {
@@ -200,12 +206,14 @@
 .checkout-tagline {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 12px;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.14em;
   color: #A37E4A;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .checkout-tagline::before {
@@ -220,10 +228,10 @@
    PROGRESS BAR
    ====================================================================== */
 .checkout-progress-wrapper {
-  max-width: 640px;
+  max-width: 520px;
   width: 100%;
-  margin: 12px auto 36px auto;
-  padding: 0 20px;
+  margin: 0 auto;
+  padding: 0 10px;
 }
 
 .checkout-progress-track {

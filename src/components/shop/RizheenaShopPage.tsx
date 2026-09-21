@@ -21,7 +21,7 @@ const CATEGORIES_DATA: CategoryCard[] = [
   {
     id: 'hair-care',
     title: 'Hair Care',
-    image: '/images/shop/category_01_hair_care.jpg',
+    image: '/images/catalogue/hair-care/hair-care-collection.jpg',
     products: [
       {
         id: 'p1',
@@ -52,7 +52,7 @@ const CATEGORIES_DATA: CategoryCard[] = [
   {
     id: 'face-care',
     title: 'Face Care',
-    image: '/images/shop/category_02_face_care.jpg',
+    image: '/images/catalogue/face-care/face-care-collection.jpg',
     products: [
       {
         id: 'p4',
@@ -83,7 +83,7 @@ const CATEGORIES_DATA: CategoryCard[] = [
   {
     id: 'beard-care',
     title: 'Beard Care',
-    image: '/images/shop/category_03_beard_care.jpg',
+    image: '/images/catalogue/beard-care/beard-care-collection.jpg',
     products: [
       {
         id: 'p7',
@@ -114,7 +114,7 @@ const CATEGORIES_DATA: CategoryCard[] = [
   {
     id: 'professional-kits',
     title: 'Professional Kits',
-    image: '/images/shop/category_04_professional_kits.jpg',
+    image: '/images/catalogue/professional-kits/professional-salon-kit.jpg',
     products: [
       {
         id: 'p10',
@@ -137,7 +137,7 @@ const CATEGORIES_DATA: CategoryCard[] = [
   {
     id: 'special-care',
     title: 'Special Care',
-    image: '/images/shop/category_05_special_care.jpg',
+    image: '/images/catalogue/special-care/special-care-collection.jpg',
     products: [
       {
         id: 'p12',
@@ -168,7 +168,7 @@ const CATEGORIES_DATA: CategoryCard[] = [
   {
     id: 'gift-sets',
     title: 'Gift Sets',
-    image: '/images/shop/category_06_gift_sets.jpg',
+    image: '/images/catalogue/gift-sets/gift-set-display.jpg',
     products: [
       {
         id: 'p15',
@@ -325,8 +325,8 @@ export const RizheenaShopPage: React.FC = () => {
           <div className="shop-hero-right">
             <div className="shop-hero-image-wrapper">
               <img
-                src="/images/shop/hero_products.jpg"
-                alt="Rizheena Professional Grooming Products Collection"
+                src="/images/catalogue/gift-sets/grooming-products-display.jpg"
+                alt="Rizheena Professional Grooming Collection"
                 className="shop-hero-img"
                 loading="eager"
               />

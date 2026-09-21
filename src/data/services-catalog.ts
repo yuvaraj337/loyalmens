@@ -19,7 +19,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: 'Precision cuts, modern styles and expert finishing tailored to your facial structure.',
     price: '₹110 – ₹130',
     duration: '45 mins',
-    thumb: '/images/haircut/thumb_01.jpg',
+    thumb: '/images/services/haircut-styling.jpg',
   },
   {
     id: 'hair-cutting',
@@ -28,7 +28,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: 'Custom gentleman haircut with straight-razor nape clean-up and styling finish.',
     price: '₹120',
     duration: '45 mins',
-    thumb: '/images/haircut/thumb_01.jpg',
+    thumb: '/images/services/hair-cutting.jpg',
   },
   {
     id: 'head-massage',
@@ -37,7 +37,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: 'Deep relaxing pressure point massage with revitalizing herbal essential oils.',
     price: '₹399',
     duration: '30 mins',
-    thumb: '/images/haircut/thumb_04.jpg',
+    thumb: '/images/services/head-massage.jpg',
   },
   {
     id: 'hair-spa-treatment',
@@ -46,7 +46,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: 'Intensive botanical mask treatment for deep hydration and scalpel rejuvenation.',
     price: '₹799',
     duration: '60 mins',
-    thumb: '/images/haircut/thumb_07.jpg',
+    thumb: '/images/services/hair-spa-treatment.jpg',
   },
   {
     id: 'hair-smoothening',
@@ -55,7 +55,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: 'Long-lasting salon grade smoothing for silkier, easily manageable hair.',
     price: '₹1,999',
     duration: '90 mins',
-    thumb: '/images/haircut/thumb_06.jpg',
+    thumb: '/images/services/hair-smoothening.jpg',
   },
 
   // --- Beard Grooming ---
@@ -66,7 +66,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: 'Complete beard care regimen: hot towel soften, sculpting, line-up and organic beard oil.',
     price: '₹199 – ₹399',
     duration: '30 mins',
-    thumb: '/images/beard/thumb_01.jpg',
+    thumb: '/images/services/beard-grooming.jpg',
   },
   {
     id: 'beard-trimming',
@@ -75,7 +75,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: 'Neat and defined trimming with symmetry check, always on point.',
     price: '₹99',
     duration: '20 mins',
-    thumb: '/images/beard/thumb_01.jpg',
+    thumb: '/images/services/beard-trimming.jpg',
   },
   {
     id: 'beard-styling',
@@ -84,7 +84,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: 'Shape your beard with bespoke fading and clipper precision to match your look.',
     price: '₹199',
     duration: '30 mins',
-    thumb: '/images/beard/thumb_02.jpg',
+    thumb: '/images/services/beard-styling.jpg',
   },
   {
     id: 'beard-spa',
@@ -93,7 +93,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: 'Deep conditioning steam, botanical scrub and argan balm for a healthier, stronger beard.',
     price: '₹299',
     duration: '40 mins',
-    thumb: '/images/beard/thumb_03.jpg',
+    thumb: '/images/services/beard-spa.jpg',
   },
   {
     id: 'beard-lining',
@@ -102,7 +102,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: 'Clean, razor-sharp edges along cheeks and neckline for a sharp, confident profile.',
     price: '₹149',
     duration: '20 mins',
-    thumb: '/images/beard/thumb_04.jpg',
+    thumb: '/images/services/beard-lining.jpg',
   },
 
   // --- Facial & Skin Care ---
@@ -113,7 +113,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: 'Revitalizing facial ritual using gentle exfoliation, pore clearing and cold hydration.',
     price: '₹599',
     duration: '45 mins',
-    thumb: '/images/facial/thumb_01.jpg',
+    thumb: '/images/services/facial-skin-care.jpg',
   },
   {
     id: 'de-tan-facial',
@@ -122,7 +122,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: 'Natural fruit AHA peel and sun-damage reversal mask for instant brightening.',
     price: '₹499',
     duration: '40 mins',
-    thumb: '/images/facial/thumb_02.jpg',
+    thumb: '/images/services/de-tan-facial.jpg',
   },
   {
     id: 'gold-facial',
@@ -131,7 +131,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: '24K colloidal gold infused therapy for luminous texture and deep hydration.',
     price: '₹899',
     duration: '60 mins',
-    thumb: '/images/facial/thumb_03.jpg',
+    thumb: '/images/services/gold-facial.jpg',
   },
   {
     id: 'charcoal-detox',
@@ -140,7 +140,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: 'Activated carbon mask pulls micro-pollutants and unclogs deep facial pores.',
     price: '₹649',
     duration: '45 mins',
-    thumb: '/images/facial/thumb_04.jpg',
+    thumb: '/images/services/charcoal-detox.jpg',
   },
 
   // --- Hair Colour & Treatment ---
@@ -151,7 +151,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: 'Ammonia-free premium gloss colour matched specifically to your undertone.',
     price: '₹999',
     duration: '60 mins',
-    thumb: '/images/colour/thumb_01.jpg',
+    thumb: '/images/services/hair-colour-treatment.jpg',
   },
   {
     id: 'beard-colouring',
@@ -160,7 +160,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: 'Natural black or subtle espresso brown root coverage with sensitive skin protection.',
     price: '₹349',
     duration: '25 mins',
-    thumb: '/images/colour/thumb_02.jpg',
+    thumb: '/images/services/beard-colouring.jpg',
   },
   {
     id: 'hair-highlights',
@@ -169,7 +169,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: 'Subtle sun-kissed streaks or bold metallic streaks with bond-building plex.',
     price: '₹1,299',
     duration: '75 mins',
-    thumb: '/images/colour/thumb_03.jpg',
+    thumb: '/images/services/hair-highlights.jpg',
   },
   {
     id: 'keratin-treatment',
@@ -178,7 +178,7 @@ export const BASE_SERVICES_CATALOG: ServiceBookingItem[] = [
     desc: 'Intense keratin infusion restores damaged hair shafts, creating smooth mirror shine.',
     price: '₹2,499',
     duration: '120 mins',
-    thumb: '/images/colour/thumb_04.jpg',
+    thumb: '/images/services/keratin-treatment.jpg',
   },
 ];
 

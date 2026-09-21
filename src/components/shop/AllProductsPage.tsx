@@ -263,7 +263,7 @@ export const AllProductsPage: React.FC = () => {
           <div className="ap-hero-right">
             <div className="ap-hero-img-wrapper">
               <img
-                src="/images/shop/hero_products.jpg"
+                src="/images/catalogue/gift-sets/grooming-products-display.jpg"
                 alt="Rizheena Professional Grooming Products Collection"
                 className="ap-hero-img"
                 loading="eager"

@@ -65,9 +65,9 @@ export const CheckoutPage: React.FC = () => {
       </header>
 
       {/* ==================================================================
-          SUBHEADER: BREADCRUMBS & TAGLINE
+          SUBHEADER: BREADCRUMBS, PROGRESS INDICATOR & TAGLINE
           ================================================================== */}
-      <div className="checkout-subheader">
+      <div className={`checkout-subheader ${step === 3 ? 'checkout-subheader--confirmed' : ''}`}>
         <nav className="checkout-breadcrumbs" aria-label="Breadcrumb">
           <a href="/">Home</a>
           <span aria-hidden="true">&gt;</span>
@@ -80,13 +80,10 @@ export const CheckoutPage: React.FC = () => {
           </span>
         </nav>
 
+        {step < 3 ? <CheckoutProgressBar /> : <div />}
+
         <div className="checkout-tagline">Same Confidence at Home</div>
       </div>
-
-      {/* ==================================================================
-          PROGRESS INDICATOR (Steps 1 & 2)
-          ================================================================== */}
-      {step < 3 && <CheckoutProgressBar />}
 
       {/* ==================================================================
           MAIN STEP CONTENT
