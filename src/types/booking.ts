@@ -27,6 +27,8 @@ export interface CustomerDetails {
   phone: string;
   email: string;
   branch: string;
+  gender?: string;
+  specialRequest?: string;
   whatsappConsent: boolean;
 }
 
@@ -38,14 +40,15 @@ export interface BookingRecord {
   service_price: string;
   duration: string;
   service_image: string;
-  date: string; // Formatted date string, e.g. "Wed, 16 Oct 2024"
+  date: string; // Formatted date string, e.g. "Mon, Sep 21, 2026"
   date_iso: string; // YYYY-MM-DD
-  time: string; // e.g. "11:30 AM"
+  time: string; // e.g. "01:30 PM"
   branch: string;
   branch_address: string;
   customer_name: string;
   phone: string;
   email: string;
+  gender?: string;
   special_request?: string;
   booking_status: BookingStatus;
   payment_status: PaymentStatus;

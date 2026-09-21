@@ -25,8 +25,8 @@ interface BookingContextType {
   setCustomerDetails: React.Dispatch<React.SetStateAction<CustomerDetails>>;
   specialRequest: string;
   setSpecialRequest: (req: string) => void;
-  step: 1 | 2 | 3 | 4;
-  setStep: (step: 1 | 2 | 3 | 4) => void;
+  step: 1 | 2 | 3 | 4 | 5;
+  setStep: (step: 1 | 2 | 3 | 4 | 5) => void;
 
   // Bookings list & latest confirmed
   bookings: BookingRecord[];
@@ -47,6 +47,8 @@ const INITIAL_DETAILS: CustomerDetails = {
   fullName: '',
   phone: '',
   email: '',
+  gender: 'Male',
+  specialRequest: '',
   branch: SALON_BRANCH_INFO.name,
   whatsappConsent: true,
 };
@@ -174,7 +176,7 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [selectedTime, setSelectedTime] = useState<string>('11:30 AM');
   const [customerDetails, setCustomerDetails] = useState<CustomerDetails>(INITIAL_DETAILS);
   const [specialRequest, setSpecialRequest] = useState<string>('');
-  const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
+  const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(1);
 
   const [bookings, setBookings] = useState<BookingRecord[]>(() => getInitialBookings());
   const [latestBooking, setLatestBooking] = useState<BookingRecord | null>(null);
@@ -228,9 +230,9 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
       throw new Error(`Slot ${selectedTime} on ${humanDate} is no longer available. Please select another slot.`);
     }
 
-    const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+    const randomSuffix = Math.floor(100 + Math.random() * 900);
     const newRecord: BookingRecord = {
-      booking_id: `RZ-${new Date().getFullYear()}-${randomSuffix}`,
+      booking_id: `RZP${new Date().getFullYear()}${String(new Date().getMonth() + 1).padStart(2, '0')}${String(new Date().getDate()).padStart(2, '0')}${randomSuffix}`,
       customer_id: `cust-${Date.now()}`,
       service_id: service.id,
       service_name: service.name,
@@ -245,7 +247,8 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
       customer_name: customerDetails.fullName.trim() || 'Valued Guest',
       phone: customerDetails.phone.trim(),
       email: customerDetails.email.trim(),
-      special_request: specialRequest.trim(),
+      gender: customerDetails.gender || 'Male',
+      special_request: customerDetails.specialRequest || specialRequest.trim(),
       booking_status: 'confirmed',
       payment_status: 'unpaid',
       created_at: new Date().toISOString(),
@@ -253,7 +256,7 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
     setBookings((prev) => [newRecord, ...prev]);
     setLatestBooking(newRecord);
-    setStep(4);
+    setStep(5);
     return newRecord;
   }, [selectedDate, selectedTime, isSlotBooked, service, customerDetails, specialRequest]);
 

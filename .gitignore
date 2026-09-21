@@ -42,3 +42,5 @@ capture_*.py
 scratch_*.py
 debug_*.py
 run_verified_*.py
+test_responsive_frames.py
+verification_screenshots/
