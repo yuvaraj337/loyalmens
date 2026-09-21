@@ -11,6 +11,11 @@ import { HaircutStylingPage } from './components/services/HaircutStylingPage';
 import { BeardGroomingPage } from './components/services/BeardGroomingPage';
 import { FacialSkinCarePage } from './components/services/FacialSkinCarePage';
 import { HairColourTreatmentPage } from './components/services/HairColourTreatmentPage';
+import { HairCareCategoryPage } from './components/shop/categories/HairCareCategoryPage';
+import { FaceCareCategoryPage } from './components/shop/categories/FaceCareCategoryPage';
+import { BeardCareCategoryPage } from './components/shop/categories/BeardCareCategoryPage';
+import { ProfessionalKitsCategoryPage } from './components/shop/categories/ProfessionalKitsCategoryPage';
+import { SpecialCareCategoryPage } from './components/shop/categories/SpecialCareCategoryPage';
 import './styles/variables.css';
 
 export function App() {
@@ -54,6 +59,31 @@ export function App() {
         window.history.pushState({}, '', href);
         setCurrentPath('/services');
         window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (href === '/shop/hair-care') {
+        e.preventDefault();
+        window.history.pushState({}, '', href);
+        setCurrentPath('/shop/hair-care');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (href === '/shop/face-care') {
+        e.preventDefault();
+        window.history.pushState({}, '', href);
+        setCurrentPath('/shop/face-care');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (href === '/shop/beard-care') {
+        e.preventDefault();
+        window.history.pushState({}, '', href);
+        setCurrentPath('/shop/beard-care');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (href === '/shop/professional-kits') {
+        e.preventDefault();
+        window.history.pushState({}, '', href);
+        setCurrentPath('/shop/professional-kits');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (href === '/shop/special-care') {
+        e.preventDefault();
+        window.history.pushState({}, '', href);
+        setCurrentPath('/shop/special-care');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (href === '/shop' || href.startsWith('/shop#')) {
         e.preventDefault();
         window.history.pushState({}, '', href);
@@ -81,8 +111,14 @@ export function App() {
   const isFacialPage = currentPath === '/services/facial-skin-care' || currentPath === '/services/facial' || currentPath.startsWith('/services/facial');
   const isColourPage = currentPath === '/services/hair-colour-treatment' || currentPath === '/services/colour' || currentPath === '/services/color' || currentPath.startsWith('/services/hair-colour') || currentPath.startsWith('/services/colour');
   
+  const isHairCareShop = currentPath === '/shop/hair-care';
+  const isFaceCareShop = currentPath === '/shop/face-care';
+  const isBeardCareShop = currentPath === '/shop/beard-care';
+  const isKitsShop = currentPath === '/shop/professional-kits';
+  const isSpecialCareShop = currentPath === '/shop/special-care';
+
   const isServicesPage = !isHaircutPage && !isBeardPage && !isFacialPage && !isColourPage && (currentPath === '/services' || currentPath.startsWith('/services'));
-  const isShopPage = currentPath === '/shop' || currentPath.startsWith('/shop');
+  const isShopPage = !isHairCareShop && !isFaceCareShop && !isBeardCareShop && !isKitsShop && !isSpecialCareShop && (currentPath === '/shop' || currentPath.startsWith('/shop'));
 
   if (isHaircutPage) {
     return (
@@ -112,6 +148,46 @@ export function App() {
     return (
       <div className="app-root colour-route-active">
         <HairColourTreatmentPage />
+      </div>
+    );
+  }
+
+  if (isHairCareShop) {
+    return (
+      <div className="app-root shop-cat-route-active">
+        <HairCareCategoryPage />
+      </div>
+    );
+  }
+
+  if (isFaceCareShop) {
+    return (
+      <div className="app-root shop-cat-route-active">
+        <FaceCareCategoryPage />
+      </div>
+    );
+  }
+
+  if (isBeardCareShop) {
+    return (
+      <div className="app-root shop-cat-route-active">
+        <BeardCareCategoryPage />
+      </div>
+    );
+  }
+
+  if (isKitsShop) {
+    return (
+      <div className="app-root shop-cat-route-active">
+        <ProfessionalKitsCategoryPage />
+      </div>
+    );
+  }
+
+  if (isSpecialCareShop) {
+    return (
+      <div className="app-root shop-cat-route-active">
+        <SpecialCareCategoryPage />
       </div>
     );
   }

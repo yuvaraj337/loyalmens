@@ -194,6 +194,18 @@ export const RizheenaShopPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<CategoryCard | null>(null);
 
   const handleOpenCategory = (cat: CategoryCard) => {
+    if (
+      cat.id === 'hair-care' ||
+      cat.id === 'face-care' ||
+      cat.id === 'beard-care' ||
+      cat.id === 'professional-kits' ||
+      cat.id === 'special-care'
+    ) {
+      window.history.pushState({}, '', `/shop/${cat.id}`);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     setSelectedCategory(cat);
   };
 

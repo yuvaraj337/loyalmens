@@ -1,0 +1,559 @@
+/* ==========================================================================
+   SHOP CATEGORY DESTINATION PAGES STYLES
+   Exact reference reproduction for Hair Care, Face Care, Beard Care,
+   Professional Kits, and Special Care.
+   ========================================================================== */
+
+.shop-category-page {
+  min-height: 100vh;
+  background-color: #FAF5EE;
+  background-image: 
+    radial-gradient(circle at 15% 10%, rgba(216, 195, 165, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(216, 195, 165, 0.08) 0%, transparent 40%);
+  color: #1A1A1A;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  padding: 30px 24px 70px 24px;
+  box-sizing: border-box;
+}
+
+.shop-category-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Breadcrumb & Back Nav
+   -------------------------------------------------------------------------- */
+.shop-cat-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.shop-cat-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #7A6F64;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.shop-cat-back-link:hover {
+  color: #111111;
+  transform: translateX(-2px);
+}
+
+.shop-cat-cart-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: #FFFFFF;
+  border: 1px solid #E4DBD0;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #222222;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.shop-cat-cart-btn:hover {
+  background: #111111;
+  color: #FFFFFF;
+  border-color: #111111;
+}
+
+.shop-cat-cart-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  background: #8E704F;
+  color: #FFFFFF;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 0 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Header Row
+   -------------------------------------------------------------------------- */
+.shop-cat-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.shop-cat-title-wrap {
+  flex: 1;
+  min-width: 280px;
+}
+
+.shop-cat-heading {
+  font-family: 'Playfair Display', 'Cinzel', 'Georgia', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.shop-cat-subtitle {
+  font-size: 14px;
+  color: #555555;
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.shop-cat-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.shop-cat-product-count {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+}
+
+/* Search input */
+.shop-cat-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.shop-cat-search-icon {
+  position: absolute;
+  left: 14px;
+  width: 16px;
+  height: 16px;
+  color: #888888;
+  pointer-events: none;
+}
+
+.shop-cat-search-input {
+  background: #FFFFFF;
+  border: 1px solid #D8CEC2;
+  border-radius: 9999px;
+  padding: 8px 18px 8px 38px;
+  font-size: 13px;
+  color: #222222;
+  outline: none;
+  min-width: 240px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+}
+
+.shop-cat-search-input:focus {
+  border-color: #8E704F;
+  box-shadow: 0 2px 8px rgba(142, 112, 79, 0.15);
+}
+
+.shop-cat-search-input::placeholder {
+  color: #888888;
+}
+
+/* Sort dropdown */
+.shop-cat-sort-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.shop-cat-sort-select {
+  background: #FFFFFF;
+  border: 1px solid #D8CEC2;
+  border-radius: 9999px;
+  padding: 8px 32px 8px 16px;
+  font-size: 13px;
+  color: #222222;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.shop-cat-sort-select:focus {
+  border-color: #8E704F;
+}
+
+.shop-cat-sort-arrow {
+  position: absolute;
+  right: 12px;
+  pointer-events: none;
+  color: #666666;
+  width: 12px;
+  height: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   Product Grid
+   -------------------------------------------------------------------------- */
+.shop-cat-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+.shop-cat-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+/* --------------------------------------------------------------------------
+   Product Card
+   -------------------------------------------------------------------------- */
+.shop-cat-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 218, 208, 0.7);
+  border-radius: 14px;
+  padding: 10px 10px 14px 10px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.025);
+  box-sizing: border-box;
+}
+
+.shop-cat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.shop-cat-card-img-wrap {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #F8F3EC;
+  margin-bottom: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shop-cat-grid-4 .shop-cat-card-img-wrap {
+  aspect-ratio: 1.15;
+}
+
+.shop-cat-grid-3 .shop-cat-card-img-wrap {
+  aspect-ratio: 0.92;
+}
+
+.shop-cat-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.shop-cat-card:hover .shop-cat-card-img {
+  transform: scale(1.02);
+}
+
+.shop-cat-card-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.shop-cat-card-name {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 4px 0;
+  line-height: 1.25;
+}
+
+.shop-cat-card-size {
+  font-size: 12px;
+  color: #666666;
+  font-weight: 400;
+  margin: 0 0 6px 0;
+}
+
+.shop-cat-card-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 14px 0;
+}
+
+/* Quantity selector */
+.shop-cat-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #F5EFEB;
+  border: 1px solid #E5DDD3;
+  border-radius: 9999px;
+  height: 32px;
+  padding: 0 12px;
+  margin: 0 auto 10px auto;
+  width: 100%;
+  max-width: 140px;
+  box-sizing: border-box;
+}
+
+.shop-cat-step-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333333;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  transition: color 0.15s ease, transform 0.1s ease;
+  user-select: none;
+}
+
+.shop-cat-step-btn:hover {
+  color: #000000;
+}
+
+.shop-cat-step-btn:active {
+  transform: scale(0.9);
+}
+
+.shop-cat-step-num {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111111;
+  min-width: 20px;
+  text-align: center;
+  user-select: none;
+}
+
+/* Add to Cart Button */
+.shop-cat-add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 38px;
+  background: #111111;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-family: inherit;
+}
+
+.shop-cat-add-btn:hover {
+  background: #2a2a2a;
+}
+
+.shop-cat-add-btn:active {
+  transform: scale(0.98);
+}
+
+.shop-cat-cart-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* --------------------------------------------------------------------------
+   Bottom Feature Strip
+   -------------------------------------------------------------------------- */
+.shop-cat-feature-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #FAF5EE;
+  border: 1px solid #E2D7CB;
+  border-radius: 14px;
+  padding: 16px 24px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.shop-cat-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.shop-cat-feature-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7A5B3E;
+  flex-shrink: 0;
+}
+
+.shop-cat-feature-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: #333333;
+  line-height: 1.35;
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-cat-feature-sep {
+  width: 1px;
+  height: 34px;
+  background: #E2D7CB;
+  flex-shrink: 0;
+}
+
+/* Face Care Side Badge */
+.shop-cat-side-badge {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1A1A1A;
+  line-height: 1.25;
+  padding-right: 20px;
+  border-right: 1px solid #E2D7CB;
+  flex-shrink: 0;
+}
+
+.shop-cat-side-badge-title {
+  font-size: 17px;
+}
+
+.shop-cat-side-badge-sub {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333333;
+}
+
+/* Empty search result message */
+.shop-cat-empty-results {
+  text-align: center;
+  padding: 60px 20px;
+  grid-column: 1 / -1;
+  color: #777777;
+  font-size: 15px;
+}
+
+/* --------------------------------------------------------------------------
+   Cart Toast
+   -------------------------------------------------------------------------- */
+.shop-cat-toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: #111111;
+  color: #FFFFFF;
+  padding: 12px 22px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  animation: toastFadeIn 0.3s ease;
+}
+
+@keyframes toastFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Design
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .shop-cat-grid-4 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .shop-cat-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .shop-cat-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .shop-cat-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .shop-cat-feature-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .shop-cat-feature-sep {
+    display: none;
+  }
+
+  .shop-cat-side-badge {
+    border-right: none;
+    border-bottom: 1px solid #E2D7CB;
+    padding-bottom: 10px;
+    padding-right: 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .shop-cat-grid-4,
+  .shop-cat-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
