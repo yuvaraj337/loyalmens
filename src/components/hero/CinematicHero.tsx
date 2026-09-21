@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { framePreloader, TOTAL_FRAMES } from './FramePreloader';
+import { getActivePreloader, FrameSequenceManager } from './FramePreloader';
 import { HeroOverlay } from './HeroOverlay';
 import '../../styles/hero.css';
 
@@ -9,13 +9,21 @@ export const CinematicHero: React.FC = () => {
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
 
+  // Responsive device detection (breakpoint at 768px)
+  const [isMobile, setIsMobile] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth <= 768;
+  });
+
   const [initialLoaded, setInitialLoaded] = useState(false);
   const [isReducedMotion, setIsReducedMotion] = useState(false);
 
   const lastDrawnFrameRef = useRef<number>(-1);
+  const lastTargetFrameRef = useRef<number>(0);
+  const activePreloaderRef = useRef<FrameSequenceManager | null>(null);
 
-  // Draw image with cover aspect ratio
-  const drawCover = useCallback((img: HTMLImageElement) => {
+  // Draw image with cover aspect ratio onto canvas
+  const drawCover = useCallback((img: HTMLImageElement, nativeWidth: number, nativeHeight: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -24,8 +32,8 @@ export const CinematicHero: React.FC = () => {
 
     const cw = canvas.width;
     const ch = canvas.height;
-    const iw = img.naturalWidth || 960;
-    const ih = img.naturalHeight || 540;
+    const iw = img.naturalWidth || nativeWidth;
+    const ih = img.naturalHeight || nativeHeight;
 
     const scale = Math.max(cw / iw, ch / ih);
     const nw = iw * scale;
@@ -36,7 +44,20 @@ export const CinematicHero: React.FC = () => {
     ctx.drawImage(img, nx, ny, nw, nh);
   }, []);
 
-  // Update canvas dimensions for device pixel ratio
+  // Responsive device media-query listener
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const mql = window.matchMedia('(max-width: 768px)');
+    const handleMediaChange = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+    };
+
+    mql.addEventListener('change', handleMediaChange);
+    return () => mql.removeEventListener('change', handleMediaChange);
+  }, []);
+
+  // Update canvas dimensions for device pixel ratio and redraw current frame
   const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -50,14 +71,15 @@ export const CinematicHero: React.FC = () => {
       canvas.height = h * dpr;
     }
 
+    const preloader = getActivePreloader(isMobile);
     const currentFrame = Math.max(0, lastDrawnFrameRef.current);
-    const img = framePreloader.getNearestFrame(currentFrame);
+    const img = preloader.getNearestFrame(currentFrame);
     if (img) {
-      drawCover(img);
+      drawCover(img, preloader.config.nativeWidth, preloader.config.nativeHeight);
     }
-  }, [drawCover]);
+  }, [isMobile, drawCover]);
 
-  // Reduced motion preference
+  // Reduced motion preference listener
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
     setIsReducedMotion(mq.matches);
@@ -71,21 +93,36 @@ export const CinematicHero: React.FC = () => {
   useEffect(() => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas, { passive: true });
+    window.addEventListener('orientationchange', resizeCanvas, { passive: true });
 
-    // 1. Immediately load and draw frame 0
-    framePreloader.loadFrame(0).then((frame0) => {
-      drawCover(frame0);
+    const preloader = getActivePreloader(isMobile);
+    activePreloaderRef.current = preloader;
+    const config = preloader.config;
+
+    setInitialLoaded(false);
+    lastDrawnFrameRef.current = -1;
+    lastTargetFrameRef.current = 0;
+
+    // 1. Immediately load and draw frame 0 for the active device sequence ONLY
+    let isCancelled = false;
+
+    preloader.loadFrame(0).then((frame0) => {
+      if (isCancelled) return;
+      drawCover(frame0, config.nativeWidth, config.nativeHeight);
       lastDrawnFrameRef.current = 0;
       setInitialLoaded(true);
 
-      // Start preloading upcoming window & background queue
-      framePreloader.preloadWindow(0, 40, 0);
-      framePreloader.startBackgroundPreload();
-    });
+      // Start preloading upcoming window & background queue for active mode
+      preloader.preloadWindow(0, true);
+      preloader.startBackgroundPreload(1);
+    }).catch(() => {});
 
     if (isReducedMotion) {
       return () => {
+        isCancelled = true;
         window.removeEventListener('resize', resizeCanvas);
+        window.removeEventListener('orientationchange', resizeCanvas);
+        preloader.stopBackgroundPreload();
       };
     }
 
@@ -104,7 +141,7 @@ export const CinematicHero: React.FC = () => {
         }
       }
 
-      // 2. Smooth lerp
+      // 2. Smooth lerp for buttery animation
       const diff = targetProgress - smoothProgress;
       if (Math.abs(diff) > 0.0001) {
         smoothProgress += diff * 0.28;
@@ -112,30 +149,35 @@ export const CinematicHero: React.FC = () => {
         smoothProgress = targetProgress;
       }
 
-      // 3. Determine target frame
+      // 3. Determine target frame based on active sequence total frames
+      const totalFrames = config.totalFrames;
       const targetFrame = Math.min(
-        TOTAL_FRAMES - 1,
-        Math.max(0, Math.floor(smoothProgress * TOTAL_FRAMES))
+        totalFrames - 1,
+        Math.max(0, Math.floor(smoothProgress * totalFrames))
       );
+      lastTargetFrameRef.current = targetFrame;
 
       // 4. Render to canvas if frame changed
       if (targetFrame !== lastDrawnFrameRef.current) {
-        framePreloader.preloadWindow(targetFrame, 35, 15);
+        const isForward = targetFrame >= lastDrawnFrameRef.current;
+        preloader.preloadWindow(targetFrame, isForward);
 
-        const cached = framePreloader.getFrame(targetFrame);
+        const cached = preloader.getFrame(targetFrame);
         if (cached) {
-          drawCover(cached);
+          drawCover(cached, config.nativeWidth, config.nativeHeight);
           lastDrawnFrameRef.current = targetFrame;
         } else {
-          // Nearest fallback so screen never flashes
-          const nearest = framePreloader.getNearestFrame(targetFrame);
+          // Nearest fallback so screen never flashes or flickers
+          const nearest = preloader.getNearestFrame(targetFrame);
           if (nearest) {
-            drawCover(nearest);
+            drawCover(nearest, config.nativeWidth, config.nativeHeight);
           }
-          // Load and draw immediately when ready
-          framePreloader.loadFrame(targetFrame).then((img) => {
-            drawCover(img);
-            lastDrawnFrameRef.current = targetFrame;
+          // Asynchronous loading safety: only paint if still the latest requested frame
+          preloader.loadFrame(targetFrame).then((img) => {
+            if (!isCancelled && lastTargetFrameRef.current === targetFrame) {
+              drawCover(img, config.nativeWidth, config.nativeHeight);
+              lastDrawnFrameRef.current = targetFrame;
+            }
           }).catch(() => {});
         }
       }
@@ -159,16 +201,19 @@ export const CinematicHero: React.FC = () => {
     animId = requestAnimationFrame(loop);
 
     return () => {
+      isCancelled = true;
       window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('orientationchange', resizeCanvas);
       cancelAnimationFrame(animId);
+      preloader.stopBackgroundPreload();
     };
-  }, [drawCover, resizeCanvas, isReducedMotion]);
+  }, [isMobile, drawCover, resizeCanvas, isReducedMotion]);
 
   return (
     <section
       ref={trackRef}
-      className="cinematic-hero-track"
-      style={{ height: isReducedMotion ? '100vh' : '380vh' }}
+      className={`cinematic-hero-track ${isMobile ? 'hero-mobile' : 'hero-desktop'}`}
+      style={{ height: isReducedMotion ? '100vh' : (isMobile ? '340vh' : '380vh') }}
       aria-label="Loyal Professional Men's Parlour Cinematic Hero"
     >
       <div className="cinematic-hero-sticky">
