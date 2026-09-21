@@ -49,7 +49,6 @@ export const ExperienceEditorialContent: React.FC<ExperienceEditorialContentProp
           <span>Look Good</span>
           <span>Feel Better</span>
         </div>
-        <div className="editorial-script-underline" />
       </div>
     </div>
   );

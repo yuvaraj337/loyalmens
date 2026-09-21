@@ -77,7 +77,7 @@
    1. Left Editorial Content (Controlled 360px Width)
    ------------------------------------------------------ */
 .space-col-left {
-  width: 360px;
+  width: 370px;
   flex-shrink: 0;
 }
 
@@ -89,33 +89,33 @@
 .editorial-eyebrow-wrapper {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
+  gap: 14px;
+  margin-bottom: 22px;
 }
 
 .editorial-eyebrow {
   font-family: var(--font-sans);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #6E665C;
+  color: #787066;
 }
 
 .editorial-eyebrow-line {
-  width: 44px;
+  width: 60px;
   height: 1px;
   background: rgba(181, 135, 76, 0.45);
 }
 
 .editorial-heading {
-  font-family: var(--font-serif-editorial);
-  font-size: clamp(34px, 3.2vw, 42px);
-  font-weight: 400;
-  line-height: 1.08;
+  font-family: 'Playfair Display', var(--font-serif);
+  font-size: clamp(40px, 3.8vw, 48px);
+  font-weight: 500;
+  line-height: 1.05;
   letter-spacing: -0.015em;
   color: #161513;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .heading-line {
@@ -123,46 +123,53 @@
   white-space: nowrap;
 }
 
-.editorial-gold-accent {
-  color: #A67C46;
+.heading-line.line-1,
+.heading-line.line-2 {
+  font-weight: 500;
+}
+
+.heading-line.line-3.editorial-gold-accent {
+  color: #987138;
+  font-weight: 600;
   font-style: normal;
 }
 
 .editorial-body {
   font-family: var(--font-sans);
-  font-size: 12.5px;
-  line-height: 1.6;
-  color: #645E54;
-  max-width: 310px;
-  margin-bottom: 24px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #554F47;
+  max-width: 335px;
+  margin-bottom: 30px;
 }
 
 /* Circular Play CTA */
 .editorial-cta-wrapper {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 28px;
+  gap: 16px;
+  margin-bottom: 36px;
 }
 
 .editorial-play-btn {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: #181512;
+  background: radial-gradient(circle at 35% 35%, #2A241E 0%, #110F0D 100%);
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), background var(--transition-smooth);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 14px rgba(181, 135, 76, 0.25);
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
   flex-shrink: 0;
 }
 
 .editorial-play-btn:hover {
   transform: scale(1.08);
-  background: #000000;
-  box-shadow: 0 6px 20px rgba(181, 135, 76, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 20px rgba(181, 135, 76, 0.4);
+  border-color: rgba(212, 175, 55, 0.8);
 }
 
 .editorial-play-btn:active {
@@ -170,9 +177,10 @@
 }
 
 .play-triangle-icon {
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   margin-left: 2px;
+  fill: #FFFFFF;
 }
 
 .editorial-cta-text {
@@ -183,12 +191,12 @@
 .cta-line-1,
 .cta-line-2 {
   font-family: var(--font-sans);
-  font-size: 9.5px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #161513;
-  line-height: 1.35;
+  line-height: 1.4;
 }
 
 /* Script Accent: Look Good Feel Better (Lower-Left Placement) */
@@ -196,25 +204,18 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 6px;
+  margin-top: 14px;
 }
 
 .editorial-script-words {
   display: flex;
   flex-direction: column;
   font-family: var(--font-script);
-  font-size: clamp(34px, 3.2vw, 42px);
-  color: #A67C46;
+  font-size: clamp(42px, 4vw, 50px);
+  font-weight: 400;
+  color: #987138;
   line-height: 0.95;
-  transform: rotate(-5deg);
-  margin-bottom: 4px;
-}
-
-.editorial-script-underline {
-  width: 62px;
-  height: 1.5px;
-  background: #A67C46;
-  margin-top: 2px;
+  transform: rotate(-4deg);
 }
 
 /* ------------------------------------------------------
@@ -236,7 +237,7 @@
   width: 100%;
   aspect-ratio: 16 / 12.5;
   max-height: 350px;
-  border-radius: 54px 28px 28px 28px;
+  border-radius: 44px 44px 44px 120px;
   overflow: hidden;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
 }
@@ -308,7 +309,7 @@
 }
 
 .quote-text {
-  font-family: var(--font-serif-editorial);
+  font-family: 'Playfair Display', var(--font-serif);
   font-style: italic;
   font-size: 15px;
   line-height: 1.35;
@@ -318,9 +319,9 @@
 }
 
 .quote-bottom-line {
-  width: 28px;
+  width: 32px;
   height: 1.5px;
-  background: #A67C46;
+  background: #987138;
 }
 
 /* ======================================================
