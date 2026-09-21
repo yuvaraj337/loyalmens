@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Search, ShoppingBag, ArrowRight } from 'lucide-react';
 import { BrandLogo } from '../common/BrandLogo';
+import { useCart } from '../../context/CartContext';
 import '../../styles/navbar.css';
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
+  const { totalCount, openDrawer, badgeAnimating } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,9 +62,15 @@ export const Navbar: React.FC = () => {
 
         <div className="nav-divider" />
 
-        <button className="nav-icon-btn cart-btn-wrapper" aria-label="Shopping Cart">
+        <button
+          className="nav-icon-btn cart-btn-wrapper"
+          aria-label={`Shopping Cart — ${totalCount} items`}
+          onClick={openDrawer}
+        >
           <ShoppingBag size={18} strokeWidth={1.8} />
-          <span className="cart-badge">0</span>
+          <span className={`cart-badge${badgeAnimating ? ' cart-badge--bounce' : ''}${totalCount === 0 ? ' cart-badge--empty' : ''}`}>
+            {totalCount}
+          </span>
         </button>
 
         <a href="/booking" className="book-now-btn">

@@ -6,10 +6,11 @@ export interface ShopProductItem {
   image: string;
   category: string;
   description?: string;
+  tags?: string[];
 }
 
 export interface FeatureItem {
-  icon: 'diamond' | 'leaf' | 'beaker' | 'recycle' | 'shield' | 'chart' | 'people' | 'droplet' | 'ribbon' | 'gift';
+  icon: 'diamond' | 'leaf' | 'beaker' | 'recycle' | 'shield' | 'chart' | 'people' | 'droplet' | 'ribbon' | 'gift' | 'star';
   text: string[];
 }
 

@@ -199,7 +199,8 @@ export const RizheenaShopPage: React.FC = () => {
       cat.id === 'face-care' ||
       cat.id === 'beard-care' ||
       cat.id === 'professional-kits' ||
-      cat.id === 'special-care'
+      cat.id === 'special-care' ||
+      cat.id === 'gift-sets'
     ) {
       window.history.pushState({}, '', `/shop/${cat.id}`);
       window.dispatchEvent(new PopStateEvent('popstate'));
@@ -210,12 +211,9 @@ export const RizheenaShopPage: React.FC = () => {
   };
 
   const handleOpenAllProducts = () => {
-    setSelectedCategory({
-      id: 'all',
-      title: 'Complete Rizheena Catalog',
-      image: '/images/shop/hero_products.jpg',
-      products: CATEGORIES_DATA.flatMap((c) => c.products),
-    });
+    window.history.pushState({}, '', '/shop/all-products');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const closeModal = () => {

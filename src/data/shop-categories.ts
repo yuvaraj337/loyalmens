@@ -47,6 +47,7 @@ export const SHOP_CATEGORIES_DATA: Record<string, CategoryPageConfig> = {
         price: '₹150 – ₹700',
         image: '/images/shop/hair_care/hair_dye.jpg',
         category: 'Hair Care',
+        tags: ['hair-dyes'],
       },
       {
         id: 'hc-6',
@@ -55,6 +56,7 @@ export const SHOP_CATEGORIES_DATA: Record<string, CategoryPageConfig> = {
         price: '₹150 – ₹700',
         image: '/images/shop/hair_care/hair_coloring.jpg',
         category: 'Hair Care',
+        tags: ['hair-dyes'],
       },
       {
         id: 'hc-7',
@@ -63,6 +65,7 @@ export const SHOP_CATEGORIES_DATA: Record<string, CategoryPageConfig> = {
         price: '₹150 – ₹200',
         image: '/images/shop/hair_care/hair_mehendi.jpg',
         category: 'Hair Care',
+        tags: ['hair-dyes'],
       },
       {
         id: 'hc-8',
@@ -302,6 +305,58 @@ export const SHOP_CATEGORIES_DATA: Record<string, CategoryPageConfig> = {
       { icon: 'leaf', text: ['Targeted Solutions'] },
       { icon: 'shield', text: ['Dermatologically Safe'] },
       { icon: 'people', text: ['Trusted by Professionals'] },
+    ],
+  },
+
+  'gift-sets': {
+    id: 'gift-sets',
+    route: '/shop/gift-sets',
+    title: 'Gift Sets Products',
+    subtitle: 'Premium grooming gift sets from our salon catalog.',
+    productCountText: '4 Products',
+    products: [
+      {
+        id: 'gs-1',
+        name: 'Essential Grooming Kit',
+        size: '',
+        description: 'Complete daily care set.',
+        price: '₹699',
+        image: '/images/shop/gift_sets/essential_grooming_kit.jpg',
+        category: 'Gift Sets',
+      },
+      {
+        id: 'gs-2',
+        name: 'Premium Care Kit',
+        size: '',
+        description: 'Advanced care for a stronger you.',
+        price: '₹999',
+        image: '/images/shop/gift_sets/premium_care_kit.jpg',
+        category: 'Gift Sets',
+      },
+      {
+        id: 'gs-3',
+        name: 'Luxury Grooming Kit',
+        size: '',
+        description: 'Complete salon care experience.',
+        price: '₹1499',
+        image: '/images/shop/gift_sets/luxury_grooming_kit.jpg',
+        category: 'Gift Sets',
+      },
+      {
+        id: 'gs-4',
+        name: 'Signature Gift Set',
+        size: '',
+        description: 'A perfect gift for every occasion.',
+        price: '₹1999',
+        image: '/images/shop/gift_sets/signature_gift_set.jpg',
+        category: 'Gift Sets',
+      },
+    ],
+    features: [
+      { icon: 'gift', text: ['Perfect for Gifting'] },
+      { icon: 'leaf', text: ['Premium Products'] },
+      { icon: 'shield', text: ['Trusted by Professionals'] },
+      { icon: 'star', text: ['Make Someone Special'] },
     ],
   },
 };

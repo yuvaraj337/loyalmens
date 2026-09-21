@@ -16,6 +16,15 @@ import { FaceCareCategoryPage } from './components/shop/categories/FaceCareCateg
 import { BeardCareCategoryPage } from './components/shop/categories/BeardCareCategoryPage';
 import { ProfessionalKitsCategoryPage } from './components/shop/categories/ProfessionalKitsCategoryPage';
 import { SpecialCareCategoryPage } from './components/shop/categories/SpecialCareCategoryPage';
+import { GiftSetsCategoryPage } from './components/shop/categories/GiftSetsCategoryPage';
+import { AllProductsPage } from './components/shop/AllProductsPage';
+import { CartPage } from './components/shop/CartPage';
+import { CartProvider } from './context/CartContext';
+import { BookingProvider } from './context/BookingContext';
+import { BookingPage } from './components/booking/BookingPage';
+import { AdminBookingsPage } from './components/booking/AdminBookingsPage';
+import { CartToast } from './components/shop/CartToast';
+import { CartDrawer } from './components/shop/CartDrawer';
 import './styles/variables.css';
 
 export function App() {
@@ -84,10 +93,40 @@ export function App() {
         window.history.pushState({}, '', href);
         setCurrentPath('/shop/special-care');
         window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (href === '/shop/gift-sets') {
+        e.preventDefault();
+        window.history.pushState({}, '', href);
+        setCurrentPath('/shop/gift-sets');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (href === '/shop/all-products') {
+        e.preventDefault();
+        window.history.pushState({}, '', href);
+        setCurrentPath('/shop/all-products');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (href === '/shop/cart') {
+        e.preventDefault();
+        window.history.pushState({}, '', href);
+        setCurrentPath('/shop/cart');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (href === '/shop/checkout') {
+        e.preventDefault();
+        window.history.pushState({}, '', href);
+        setCurrentPath('/shop/checkout');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (href === '/shop' || href.startsWith('/shop#')) {
         e.preventDefault();
         window.history.pushState({}, '', href);
         setCurrentPath('/shop');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (href.startsWith('/booking')) {
+        e.preventDefault();
+        window.history.pushState({}, '', href);
+        setCurrentPath('/booking');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (href.startsWith('/admin')) {
+        e.preventDefault();
+        window.history.pushState({}, '', href);
+        setCurrentPath('/admin');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (href === '/') {
         e.preventDefault();
@@ -116,12 +155,46 @@ export function App() {
   const isBeardCareShop = currentPath === '/shop/beard-care';
   const isKitsShop = currentPath === '/shop/professional-kits';
   const isSpecialCareShop = currentPath === '/shop/special-care';
+  const isGiftSetsShop = currentPath === '/shop/gift-sets';
+  const isAllProductsShop = currentPath === '/shop/all-products';
+  const isCartPage = currentPath === '/shop/cart';
+  const isCheckoutPage = currentPath === '/shop/checkout';
 
-  const isServicesPage = !isHaircutPage && !isBeardPage && !isFacialPage && !isColourPage && (currentPath === '/services' || currentPath.startsWith('/services'));
-  const isShopPage = !isHairCareShop && !isFaceCareShop && !isBeardCareShop && !isKitsShop && !isSpecialCareShop && (currentPath === '/shop' || currentPath.startsWith('/shop'));
+  const isBookingPage = currentPath === '/booking' || currentPath.startsWith('/booking');
+  const isAdminPage = currentPath === '/admin' || currentPath.startsWith('/admin');
+
+  const isServicesPage = !isBookingPage && !isAdminPage && !isHaircutPage && !isBeardPage && !isFacialPage && !isColourPage && (currentPath === '/services' || currentPath.startsWith('/services'));
+  const isShopPage = !isBookingPage && !isAdminPage && !isHairCareShop && !isFaceCareShop && !isBeardCareShop && !isKitsShop && !isSpecialCareShop && !isGiftSetsShop && !isAllProductsShop && !isCartPage && !isCheckoutPage && (currentPath === '/shop' || currentPath.startsWith('/shop'));
+
+  // Helper to wrap content in CartProvider & BookingProvider with global drawer/toast
+  const wrapWithProviders = (content: React.ReactNode) => (
+    <CartProvider>
+      <BookingProvider>
+        {content}
+        <CartToast />
+        <CartDrawer />
+      </BookingProvider>
+    </CartProvider>
+  );
+
+  if (isBookingPage) {
+    return wrapWithProviders(
+      <div className="app-root booking-route-active">
+        <BookingPage />
+      </div>
+    );
+  }
+
+  if (isAdminPage) {
+    return wrapWithProviders(
+      <div className="app-root admin-route-active">
+        <AdminBookingsPage />
+      </div>
+    );
+  }
 
   if (isHaircutPage) {
-    return (
+    return wrapWithProviders(
       <div className="app-root haircut-route-active">
         <HaircutStylingPage />
       </div>
@@ -129,7 +202,7 @@ export function App() {
   }
 
   if (isBeardPage) {
-    return (
+    return wrapWithProviders(
       <div className="app-root beard-route-active">
         <BeardGroomingPage />
       </div>
@@ -137,7 +210,7 @@ export function App() {
   }
 
   if (isFacialPage) {
-    return (
+    return wrapWithProviders(
       <div className="app-root facial-route-active">
         <FacialSkinCarePage />
       </div>
@@ -145,7 +218,7 @@ export function App() {
   }
 
   if (isColourPage) {
-    return (
+    return wrapWithProviders(
       <div className="app-root colour-route-active">
         <HairColourTreatmentPage />
       </div>
@@ -153,7 +226,7 @@ export function App() {
   }
 
   if (isHairCareShop) {
-    return (
+    return wrapWithProviders(
       <div className="app-root shop-cat-route-active">
         <HairCareCategoryPage />
       </div>
@@ -161,7 +234,7 @@ export function App() {
   }
 
   if (isFaceCareShop) {
-    return (
+    return wrapWithProviders(
       <div className="app-root shop-cat-route-active">
         <FaceCareCategoryPage />
       </div>
@@ -169,7 +242,7 @@ export function App() {
   }
 
   if (isBeardCareShop) {
-    return (
+    return wrapWithProviders(
       <div className="app-root shop-cat-route-active">
         <BeardCareCategoryPage />
       </div>
@@ -177,7 +250,7 @@ export function App() {
   }
 
   if (isKitsShop) {
-    return (
+    return wrapWithProviders(
       <div className="app-root shop-cat-route-active">
         <ProfessionalKitsCategoryPage />
       </div>
@@ -185,15 +258,51 @@ export function App() {
   }
 
   if (isSpecialCareShop) {
-    return (
+    return wrapWithProviders(
       <div className="app-root shop-cat-route-active">
         <SpecialCareCategoryPage />
       </div>
     );
   }
 
+  if (isGiftSetsShop) {
+    return wrapWithProviders(
+      <div className="app-root shop-cat-route-active">
+        <GiftSetsCategoryPage />
+      </div>
+    );
+  }
+
+  if (isAllProductsShop) {
+    return wrapWithProviders(
+      <div className="app-root shop-cat-route-active">
+        <AllProductsPage />
+      </div>
+    );
+  }
+
+  if (isCartPage) {
+    return wrapWithProviders(
+      <div className="app-root shop-cat-route-active">
+        <CartPage />
+      </div>
+    );
+  }
+
+  if (isCheckoutPage) {
+    return wrapWithProviders(
+      <div className="app-root shop-cat-route-active" style={{ minHeight: '100vh', background: '#FAF5EE', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ textAlign: 'center', padding: '60px 24px' }}>
+          <h1 style={{ fontFamily: 'Playfair Display, Georgia, serif', fontSize: '32px', color: '#111', marginBottom: '16px' }}>Checkout</h1>
+          <p style={{ fontSize: '15px', color: '#666', marginBottom: '24px' }}>Checkout is coming soon. Thank you for your patience.</p>
+          <a href="/shop" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 28px', background: '#111', color: '#fff', borderRadius: '9999px', fontSize: '13px', fontWeight: 600, textDecoration: 'none' }}>Continue Shopping</a>
+        </div>
+      </div>
+    );
+  }
+
   if (isServicesPage) {
-    return (
+    return wrapWithProviders(
       <div className="app-root services-route-active">
         <SalonServicesPage />
       </div>
@@ -201,14 +310,14 @@ export function App() {
   }
 
   if (isShopPage) {
-    return (
+    return wrapWithProviders(
       <div className="app-root shop-route-active">
         <RizheenaShopPage />
       </div>
     );
   }
 
-  return (
+  return wrapWithProviders(
     <div className="app-root">
       {/* Global Fixed Luxury Navbar */}
       <Navbar />

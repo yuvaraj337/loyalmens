@@ -1,0 +1,188 @@
+/* ==========================================================================
+   CART TOAST NOTIFICATION — Top-right floating notification
+   ========================================================================== */
+
+.cart-toast-wrapper {
+  position: fixed;
+  top: 90px;
+  right: 24px;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.cart-toast {
+  pointer-events: auto;
+  background: #FFFFFF;
+  border: 1px solid #E8DFD3;
+  border-radius: 14px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 280px;
+  max-width: 340px;
+  animation: cartToastSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.cart-toast--exiting {
+  animation: cartToastSlideOut 0.3s ease forwards;
+}
+
+@keyframes cartToastSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(40px) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes cartToastSlideOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(40px) translateY(-5px);
+  }
+}
+
+/* Product thumbnail */
+.cart-toast-thumb {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #F8F3EC;
+  border: 1px solid #EDE5DA;
+}
+
+.cart-toast-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Content area */
+.cart-toast-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Success header row */
+.cart-toast-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.cart-toast-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #22A55B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  animation: toastCheckPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes toastCheckPop {
+  0% {
+    transform: scale(0);
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.cart-toast-check svg {
+  width: 10px;
+  height: 10px;
+}
+
+.cart-toast-title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #22A55B;
+  letter-spacing: 0.02em;
+}
+
+/* Product details */
+.cart-toast-name {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111111;
+  line-height: 1.3;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cart-toast-size {
+  font-size: 12px;
+  color: #666666;
+  margin-bottom: 8px;
+}
+
+/* View Cart link */
+.cart-toast-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #111111;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  transition: color 0.2s ease;
+}
+
+.cart-toast-action:hover {
+  color: #8E704F;
+}
+
+.cart-toast-action svg {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.2s ease;
+}
+
+.cart-toast-action:hover svg {
+  transform: translateX(2px);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .cart-toast-wrapper {
+    right: 12px;
+    left: 12px;
+    top: 80px;
+  }
+
+  .cart-toast {
+    min-width: 0;
+    max-width: none;
+    width: 100%;
+  }
+}

@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from 'react';
-import { CategoryPageConfig, ShopProductItem } from '../../types/shop-category';
+import { CategoryPageConfig } from '../../types/shop-category';
 import { FeatureIcon } from './ShopCategoryIcons';
+import { AddToCartButton } from './AddToCartButton';
+import { useCart } from '../../context/CartContext';
 import '../../styles/shop-category.css';
 
 interface ShopCategoryPageProps {
@@ -12,8 +14,7 @@ export const ShopCategoryPage: React.FC<ShopCategoryPageProps> = ({ config }) =>
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortOption, setSortOption] = useState<string>('default');
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
-  const [cartCount, setCartCount] = useState<number>(0);
+  const { totalCount: cartCount, openDrawer } = useCart();
 
   // Helper to get quantity of a product
   const getQty = (id: string) => quantities[id] || 1;
@@ -64,24 +65,7 @@ export const ShopCategoryPage: React.FC<ShopCategoryPageProps> = ({ config }) =>
     return list;
   }, [config.products, config.hasSearch, config.hasSort, searchQuery, sortOption]);
 
-  // Handle Add to Cart
-  const handleAddToCart = (product: ShopProductItem) => {
-    const qty = getQty(product.id);
-    setCartCount((prev) => prev + qty);
-    setToastMessage(`Added ${qty} × "${product.name}" to cart`);
 
-    // Auto-dismiss toast after 2.5s
-    setTimeout(() => {
-      setToastMessage(null);
-    }, 2500);
-
-    // Dispatch global event for navbar/cart badge updates
-    window.dispatchEvent(
-      new CustomEvent('cart-updated', {
-        detail: { product, quantity: qty },
-      })
-    );
-  };
 
   // Determine grid class (3 columns for Beard Care, 4 for others)
   const isThreeCol = config.id === 'beard-care';
@@ -100,7 +84,12 @@ export const ShopCategoryPage: React.FC<ShopCategoryPageProps> = ({ config }) =>
             <span>Back to Shop</span>
           </a>
 
-          <a href="/shop" className="shop-cat-cart-btn" aria-label={`View Cart (${cartCount} items)`}>
+          <button
+            type="button"
+            className="shop-cat-cart-btn"
+            onClick={openDrawer}
+            aria-label={`View Cart (${cartCount} items)`}
+          >
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="9" cy="21" r="1" />
               <circle cx="20" cy="21" r="1" />
@@ -108,7 +97,7 @@ export const ShopCategoryPage: React.FC<ShopCategoryPageProps> = ({ config }) =>
             </svg>
             <span>Cart</span>
             <span className="shop-cat-cart-badge">{cartCount}</span>
-          </a>
+          </button>
         </div>
 
         {/* Header Row: Title, Subtitle, Count / Search / Sort */}
@@ -206,7 +195,11 @@ export const ShopCategoryPage: React.FC<ShopCategoryPageProps> = ({ config }) =>
 
                   <div className="shop-cat-card-info">
                     <h2 className="shop-cat-card-name">{product.name}</h2>
-                    <span className="shop-cat-card-size">{product.size}</span>
+                    {product.description ? (
+                      <p className="shop-cat-card-desc">{product.description}</p>
+                    ) : (
+                      product.size && <span className="shop-cat-card-size">{product.size}</span>
+                    )}
                     <span className="shop-cat-card-price">{product.price}</span>
 
                     {/* Stepper: - 1 + */}
@@ -233,28 +226,7 @@ export const ShopCategoryPage: React.FC<ShopCategoryPageProps> = ({ config }) =>
                     </div>
 
                     {/* Add to Cart Button */}
-                    <button
-                      type="button"
-                      className="shop-cat-add-btn"
-                      onClick={() => handleAddToCart(product)}
-                      aria-label={`Add ${product.name} to Cart`}
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="shop-cat-cart-icon"
-                        aria-hidden="true"
-                      >
-                        <circle cx="9" cy="21" r="1" />
-                        <circle cx="20" cy="21" r="1" />
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                      </svg>
-                      <span>Add to Cart</span>
-                    </button>
+                    <AddToCartButton product={product} quantity={qty} />
                   </div>
                 </article>
               );
@@ -294,15 +266,7 @@ export const ShopCategoryPage: React.FC<ShopCategoryPageProps> = ({ config }) =>
         </aside>
       </div>
 
-      {/* Cart Toast Notification */}
-      {toastMessage && (
-        <div className="shop-cat-toast" role="status" aria-live="polite">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#68D391" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-          <span>{toastMessage}</span>
-        </div>
-      )}
+
     </div>
   );
 };
