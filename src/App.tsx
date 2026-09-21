@@ -21,8 +21,10 @@ import { AllProductsPage } from './components/shop/AllProductsPage';
 import { CartPage } from './components/shop/CartPage';
 import { CartProvider } from './context/CartContext';
 import { BookingProvider } from './context/BookingContext';
+import { CheckoutProvider } from './context/CheckoutContext';
 import { BookingPage } from './components/booking/BookingPage';
 import { AdminBookingsPage } from './components/booking/AdminBookingsPage';
+import { CheckoutPage } from './components/shop/checkout/CheckoutPage';
 import { CartToast } from './components/shop/CartToast';
 import { CartDrawer } from './components/shop/CartDrawer';
 import './styles/variables.css';
@@ -166,13 +168,15 @@ export function App() {
   const isServicesPage = !isBookingPage && !isAdminPage && !isHaircutPage && !isBeardPage && !isFacialPage && !isColourPage && (currentPath === '/services' || currentPath.startsWith('/services'));
   const isShopPage = !isBookingPage && !isAdminPage && !isHairCareShop && !isFaceCareShop && !isBeardCareShop && !isKitsShop && !isSpecialCareShop && !isGiftSetsShop && !isAllProductsShop && !isCartPage && !isCheckoutPage && (currentPath === '/shop' || currentPath.startsWith('/shop'));
 
-  // Helper to wrap content in CartProvider & BookingProvider with global drawer/toast
+  // Helper to wrap content in CartProvider, BookingProvider & CheckoutProvider with global drawer/toast
   const wrapWithProviders = (content: React.ReactNode) => (
     <CartProvider>
       <BookingProvider>
-        {content}
-        <CartToast />
-        <CartDrawer />
+        <CheckoutProvider>
+          {content}
+          <CartToast />
+          <CartDrawer />
+        </CheckoutProvider>
       </BookingProvider>
     </CartProvider>
   );
@@ -291,12 +295,8 @@ export function App() {
 
   if (isCheckoutPage) {
     return wrapWithProviders(
-      <div className="app-root shop-cat-route-active" style={{ minHeight: '100vh', background: '#FAF5EE', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ textAlign: 'center', padding: '60px 24px' }}>
-          <h1 style={{ fontFamily: 'Playfair Display, Georgia, serif', fontSize: '32px', color: '#111', marginBottom: '16px' }}>Checkout</h1>
-          <p style={{ fontSize: '15px', color: '#666', marginBottom: '24px' }}>Checkout is coming soon. Thank you for your patience.</p>
-          <a href="/shop" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 28px', background: '#111', color: '#fff', borderRadius: '9999px', fontSize: '13px', fontWeight: 600, textDecoration: 'none' }}>Continue Shopping</a>
-        </div>
+      <div className="app-root checkout-route-active">
+        <CheckoutPage />
       </div>
     );
   }

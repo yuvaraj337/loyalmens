@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { useBooking } from '../../context/BookingContext';
+import { useCheckout } from '../../context/CheckoutContext';
 import { getServicesCatalog, saveServiceOverride, SALON_BRANCH_INFO } from '../../data/services-catalog';
 import { BookingStatus, PaymentStatus } from '../../types/booking';
+import { OrderStatus } from '../../types/checkout';
 import '../../styles/admin-bookings.css';
 
 export const AdminBookingsPage: React.FC = () => {
   const { bookings, updateBookingStatus } = useBooking();
-  const [activeTab, setActiveTab] = useState<'bookings' | 'services' | 'salon'>('bookings');
+  const { orders, updateOrderStatus, storeSettings, updateStoreSettings } = useCheckout();
+  const [activeTab, setActiveTab] = useState<'bookings' | 'services' | 'salon' | 'shop_orders'>('bookings');
   const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [orderStatusFilter, setOrderStatusFilter] = useState<string>('all');
+  const [editingDeliveryFee, setEditingDeliveryFee] = useState<boolean>(false);
+  const [customDeliveryFee, setCustomDeliveryFee] = useState<number>(storeSettings.deliveryCharge);
   const [services, setServices] = useState(() => getServicesCatalog());
   const [editingPriceId, setEditingPriceId] = useState<string | null>(null);
   const [newPrice, setNewPrice] = useState<string>('');
@@ -64,6 +70,13 @@ export const AdminBookingsPage: React.FC = () => {
             onClick={() => setActiveTab('bookings')}
           >
             All Appointments ({bookings.length})
+          </button>
+          <button
+            type="button"
+            className={`admin-tab-btn ${activeTab === 'shop_orders' ? 'active' : ''}`}
+            onClick={() => setActiveTab('shop_orders')}
+          >
+            RIZHEENA Shop Orders ({orders.length})
           </button>
           <button
             type="button"
@@ -345,6 +358,182 @@ export const AdminBookingsPage: React.FC = () => {
                   <strong>Double Booking Guard:</strong> Enabled (Real-time reservation locking)
                 </div>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 4: RIZHEENA SHOP ORDERS */}
+        {activeTab === 'shop_orders' && (
+          <div className="admin-card">
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '16px' }}>
+              <div>
+                <h2 style={{ fontSize: '18px', margin: '0 0 6px 0', fontWeight: 700, color: '#FFF' }}>
+                  RIZHEENA Shop Orders
+                </h2>
+                <div style={{ fontSize: '12px', color: '#A0988A' }}>
+                  Manage customer ecommerce orders, track delivery addresses, and update fulfillment statuses.
+                </div>
+              </div>
+
+              {/* Delivery Fee Configuration */}
+              <div style={{ background: '#110F0D', border: '1px solid rgba(212,175,55,0.2)', padding: '10px 16px', borderRadius: '10px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <span style={{ fontSize: '12px', color: '#D4AF37', fontWeight: 600 }}>All-India Delivery Fee:</span>
+                {editingDeliveryFee ? (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <input
+                      type="number"
+                      value={customDeliveryFee}
+                      onChange={(e) => setCustomDeliveryFee(Number(e.target.value) || 0)}
+                      style={{ width: '60px', background: '#000', color: '#FFF', border: '1px solid #D4AF37', borderRadius: '4px', padding: '4px 8px', fontSize: '13px' }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        updateStoreSettings({ deliveryCharge: customDeliveryFee });
+                        setEditingDeliveryFee(false);
+                      }}
+                      style={{ background: '#D4AF37', color: '#111', border: 'none', borderRadius: '4px', padding: '4px 10px', fontSize: '12px', fontWeight: 700, cursor: 'pointer' }}
+                    >
+                      Save
+                    </button>
+                  </div>
+                ) : (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ fontSize: '14px', fontWeight: 700, color: '#FFF' }}>₹{storeSettings.deliveryCharge}</span>
+                    <button
+                      type="button"
+                      onClick={() => setEditingDeliveryFee(true)}
+                      style={{ background: 'none', border: 'none', color: '#A0988A', fontSize: '11px', textDecoration: 'underline', cursor: 'pointer' }}
+                    >
+                      Change
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Status Filter buttons */}
+            <div style={{ display: 'flex', gap: '8px', marginBottom: '20px', flexWrap: 'wrap' }}>
+              {['all', 'pending', 'confirmed', 'processing', 'shipped', 'out_for_delivery', 'delivered', 'cancelled'].map((st) => (
+                <button
+                  key={st}
+                  type="button"
+                  onClick={() => setOrderStatusFilter(st)}
+                  style={{
+                    background: orderStatusFilter === st ? '#D4AF37' : 'rgba(255,255,255,0.06)',
+                    color: orderStatusFilter === st ? '#111' : '#DDD',
+                    border: 'none',
+                    padding: '6px 12px',
+                    borderRadius: '6px',
+                    fontSize: '12px',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    textTransform: 'capitalize',
+                  }}
+                >
+                  {st.replace(/_/g, ' ')}
+                </button>
+              ))}
+            </div>
+
+            {/* Orders Table */}
+            <div className="admin-table-wrap">
+              {orders.length === 0 ? (
+                <div style={{ textAlign: 'center', padding: '40px 16px', color: '#888' }}>
+                  No orders have been placed yet. Submit an order through the shop checkout to view it here.
+                </div>
+              ) : (
+                <table className="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Order No</th>
+                      <th>Customer &amp; Phone</th>
+                      <th>Items</th>
+                      <th>Total</th>
+                      <th>Payment</th>
+                      <th>Delivery Address</th>
+                      <th>Date</th>
+                      <th>Status &amp; Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {orders
+                      .filter((ord) => orderStatusFilter === 'all' || ord.order_status === orderStatusFilter)
+                      .map((ord) => {
+                        const dateFormatted = new Date(ord.created_at).toLocaleDateString('en-IN', {
+                          day: 'numeric',
+                          month: 'short',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        });
+
+                        return (
+                          <tr key={ord.order_id}>
+                            <td>
+                              <strong style={{ color: '#D4AF37' }}>{ord.order_number}</strong>
+                            </td>
+                            <td>
+                              <div style={{ fontWeight: 600, color: '#FFF' }}>{ord.customer_name}</div>
+                              <div style={{ fontSize: '11.5px', color: '#AAA' }}>{ord.phone}</div>
+                              {ord.email && <div style={{ fontSize: '11px', color: '#777' }}>{ord.email}</div>}
+                            </td>
+                            <td>
+                              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                {ord.items.map((item, i) => (
+                                  <div key={i} style={{ fontSize: '12px', color: '#DDD' }}>
+                                    {item.name} × {item.quantity} ({item.price})
+                                  </div>
+                                ))}
+                              </div>
+                            </td>
+                            <td>
+                              <div style={{ fontWeight: 700, color: '#FFF', fontSize: '14px' }}>
+                                ₹{ord.total.toLocaleString('en-IN')}
+                              </div>
+                              <div style={{ fontSize: '11px', color: '#888' }}>
+                                Subtotal ₹{ord.subtotal} + Del ₹{ord.delivery_charge}
+                              </div>
+                            </td>
+                            <td>
+                              <span style={{ fontSize: '11px', padding: '3px 8px', borderRadius: '4px', background: 'rgba(212,175,55,0.15)', color: '#D4AF37', fontWeight: 600, textTransform: 'uppercase' }}>
+                                {ord.payment_status}
+                              </span>
+                            </td>
+                            <td style={{ maxWidth: '220px', fontSize: '12px', color: '#BBB', lineHeight: 1.4 }}>
+                              {ord.delivery_address.formattedAddress}
+                            </td>
+                            <td style={{ fontSize: '12px', color: '#888', whiteSpace: 'nowrap' }}>
+                              {dateFormatted}
+                            </td>
+                            <td>
+                              <select
+                                value={ord.order_status}
+                                onChange={(e) => updateOrderStatus(ord.order_id, e.target.value as OrderStatus)}
+                                style={{
+                                  background: '#111',
+                                  color: '#FFF',
+                                  border: '1px solid rgba(212,175,55,0.4)',
+                                  borderRadius: '6px',
+                                  padding: '6px 8px',
+                                  fontSize: '12px',
+                                  fontWeight: 600,
+                                }}
+                              >
+                                <option value="pending">Pending</option>
+                                <option value="confirmed">Confirmed</option>
+                                <option value="processing">Processing</option>
+                                <option value="shipped">Shipped</option>
+                                <option value="out_for_delivery">Out for Delivery</option>
+                                <option value="delivered">Delivered</option>
+                                <option value="cancelled">Cancelled</option>
+                              </select>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                  </tbody>
+                </table>
+              )}
             </div>
           </div>
         )}
