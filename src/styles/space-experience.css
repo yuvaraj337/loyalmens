@@ -283,9 +283,9 @@
 
 .quote-vertical-rule {
   width: 1px;
-  height: 60px;
+  height: 85px;
   background: rgba(181, 135, 76, 0.45);
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 }
 
 .quote-eyebrow {
@@ -293,35 +293,37 @@
   flex-direction: column;
   font-family: var(--font-sans);
   font-size: 8.5px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  color: #6E665C;
-  line-height: 1.45;
-  margin-bottom: 14px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  color: #787066;
+  line-height: 1.6;
+  margin-bottom: 22px;
 }
 
 .quote-mark {
-  font-family: var(--font-serif);
-  font-size: 36px;
-  line-height: 0.8;
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  line-height: 0.9;
   color: #161513;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 }
 
 .quote-text {
-  font-family: 'Playfair Display', var(--font-serif);
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-style: italic;
-  font-size: 15px;
-  line-height: 1.35;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
   color: #38322B;
   margin: 0;
-  margin-bottom: 14px;
+  margin-bottom: 20px;
 }
 
 .quote-bottom-line {
-  width: 32px;
-  height: 1.5px;
-  background: #987138;
+  width: 36px;
+  height: 1px;
+  background: rgba(166, 124, 70, 0.75);
 }
 
 /* ======================================================
