@@ -11,7 +11,10 @@ export const ExperienceHeader: React.FC<ExperienceHeaderProps> = ({ onPrev, onNe
     <div className="experience-header">
       <div className="experience-header-text">
         <span className="experience-eyebrow">HOW WOULD YOU LIKE TO EXPERIENCE LOYAL?</span>
-        <h2 className="experience-title">Choose Your Experience</h2>
+        <h2 className="experience-title">
+          <span>Choose Your</span>
+          <span>Experience</span>
+        </h2>
       </div>
 
       <div className="experience-arrows" aria-label="Experience cards navigation">

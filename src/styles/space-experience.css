@@ -824,41 +824,312 @@
   }
 }
 
-@media (max-width: 600px) {
+/* Default desktop / mobile visibility toggles */
+.space-desktop-view {
+  display: block;
+}
+
+.space-mobile-view {
+  display: none;
+}
+
+/* ======================================================
+   MOBILE-ONLY RESPONSIVE REDESIGN (EXACT MATCH TO REFERENCE 2)
+   Desktop layout is 100% preserved and untouched above 768px
+   ====================================================== */
+@media (max-width: 768px) {
   .loyal-space-section {
-    padding: 40px 16px 36px 16px;
+    padding: 56px 18px 48px 18px !important;
+    scroll-margin-top: 56px !important;
+    background: radial-gradient(circle at 50% 20%, #FFFDF9 0%, #F8F1E7 50%, #EFE4D6 100%) !important;
+    overflow: hidden !important;
   }
 
-  .heading-line {
-    white-space: normal;
+  .space-desktop-view {
+    display: none !important;
   }
 
-  .editorial-heading {
-    font-size: clamp(28px, 7.5vw, 36px);
+  .space-mobile-view {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 540px !important;
+    margin: 0 auto !important;
   }
 
-  .stats-pill-container {
-    flex-direction: column;
-    row-gap: 14px;
-    padding: 16px;
+  /* 1. Top Eyebrow with horizontal line */
+  .space-mobile-eyebrow-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-bottom: 14px !important;
   }
 
-  .stat-item-box {
-    width: 100%;
-    justify-content: flex-start;
+  .space-mobile-eyebrow {
+    font-family: var(--font-sans) !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.25em !important;
+    text-transform: uppercase !important;
+    color: #6B6256 !important;
+    white-space: nowrap !important;
   }
 
-  .stat-item-box:not(:last-child) {
-    border-right: none;
-    border-bottom: 1px solid rgba(181, 135, 76, 0.2);
-    padding-bottom: 10px;
+  .space-mobile-eyebrow-line {
+    flex: 1 !important;
+    height: 1px !important;
+    background: #C5A165 !important;
+    opacity: 0.6 !important;
   }
 
-  .editorial-detail-cards-grid {
-    grid-template-columns: 1fr;
+  /* 2. Main Heading: A Space Designed Around You */
+  .space-mobile-heading {
+    font-family: var(--font-serif) !important;
+    font-size: clamp(38px, 9.5vw, 46px) !important;
+    font-weight: 500 !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.015em !important;
+    color: #161513 !important;
+    margin: 0 0 16px 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
-  .main-image-frame {
-    border-radius: 36px 18px 18px 18px;
+  .space-mobile-heading span {
+    display: block !important;
+  }
+
+  .space-mobile-gold-accent {
+    color: #987138 !important;
+    font-weight: 600 !important;
+  }
+
+  /* 3. Description Paragraph */
+  .space-mobile-desc {
+    font-family: var(--font-sans) !important;
+    font-size: 13.5px !important;
+    line-height: 1.55 !important;
+    color: #554F47 !important;
+    margin: 0 0 20px 0 !important;
+  }
+
+  /* 4. Full-width Salon Interior Image with Rounded Corners */
+  .space-mobile-image-wrap {
+    width: 100% !important;
+    aspect-ratio: 16 / 10 !important;
+    border-radius: 24px !important;
+    overflow: hidden !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12) !important;
+    margin-bottom: 14px !important;
+    background: #11100E !important;
+  }
+
+  .space-mobile-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 50% !important;
+    display: block !important;
+  }
+
+  /* 5. Four-Column Statistics Row matching Reference 2 */
+  .space-mobile-stats-card {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    background: #FFFFFF !important;
+    border: 1px solid rgba(197, 161, 101, 0.25) !important;
+    border-radius: 18px !important;
+    padding: 16px 4px !important;
+    box-shadow: 0 4px 18px rgba(60, 45, 30, 0.05) !important;
+    margin-bottom: 26px !important;
+  }
+
+  .space-mobile-stat-col {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 0 4px !important;
+  }
+
+  .space-mobile-stat-col:not(:last-child) {
+    border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .space-mobile-stat-icon {
+    color: #C5A165 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 6px !important;
+  }
+
+  .space-mobile-stat-icon svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  .space-mobile-stat-val {
+    font-family: var(--font-sans) !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: #161513 !important;
+    line-height: 1.15 !important;
+    margin-bottom: 3px !important;
+  }
+
+  .space-mobile-stat-lbl {
+    font-family: var(--font-sans) !important;
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    color: #6E665B !important;
+    line-height: 1.2 !important;
+  }
+
+  /* 6. Bottom Row: Play Button & Script (Left) | Divider | Quote (Right) */
+  .space-mobile-bottom-row {
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+  }
+
+  .space-mobile-bottom-left {
+    flex: 1.15 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 0 !important;
+  }
+
+  .space-mobile-play-line-wrap {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .space-mobile-play-btn {
+    width: 46px !important;
+    height: 46px !important;
+    border-radius: 50% !important;
+    background: #161513 !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #FFFFFF !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+    transition: transform 0.2s ease !important;
+  }
+
+  .space-mobile-play-btn:active {
+    transform: scale(0.95) !important;
+  }
+
+  .mobile-play-triangle {
+    width: 14px !important;
+    height: 14px !important;
+    margin-left: 2px !important;
+  }
+
+  .space-mobile-play-text {
+    display: flex !important;
+    flex-direction: column !important;
+    font-family: var(--font-sans) !important;
+    font-size: 9.5px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.15em !important;
+    color: #161513 !important;
+    line-height: 1.25 !important;
+    white-space: nowrap !important;
+  }
+
+  .space-mobile-play-divider-line {
+    flex: 1 !important;
+    height: 1px !important;
+    background: #C5A165 !important;
+    opacity: 0.6 !important;
+  }
+
+  .space-mobile-script-art {
+    font-family: var(--font-script), 'Alex Brush', cursive !important;
+    font-size: clamp(38px, 9vw, 46px) !important;
+    color: #B88D4D !important;
+    line-height: 0.95 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding-left: 6px !important;
+    transform: rotate(-3deg) !important;
+    transform-origin: left center !important;
+  }
+
+  .space-mobile-vert-line {
+    width: 1px !important;
+    height: 115px !important;
+    background: #C5A165 !important;
+    opacity: 0.5 !important;
+    flex-shrink: 0 !important;
+    margin: 0 4px !important;
+  }
+
+  .space-mobile-bottom-right {
+    flex: 0.85 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 0 !important;
+    padding-top: 4px !important;
+  }
+
+  .space-mobile-quote-eyebrow {
+    display: flex !important;
+    flex-direction: column !important;
+    font-family: var(--font-sans) !important;
+    font-size: 8.5px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.2em !important;
+    color: #4A433A !important;
+    line-height: 1.3 !important;
+  }
+
+  .space-mobile-quote-dash {
+    width: 18px !important;
+    height: 1px !important;
+    background: #C5A165 !important;
+    margin: 8px 0 10px 0 !important;
+    opacity: 0.8 !important;
+  }
+
+  .space-mobile-quote-text {
+    font-family: 'Playfair Display', Georgia, serif !important;
+    font-size: 11.5px !important;
+    font-style: italic !important;
+    line-height: 1.45 !important;
+    color: #6E665B !important;
+    margin: 0 !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .space-mobile-stat-val {
+    font-size: 13.5px !important;
+  }
+  .space-mobile-stat-lbl {
+    font-size: 8.5px !important;
+  }
+  .space-mobile-stat-icon svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  .space-mobile-play-btn {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .space-mobile-script-art {
+    font-size: 34px !important;
+  }
+  .space-mobile-quote-text {
+    font-size: 10.5px !important;
   }
 }

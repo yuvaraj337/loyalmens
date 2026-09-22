@@ -475,10 +475,27 @@
   box-shadow: 0 0 6px #D4AF37;
 }
 
+/* Default desktop rules for new helper classes */
+.card-mobile-content {
+  display: none;
+}
+
+.card-desktop-content {
+  display: contents;
+}
+
+.experience-title span {
+  display: inline;
+}
+
+.experience-title span:first-child::after {
+  content: ' ';
+}
+
 /* ======================================================
-   Responsive Adjustments
+   Responsive Adjustments: Tablet (769px - 1150px)
    ====================================================== */
-@media (max-width: 1150px) {
+@media (max-width: 1150px) and (min-width: 769px) {
   .experience-cards-grid {
     display: flex;
     overflow-x: auto;
@@ -499,34 +516,248 @@
   }
 }
 
-@media (max-width: 640px) {
+/* ======================================================
+   MOBILE-ONLY RESPONSIVE REDESIGN (EXACT MATCH TO REFERENCE 1)
+   Desktop layout is 100% preserved and untouched above 768px
+   ====================================================== */
+@media (max-width: 768px) {
   .experience-section {
-    padding: 60px 20px 0 20px;
+    padding: 56px 18px 44px 18px !important;
+    scroll-margin-top: 56px !important;
+    background: radial-gradient(circle at 50% 15%, #F7EFE5 0%, #EFE5D8 50%, #E5D7C6 100%) !important;
   }
+
+  .experience-container {
+    max-width: 100% !important;
+  }
+
   .experience-header {
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin-bottom: 24px !important;
   }
+
+  .experience-header-text {
+    text-align: center !important;
+  }
+
+  .experience-eyebrow {
+    font-size: 10px !important;
+    letter-spacing: 0.22em !important;
+    color: #6E665B !important;
+    margin-bottom: 8px !important;
+    display: block !important;
+  }
+
+  .experience-title {
+    font-size: clamp(34px, 8.5vw, 42px) !important;
+    font-weight: 500 !important;
+    line-height: 1.08 !important;
+    color: #161513 !important;
+    letter-spacing: -0.015em !important;
+  }
+
+  .experience-title span {
+    display: block !important;
+  }
+
+  .experience-title span:first-child::after {
+    content: "" !important;
+  }
+
   .experience-arrows {
-    position: static;
+    display: none !important;
   }
+
+  /* 3 Cards MUST stack vertically */
+  .experience-cards-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Individual Mobile Card */
   .experience-card {
-    min-width: 85vw;
+    position: relative !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    aspect-ratio: 16 / 8.5 !important;
+    min-height: 180px !important;
+    border-radius: 24px !important;
+    overflow: hidden !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+    transform: none !important;
   }
-  .trust-pillars-grid {
-    grid-template-columns: 1fr;
+
+  .experience-card:hover {
+    transform: none !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
   }
-  .trust-strip-wrapper, .lifestyle-peek-section {
-    margin: 0 -20px;
-    padding: 30px 20px;
+
+  .experience-card:nth-child(1) .card-bg-img {
+    object-position: center 30% !important;
   }
-  .lifestyle-peek-container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 28px;
+
+  .experience-card:nth-child(2) .card-bg-img {
+    object-position: center 40% !important;
   }
-  .lifestyle-right {
-    align-items: flex-start;
+
+  .experience-card:nth-child(3) .card-bg-img {
+    object-position: center 25% !important;
+  }
+
+  /* Dark gradient overlay toward bottom */
+  .card-overlay-gradient {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 30%,
+      rgba(10, 9, 8, 0.45) 55%,
+      rgba(10, 9, 8, 0.88) 80%,
+      rgba(10, 9, 8, 0.98) 100%
+    ) !important;
+  }
+
+  /* Card Number at Top Left */
+  .card-number-badge {
+    top: 18px !important;
+    left: 20px !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.04em !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;
+  }
+
+  /* Hide Desktop Content on Mobile */
+  .card-desktop-content {
+    display: none !important;
+  }
+
+  /* Show Mobile Content Row on Mobile */
+  .card-mobile-content {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 4 !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 14px 18px !important;
+  }
+
+  /* Gold Circular Icon on Left */
+  .card-mobile-icon-circle {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    border: 1.5px solid #C5A165 !important;
+    background: rgba(14, 12, 10, 0.6) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #C5A165 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .card-mobile-icon-circle svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  /* Text in Middle */
+  .card-mobile-text {
+    margin-left: 14px !important;
+    margin-right: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3px !important;
+    min-width: 0 !important;
+  }
+
+  .card-mobile-title {
+    font-family: var(--font-sans) !important;
+    font-size: 15.5px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    color: #FFFFFF !important;
+    line-height: 1.15 !important;
+    margin: 0 !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .card-mobile-subtitle {
+    font-family: var(--font-sans) !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    color: #DDD4C8 !important;
+    line-height: 1.35 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .card-mobile-subtitle span {
+    display: block !important;
+  }
+
+  /* Gold Circular Arrow Button on Right */
+  .card-mobile-arrow-btn {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    border: 1.5px solid #C5A165 !important;
+    background: rgba(14, 12, 10, 0.6) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #C5A165 !important;
+    flex-shrink: 0 !important;
+    transition: transform 0.2s ease, background 0.2s ease !important;
+  }
+
+  .card-mobile-arrow-btn svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  /* Hide Feature Strip & Lifestyle Preview on Mobile (Section ends cleanly at Card 03) */
+  .experience-feature-strip,
+  .trust-strip-wrapper,
+  .lifestyle-peek-section {
+    display: none !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .experience-card {
+    min-height: 165px !important;
+  }
+  .card-mobile-icon-circle {
+    width: 42px !important;
+    height: 42px !important;
+  }
+  .card-mobile-arrow-btn {
+    width: 38px !important;
+    height: 38px !important;
+  }
+  .card-mobile-title {
+    font-size: 14px !important;
+  }
+  .card-mobile-subtitle {
+    font-size: 11px !important;
   }
 }

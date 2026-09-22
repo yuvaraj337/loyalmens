@@ -631,4 +631,7 @@
   .mobile-menu-toggle-btn {
     display: none;
   }
+  .nav-lang-trigger-wrap {
+    display: none !important;
+  }
 }
