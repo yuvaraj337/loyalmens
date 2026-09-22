@@ -450,6 +450,28 @@
   color: #161513;
 }
 
+.haircut-heading-line-1 {
+  display: inline;
+}
+
+.haircut-heading-line-2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.haircut-desktop-subtitle {
+  display: block;
+}
+
+.haircut-mobile-subtitle {
+  display: none;
+}
+
+.haircut-service-divider-line {
+  display: none;
+}
+
 .haircut-services-heading-line {
   width: 80px;
   height: 1px;
@@ -460,6 +482,11 @@
   font-family: var(--font-sans);
   font-size: 13.5px;
   color: #665F57;
+}
+
+.haircut-services-meta-row {
+  display: flex;
+  align-items: flex-end;
 }
 
 .haircut-view-all-link {
@@ -473,6 +500,15 @@
   text-decoration: underline;
   text-underline-offset: 3px;
   transition: color 0.2s ease;
+}
+
+.haircut-view-all-text {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.haircut-view-all-arrow {
+  display: inline;
 }
 
 .haircut-view-all-link:hover {
@@ -876,79 +912,403 @@
   }
 }
 
-@media (max-width: 640px) {
+/* ==========================================================================
+   MOBILE EXACT REBUILD — MATCHING IMAGE 3 (HERO) AND IMAGE 2 (SERVICES)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* 1. Remove Entire Mobile Header Row (Image 3) */
   .haircut-header {
-    padding: 12px 20px;
+    display: none !important;
   }
 
-  .haircut-header-nav {
-    display: none;
+  /* 2. Page & Container */
+  .haircut-page {
+    background-color: #FAF5EE !important;
+    padding-top: 0 !important;
   }
 
   .haircut-container {
-    padding: 0 20px;
+    padding: 0 20px !important;
+    max-width: 100% !important;
   }
 
-  .haircut-footer-top-grid {
-    grid-template-columns: 1fr;
+  /* 3. Section 1: Hero Section (Image 3) */
+  .haircut-hero-section {
+    padding: 28px 0 0 0 !important;
   }
 
-  .haircut-footer-bottom-bar {
-    flex-direction: column;
-    gap: 12px;
-    text-align: center;
-  }
-}
-
-@media (max-width: 520px) {
-  .haircut-container {
-    padding: 0 16px;
+  .haircut-hero-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
   }
 
-  .haircut-breadcrumbs {
-    flex-wrap: wrap;
-    gap: 6px;
-    font-size: 11px;
+  .haircut-hero-left {
+    max-width: 100% !important;
+    margin-bottom: 0 !important;
+    align-items: flex-start !important;
   }
 
-  .haircut-hero-title {
-    font-size: clamp(28px, 8vw, 36px);
+  .haircut-hero-eyebrow {
+    font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
+    font-size: 10.5px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.28em !important;
+    color: #8C8276 !important;
+    text-transform: uppercase !important;
+    margin-bottom: 12px !important;
+  }
+
+  .haircut-hero-heading {
+    font-family: var(--font-serif, "Playfair Display", Georgia, serif) !important;
+    font-size: clamp(40px, 12vw, 48px) !important;
+    font-weight: 500 !important;
+    line-height: 1.05 !important;
+    color: #161513 !important;
+    margin-bottom: 16px !important;
+  }
+
+  .haircut-heading-line {
+    display: block !important;
+  }
+
+  .haircut-heading-accent {
+    color: #B3874B !important;
+  }
+
+  .haircut-hero-desc {
+    font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important;
+    color: #58514A !important;
+    margin-bottom: 24px !important;
+  }
+
+  /* 4. Remove Book Your Appointment CTA button completely (Image 3) */
+  .haircut-book-cta-btn {
+    display: none !important;
+  }
+
+  /* 5. Wide Hero Image (Image 3) */
+  .haircut-hero-right {
+    width: 100% !important;
+    margin-bottom: 0 !important;
+  }
+
+  .haircut-hero-img-wrap {
+    width: 100% !important;
+    border-radius: 26px !important;
+    overflow: hidden !important;
+    box-shadow: 0 10px 28px -6px rgba(45, 30, 15, 0.12) !important;
+  }
+
+  .haircut-hero-photo {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    object-fit: cover !important;
+  }
+
+  /* 6. STYLE GROOM CONFIDENCE & Feature Grid (Image 3) */
+  .haircut-benefit-strip {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 26px 0 28px 0 !important;
+    border-bottom: 1px solid rgba(216, 206, 194, 0.6) !important;
+    margin-bottom: 32px !important;
+    gap: 0 !important;
+  }
+
+  .haircut-tagline-motto {
+    font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
+    font-size: 10.5px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.25em !important;
+    color: #8C8276 !important;
+    text-transform: uppercase !important;
+    margin-bottom: 18px !important;
+    text-align: left !important;
+    align-self: flex-start !important;
+  }
+
+  .haircut-benefit-items-row {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    row-gap: 18px !important;
+    column-gap: 8px !important;
+    width: 100% !important;
+    align-items: flex-start !important;
+  }
+
+  .haircut-benefit-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .haircut-benefit-icon {
+    color: #8C8276 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .haircut-benefit-icon svg {
+    width: 18px !important;
+    height: 18px !important;
+    stroke-width: 1.6 !important;
+  }
+
+  .haircut-benefit-text {
+    display: flex !important;
+    flex-direction: column !important;
+    font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    line-height: 1.25 !important;
+    color: #38332D !important;
+  }
+
+  /* 7. Section 2: "Our Hair Services" (Image 2) */
+  .haircut-services-section {
+    position: relative !important;
+    margin-bottom: 40px !important;
+  }
+
+  .haircut-services-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    margin-bottom: 20px !important;
+    width: 100% !important;
+  }
+
+  .haircut-services-title-col {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .haircut-services-eyebrow {
+    font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.28em !important;
+    color: #8C8276 !important;
+    text-transform: uppercase !important;
+    margin-bottom: 8px !important;
+  }
+
+  .haircut-services-heading-row {
+    margin-bottom: 4px !important;
+  }
+
+  .haircut-services-heading {
+    font-family: var(--font-serif, "Playfair Display", Georgia, serif) !important;
+    font-size: 32px !important;
+    font-weight: 600 !important;
+    color: #161513 !important;
+    line-height: 1.15 !important;
+  }
+
+  .haircut-heading-line-1 {
+    display: block !important;
+  }
+
+  .haircut-heading-line-2 {
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+  }
+
+  .haircut-services-heading-line {
+    display: inline-block !important;
+    width: 65px !important;
+    height: 1px !important;
+    background: rgba(168, 155, 142, 0.6) !important;
+  }
+
+  .haircut-desktop-subtitle {
+    display: none !important;
+  }
+
+  .haircut-mobile-subtitle {
+    display: block !important;
+  }
+
+  .haircut-services-meta-row {
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+    margin-top: 6px !important;
+    width: 100% !important;
+  }
+
+  .haircut-services-subtitle {
+    font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
+    font-size: 13.5px !important;
+    color: #665F57 !important;
+    line-height: 1.45 !important;
+    max-width: 240px !important;
+    margin: 0 !important;
+  }
+
+  .haircut-view-all-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    text-decoration: none !important;
+    color: #161513 !important;
+    font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    line-height: 1.25 !important;
+    padding-top: 2px !important;
+  }
+
+  .haircut-view-all-text {
+    display: flex !important;
+    flex-direction: column !important;
+    border-bottom: 1.2px solid #161513 !important;
+    padding-bottom: 1px !important;
+  }
+
+  .haircut-view-all-arrow {
+    font-size: 15px !important;
+    color: #161513 !important;
+    margin-left: 2px !important;
+  }
+
+  /* 8. Service Cards (Image 2) */
+  .haircut-services-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    width: 100% !important;
   }
 
   .haircut-service-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 14px;
+    background-color: #FAF6F0 !important;
+    border: 1px solid rgba(216, 206, 194, 0.65) !important;
+    border-radius: 16px !important;
+    padding: 16px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    gap: 0 !important;
+  }
+
+  .haircut-service-left-group {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    width: 100% !important;
+  }
+
+  .haircut-service-thumb {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 10px !important;
+    object-fit: cover !important;
+    flex-shrink: 0 !important;
+  }
+
+  .haircut-service-details {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3px !important;
+  }
+
+  .haircut-service-name {
+    font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
+    font-size: 14.5px !important;
+    font-weight: 600 !important;
+    color: #161513 !important;
+    line-height: 1.2 !important;
+  }
+
+  .haircut-service-desc {
+    font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
+    font-size: 12px !important;
+    color: #7A7064 !important;
+    line-height: 1.35 !important;
+  }
+
+  .haircut-service-divider-line {
+    display: block !important;
+    width: 100% !important;
+    border-bottom: 1px dotted rgba(200, 190, 178, 0.85) !important;
+    margin: 14px 0 12px 0 !important;
   }
 
   .haircut-service-right-group {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px dashed rgba(216, 206, 194, 0.45);
-    padding-top: 10px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    border-top: none !important;
+    padding-top: 0 !important;
   }
 
-  .facial-service-card {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 14px;
-  }
-
-  .facial-service-card .haircut-service-right-group {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px dashed rgba(216, 206, 194, 0.45);
-    padding-top: 10px;
+  .haircut-service-price {
+    font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #161513 !important;
   }
 
   .haircut-service-book-btn {
-    min-height: 38px;
-    padding: 8px 18px;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #161513 !important;
+    color: #FFFFFF !important;
+    border-radius: 9999px !important;
+    padding: 7px 24px !important;
+    font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
+    font-size: 11.5px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: background 0.2s ease !important;
+    min-height: unset !important;
+  }
+
+  /* 9. Footer responsive adjustments */
+  .haircut-footer-top-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .haircut-footer-bottom-bar {
+    flex-direction: column !important;
+    gap: 12px !important;
+    text-align: center !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .haircut-container {
+    padding: 0 14px !important;
+  }
+  .haircut-benefit-items-row {
+    column-gap: 4px !important;
+  }
+  .haircut-benefit-text {
+    font-size: 10px !important;
+  }
+  .haircut-services-heading {
+    font-size: 28px !important;
+  }
+  .haircut-services-subtitle {
+    font-size: 12.5px !important;
+    max-width: 180px !important;
   }
 }

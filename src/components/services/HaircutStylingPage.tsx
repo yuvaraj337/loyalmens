@@ -250,18 +250,32 @@ export const HaircutStylingPage: React.FC = () => {
             <div className="haircut-services-title-col">
               <span className="haircut-services-eyebrow">OUR SERVICES</span>
               <div className="haircut-services-heading-row">
-                <h2 className="haircut-services-heading">Our Hair Services</h2>
-                <span className="haircut-services-heading-line" />
+                <h2 className="haircut-services-heading">
+                  <span className="haircut-heading-line-1">Our Hair </span>
+                  <span className="haircut-heading-line-2">
+                    <span>Services</span>
+                    <span className="haircut-services-heading-line" />
+                  </span>
+                </h2>
               </div>
-              <p className="haircut-services-subtitle">
+              <p className="haircut-services-subtitle haircut-desktop-subtitle">
                 Premium grooming solutions for the modern man.
               </p>
             </div>
 
-            <a href="/services" className="haircut-view-all-link">
-              <span>View All Services</span>
-              <span aria-hidden="true">→</span>
-            </a>
+            <div className="haircut-services-meta-row">
+              <p className="haircut-services-subtitle haircut-mobile-subtitle">
+                Premium grooming solutions for the<br />modern man.
+              </p>
+
+              <a href="/services" className="haircut-view-all-link">
+                <span className="haircut-view-all-text">
+                  <span>View All</span>
+                  <span>Services</span>
+                </span>
+                <span className="haircut-view-all-arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
           </div>
 
           <div className="haircut-services-grid">
@@ -279,6 +293,8 @@ export const HaircutStylingPage: React.FC = () => {
                     <span className="haircut-service-desc">{svc.desc}</span>
                   </div>
                 </div>
+
+                <div className="haircut-service-divider-line" />
 
                 <div className="haircut-service-right-group">
                   <span className="haircut-service-price">{svc.price}</span>
