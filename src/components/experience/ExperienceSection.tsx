@@ -57,7 +57,6 @@ export const ExperienceSection: React.FC = () => {
       mobileDescriptionLines: ['Professional Grooming.', 'At Your Doorstep.'],
       ctaLabel: 'BOOK HOME →',
       mobileCtaLabel: 'BOOK HOME',
-      tagline: ['SAME', 'EXPERTISE', 'AT YOUR HOME'],
       href: '/home-service',
       image: '/images/cards/card_04_at_home.png',
       icon: (
