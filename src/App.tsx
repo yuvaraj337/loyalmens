@@ -5,6 +5,7 @@ import { ExperienceSection } from './components/experience/ExperienceSection';
 import { LoyalExperienceSection } from './components/space/LoyalExperienceSection';
 import { LocationSection } from './components/location/LocationSection';
 import { Footer } from './components/footer/Footer';
+import { MembershipSection } from './components/membership/MembershipSection';
 import { SalonServicesPage } from './components/services/SalonServicesPage';
 import { RizheenaShopPage } from './components/shop/RizheenaShopPage';
 import { HaircutStylingPage } from './components/services/HaircutStylingPage';
@@ -332,7 +333,10 @@ export function App() {
         {/* 4. A Space Designed Around You (LoyalExperienceSection) */}
         <LoyalExperienceSection />
 
-        {/* 5. Find Us Here (LocationSection) */}
+        {/* 5. Choose Your Membership (MembershipSection) */}
+        <MembershipSection />
+
+        {/* 6. Find Us Here (LocationSection) */}
         <LocationSection />
       </main>
 

@@ -1,0 +1,747 @@
+/* ==========================================================================
+   RIZHEENA MEMBERSHIP SECTION STYLES
+   ========================================================================== */
+
+.mem-section {
+  background-color: #F5EFE7;
+  padding: 80px 0 88px;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #1A1612;
+}
+
+.mem-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  box-sizing: border-box;
+}
+
+/* Header */
+.mem-header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 44px;
+}
+
+.mem-eyebrow-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.mem-eyebrow-line {
+  width: 50px;
+  height: 1px;
+  background-color: #C9A96E;
+  opacity: 0.8;
+}
+
+.mem-eyebrow-text {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #8C754B;
+}
+
+.mem-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.3rem, 4vw, 3.3rem);
+  font-weight: 700;
+  color: #1A1612;
+  margin: 0 0 10px 0;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.mem-subtitle {
+  font-size: 15.5px;
+  color: #5C5247;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Header Top-Right Navigation Arrows */
+.mem-nav-arrows {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.mem-arrow-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid #C9A96E;
+  background: transparent;
+  color: #8C754B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  padding: 0;
+}
+
+.mem-arrow-btn:hover {
+  background: #C9A96E;
+  color: #FFFFFF;
+  border-color: #C9A96E;
+  transform: scale(1.06);
+}
+
+.mem-arrow-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.2;
+}
+
+/* Cards Grid */
+.mem-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+  scroll-behavior: smooth;
+}
+
+/* Individual Card Structure */
+.mem-card {
+  border-radius: 18px;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 480px;
+}
+
+.mem-card:hover {
+  transform: translateY(-4px);
+}
+
+/* VIP Card (Light) */
+.mem-card-vip {
+  background: #FFFFFF;
+  border: 1px solid #E6DED4;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+.mem-card-vip:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.09);
+}
+
+/* VVIP Card (Dark) */
+.mem-card-vvip {
+  background: #110E0C;
+  border: 1px solid #2A231C;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+}
+
+.mem-card-vvip:hover {
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+  border-color: #4A3C2B;
+}
+
+/* Card Left: Image */
+.mem-card-media {
+  width: 44%;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  padding: 12px 0 12px 12px;
+  box-sizing: border-box;
+}
+
+.mem-card-img-inner {
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.mem-card-img-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.mem-card:hover .mem-card-img-inner img {
+  transform: scale(1.03);
+}
+
+/* Card Right: Content */
+.mem-card-content {
+  flex: 1;
+  padding: 26px 26px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Most Popular Badge */
+.mem-popular-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background-color: #B88E52;
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.mem-badge-spacer {
+  height: 29px; /* Placeholder for alignment when badge is absent */
+}
+
+/* Title & Subtitle */
+.mem-card-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.4rem, 3.2vw, 3.2rem);
+  font-weight: 700;
+  line-height: 0.95;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.mem-card-vip .mem-card-title {
+  color: #1A1612;
+}
+
+.mem-card-vvip .mem-card-title {
+  color: #DFBD80;
+}
+
+.mem-card-sublabel {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.mem-card-vip .mem-card-sublabel {
+  color: #8C754B;
+}
+
+.mem-card-vvip .mem-card-sublabel {
+  color: #C9A96E;
+}
+
+.mem-card-tagline {
+  font-size: 13px;
+  margin: 0 0 14px 0;
+  line-height: 1.4;
+}
+
+.mem-card-vip .mem-card-tagline {
+  color: #5C5247;
+}
+
+.mem-card-vvip .mem-card-tagline {
+  color: #9C9083;
+}
+
+/* Price Box */
+.mem-card-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.mem-card-price {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+}
+
+.mem-card-vip .mem-card-price {
+  color: #1A1612;
+}
+
+.mem-card-vvip .mem-card-price {
+  color: #DFBD80;
+}
+
+.mem-card-duration {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.mem-card-vip .mem-card-duration {
+  color: #5C5247;
+}
+
+.mem-card-vvip .mem-card-duration {
+  color: #8C7E70;
+}
+
+/* Benefits List */
+.mem-benefit-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+}
+
+.mem-benefit-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.mem-card-vip .mem-benefit-row {
+  color: #2D251E;
+}
+
+.mem-card-vvip .mem-benefit-row {
+  color: #E2DAD0;
+}
+
+/* Check Icons */
+.mem-check-icon-circle {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mem-card-vip .mem-check-icon-circle {
+  background-color: #1A1612;
+}
+
+.mem-card-vvip .mem-check-icon-circle {
+  background-color: #B88E52;
+}
+
+.mem-check-icon-circle svg {
+  width: 10px;
+  height: 10px;
+  stroke: #FFFFFF;
+  stroke-width: 2.8;
+  fill: none;
+}
+
+.mem-card-vvip .mem-check-icon-circle svg {
+  stroke: #110E0C;
+}
+
+/* Action Buttons */
+.mem-card-btn {
+  width: 100%;
+  padding: 13px 20px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s ease;
+  margin-top: auto;
+  box-sizing: border-box;
+}
+
+.mem-card-vip .mem-card-btn {
+  background-color: #1A1612;
+  color: #FFFFFF;
+}
+
+.mem-card-vip .mem-card-btn:hover {
+  background-color: #2D2721;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+.mem-card-vvip .mem-card-btn {
+  background: linear-gradient(135deg, #DFBD80 0%, #C29B53 100%);
+  color: #110E0C;
+}
+
+.mem-card-vvip .mem-card-btn:hover {
+  background: linear-gradient(135deg, #E8C88E 0%, #D4A95F 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(216, 178, 107, 0.35);
+}
+
+.mem-card-btn svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2.4;
+  transition: transform 0.2s ease;
+}
+
+.mem-card-btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   HORIZONTAL BENEFIT STRIP
+   ========================================================================== */
+.mem-benefit-strip {
+  background: #FFFFFF;
+  border: 1px solid #E6DED4;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
+.mem-strip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 4px 18px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.mem-strip-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background-color: #E6DED4;
+}
+
+.mem-strip-icon-wrap {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mem-strip-icon-wrap svg {
+  width: 32px;
+  height: 32px;
+  stroke: #B88E52;
+  stroke-width: 1.6;
+  fill: none;
+}
+
+.mem-strip-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.mem-strip-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #1A1612;
+  margin: 0 0 3px 0;
+  letter-spacing: -0.01em;
+}
+
+.mem-strip-desc {
+  font-size: 12px;
+  color: #6B6057;
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   INQUIRY MODAL STYLES
+   ========================================================================== */
+.mem-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 12, 10, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: memFadeIn 0.25s ease-out;
+}
+
+@keyframes memFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.mem-modal-box {
+  background: #FCFAF7;
+  border: 1px solid #E6DED4;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 460px;
+  padding: 36px 32px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  position: relative;
+  box-sizing: border-box;
+  animation: memScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes memScaleIn {
+  from { transform: scale(0.94); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.mem-modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #DFD5C8;
+  background: transparent;
+  color: #5C5247;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0;
+}
+
+.mem-modal-close-btn:hover {
+  background: #EFE9E0;
+  color: #1A1612;
+}
+
+.mem-modal-badge {
+  display: inline-block;
+  background-color: #B88E52;
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.mem-modal-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1A1612;
+  margin: 0 0 6px 0;
+}
+
+.mem-modal-sub {
+  font-size: 13.5px;
+  color: #6B6057;
+  margin: 0 0 24px 0;
+}
+
+.mem-form-group {
+  margin-bottom: 16px;
+}
+
+.mem-form-group label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4A4036;
+  margin-bottom: 6px;
+}
+
+.mem-form-group input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid #DFD5C8;
+  background: #FFFFFF;
+  font-size: 14px;
+  color: #1A1612;
+  box-sizing: border-box;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.mem-form-group input:focus {
+  border-color: #B88E52;
+  box-shadow: 0 0 0 3px rgba(184, 142, 82, 0.15);
+}
+
+.mem-modal-submit-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  margin-top: 8px;
+  transition: all 0.25s ease;
+}
+
+.mem-modal-submit-vip {
+  background-color: #1A1612;
+  color: #FFFFFF;
+}
+
+.mem-modal-submit-vip:hover {
+  background-color: #2D2721;
+}
+
+.mem-modal-submit-vvip {
+  background: linear-gradient(135deg, #DFBD80 0%, #C29B53 100%);
+  color: #110E0C;
+}
+
+.mem-modal-submit-vvip:hover {
+  background: linear-gradient(135deg, #E8C88E 0%, #D4A95F 100%);
+}
+
+.mem-modal-success {
+  text-align: center;
+  padding: 16px 8px;
+}
+
+.mem-modal-success-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #1A1612;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.mem-modal-success-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: #C9A96E;
+  stroke-width: 2.2;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .mem-cards-grid {
+    gap: 16px;
+  }
+  .mem-card-media {
+    width: 40%;
+  }
+  .mem-card-content {
+    padding: 22px 18px 20px 16px;
+  }
+  .mem-card-title {
+    font-size: 2.2rem;
+  }
+  .mem-strip-item {
+    padding: 4px 12px;
+    gap: 10px;
+  }
+  .mem-strip-icon-wrap svg {
+    width: 26px;
+    height: 26px;
+  }
+  .mem-strip-title {
+    font-size: 13.5px;
+  }
+}
+
+@media (max-width: 860px) {
+  .mem-cards-grid {
+    grid-template-columns: 1fr;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .mem-card-media {
+    width: 44%;
+  }
+  .mem-card-img-inner {
+    min-height: 420px;
+  }
+  .mem-benefit-strip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 0;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .mem-strip-item:nth-child(2)::after {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .mem-section {
+    padding: 60px 0 64px;
+  }
+  .mem-container {
+    padding: 0 18px;
+  }
+  .mem-header {
+    margin-bottom: 32px;
+  }
+  .mem-nav-arrows {
+    position: static;
+    transform: none;
+    justify-content: center;
+    margin-top: 16px;
+  }
+  .mem-card {
+    flex-direction: column;
+  }
+  .mem-card-media {
+    width: 100%;
+    padding: 12px 12px 0 12px;
+  }
+  .mem-card-img-inner {
+    min-height: 220px;
+    height: 220px;
+  }
+  .mem-card-content {
+    padding: 20px 18px 20px;
+  }
+  .mem-benefit-strip {
+    grid-template-columns: 1fr;
+    padding: 18px 14px;
+    gap: 14px;
+  }
+  .mem-strip-item {
+    padding: 4px 8px;
+  }
+  .mem-strip-item:not(:last-child)::after {
+    display: none;
+  }
+}
