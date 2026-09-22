@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  Search,
   ShoppingBag,
   ArrowRight,
   Menu,
@@ -138,20 +137,6 @@ export const Navbar: React.FC = () => {
 
         {/* Right Action Icons & Buttons */}
         <div className="nav-actions">
-          {/* Search Button */}
-          <button
-            type="button"
-            className="nav-icon-btn nav-search-btn"
-            aria-label="Search services or products"
-            onClick={() => {
-              window.location.href = '/services';
-            }}
-          >
-            <Search size={18} strokeWidth={1.8} />
-          </button>
-
-          <div className="nav-divider" />
-
           {/* Language Selector Pill + Dropdown */}
           <div className="nav-lang-container" ref={langMenuRef}>
             <button

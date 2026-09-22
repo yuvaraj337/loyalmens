@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { LanguageSelector } from '../common/LanguageSelector';
+import { RizheenaSeal } from '../common/RizheenaSeal';
 import '../../styles/salon-services.css';
 
 interface ServiceItem {
@@ -274,18 +275,16 @@ export const SalonServicesPage: React.FC<SalonServicesPageProps> = ({ isHomeServ
             <p className="salon-intro-text">
               {t('salon_intro_desc')}
             </p>
+
+            {/* Centerpiece Embossed Brand Seal Directly Above Service Cards */}
+            <div className="salon-seal-container" aria-hidden="true">
+              <RizheenaSeal className="salon-brand-seal" />
+            </div>
           </div>
 
-          {/* Top Right: Stamp + Language Selector */}
-          <div className="salon-top-right-seal">
-            <div style={{ marginBottom: '10px' }}>
-              <LanguageSelector theme="light" />
-            </div>
-            <img
-              src="/images/services/badge_seal.png"
-              alt="Style Grooming Sleek Stamp"
-              className="salon-seal-badge-img"
-            />
+          {/* Top Right: Language Selector */}
+          <div className="salon-top-right-actions">
+            <LanguageSelector theme="light" />
           </div>
         </div>
 
