@@ -582,232 +582,191 @@
   }
 
   /* ====================================================
-     Individual Mobile Card
+     Individual Mobile Card — Exact Match to Reference Image 2
      ==================================================== */
   .experience-card {
     position: relative !important;
     width: 100% !important;
     min-width: 0 !important;
-    aspect-ratio: unset !important;
-    height: auto !important;
-    min-height: 0 !important;
-    border-radius: 20px !important;
+    aspect-ratio: 400 / 287 !important;
+    min-height: 250px !important;
+    border-radius: 26px !important;
     overflow: hidden !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+    border: 1.5px solid rgba(197, 161, 101, 0.45) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
     transform: none !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
     background: #0A0908 !important;
+    padding: 0 !important;
   }
 
   .experience-card:hover {
     transform: none !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
   }
 
-  /* ====================================================
-     Image — full width, sits in document flow
-     ==================================================== */
+  /* Layer 1: Background photo flush to edges */
   .card-bg-img {
-    position: relative !important;
-    inset: unset !important;
+    position: absolute !important;
+    inset: 0 !important;
     width: 100% !important;
-    height: 200px !important;
+    height: 100% !important;
     object-fit: cover !important;
+    object-position: right center !important;
     display: block !important;
     z-index: 1 !important;
   }
 
-  .experience-card:nth-child(1) .card-bg-img {
-    object-position: center 30% !important;
-  }
-
-  .experience-card:nth-child(2) .card-bg-img {
-    object-position: center 40% !important;
-  }
-
-  .experience-card:nth-child(3) .card-bg-img {
-    object-position: center 25% !important;
-  }
-
-  /* ====================================================
-     Dark vignette gradient — darkens image near the curve
-     for smooth transition (like the reference)
-     ==================================================== */
-  .experience-card::after {
-    content: '' !important;
-    position: absolute !important;
-    left: 0 !important;
-    right: 0 !important;
-    top: 80px !important;
-    height: 125px !important;
-    z-index: 2 !important;
-    pointer-events: none !important;
-    display: block !important;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgba(10, 9, 8, 0.15) 35%,
-      rgba(10, 9, 8, 0.45) 65%,
-      rgba(10, 9, 8, 0.8) 90%,
-      rgba(10, 9, 8, 0.95) 100%
-    ) !important;
-  }
-
-  /* ====================================================
-     Curved black mask — SVG shape overlaid on bottom of image
-     Path: left edge up → curve dips down at center → right edge up
-     Below the curve filled solid black (#0A0908)
-     ==================================================== */
+  /* Layer 2: Subtle gradient on left for crystal clear typography */
   .card-overlay-gradient {
     position: absolute !important;
-    inset: unset !important;
-    left: 0 !important;
-    right: 0 !important;
-    top: 145px !important;
-    height: 60px !important;
-    z-index: 3 !important;
+    inset: 0 !important;
+    z-index: 2 !important;
     pointer-events: none !important;
-    background: none !important;
-    border-radius: 0 !important;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cpath d='M0,60 L0,8 Q200,56 400,8 L400,60 Z' fill='%230A0908'/%3E%3C/svg%3E") !important;
-    background-size: 100% 100% !important;
-    background-repeat: no-repeat !important;
+    background: linear-gradient(
+      90deg,
+      rgba(8, 7, 6, 0.94) 0%,
+      rgba(8, 7, 6, 0.85) 40%,
+      rgba(8, 7, 6, 0.5) 65%,
+      rgba(8, 7, 6, 0.15) 85%,
+      transparent 100%
+    ) !important;
+    background-image: linear-gradient(
+      90deg,
+      rgba(8, 7, 6, 0.94) 0%,
+      rgba(8, 7, 6, 0.85) 40%,
+      rgba(8, 7, 6, 0.5) 65%,
+      rgba(8, 7, 6, 0.15) 85%,
+      transparent 100%
+    ) !important;
+    border-radius: inherit !important;
   }
 
-  /* ====================================================
-     Gold curved line — SVG stroke on the same path
-     ==================================================== */
-  .experience-card::before {
-    content: '' !important;
-    position: absolute !important;
-    left: 0 !important;
-    right: 0 !important;
-    top: 145px !important;
-    height: 60px !important;
-    z-index: 6 !important;
-    pointer-events: none !important;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cpath d='M0,8 Q200,56 400,8' fill='none' stroke='%23C5A165' stroke-width='2.5'/%3E%3C/svg%3E") !important;
-    background-size: 100% 100% !important;
-    background-repeat: no-repeat !important;
+  .experience-card::before,
+  .experience-card::after {
+    display: none !important;
+    content: none !important;
   }
 
-  /* ====================================================
-     Card Number at Top Left
-     ==================================================== */
+  /* Layer 3: Card Number at Top Left */
   .card-number-badge {
     position: absolute !important;
-    top: 16px !important;
-    left: 18px !important;
+    top: 18px !important;
+    left: 22px !important;
     font-size: 15px !important;
     font-weight: 500 !important;
     letter-spacing: 0.04em !important;
     color: #FFFFFF !important;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;
     z-index: 7 !important;
+    line-height: 1 !important;
   }
 
-  /* ====================================================
-     Black content area — below the curved image
-     ==================================================== */
+  /* Layer 4: Content on Left (Matching Image 2) */
   .card-desktop-content {
-    display: none !important;
-  }
-
-  .card-mobile-content {
     position: relative !important;
-    bottom: unset !important;
-    left: unset !important;
-    right: unset !important;
-    z-index: 4 !important;
+    z-index: 5 !important;
     display: flex !important;
-    align-items: center !important;
-    padding: 14px 18px 16px 18px !important;
-    background: #0A0908 !important;
-    margin-top: -5px !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    height: 100% !important;
+    padding: 44px 20px 20px 22px !important;
+    max-width: 65% !important;
+    box-sizing: border-box !important;
   }
 
-  /* Gold Circular Icon on Left */
-  .card-mobile-icon-circle {
-    width: 48px !important;
-    height: 48px !important;
+  .card-text-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  /* Gold Circular Icon */
+  .card-icon-circle {
+    width: 40px !important;
+    height: 40px !important;
     border-radius: 50% !important;
     border: 1.5px solid #C5A165 !important;
-    background: rgba(14, 12, 10, 0.6) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
+    background: rgba(14, 12, 10, 0.5) !important;
+    backdrop-filter: blur(4px) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     color: #C5A165 !important;
-    flex-shrink: 0 !important;
+    margin-bottom: 2px !important;
   }
 
-  .card-mobile-icon-circle svg {
-    width: 20px !important;
-    height: 20px !important;
+  .card-icon-circle svg {
+    width: 18px !important;
+    height: 18px !important;
   }
 
-  /* Text in Middle */
-  .card-mobile-text {
-    margin-left: 14px !important;
-    margin-right: auto !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 3px !important;
-    min-width: 0 !important;
-  }
-
-  .card-mobile-title {
+  /* Editorial Title */
+  .card-editorial-title {
     font-family: var(--font-sans) !important;
-    font-size: 15.5px !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.05em !important;
-    text-transform: uppercase !important;
+    font-size: 17px !important;
+    font-weight: 700 !important;
     color: #FFFFFF !important;
-    line-height: 1.15 !important;
+    line-height: 1.22 !important;
+    letter-spacing: 0.02em !important;
+    text-transform: uppercase !important;
     margin: 0 !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
+    max-width: 180px !important;
   }
 
-  .card-mobile-subtitle {
+  .card-editorial-title span {
+    display: block !important;
+  }
+
+  /* Editorial Description */
+  .card-editorial-desc {
     font-family: var(--font-sans) !important;
-    font-size: 12px !important;
+    font-size: 11px !important;
     font-weight: 400 !important;
     color: #DDD4C8 !important;
     line-height: 1.35 !important;
     margin: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
+    max-width: 190px !important;
   }
 
-  .card-mobile-subtitle span {
-    display: block !important;
+  .card-editorial-desc span {
+    display: inline !important;
   }
 
-  /* Gold Circular Arrow Button on Right */
-  .card-mobile-arrow-btn {
-    width: 44px !important;
-    height: 44px !important;
-    border-radius: 50% !important;
+  /* CTA Pill Button (Exact Match to Image 2) */
+  .card-cta-pill {
+    margin-top: 10px !important;
+    height: 38px !important;
+    padding: 0 16px !important;
+    border-radius: 999px !important;
     border: 1.5px solid #C5A165 !important;
-    background: rgba(14, 12, 10, 0.6) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
-    display: flex !important;
+    background: rgba(14, 12, 10, 0.75) !important;
+    backdrop-filter: blur(6px) !important;
+    display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    color: #C5A165 !important;
-    flex-shrink: 0 !important;
-    transition: transform 0.2s ease, background 0.2s ease !important;
+    gap: 8px !important;
+    width: fit-content !important;
+    align-self: flex-start !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
   }
 
-  .card-mobile-arrow-btn svg {
-    width: 18px !important;
-    height: 18px !important;
+  .cta-pill-label {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    color: #FFFFFF !important;
+    white-space: nowrap !important;
+  }
+
+  .cta-pill-arrow-circle {
+    display: none !important;
+  }
+
+  /* Hide old mobile split container */
+  .card-mobile-content {
+    display: none !important;
   }
 
   /* Hide Feature Strip & Lifestyle Preview on Mobile */
@@ -818,37 +777,33 @@
   }
 
   .card-hover-border {
+    border-color: rgba(197, 161, 101, 0.5) !important;
+    border-radius: 26px !important;
     z-index: 8 !important;
   }
 }
 
 /* Small mobile screens */
 @media (max-width: 375px) {
-  .card-bg-img {
-    height: 175px !important;
+  .experience-card {
+    min-height: 230px !important;
+    border-radius: 22px !important;
   }
-  .experience-card::after {
-    top: 60px !important;
-    height: 120px !important;
+  .card-desktop-content {
+    padding: 38px 16px 16px 18px !important;
+    max-width: 70% !important;
   }
-  .card-overlay-gradient {
-    top: 125px !important;
+  .card-editorial-title {
+    font-size: 15px !important;
   }
-  .experience-card::before {
-    top: 125px !important;
+  .card-editorial-desc {
+    font-size: 10px !important;
   }
-  .card-mobile-icon-circle {
-    width: 42px !important;
-    height: 42px !important;
+  .card-cta-pill {
+    height: 34px !important;
+    padding: 0 13px !important;
   }
-  .card-mobile-arrow-btn {
-    width: 38px !important;
-    height: 38px !important;
-  }
-  .card-mobile-title {
-    font-size: 14px !important;
-  }
-  .card-mobile-subtitle {
-    font-size: 11px !important;
+  .cta-pill-label {
+    font-size: 10px !important;
   }
 }
