@@ -17,8 +17,12 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",
+    "rollup": "npm:@rollup/wasm-node@^4.63.4",
     "typescript": "^5.7.2",
     "vite": "^6.2.0"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.63.4"
   },
   "overrides": {
     "rollup": "npm:@rollup/wasm-node@^4.63.4"
