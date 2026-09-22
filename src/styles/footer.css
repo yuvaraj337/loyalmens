@@ -457,3 +457,25 @@ a.footer-contact-val:hover {
     justify-content: center;
   }
 }
+
+@media (max-width: 480px) {
+  .luxury-footer {
+    padding: 44px 16px 20px 16px;
+  }
+
+  .footer-input-wrapper {
+    max-width: 100%;
+  }
+
+  .footer-description {
+    max-width: 100%;
+  }
+
+  .footer-nav-link {
+    max-width: 100%;
+  }
+
+  .footer-brand-title {
+    font-size: 18px;
+  }
+}

@@ -526,6 +526,11 @@
     padding: 56px 24px 32px 24px;
   }
 
+  .location-heading {
+    white-space: normal;
+    font-size: clamp(28px, 6vw, 38px);
+  }
+
   .location-features-row {
     flex-wrap: wrap;
     gap: 16px;
@@ -551,5 +556,35 @@
     flex-direction: column;
     gap: 12px;
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .location-section {
+    padding: 40px 16px 24px 16px;
+  }
+
+  .location-heading {
+    font-size: clamp(24px, 7.5vw, 32px);
+  }
+
+  .location-desc {
+    font-size: 12.5px;
+  }
+
+  .location-features-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .location-feature-box {
+    width: 100%;
+    padding: 0;
+  }
+
+  .location-map-wrapper {
+    min-height: 280px;
+    border-radius: 18px;
   }
 }

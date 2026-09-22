@@ -899,3 +899,56 @@
     text-align: center;
   }
 }
+
+@media (max-width: 520px) {
+  .haircut-container {
+    padding: 0 16px;
+  }
+
+  .haircut-breadcrumbs {
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 11px;
+  }
+
+  .haircut-hero-title {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+
+  .haircut-service-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .haircut-service-right-group {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px dashed rgba(216, 206, 194, 0.45);
+    padding-top: 10px;
+  }
+
+  .facial-service-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .facial-service-card .haircut-service-right-group {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px dashed rgba(216, 206, 194, 0.45);
+    padding-top: 10px;
+  }
+
+  .haircut-service-book-btn {
+    min-height: 38px;
+    padding: 8px 18px;
+  }
+}

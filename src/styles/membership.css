@@ -745,3 +745,22 @@
     display: none;
   }
 }
+
+@media (max-width: 480px) {
+  .mem-container {
+    padding: 0 14px;
+  }
+  .mem-heading {
+    font-size: clamp(2rem, 7.5vw, 2.5rem);
+  }
+  .mem-card-title {
+    font-size: clamp(1.8rem, 7vw, 2.2rem);
+  }
+  .mem-modal-box {
+    max-width: calc(100vw - 24px);
+    padding: 24px 18px;
+  }
+  .mem-modal-title {
+    font-size: 1.4rem;
+  }
+}

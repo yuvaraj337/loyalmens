@@ -337,3 +337,43 @@
     bottom: 24px;
   }
 }
+
+@media (max-width: 480px) {
+  .hero-overlay-container {
+    padding: 85px 18px 24px 18px;
+  }
+  .hero-title {
+    font-size: clamp(32px, 8.5vw, 44px);
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    margin-bottom: 12px;
+  }
+  .hero-subtitle {
+    font-size: 13.5px;
+    margin-bottom: 22px;
+    line-height: 1.5;
+  }
+  .hero-left-content {
+    margin-bottom: 16px;
+  }
+  .hero-scroll-indicator {
+    left: 18px;
+    bottom: 18px;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-overlay-container {
+    padding: 80px 14px 20px 14px;
+  }
+  .hero-title {
+    font-size: clamp(28px, 9vw, 36px);
+  }
+  .hero-scroll-indicator {
+    display: none;
+  }
+}

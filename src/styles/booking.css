@@ -2715,17 +2715,31 @@
    MOBILE RESPONSIVENESS (STRICT COMPLIANCE)
    ========================================================================== */
 @media (max-width: 992px) {
-  .booking-content-grid {
-    grid-template-columns: 1fr;
+  .booking-header {
+    padding: 12px 18px;
   }
 
-  /* CRITICAL: HIDE "YOUR APPOINTMENT" SIDE CARD ON MOBILE FOR STEPS 1, 2, AND 3 */
+  .booking-nav-links {
+    display: none;
+  }
+
+  .booking-content-grid,
+  .booking-grid-s1,
+  .booking-grid-s2 {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* Show Appointment Summary stacked below on mobile */
   .booking-right-col {
-    display: none !important;
+    display: block !important;
+    width: 100%;
+    margin-top: 20px;
+    order: 2;
   }
 
   .booking-mobile-action-wrap {
-    display: block;
+    display: none !important;
   }
 
   .review-cards-grid {
@@ -2746,6 +2760,39 @@
 }
 
 @media (max-width: 640px) {
+  .booking-container {
+    padding: 16px 14px 40px 14px;
+  }
+
+  .booking-main-title {
+    font-size: clamp(24px, 7vw, 30px);
+  }
+
+  .booking-card {
+    padding: 18px 14px;
+  }
+
+  .booking-progress-wrap {
+    margin: 8px 0 24px 0;
+  }
+
+  .booking-progress-circle {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+  }
+
+  .booking-progress-line {
+    width: clamp(8px, 3.5vw, 24px);
+    margin: 0 4px;
+    transform: translateY(-10px);
+  }
+
+  .booking-progress-label {
+    font-size: 9.5px;
+    margin-top: 6px;
+  }
+
   .slots-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2784,6 +2831,46 @@
     flex-direction: column;
     gap: 12px;
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-container {
+    padding: 12px 10px 36px 10px;
+  }
+
+  .booking-card {
+    padding: 14px 10px;
+    border-radius: 14px;
+  }
+
+  .calendar-days-grid {
+    gap: 4px;
+  }
+
+  .calendar-day-cell {
+    font-size: 12px;
+  }
+
+  .calendar-weekdays {
+    font-size: 10px;
+    margin-bottom: 8px;
+  }
+
+  .appointment-service-preview {
+    gap: 10px;
+  }
+
+  .summary-service-img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .booking-features-strip {
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 16px 14px;
   }
 }
 

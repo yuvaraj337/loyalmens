@@ -40,6 +40,8 @@ interface BookingContextType {
   createBooking: () => Promise<BookingRecord>;
   updateBookingStatus: (id: string, status: BookingStatus, paymentStatus?: PaymentStatus) => void;
   submitUtrPayment: (bookingId: string, utr: string) => void;
+  rescheduleBooking: (id: string, newDateIso: string, newFormattedDate: string, newTime: string) => void;
+  deleteBooking: (id: string) => void;
   resetBookingFlow: () => void;
 }
 
@@ -336,6 +338,28 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
     );
   }, []);
 
+  const rescheduleBooking = useCallback(
+    (id: string, newDateIso: string, newFormattedDate: string, newTime: string) => {
+      setBookings((prev) =>
+        prev.map((b) =>
+          b.booking_id === id
+            ? {
+                ...b,
+                date_iso: newDateIso,
+                date: newFormattedDate,
+                time: newTime,
+              }
+            : b
+        )
+      );
+    },
+    []
+  );
+
+  const deleteBooking = useCallback((id: string) => {
+    setBookings((prev) => prev.filter((b) => b.booking_id !== id));
+  }, []);
+
   const resetBookingFlow = useCallback(() => {
     setStep(1);
     setSelectedTime('11:30 AM');
@@ -368,6 +392,8 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
         createBooking,
         updateBookingStatus,
         submitUtrPayment,
+        rescheduleBooking,
+        deleteBooking,
         resetBookingFlow,
       }}
     >

@@ -761,7 +761,39 @@
   }
 
   .space-col-right-quote {
+    display: flex;
+    width: 100%;
+    max-width: 440px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .editorial-right-quote-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(181, 135, 76, 0.25);
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(60, 45, 30, 0.05);
+    width: 100%;
+  }
+
+  .quote-vertical-rule {
     display: none;
+  }
+
+  .quote-eyebrow {
+    flex-direction: row;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .quote-text {
+    margin-bottom: 8px;
+    text-align: center;
   }
 
   .stats-pill-container {
@@ -795,6 +827,14 @@
 @media (max-width: 600px) {
   .loyal-space-section {
     padding: 40px 16px 36px 16px;
+  }
+
+  .heading-line {
+    white-space: normal;
+  }
+
+  .editorial-heading {
+    font-size: clamp(28px, 7.5vw, 36px);
   }
 
   .stats-pill-container {

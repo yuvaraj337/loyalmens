@@ -40,6 +40,7 @@
 }
 
 html {
+  overflow-x: clip;
   scroll-behavior: smooth;
   background-color: var(--bg-dark);
   color: var(--text-white);
@@ -53,6 +54,7 @@ body {
   width: 100%;
   min-height: 100vh;
   background-color: var(--bg-dark);
+  overflow-wrap: break-word;
 }
 
 a {

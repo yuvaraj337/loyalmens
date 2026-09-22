@@ -680,4 +680,35 @@
   .shop-category-title {
     font-size: 13.5px;
   }
+
+  .shop-modal-card {
+    max-width: calc(100vw - 24px);
+    max-height: 85dvh;
+    padding: 24px 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shop-page-container {
+    padding: 0 16px;
+  }
+
+  .shop-main-heading {
+    font-size: clamp(28px, 7.5vw, 34px);
+  }
+
+  .shop-hero-cta {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .shop-category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-category-img-wrap {
+    height: 130px;
+  }
 }

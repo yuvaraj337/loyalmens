@@ -757,3 +757,30 @@
     font-size: 13.5px;
   }
 }
+
+@media (max-width: 480px) {
+  .salon-services-page {
+    padding: 70px 0 30px 0;
+  }
+
+  .salon-services-container {
+    padding: 0 16px;
+  }
+
+  .salon-card-content {
+    padding: 20px 16px 16px 16px;
+  }
+
+  .salon-card-image-wrap {
+    height: 220px;
+  }
+
+  .salon-main-heading {
+    font-size: clamp(26px, 7vw, 30px);
+  }
+
+  .salon-card-book-btn {
+    min-height: 42px;
+    padding: 8px 16px;
+  }
+}
