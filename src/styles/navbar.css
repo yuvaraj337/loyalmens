@@ -186,6 +186,174 @@
   background: rgba(255, 255, 255, 0.15);
 }
 
+/* ==========================================================================
+   LANGUAGE SELECTOR & DROPDOWN (MATCHING REFERENCE 2)
+   ========================================================================== */
+.nav-lang-open-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-lang-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(18, 16, 14, 0.9);
+  border: 1px solid #C5A165;
+  border-radius: 9999px;
+  color: #FFFFFF;
+  padding: 5px 12px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  transition: all var(--transition-fast);
+}
+
+.nav-lang-pill-btn:hover {
+  background: rgba(30, 26, 22, 0.95);
+  border-color: #D4AF37;
+}
+
+.lang-globe-icon {
+  color: var(--gold-light);
+  flex-shrink: 0;
+}
+
+.lang-code-text {
+  letter-spacing: 0.05em;
+}
+
+.lang-chevron-icon {
+  color: var(--gold-primary);
+  flex-shrink: 0;
+}
+
+/* Language Trigger in Closed State */
+.nav-lang-trigger-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.nav-lang-trigger-btn {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.nav-lang-trigger-btn:hover {
+  color: var(--gold-light);
+}
+
+/* Language Dropdown Menu (Reference 2) */
+.lang-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 170px;
+  background: #161412;
+  border: 1px solid rgba(197, 161, 101, 0.4);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  animation: langFadeIn 0.2s ease-out;
+}
+
+@keyframes langFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.lang-option-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--transition-fast);
+}
+
+.lang-option-row:hover {
+  background: rgba(197, 161, 101, 0.1);
+}
+
+.lang-option-row.active {
+  background: rgba(197, 161, 101, 0.18);
+  color: #FFFFFF;
+}
+
+.lang-name {
+  color: inherit;
+}
+
+.lang-check {
+  color: #D4AF37;
+  stroke-width: 2.5;
+  flex-shrink: 0;
+}
+
+/* Mobile Nav Language Bar inside Drawer */
+.mobile-nav-lang-bar {
+  padding: 16px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mobile-nav-lang-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin-bottom: 10px;
+}
+
+.mobile-nav-lang-pills {
+  display: flex;
+  gap: 8px;
+}
+
+.mobile-lang-pill {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mobile-lang-pill.active {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: #D4AF37;
+  color: #D4AF37;
+}
+
 .book-now-btn {
   display: inline-flex;
   align-items: center;
@@ -421,17 +589,21 @@
 
 @media (max-width: 480px) {
   .navbar-container {
-    padding: 10px 12px;
+    padding: 10px 14px;
+    height: 56px;
+    box-sizing: border-box;
   }
   .brand-title {
     font-size: 13.5px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
   }
   .brand-sub {
-    font-size: 7px;
+    font-size: 6.5px;
+    letter-spacing: 0.28em;
   }
   .brand-sub-tag {
-    font-size: 6px;
+    font-size: 5.5px;
+    letter-spacing: 0.22em;
   }
   .brand-crown-svg {
     width: 24px;
@@ -444,9 +616,19 @@
     gap: 8px;
   }
   .nav-divider {
-    display: none;
+    display: block;
+    width: 1px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 0 2px;
   }
   .book-now-btn {
-    display: none; /* Cleanly accessible via mobile menu */
+    display: inline-flex;
+    padding: 6px 12px;
+    font-size: 10px;
+    gap: 5px;
+  }
+  .mobile-menu-toggle-btn {
+    display: none;
   }
 }
