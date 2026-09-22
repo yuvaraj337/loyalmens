@@ -16,7 +16,10 @@ export const ExperienceSection: React.FC = () => {
       number: '01',
       titleLines: [t('exp_salon_services')],
       descriptionLines: [t('exp_salon_desc')],
+      mobileDescriptionLines: ['Precision. Style. Reimagined.'],
       ctaLabel: 'EXPLORE →',
+      mobileCtaLabel: 'EXPLORE',
+      tagline: ['STYLE', 'GROOM', 'BELONG'],
       href: '/services',
       image: '/images/cards/card_01_salon_services.png',
       icon: (
@@ -33,7 +36,10 @@ export const ExperienceSection: React.FC = () => {
       number: '02',
       titleLines: [t('exp_rizheena_shop')],
       descriptionLines: [t('exp_shop_desc')],
-      ctaLabel: 'SHOP NOW',
+      mobileDescriptionLines: ['Premium Grooming Essentials', 'for Everyday Excellence.'],
+      ctaLabel: 'SHOP NOW →',
+      mobileCtaLabel: 'SHOP NOW',
+      tagline: ['CARE', 'FUELS', 'CONFIDENCE'],
       href: '/shop',
       image: '/images/cards/card_02_rizheena_shop.png',
       icon: (
@@ -48,7 +54,10 @@ export const ExperienceSection: React.FC = () => {
       number: '03',
       titleLines: [t('exp_at_home')],
       descriptionLines: [t('exp_home_desc')],
+      mobileDescriptionLines: ['Professional Grooming.', 'At Your Doorstep.'],
       ctaLabel: 'BOOK HOME →',
+      mobileCtaLabel: 'BOOK HOME',
+      tagline: ['SAME', 'EXPERTISE', 'AT YOUR HOME'],
       href: '/home-service',
       image: '/images/cards/card_04_at_home.png',
       icon: (
