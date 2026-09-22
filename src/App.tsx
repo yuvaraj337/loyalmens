@@ -153,27 +153,29 @@ export function App() {
     };
   }, []);
 
-  const isHaircutPage = currentPath === '/services/haircut-styling' || currentPath === '/services/haircut' || currentPath.startsWith('/services/haircut');
-  const isBeardPage = currentPath === '/services/beard-grooming' || currentPath === '/services/beard' || currentPath.startsWith('/services/beard');
-  const isFacialPage = currentPath === '/services/facial-skin-care' || currentPath === '/services/facial' || currentPath.startsWith('/services/facial');
-  const isColourPage = currentPath === '/services/hair-colour-treatment' || currentPath === '/services/colour' || currentPath === '/services/color' || currentPath.startsWith('/services/hair-colour') || currentPath.startsWith('/services/colour');
+  const normalizedPath = currentPath.endsWith('/') && currentPath.length > 1 ? currentPath.slice(0, -1) : currentPath;
+
+  const isHaircutPage = normalizedPath === '/services/haircut-styling' || normalizedPath === '/services/haircut' || normalizedPath.startsWith('/services/haircut');
+  const isBeardPage = normalizedPath === '/services/beard-grooming' || normalizedPath === '/services/beard' || normalizedPath.startsWith('/services/beard');
+  const isFacialPage = normalizedPath === '/services/facial-skin-care' || normalizedPath === '/services/facial' || normalizedPath.startsWith('/services/facial');
+  const isColourPage = normalizedPath === '/services/hair-colour-treatment' || normalizedPath === '/services/colour' || normalizedPath === '/services/color' || normalizedPath.startsWith('/services/hair-colour') || normalizedPath.startsWith('/services/colour');
   
-  const isHairCareShop = currentPath === '/shop/hair-care';
-  const isFaceCareShop = currentPath === '/shop/face-care';
-  const isBeardCareShop = currentPath === '/shop/beard-care';
-  const isKitsShop = currentPath === '/shop/professional-kits';
-  const isSpecialCareShop = currentPath === '/shop/special-care';
-  const isGiftSetsShop = currentPath === '/shop/gift-sets';
-  const isAllProductsShop = currentPath === '/shop/all-products';
-  const isCartPage = currentPath === '/shop/cart' || currentPath === '/cart';
-  const isCheckoutPage = currentPath === '/shop/checkout' || currentPath === '/checkout';
+  const isHairCareShop = normalizedPath === '/shop/hair-care';
+  const isFaceCareShop = normalizedPath === '/shop/face-care';
+  const isBeardCareShop = normalizedPath === '/shop/beard-care';
+  const isKitsShop = normalizedPath === '/shop/professional-kits';
+  const isSpecialCareShop = normalizedPath === '/shop/special-care';
+  const isGiftSetsShop = normalizedPath === '/shop/gift-sets';
+  const isAllProductsShop = normalizedPath === '/shop/all-products';
+  const isCartPage = normalizedPath === '/shop/cart' || normalizedPath === '/cart';
+  const isCheckoutPage = normalizedPath === '/shop/checkout' || normalizedPath === '/checkout';
 
-  const isBookingPage = currentPath === '/booking' || currentPath.startsWith('/booking');
-  const isAdminPage = currentPath === '/admin' || currentPath.startsWith('/admin');
-  const isHomeServicePage = currentPath === '/home-service' || currentPath.startsWith('/home-service');
+  const isBookingPage = normalizedPath === '/booking' || normalizedPath === '/book' || normalizedPath.startsWith('/booking') || normalizedPath.startsWith('/book');
+  const isAdminPage = normalizedPath === '/admin' || normalizedPath.startsWith('/admin');
+  const isHomeServicePage = normalizedPath === '/home-service' || normalizedPath.startsWith('/home-service');
 
-  const isServicesPage = !isBookingPage && !isAdminPage && !isHomeServicePage && !isHaircutPage && !isBeardPage && !isFacialPage && !isColourPage && (currentPath === '/services' || currentPath.startsWith('/services'));
-  const isShopPage = !isBookingPage && !isAdminPage && !isHairCareShop && !isFaceCareShop && !isBeardCareShop && !isKitsShop && !isSpecialCareShop && !isGiftSetsShop && !isAllProductsShop && !isCartPage && !isCheckoutPage && (currentPath === '/shop' || currentPath.startsWith('/shop'));
+  const isServicesPage = !isBookingPage && !isAdminPage && !isHomeServicePage && !isHaircutPage && !isBeardPage && !isFacialPage && !isColourPage && (normalizedPath === '/services' || normalizedPath.startsWith('/services'));
+  const isShopPage = !isBookingPage && !isAdminPage && !isHairCareShop && !isFaceCareShop && !isBeardCareShop && !isKitsShop && !isSpecialCareShop && !isGiftSetsShop && !isAllProductsShop && !isCartPage && !isCheckoutPage && (normalizedPath === '/shop' || normalizedPath.startsWith('/shop'));
 
   // Helper to wrap content in CartProvider, BookingProvider & CheckoutProvider with global drawer/toast
   const wrapWithProviders = (content: React.ReactNode) => (
