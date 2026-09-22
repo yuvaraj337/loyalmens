@@ -19,7 +19,6 @@ export const ExperienceSection: React.FC = () => {
       mobileDescriptionLines: ['Precision. Style. Reimagined.'],
       ctaLabel: 'EXPLORE →',
       mobileCtaLabel: 'EXPLORE',
-      tagline: ['STYLE', 'GROOM', 'BELONG'],
       href: '/services',
       image: '/images/cards/card_01_salon_services.png',
       icon: (
@@ -39,7 +38,6 @@ export const ExperienceSection: React.FC = () => {
       mobileDescriptionLines: ['Premium Grooming Essentials', 'for Everyday Excellence.'],
       ctaLabel: 'SHOP NOW →',
       mobileCtaLabel: 'SHOP NOW',
-      tagline: ['CARE', 'FUELS', 'CONFIDENCE'],
       href: '/shop',
       image: '/images/cards/card_02_rizheena_shop.png',
       icon: (
