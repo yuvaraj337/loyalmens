@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Language, translations, Translations } from '../data/translations';
+import { Language, translations, dynamicTextTranslations } from '../data/translations';
 
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: keyof Translations) => string;
+  t: (key: string, fallback?: string) => string;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -22,18 +22,35 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setLanguageState(lang);
     localStorage.setItem('loyal_language', lang);
     document.documentElement.lang = lang;
+    window.dispatchEvent(new CustomEvent('languagechange', { detail: lang }));
   };
 
   useEffect(() => {
     document.documentElement.lang = language;
   }, [language]);
 
-  const t = (key: keyof Translations): string => {
+  const t = (key: string, fallback?: string): string => {
+    if (!key) return fallback || '';
+
+    // 1. Direct translation key in current language
     const currentDict = translations[language];
     if (currentDict && currentDict[key]) {
       return currentDict[key];
     }
-    return translations.en[key] || (key as string);
+
+    // 2. Check dynamic text translation mapping (for product/service titles & buttons)
+    const dynDict = dynamicTextTranslations[language];
+    if (dynDict && dynDict[key]) {
+      return dynDict[key];
+    }
+
+    // 3. Fallback to English dict
+    if (translations.en && translations.en[key]) {
+      return translations.en[key];
+    }
+
+    // 4. Return fallback or key
+    return fallback !== undefined ? fallback : key;
   };
 
   return (

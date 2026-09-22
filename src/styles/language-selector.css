@@ -1,0 +1,132 @@
+/* ==========================================================================
+   GLOBAL LUXURY LANGUAGE SELECTOR STYLING
+   ========================================================================== */
+
+.global-lang-selector {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  z-index: 999;
+}
+
+.global-lang-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 9999px;
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+/* Dark Theme (Default) */
+.global-lang-selector.theme-dark .global-lang-pill-btn {
+  background: rgba(18, 16, 14, 0.85);
+  border: 1px solid rgba(197, 161, 101, 0.5);
+  color: #FAF5EE;
+  backdrop-filter: blur(8px);
+}
+
+.global-lang-selector.theme-dark .global-lang-pill-btn:hover,
+.global-lang-selector.theme-dark .global-lang-pill-btn.active {
+  background: rgba(30, 26, 22, 0.95);
+  border-color: #D4AF37;
+  color: #FFFFFF;
+}
+
+/* Light Theme */
+.global-lang-selector.theme-light .global-lang-pill-btn {
+  background: rgba(250, 245, 238, 0.9);
+  border: 1px solid rgba(197, 161, 101, 0.55);
+  color: #161513;
+  box-shadow: 0 2px 8px rgba(35, 25, 15, 0.06);
+}
+
+.global-lang-selector.theme-light .global-lang-pill-btn:hover,
+.global-lang-selector.theme-light .global-lang-pill-btn.active {
+  background: #FFFFFF;
+  border-color: #B3874B;
+  color: #161513;
+}
+
+.global-lang-globe {
+  color: #D4AF37;
+  flex-shrink: 0;
+}
+
+.global-lang-chevron {
+  color: #C5A165;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.global-lang-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 150px;
+  background: #161412;
+  border: 1px solid rgba(197, 161, 101, 0.4);
+  border-radius: 12px;
+  padding: 5px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  animation: globalLangFadeIn 0.18s ease-out;
+  z-index: 1001;
+}
+
+@keyframes globalLangFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.global-lang-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  color: #FAF5EE;
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease;
+}
+
+.global-lang-option:hover {
+  background: rgba(197, 161, 101, 0.15);
+}
+
+.global-lang-option.active {
+  background: rgba(197, 161, 101, 0.25);
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.global-lang-check {
+  color: #D4AF37;
+  stroke-width: 2.5;
+  flex-shrink: 0;
+}
+
+/* Floating Corner Widget (for pages without direct header switcher) */
+.floating-lang-widget {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 9999px;
+}

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { useCart } from '../../context/CartContext';
+import { useLanguage } from '../../context/LanguageContext';
 import '../../styles/add-to-cart-button.css';
 
 type ButtonState = 'default' | 'pressed' | 'processing' | 'success' | 'reverting';
@@ -19,6 +20,7 @@ interface AddToCartButtonProps {
 
 export const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product, quantity }) => {
   const { addItem } = useCart();
+  const { t } = useLanguage();
   const [btnState, setBtnState] = useState<ButtonState>('default');
   const [ripple, setRipple] = useState<{ x: number; y: number; key: number } | null>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
@@ -165,10 +167,10 @@ export const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product, quant
         {/* Text */}
         <span className="atc-text">
           {btnState === 'processing'
-            ? 'Adding...'
+            ? t('adding', 'Adding...')
             : btnState === 'success'
-              ? 'Added to Cart'
-              : 'Add to Cart'}
+              ? t('added_to_cart', 'Added to Cart')
+              : t('add_to_cart', 'Add to Cart')}
         </span>
       </button>
     </div>

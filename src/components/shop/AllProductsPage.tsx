@@ -4,6 +4,8 @@ import { ShopProductItem } from '../../types/shop-category';
 import { FeatureIcon } from './ShopCategoryIcons';
 import { AddToCartButton } from './AddToCartButton';
 import { useCart } from '../../context/CartContext';
+import { useLanguage } from '../../context/LanguageContext';
+import { LanguageSelector } from '../common/LanguageSelector';
 import '../../styles/all-products.css';
 
 type CategoryFilter =
@@ -22,7 +24,7 @@ interface FilterButton {
 }
 
 const FILTER_BUTTONS: FilterButton[] = [
-  { id: 'all', label: 'All' },
+  { id: 'all', label: 'All Products' },
   { id: 'hair-care', label: 'Hair Care' },
   { id: 'hair-dyes', label: 'Hair Dyes' },
   { id: 'beard-care', label: 'Beard Care' },
@@ -35,6 +37,7 @@ const FILTER_BUTTONS: FilterButton[] = [
 const PRODUCTS_PER_PAGE = 12;
 
 export const AllProductsPage: React.FC = () => {
+  const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortOption, setSortOption] = useState<string>('default');
@@ -157,23 +160,27 @@ export const AllProductsPage: React.FC = () => {
               <line x1="19" y1="12" x2="5" y2="12" />
               <polyline points="12 19 5 12 12 5" />
             </svg>
-            <span>Back to Shop</span>
+            <span>{t('Back to Shop', 'Back to Shop')}</span>
           </a>
 
-          <button
-            type="button"
-            className="ap-cart-btn"
-            onClick={openDrawer}
-            aria-label={`View Cart (${cartCount} items)`}
-          >
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="9" cy="21" r="1" />
-              <circle cx="20" cy="21" r="1" />
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-            </svg>
-            <span>Cart</span>
-            <span className="ap-cart-badge">{cartCount}</span>
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <LanguageSelector theme="light" />
+
+            <button
+              type="button"
+              className="ap-cart-btn"
+              onClick={openDrawer}
+              aria-label={`View Cart (${cartCount} items)`}
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="9" cy="21" r="1" />
+                <circle cx="20" cy="21" r="1" />
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+              </svg>
+              <span>{t('nav_cart')}</span>
+              <span className="ap-cart-badge">{cartCount}</span>
+            </button>
+          </div>
         </div>
 
         {/* ============================================================
@@ -285,9 +292,9 @@ export const AllProductsPage: React.FC = () => {
               onClick={() => handleCategoryChange(btn.id)}
               role="tab"
               aria-selected={activeCategory === btn.id}
-              aria-label={`Filter by ${btn.label}`}
+              aria-label={`Filter by ${t(btn.label)}`}
             >
-              {btn.label}
+              {t(btn.label)}
             </button>
           ))}
         </div>
@@ -314,7 +321,7 @@ export const AllProductsPage: React.FC = () => {
               <input
                 type="text"
                 className="ap-search-input"
-                placeholder="Search products..."
+                placeholder={t('search_products', 'Search products...')}
                 value={searchQuery}
                 onChange={(e) => handleSearchChange(e.target.value)}
                 aria-label="Search products"
@@ -328,10 +335,10 @@ export const AllProductsPage: React.FC = () => {
                 onChange={(e) => handleSortChange(e.target.value)}
                 aria-label="Sort products"
               >
-                <option value="default">Sort by: Recommended</option>
-                <option value="price-asc">Sort by: Price (Low to High)</option>
-                <option value="price-desc">Sort by: Price (High to Low)</option>
-                <option value="name-asc">Sort by: Name (A to Z)</option>
+                <option value="default">{t('sort_recommended', 'Sort by: Recommended')}</option>
+                <option value="price-asc">{t('sort_price_low', 'Sort by: Price (Low to High)')}</option>
+                <option value="price-desc">{t('sort_price_high', 'Sort by: Price (High to Low)')}</option>
+                <option value="name-asc">{t('sort_name_asc', 'Sort by: Name (A to Z)')}</option>
               </select>
               <svg
                 viewBox="0 0 24 24"
@@ -349,7 +356,7 @@ export const AllProductsPage: React.FC = () => {
           </div>
 
           <span className="ap-product-count">
-            {displayProducts.length} Product{displayProducts.length !== 1 ? 's' : ''}
+            {displayProducts.length} {t('products_count', 'Products')}
           </span>
         </div>
 
@@ -369,13 +376,13 @@ export const AllProductsPage: React.FC = () => {
                       className="ap-card-img"
                       loading="lazy"
                     />
-                    <span className="ap-card-category-tag">{product.category}</span>
+                    <span className="ap-card-category-tag">{t(product.category)}</span>
                   </div>
 
                   <div className="ap-card-info">
-                    <h2 className="ap-card-name">{product.name}</h2>
+                    <h2 className="ap-card-name">{t(product.name)}</h2>
                     {product.description ? (
-                      <p className="ap-card-desc">{product.description}</p>
+                      <p className="ap-card-desc">{t(product.description)}</p>
                     ) : (
                       product.size && <span className="ap-card-size">{product.size}</span>
                     )}

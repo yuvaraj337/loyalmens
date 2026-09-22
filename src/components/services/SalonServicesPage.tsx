@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
+import { LanguageSelector } from '../common/LanguageSelector';
 import '../../styles/salon-services.css';
 
 interface ServiceItem {
@@ -19,192 +21,193 @@ interface ServiceCategory {
   services: ServiceItem[];
 }
 
-const SERVICE_CATEGORIES: ServiceCategory[] = [
-  {
-    id: 'haircut',
-    number: '01',
-    title: 'Haircut & Styling',
-    description: 'Precision cuts, modern styles\nand expert finishing.',
-    image: '/images/services/card_01_final.jpg',
-    imgClass: 'salon-card-img-01',
-    icon: (
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="6" cy="6" r="3" />
-        <circle cx="6" cy="18" r="3" />
-        <line x1="20" y1="4" x2="8.12" y2="15.88" />
-        <line x1="14.47" y1="14.48" x2="20" y2="20" />
-        <line x1="8.12" y1="8.12" x2="12" y2="12" />
-      </svg>
-    ),
-    services: [
-      {
-        id: 'h1',
-        name: 'Signature Royal Haircut',
-        description: 'Bespoke consultation, precision shear cut, wash with Rizheena organic shampoo, blow-dry & luxury styling.',
-        duration: '45 mins',
-      },
-      {
-        id: 'h2',
-        name: 'Executive Scissor Cut & Finish',
-        description: 'Classic scissor over comb sculpting, clean taper or fade, cooling scalp tonic massage.',
-        duration: '40 mins',
-      },
-      {
-        id: 'h3',
-        name: 'Junior Master Cut (Under 12)',
-        description: 'Gentle, stylish haircuts tailored for young gentlemen with patience and precision.',
-        duration: '30 mins',
-      },
-      {
-        id: 'h4',
-        name: 'Scalp Clarifying Wash & Blow-Dry',
-        description: 'Deep clarifying wash, therapeutic scalp massage, blow dry & luxury matte paste finish.',
-        duration: '25 mins',
-      },
-    ],
-  },
-  {
-    id: 'beard',
-    number: '02',
-    title: 'Beard Grooming',
-    description: 'Sharp. Defined.\nAlways on point.',
-    image: '/images/services/card_02_final.jpg',
-    imgClass: 'salon-card-img-02',
-    icon: (
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 6h16M4 10h16M7 14h10M9 18h6" />
-        <path d="M5 6c0 6 3 14 7 14s7-8 7-14" />
-      </svg>
-    ),
-    services: [
-      {
-        id: 'b1',
-        name: 'Royal Hot Towel Beard Sculpt',
-        description: 'Essential oil hot towel infusion, precision straight razor edge lining, beard shaping & warm oil conditioning.',
-        duration: '35 mins',
-      },
-      {
-        id: 'b2',
-        name: 'Classic Beard Trim & Line-Up',
-        description: 'Clipper and shear detailing, cheek and neckline definition, nourishing beard butter application.',
-        duration: '25 mins',
-      },
-      {
-        id: 'b3',
-        name: 'Traditional Straight Razor Shave',
-        description: 'Pre-shave botanical oil, rich warm lather, dual-pass straight razor shave, ice towel & aftershave balm.',
-        duration: '40 mins',
-      },
-      {
-        id: 'b4',
-        name: 'Beard Spa & Follicle Therapy',
-        description: 'Deep cleansing steam treatment, exfoliating beard scrub, leave-in hydration serum for soft texture.',
-        duration: '30 mins',
-      },
-    ],
-  },
-  {
-    id: 'facial',
-    number: '03',
-    title: 'Facial & Skin Care',
-    description: 'Refresh your skin.\nFeel the difference.',
-    image: '/images/services/card_03_final.jpg',
-    imgClass: 'salon-card-img-03',
-    icon: (
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2C9 7 4 9 4 14a8 8 0 0 0 16 0c0-5-5-7-8-12z" />
-        <path d="M12 12c-2 2-3 4-3 6" />
-        <path d="M12 12c2 2 3 4 3 6" />
-      </svg>
-    ),
-    services: [
-      {
-        id: 'f1',
-        name: 'Rizheena Signature Deep Cleanse',
-        description: 'Ultrasonic pore cleansing, herbal steam, gentle exfoliation, bespoke mask & tension-relieving face massage.',
-        duration: '60 mins',
-      },
-      {
-        id: 'f2',
-        name: 'Hydra-Infusion Glow Treatment',
-        description: 'Intense hyaluronic acid hydration therapy, cooling jade roller stimulation, and bright radiant skin finish.',
-        duration: '50 mins',
-      },
-      {
-        id: 'f3',
-        name: 'De-Tan & Skin Brightening Therapy',
-        description: 'Targeted botanical de-tanning mask, active antioxidant serum, and UV protection barrier.',
-        duration: '45 mins',
-      },
-      {
-        id: 'f4',
-        name: 'Anti-Pollution Charcoal Detox',
-        description: 'Activated charcoal peel, sebum control toning, pore tightening & refreshing cold mist.',
-        duration: '45 mins',
-      },
-    ],
-  },
-  {
-    id: 'colour',
-    number: '04',
-    title: 'Hair Colour & Treatment',
-    description: 'Express your style\nwith expert care.',
-    image: '/images/services/card_04_final.jpg',
-    imgClass: 'salon-card-img-04',
-    icon: (
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M12 2a4.5 4.5 0 0 0 0 9 4.5 4.5 0 0 1 0 9" />
-        <circle cx="12" cy="7" r="1" fill="currentColor" />
-        <circle cx="12" cy="17" r="1" fill="currentColor" />
-      </svg>
-    ),
-    services: [
-      {
-        id: 'c1',
-        name: 'Natural Gray Blending Camouflage',
-        description: 'Subtle, ammonia-free 10-minute tone application for hair or beard to achieve a distinguished, youthful blend.',
-        duration: '35 mins',
-      },
-      {
-        id: 'c2',
-        name: 'Full Luxury Hair Colouring',
-        description: 'Rich multidimensional colour application with conditioning agents, lustrous shine & scalp barrier protectant.',
-        duration: '60 mins',
-      },
-      {
-        id: 'c3',
-        name: 'Keratin Smooth & Repair Therapy',
-        description: 'Intense protein infusion to tame unmanageable frizz, strengthen broken hair shafts & lock in silky texture.',
-        duration: '75 mins',
-      },
-      {
-        id: 'c4',
-        name: 'Moroccan Oil Scalp & Hair Spa',
-        description: 'Warm argan oil massage, nourishing cream bath with steam infusion, neck & shoulder pressure point relief.',
-        duration: '50 mins',
-      },
-    ],
-  },
-];
-
 interface SalonServicesPageProps {
   isHomeService?: boolean;
 }
 
 export const SalonServicesPage: React.FC<SalonServicesPageProps> = ({ isHomeService = false }) => {
+  const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<ServiceCategory | null>(null);
+
+  const categories: ServiceCategory[] = useMemo(() => [
+    {
+      id: 'haircut',
+      number: '01',
+      title: t('cat_haircut_title'),
+      description: t('cat_haircut_desc'),
+      image: '/images/services/card_01_final.jpg',
+      imgClass: 'salon-card-img-01',
+      icon: (
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="6" cy="6" r="3" />
+          <circle cx="6" cy="18" r="3" />
+          <line x1="20" y1="4" x2="8.12" y2="15.88" />
+          <line x1="14.47" y1="14.48" x2="20" y2="20" />
+          <line x1="8.12" y1="8.12" x2="12" y2="12" />
+        </svg>
+      ),
+      services: [
+        {
+          id: 'h1',
+          name: t('h1_name'),
+          description: t('h1_desc'),
+          duration: '45 mins',
+        },
+        {
+          id: 'h2',
+          name: t('h2_name'),
+          description: t('h2_desc'),
+          duration: '40 mins',
+        },
+        {
+          id: 'h3',
+          name: t('h3_name'),
+          description: t('h3_desc'),
+          duration: '30 mins',
+        },
+        {
+          id: 'h4',
+          name: t('h4_name'),
+          description: t('h4_desc'),
+          duration: '25 mins',
+        },
+      ],
+    },
+    {
+      id: 'beard',
+      number: '02',
+      title: t('cat_beard_title'),
+      description: t('cat_beard_desc'),
+      image: '/images/services/card_02_final.jpg',
+      imgClass: 'salon-card-img-02',
+      icon: (
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 6h16M4 10h16M7 14h10M9 18h6" />
+          <path d="M5 6c0 6 3 14 7 14s7-8 7-14" />
+        </svg>
+      ),
+      services: [
+        {
+          id: 'b1',
+          name: t('b1_name'),
+          description: t('b1_desc'),
+          duration: '35 mins',
+        },
+        {
+          id: 'b2',
+          name: t('b2_name'),
+          description: t('b2_desc'),
+          duration: '25 mins',
+        },
+        {
+          id: 'b3',
+          name: t('b3_name'),
+          description: t('b3_desc'),
+          duration: '40 mins',
+        },
+        {
+          id: 'b4',
+          name: t('b4_name'),
+          description: t('b4_desc'),
+          duration: '30 mins',
+        },
+      ],
+    },
+    {
+      id: 'facial',
+      number: '03',
+      title: t('cat_facial_title'),
+      description: t('cat_facial_desc'),
+      image: '/images/services/card_03_final.jpg',
+      imgClass: 'salon-card-img-03',
+      icon: (
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2C9 7 4 9 4 14a8 8 0 0 0 16 0c0-5-5-7-8-12z" />
+          <path d="M12 12c-2 2-3 4-3 6" />
+          <path d="M12 12c2 2 3 4 3 6" />
+        </svg>
+      ),
+      services: [
+        {
+          id: 'f1',
+          name: t('f1_name'),
+          description: t('f1_desc'),
+          duration: '60 mins',
+        },
+        {
+          id: 'f2',
+          name: t('f2_name'),
+          description: t('f2_desc'),
+          duration: '50 mins',
+        },
+        {
+          id: 'f3',
+          name: t('f3_name'),
+          description: t('f3_desc'),
+          duration: '45 mins',
+        },
+        {
+          id: 'f4',
+          name: t('f4_name'),
+          description: t('f4_desc'),
+          duration: '45 mins',
+        },
+      ],
+    },
+    {
+      id: 'colour',
+      number: '04',
+      title: t('cat_colour_title'),
+      description: t('cat_colour_desc'),
+      image: '/images/services/card_04_final.jpg',
+      imgClass: 'salon-card-img-04',
+      icon: (
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 2a4.5 4.5 0 0 0 0 9 4.5 4.5 0 0 1 0 9" />
+          <circle cx="12" cy="7" r="1" fill="currentColor" />
+          <circle cx="12" cy="17" r="1" fill="currentColor" />
+        </svg>
+      ),
+      services: [
+        {
+          id: 'c1',
+          name: t('c1_name'),
+          description: t('c1_desc'),
+          duration: '35 mins',
+        },
+        {
+          id: 'c2',
+          name: t('c2_name'),
+          description: t('c2_desc'),
+          duration: '60 mins',
+        },
+        {
+          id: 'c3',
+          name: t('c3_name'),
+          description: t('c3_desc'),
+          duration: '75 mins',
+        },
+        {
+          id: 'c4',
+          name: t('c4_name'),
+          description: t('c4_desc'),
+          duration: '50 mins',
+        },
+      ],
+    },
+  ], [t]);
 
   // Auto-open modal if URL has hash (e.g. /services#haircut)
   useEffect(() => {
     const hash = window.location.hash.replace('#', '');
     if (hash) {
-      const match = SERVICE_CATEGORIES.find((c) => c.id === hash);
+      const match = categories.find((c) => c.id === hash);
       if (match) {
         setSelectedCategory(match);
       }
     }
-  }, []);
+  }, [categories]);
 
   const handleCardClick = (cat: ServiceCategory) => {
     let route = '';
@@ -224,16 +227,15 @@ export const SalonServicesPage: React.FC<SalonServicesPageProps> = ({ isHomeServ
   };
 
   const handleExploreAll = () => {
-    // Open full modal showing all services
     setSelectedCategory({
       id: 'all',
       number: 'ALL',
-      title: 'Our Complete Signature Menu',
-      description: 'Explore our full array of luxury grooming, hair styling, beard artistry & skin treatments.',
-      image: '/images/services/card_01_haircut_styling.png',
+      title: t('explore_all_menu'),
+      description: t('salon_intro_desc'),
+      image: '/images/services/card_01_final.jpg',
       imgClass: '',
       icon: null,
-      services: SERVICE_CATEGORIES.flatMap((c) => c.services),
+      services: categories.flatMap((c) => c.services),
     });
   };
 
@@ -252,10 +254,10 @@ export const SalonServicesPage: React.FC<SalonServicesPageProps> = ({ isHomeServ
           <div className="salon-top-left-tagline" aria-label="Brand Motto">
             <div className="salon-vertical-line" />
             <div className="salon-tagline-text">
-              <span>GOOD</span>
-              <span>HAIR</span>
-              <span>BETTER</span>
-              <span>MOOD</span>
+              <span>{t('salon_motto_good')}</span>
+              <span>{t('salon_motto_hair')}</span>
+              <span>{t('salon_motto_better')}</span>
+              <span>{t('salon_motto_mood')}</span>
             </div>
           </div>
 
@@ -263,21 +265,22 @@ export const SalonServicesPage: React.FC<SalonServicesPageProps> = ({ isHomeServ
           <div className="salon-center-header">
             <div className="salon-eyebrow-wrapper">
               <span className="salon-eyebrow-line" />
-              <span className="salon-eyebrow-text">OUR SIGNATURE SERVICES</span>
+              <span className="salon-eyebrow-text">{t('salon_signature_services')}</span>
               <span className="salon-eyebrow-line" />
             </div>
 
-            <h1 className="salon-main-heading">Crafted for a Better You</h1>
+            <h1 className="salon-main-heading">{t('salon_crafted_for_you')}</h1>
 
             <p className="salon-intro-text">
-              From classic cuts to advanced grooming, discover services designed to
-              <br />
-              bring out your best — every time.
+              {t('salon_intro_desc')}
             </p>
           </div>
 
-          {/* Top Right: Circular Stamp / Seal Badge */}
-          <div className="salon-top-right-seal" aria-hidden="true">
+          {/* Top Right: Stamp + Language Selector */}
+          <div className="salon-top-right-seal">
+            <div style={{ marginBottom: '10px' }}>
+              <LanguageSelector theme="light" />
+            </div>
             <img
               src="/images/services/badge_seal.png"
               alt="Style Grooming Sleek Stamp"
@@ -290,7 +293,7 @@ export const SalonServicesPage: React.FC<SalonServicesPageProps> = ({ isHomeServ
             2. FOUR SERVICE CARDS (HORIZONTAL ROW)
             ================================================================== */}
         <div className="salon-cards-grid" role="region" aria-label="Signature Salon Services">
-          {SERVICE_CATEGORIES.map((cat) => (
+          {categories.map((cat) => (
             <article
               key={cat.id}
               className="salon-service-card"
@@ -330,7 +333,7 @@ export const SalonServicesPage: React.FC<SalonServicesPageProps> = ({ isHomeServ
 
                 {/* Card CTA Row */}
                 <div className="salon-card-cta-row">
-                  <span className="salon-card-cta-label">VIEW SERVICES</span>
+                  <span className="salon-card-cta-label">{t('view_services')}</span>
                   <div className="salon-card-arrow-btn" aria-hidden="true">
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="5" y1="12" x2="19" y2="12" />
@@ -351,9 +354,9 @@ export const SalonServicesPage: React.FC<SalonServicesPageProps> = ({ isHomeServ
           <div className="salon-bottom-quote-block">
             <span className="salon-quote-mark" aria-hidden="true">“</span>
             <blockquote className="salon-quote-text">
-              Self-care
+              {t('salon_quote_1')}
               <br />
-              is a new confidence.
+              {t('salon_quote_2')}
             </blockquote>
             <div className="salon-quote-underline" />
           </div>
@@ -362,12 +365,12 @@ export const SalonServicesPage: React.FC<SalonServicesPageProps> = ({ isHomeServ
           <div className="salon-bottom-center-block">
             <div className="salon-brand-line-wrapper">
               <span className="salon-brand-line" />
-              <span className="salon-brand-text">RIZHEENA PROFESSIONAL</span>
+              <span className="salon-brand-text">{t('salon_brand_text')}</span>
               <span className="salon-brand-line" />
             </div>
           </div>
 
-          {/* Right: Editorial Slogan & Stone Plinth Corner Composition */}
+          {/* Right: Editorial Slogan & Corner Image */}
           <div className="salon-bottom-right-block">
             <div className="salon-plinth-wrapper">
               <img
@@ -399,7 +402,7 @@ export const SalonServicesPage: React.FC<SalonServicesPageProps> = ({ isHomeServ
               type="button"
               className="salon-modal-close-btn"
               onClick={closeModal}
-              aria-label="Close services modal"
+              aria-label={t('close')}
             >
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18" />
@@ -409,7 +412,7 @@ export const SalonServicesPage: React.FC<SalonServicesPageProps> = ({ isHomeServ
 
             <div className="salon-modal-header">
               <span className="salon-modal-category-eyebrow">
-                {selectedCategory.number !== 'ALL' ? `Service 0${selectedCategory.number} • Category` : 'Signature Menu'}
+                {selectedCategory.number !== 'ALL' ? `${t('category_label')} 0${selectedCategory.number}` : t('explore_all_menu')}
               </span>
               <h3 className="salon-modal-title">{selectedCategory.title}</h3>
             </div>
@@ -420,13 +423,13 @@ export const SalonServicesPage: React.FC<SalonServicesPageProps> = ({ isHomeServ
                   <div className="salon-modal-service-info">
                     <h4 className="salon-modal-service-name">{svc.name}</h4>
                     <p className="salon-modal-service-desc">{svc.description}</p>
-                    <span className="salon-modal-service-duration">Estimated Duration: {svc.duration}</span>
+                    <span className="salon-modal-service-duration">{t('est_duration')} {svc.duration}</span>
                   </div>
                   <a
                     href={`/booking?service=${encodeURIComponent(svc.name)}${isHomeService ? '&type=home' : ''}`}
                     className="salon-modal-book-btn"
                   >
-                    Book Now
+                    {t('nav_book_now')}
                   </a>
                 </div>
               ))}
@@ -439,7 +442,7 @@ export const SalonServicesPage: React.FC<SalonServicesPageProps> = ({ isHomeServ
                 onClick={closeModal}
                 style={{ fontSize: '11px', padding: '12px 28px' }}
               >
-                Close Menu
+                {t('close_menu')}
               </button>
             </div>
           </div>
@@ -448,3 +451,5 @@ export const SalonServicesPage: React.FC<SalonServicesPageProps> = ({ isHomeServ
     </div>
   );
 };
+
+export default SalonServicesPage;

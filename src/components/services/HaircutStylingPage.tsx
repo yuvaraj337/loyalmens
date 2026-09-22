@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
+import { LanguageSelector } from '../common/LanguageSelector';
 import '../../styles/haircut-styling.css';
 
 interface ServiceItem {
@@ -9,73 +11,74 @@ interface ServiceItem {
   thumb: string;
 }
 
-const SERVICES_DATA: ServiceItem[] = [
-  {
-    id: 's1',
-    name: 'Haircut & Styling',
-    desc: 'Trendy cuts tailored to your style.',
-    price: '₹299 – ₹499',
-    thumb: '/images/haircut/thumb_01.jpg',
-  },
-  {
-    id: 's2',
-    name: 'Beard Grooming',
-    desc: 'Shape, trim and style your beard.',
-    price: '₹199 – ₹399',
-    thumb: '/images/haircut/thumb_02.jpg',
-  },
-  {
-    id: 's3',
-    name: 'Facial & Skin Care',
-    desc: 'Rejuvenate your skin.',
-    price: '₹599',
-    thumb: '/images/haircut/thumb_03.jpg',
-  },
-  {
-    id: 's4',
-    name: 'Head Massage',
-    desc: 'Relax and recharge.',
-    price: '₹399',
-    thumb: '/images/haircut/thumb_04.jpg',
-  },
-  {
-    id: 's5',
-    name: 'Hair Colouring',
-    desc: 'Premium colours for a bold new you.',
-    price: '₹999',
-    thumb: '/images/haircut/thumb_05.jpg',
-  },
-  {
-    id: 's6',
-    name: 'Hair Smoothening',
-    desc: 'Get smoother, manageable hair.',
-    price: '₹1,999',
-    thumb: '/images/haircut/thumb_06.jpg',
-  },
-  {
-    id: 's7',
-    name: 'Hair Spa Treatment',
-    desc: 'Deep nourishment for healthier hair.',
-    price: '₹799',
-    thumb: '/images/haircut/thumb_07.jpg',
-  },
-  {
-    id: 's8',
-    name: 'Kids Haircut & Styling',
-    desc: 'Stylish cuts for the little gentlemen.',
-    price: '₹199',
-    thumb: '/images/haircut/thumb_08.jpg',
-  },
-];
-
 export const HaircutStylingPage: React.FC = () => {
+  const { t } = useLanguage();
   const isHome = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('type') === 'home';
   const typeParam = isHome ? '&type=home' : '';
+
+  const servicesData: ServiceItem[] = useMemo(() => [
+    {
+      id: 's1',
+      name: t('s1_name'),
+      desc: t('s1_desc'),
+      price: '₹299 – ₹499',
+      thumb: '/images/haircut/thumb_01.jpg',
+    },
+    {
+      id: 's2',
+      name: t('s2_name'),
+      desc: t('s2_desc'),
+      price: '₹199 – ₹399',
+      thumb: '/images/haircut/thumb_02.jpg',
+    },
+    {
+      id: 's3',
+      name: t('s3_name'),
+      desc: t('s3_desc'),
+      price: '₹599',
+      thumb: '/images/haircut/thumb_03.jpg',
+    },
+    {
+      id: 's4',
+      name: t('s4_name'),
+      desc: t('s4_desc'),
+      price: '₹399',
+      thumb: '/images/haircut/thumb_04.jpg',
+    },
+    {
+      id: 's5',
+      name: t('s5_name'),
+      desc: t('s5_desc'),
+      price: '₹999',
+      thumb: '/images/haircut/thumb_05.jpg',
+    },
+    {
+      id: 's6',
+      name: t('s6_name'),
+      desc: t('s6_desc'),
+      price: '₹1,999',
+      thumb: '/images/haircut/thumb_06.jpg',
+    },
+    {
+      id: 's7',
+      name: t('s7_name'),
+      desc: t('s7_desc'),
+      price: '₹799',
+      thumb: '/images/haircut/thumb_07.jpg',
+    },
+    {
+      id: 's8',
+      name: t('s8_name'),
+      desc: t('s8_desc'),
+      price: '₹199',
+      thumb: '/images/haircut/thumb_08.jpg',
+    },
+  ], [t]);
 
   return (
     <div className="haircut-page" id="haircut-styling-page">
       {/* ==================================================================
-          1. LIGHT LUXURY HEADER
+          1. LIGHT LUXURY HEADER (Desktop only per target mobile specs)
           ================================================================== */}
       <header className="haircut-header">
         <a href="/" className="haircut-header-brand" aria-label="Rizheena Home">
@@ -89,23 +92,24 @@ export const HaircutStylingPage: React.FC = () => {
         </a>
 
         <nav className="haircut-header-nav" aria-label="Main Navigation">
-          <a href="/" className="haircut-header-nav-link">Home</a>
-          <a href="/services" className="haircut-header-nav-link active">Services</a>
-          <a href="/shop" className="haircut-header-nav-link">Shop</a>
-          <a href="/#vip" className="haircut-header-nav-link">VIP</a>
-          <a href="/#gallery" className="haircut-header-nav-link">Gallery</a>
-          <a href="/#contact" className="haircut-header-nav-link">Contact</a>
+          <a href="/" className="haircut-header-nav-link">{t('nav_home')}</a>
+          <a href="/services" className="haircut-header-nav-link active">{t('nav_services')}</a>
+          <a href="/shop" className="haircut-header-nav-link">{t('nav_shop')}</a>
+          <a href="/#vip" className="haircut-header-nav-link">{t('nav_membership')}</a>
+          <a href="/#contact" className="haircut-header-nav-link">{t('nav_contact')}</a>
         </nav>
 
         <div className="haircut-header-actions">
-          <button type="button" className="haircut-header-icon-btn" aria-label="Search services">
+          <LanguageSelector theme="light" />
+
+          <button type="button" className="haircut-header-icon-btn" aria-label={t('nav_search')}>
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="11" cy="11" r="8" />
               <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
           </button>
 
-          <a href="/shop" className="haircut-header-icon-btn" aria-label="Cart (0 items)">
+          <a href="/shop" className="haircut-header-icon-btn" aria-label={t('nav_cart')}>
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="9" cy="21" r="1" />
               <circle cx="20" cy="21" r="1" />
@@ -115,7 +119,7 @@ export const HaircutStylingPage: React.FC = () => {
           </a>
 
           <a href={`/booking?service=Haircut%20%26%20Styling${typeParam}`} className="haircut-header-book-btn">
-            <span>Book Now</span>
+            <span>{t('nav_book_now')}</span>
             <span aria-hidden="true">→</span>
           </a>
         </div>
@@ -129,17 +133,16 @@ export const HaircutStylingPage: React.FC = () => {
           <div className="haircut-hero-grid">
             {/* Left Hero Column */}
             <div className="haircut-hero-left">
-              <span className="haircut-hero-eyebrow">MODERN GROOMING</span>
+              <span className="haircut-hero-eyebrow">{t('modern_grooming')}</span>
               <h1 className="haircut-hero-heading">
-                <span className="haircut-heading-line">Haircut &amp;</span>
-                <span className="haircut-heading-line haircut-heading-accent">Styling</span>
+                <span className="haircut-heading-line">{t('haircut_and')} </span>
+                <span className="haircut-heading-line haircut-heading-accent">{t('styling')}</span>
               </h1>
               <p className="haircut-hero-desc">
-                Precision cuts. Modern styles.<br />
-                A sharper you, every time.
+                {t('haircut_hero_desc')}
               </p>
               <a href={`/booking?service=Haircut%20%26%20Styling${typeParam}`} className="haircut-book-cta-btn">
-                <span>Book Your Appointment</span>
+                <span>{t('hero_book_now')}</span>
                 <span aria-hidden="true">→</span>
               </a>
             </div>
@@ -163,7 +166,7 @@ export const HaircutStylingPage: React.FC = () => {
             ================================================================== */}
         <section className="haircut-benefit-strip" aria-label="Brand Benefits">
           <div className="haircut-tagline-motto">
-            STYLE GROOM CONFIDENCE
+            {t('style_groom_confidence')}
           </div>
 
           <div className="haircut-benefit-items-row">
@@ -175,8 +178,7 @@ export const HaircutStylingPage: React.FC = () => {
                 </svg>
               </span>
               <span className="haircut-benefit-text">
-                <span>Expert</span>
-                <span>Stylists</span>
+                <span>{t('expert_stylists')}</span>
               </span>
             </div>
 
@@ -189,8 +191,7 @@ export const HaircutStylingPage: React.FC = () => {
                 </svg>
               </span>
               <span className="haircut-benefit-text">
-                <span>Premium</span>
-                <span>Products</span>
+                <span>{t('premium_products')}</span>
               </span>
             </div>
 
@@ -204,8 +205,7 @@ export const HaircutStylingPage: React.FC = () => {
                 </svg>
               </span>
               <span className="haircut-benefit-text">
-                <span>Hygienic</span>
-                <span>Environment</span>
+                <span>{t('hygienic_environment')}</span>
               </span>
             </div>
 
@@ -219,8 +219,7 @@ export const HaircutStylingPage: React.FC = () => {
                 </svg>
               </span>
               <span className="haircut-benefit-text">
-                <span>Relaxing</span>
-                <span>Ambience</span>
+                <span>{t('relaxing_ambience')}</span>
               </span>
             </div>
 
@@ -235,8 +234,7 @@ export const HaircutStylingPage: React.FC = () => {
                 </svg>
               </span>
               <span className="haircut-benefit-text">
-                <span>Personalised</span>
-                <span>Care</span>
+                <span>{t('personalised_care')}</span>
               </span>
             </div>
           </div>
@@ -248,30 +246,28 @@ export const HaircutStylingPage: React.FC = () => {
         <section className="haircut-services-section" aria-label="Our Hair Services Menu">
           <div className="haircut-services-header">
             <div className="haircut-services-title-col">
-              <span className="haircut-services-eyebrow">OUR SERVICES</span>
+              <span className="haircut-services-eyebrow">{t('our_services')}</span>
               <div className="haircut-services-heading-row">
                 <h2 className="haircut-services-heading">
-                  <span className="haircut-heading-line-1">Our Hair </span>
+                  <span className="haircut-heading-line-1">{t('our_hair_services')} </span>
                   <span className="haircut-heading-line-2">
-                    <span>Services</span>
                     <span className="haircut-services-heading-line" />
                   </span>
                 </h2>
               </div>
               <p className="haircut-services-subtitle haircut-desktop-subtitle">
-                Premium grooming solutions for the modern man.
+                {t('hair_services_subtitle')}
               </p>
             </div>
 
             <div className="haircut-services-meta-row">
               <p className="haircut-services-subtitle haircut-mobile-subtitle">
-                Premium grooming solutions for the<br />modern man.
+                {t('hair_services_subtitle')}
               </p>
 
               <a href="/services" className="haircut-view-all-link">
                 <span className="haircut-view-all-text">
-                  <span>View All</span>
-                  <span>Services</span>
+                  <span>{t('view_all_services')}</span>
                 </span>
                 <span className="haircut-view-all-arrow" aria-hidden="true">→</span>
               </a>
@@ -279,7 +275,7 @@ export const HaircutStylingPage: React.FC = () => {
           </div>
 
           <div className="haircut-services-grid">
-            {SERVICES_DATA.map((svc) => (
+            {servicesData.map((svc) => (
               <div key={svc.id} className="haircut-service-row">
                 <div className="haircut-service-left-group">
                   <img
@@ -303,19 +299,17 @@ export const HaircutStylingPage: React.FC = () => {
                     className="haircut-service-book-btn"
                     aria-label={`Book ${svc.name}`}
                   >
-                    Book
+                    {t('book')}
                   </a>
                 </div>
               </div>
             ))}
           </div>
         </section>
-
-
       </main>
 
       {/* ==================================================================
-          6. LUXURY LIGHT FOOTER
+          5. LUXURY LIGHT FOOTER
           ================================================================== */}
       <footer className="haircut-footer">
         <div className="haircut-container">
@@ -335,14 +329,13 @@ export const HaircutStylingPage: React.FC = () => {
 
             {/* Col 2: Quick Links */}
             <div className="haircut-footer-col">
-              <h4 className="haircut-footer-col-title">QUICK LINKS</h4>
+              <h4 className="haircut-footer-col-title">{t('footer_quick_links')}</h4>
               <ul className="haircut-footer-links-list">
-                <li><a href="/" className="haircut-footer-link">Home</a></li>
-                <li><a href="/services" className="haircut-footer-link">Services</a></li>
-                <li><a href="/shop" className="haircut-footer-link">Shop</a></li>
-                <li><a href="/#vip" className="haircut-footer-link">VIP</a></li>
-                <li><a href="/#gallery" className="haircut-footer-link">Gallery</a></li>
-                <li><a href="/#contact" className="haircut-footer-link">Contact</a></li>
+                <li><a href="/" className="haircut-footer-link">{t('nav_home')}</a></li>
+                <li><a href="/services" className="haircut-footer-link">{t('nav_services')}</a></li>
+                <li><a href="/shop" className="haircut-footer-link">{t('nav_shop')}</a></li>
+                <li><a href="/#vip" className="haircut-footer-link">{t('nav_membership')}</a></li>
+                <li><a href="/#contact" className="haircut-footer-link">{t('nav_contact')}</a></li>
               </ul>
             </div>
 
@@ -414,13 +407,11 @@ export const HaircutStylingPage: React.FC = () => {
                 </a>
               </div>
             </div>
-
-
           </div>
 
           {/* Bottom Bar */}
           <div className="haircut-footer-bottom-bar">
-            <span>© 2024 Rizheena Professional. All rights reserved.</span>
+            <span>© 2024 Rizheena Professional. {t('footer_rights')}</span>
             <div className="haircut-footer-legal-links">
               <a href="/privacy" className="haircut-footer-legal-link">Privacy Policy</a>
               <span>|</span>

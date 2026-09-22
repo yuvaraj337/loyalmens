@@ -1,68 +1,7 @@
 export type Language = 'en' | 'hi' | 'kn';
 
 export interface Translations {
-  // Navigation & Header
-  nav_home: string;
-  nav_services: string;
-  nav_shop: string;
-  nav_experience: string;
-  nav_membership: string;
-  nav_contact: string;
-  nav_book_now: string;
-  nav_cart: string;
-  nav_search: string;
-
-  // Hero Section
-  hero_eyebrow: string;
-  hero_title_line1: string;
-  hero_title_line2: string;
-  hero_subtitle: string;
-  hero_book_now: string;
-  hero_stats_clients: string;
-  hero_stats_rating: string;
-
-  // Experience Section
-  exp_eyebrow: string;
-  exp_title: string;
-  exp_salon_services: string;
-  exp_salon_desc: string;
-  exp_rizheena_shop: string;
-  exp_shop_desc: string;
-  exp_at_home: string;
-  exp_home_desc: string;
-
-  // Space Section
-  space_eyebrow: string;
-  space_title_line1: string;
-  space_title_line2: string;
-  space_desc: string;
-  space_stat_clients: string;
-  space_stat_years: string;
-  space_stat_rating: string;
-  space_stat_hygiene: string;
-  space_step_inside: string;
-  space_crafted: string;
-  space_quote: string;
-
-  // Membership Section
-  mem_title: string;
-  mem_subtitle: string;
-  mem_popular: string;
-  mem_vip_title: string;
-  mem_vip_desc: string;
-  mem_vvip_title: string;
-  mem_vvip_desc: string;
-  mem_join_vip: string;
-  mem_join_vvip: string;
-
-  // Common & Footer
-  footer_tagline: string;
-  footer_quick_links: string;
-  footer_hours: string;
-  footer_rights: string;
-  book_appointment: string;
-  view_details: string;
-  close: string;
+  [key: string]: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -129,7 +68,130 @@ export const translations: Record<Language, Translations> = {
     book_appointment: 'Book Appointment',
     view_details: 'View Details',
     close: 'Close',
+
+    // =========================================================================
+    // SALON SERVICES PAGE (/services)
+    // =========================================================================
+    salon_motto_good: 'GOOD',
+    salon_motto_hair: 'HAIR',
+    salon_motto_better: 'BETTER',
+    salon_motto_mood: 'MOOD',
+    salon_signature_services: 'OUR SIGNATURE SERVICES',
+    salon_crafted_for_you: 'Crafted for a Better You',
+    salon_intro_desc: 'From classic cuts to advanced grooming, discover services designed to bring out your best — every time.',
+    view_services: 'VIEW SERVICES',
+    book_service: 'Book Service',
+    explore_all_menu: 'EXPLORE ALL SIGNATURE SERVICES',
+
+    // 4 Main Category Cards
+    cat_haircut_title: 'Haircut & Styling',
+    cat_haircut_desc: 'Precision cuts, modern styles and expert finishing.',
+    cat_beard_title: 'Beard Grooming',
+    cat_beard_desc: 'Sharp. Defined. Always on point.',
+    cat_facial_title: 'Facial & Skin Care',
+    cat_facial_desc: 'Refresh your skin. Feel the difference.',
+    cat_colour_title: 'Hair Colour & Treatment',
+    cat_colour_desc: 'Express your style with expert care.',
+    salon_quote_1: 'Self-care',
+    salon_quote_2: 'is a new confidence.',
+    salon_brand_text: 'RIZHEENA PROFESSIONAL',
+    est_duration: 'Estimated Duration:',
+    close_menu: 'Close Menu',
+    category_label: 'Category',
+
+    // Modal Service Items
+    h1_name: 'Signature Royal Haircut',
+    h1_desc: 'Bespoke consultation, precision shear cut, wash with Rizheena organic shampoo, blow-dry & luxury styling.',
+    h2_name: 'Executive Scissor Cut & Finish',
+    h2_desc: 'Classic scissor over comb sculpting, clean taper or fade, cooling scalp tonic massage.',
+    h3_name: 'Junior Master Cut (Under 12)',
+    h3_desc: 'Gentle, stylish haircuts tailored for young gentlemen with patience and precision.',
+    h4_name: 'Scalp Clarifying Wash & Blow-Dry',
+    h4_desc: 'Deep clarifying wash, therapeutic scalp massage, blow dry & luxury matte paste finish.',
+
+    b1_name: 'Royal Hot Towel Beard Sculpt',
+    b1_desc: 'Essential oil hot towel infusion, precision straight razor edge lining, beard shaping & warm oil conditioning.',
+    b2_name: 'Classic Beard Trim & Line-Up',
+    b2_desc: 'Clipper and shear detailing, cheek and neckline definition, nourishing beard butter application.',
+    b3_name: 'Traditional Straight Razor Shave',
+    b3_desc: 'Pre-shave botanical oil, rich warm lather, dual-pass straight razor shave, ice towel & aftershave balm.',
+    b4_name: 'Beard Spa & Follicle Therapy',
+    b4_desc: 'Deep cleansing steam treatment, exfoliating beard scrub, leave-in hydration serum for soft texture.',
+
+    f1_name: 'Rizheena Signature Deep Cleanse',
+    f1_desc: 'Ultrasonic pore cleansing, herbal steam, gentle exfoliation, bespoke mask & tension-relieving face massage.',
+    f2_name: 'Hydra-Infusion Glow Treatment',
+    f2_desc: 'Intense hyaluronic acid hydration therapy, cooling jade roller stimulation, and bright radiant skin finish.',
+    f3_name: 'De-Tan & Skin Brightening Therapy',
+    f3_desc: 'Targeted botanical de-tanning mask, active antioxidant serum, and UV protection barrier.',
+    f4_name: 'Anti-Pollution Charcoal Detox',
+    f4_desc: 'Activated charcoal peel, sebum control toning, pore tightening & refreshing cold mist.',
+
+    c1_name: 'Natural Gray Blending Camouflage',
+    c1_desc: 'Subtle, ammonia-free 10-minute tone application for hair or beard to achieve a distinguished, youthful blend.',
+    c2_name: 'Full Luxury Hair Colouring',
+    c2_desc: 'Rich multidimensional colour application with conditioning agents, lustrous shine & scalp barrier protectant.',
+    c3_name: 'Keratin Smooth & Repair Therapy',
+    c3_desc: 'Intense protein infusion to tame unmanageable frizz, strengthen broken hair shafts & lock in silky texture.',
+    c4_name: 'Moroccan Oil Scalp & Hair Spa',
+    c4_desc: 'Warm argan oil massage, nourishing cream bath with steam infusion, neck & shoulder pressure point relief.',
+
+    // =========================================================================
+    // HAIRCUT & STYLING DESTINATION PAGE (/services/haircut-styling)
+    // =========================================================================
+    modern_grooming: 'MODERN GROOMING',
+    haircut_and: 'Haircut &',
+    styling: 'Styling',
+    haircut_hero_desc: 'Precision cuts. Modern styles. A sharper you, every time.',
+    style_groom_confidence: 'STYLE GROOM CONFIDENCE',
+    expert_stylists: 'Expert Stylists',
+    premium_products: 'Premium Products',
+    hygienic_environment: 'Hygienic Environment',
+    relaxing_ambience: 'Relaxing Ambience',
+    personalised_care: 'Personalised Care',
+    our_services: 'OUR SERVICES',
+    our_hair_services: 'Our Hair Services',
+    hair_services_subtitle: 'Premium grooming solutions for the modern man.',
+    view_all_services: 'View All Services',
+    book: 'Book',
+
+    s1_name: 'Haircut & Styling',
+    s1_desc: 'Trendy cuts tailored to your style.',
+    s2_name: 'Beard Grooming',
+    s2_desc: 'Shape, trim and style your beard.',
+    s3_name: 'Facial & Skin Care',
+    s3_desc: 'Rejuvenate your skin.',
+    s4_name: 'Head Massage',
+    s4_desc: 'Relax and recharge.',
+    s5_name: 'Hair Colouring',
+    s5_desc: 'Premium colours for a bold new you.',
+    s6_name: 'Hair Smoothening',
+    s6_desc: 'Get smoother, manageable hair.',
+    s7_name: 'Hair Spa Treatment',
+    s7_desc: 'Deep nourishment for healthier hair.',
+    s8_name: 'Kids Haircut & Styling',
+    s8_desc: 'Stylish cuts for the little gentlemen.',
+
+    // =========================================================================
+    // PRODUCTS & SHOP (/shop)
+    // =========================================================================
+    shop_eyebrow: 'RIZHEENA PROFESSIONAL MEN\'S PARLOUR',
+    shop_hero_title: 'Professional Grooming Catalog',
+    shop_hero_subtitle: 'Authentic salon formulations delivered straight to your home.',
+    cat_all: 'All Products',
+    cat_hair: 'Hair Care',
+    cat_face: 'Face Care',
+    cat_beard: 'Beard Care',
+    cat_kits: 'Professional Kits',
+    cat_special: 'Special Care',
+    cat_gifts: 'Gift Sets',
+    add_to_cart: 'Add to Cart',
+    buy_now: 'Buy Now',
+    in_stock: 'In Stock',
+    out_of_stock: 'Out of Stock',
+    price_label: 'Price',
   },
+
   hi: {
     // Navigation & Header
     nav_home: 'होम',
@@ -193,7 +255,130 @@ export const translations: Record<Language, Translations> = {
     book_appointment: 'अपॉइंटमेंट बुक करें',
     view_details: 'विवरण देखें',
     close: 'बंद करें',
+
+    // =========================================================================
+    // SALON SERVICES PAGE (/services)
+    // =========================================================================
+    salon_motto_good: 'अच्छे',
+    salon_motto_hair: 'बाल',
+    salon_motto_better: 'बेहतर',
+    salon_motto_mood: 'मूड',
+    salon_signature_services: 'हमारी सिग्नेचर सेवाएं',
+    salon_crafted_for_you: 'आपके बेहतर रूप के लिए',
+    salon_intro_desc: 'क्लासिक कटिंग से लेकर उन्नत ग्रूमिंग तक, ऐसी सेवाएं जो आपको हर बार सर्वश्रेष्ठ बनाती हैं।',
+    view_services: 'सेवाएं देखें',
+    book_service: 'सेवा बुक करें',
+    explore_all_menu: 'सभी सिग्नेचर सेवाएं देखें',
+
+    // 4 Main Category Cards
+    cat_haircut_title: 'हेयरकट और स्टाइलिंग',
+    cat_haircut_desc: 'सटीक कटिंग, आधुनिक शैलियाँ और विशेषज्ञ फिनिशिंग।',
+    cat_beard_title: 'दाढ़ी ग्रूमिंग',
+    cat_beard_desc: 'शार्प। सुगठित। हमेशा सटीक।',
+    cat_facial_title: 'फेशियल और त्वचा देखभाल',
+    cat_facial_desc: 'त्वचा को तरोताजा करें। अंतर महसूस करें।',
+    cat_colour_title: 'हेयर कलर और उपचार',
+    cat_colour_desc: 'अपनी शैली को व्यक्त करें विशेषज्ञ देखभाल के साथ।',
+    salon_quote_1: 'स्व-देखभाल ही',
+    salon_quote_2: 'एक नया आत्मविश्वास है।',
+    salon_brand_text: 'रिज़ीना प्रोफेशनल',
+    est_duration: 'अनुमानित समय:',
+    close_menu: 'मेनू बंद करें',
+    category_label: 'श्रेणी',
+
+    // Modal Service Items
+    h1_name: 'सिग्नेचर रॉयल हेयरकट',
+    h1_desc: 'कंसल्टेशन, प्रिसिजन शीयर कट, ऑर्गेनिक शैम्पू से वॉश, ब्लो-ड्राई और लक्जरी स्टाइलिंग।',
+    h2_name: 'एक्जीक्यूटिव सीज़र कट & फिनिश',
+    h2_desc: 'क्लासिक सीज़र ओवर कोम्ब स्कल्पटिंग, क्लीन टेपर या फेड, कूलिंग स्कैल्प टॉनिक मसाज।',
+    h3_name: 'जूनियर मास्टर कट (12 से कम)',
+    h3_desc: 'धैर्य और सटीकता के साथ युवा नवाबों के लिए स्टाइलिश हेयरकट।',
+    h4_name: 'स्कैल्प क्लेरिफाइंग वॉश & ब्लो-ड्राई',
+    h4_desc: 'डीप क्लेरिफाइंग वॉश, चिकित्सीय स्कैल्प मसाज, ब्लो ड्राई और लक्जरी मैट पेस्ट फिनिश।',
+
+    b1_name: 'रॉयल हॉट टॉवल बियर्ड स्कल्प्ट',
+    b1_desc: 'हॉट टॉवल इन्फ्यूजन, प्रिसिजन रेज़र एज लाइनिंग, दाढ़ी को आकार और गर्म तेल कंडीशनिंग।',
+    b2_name: 'क्लासिक बियर्ड ट्रिम & लाइन-अप',
+    b2_desc: 'क्लिपर और शीयर डिटेलिंग, गाल और नेकलाइन परिभाषा, पौष्टिक बियर्ड बटर।',
+    b3_name: 'ट्रेडिशनल स्ट्रेट रेज़र शेव',
+    b3_desc: 'प्री-शेव बॉटनिकल ऑयल, रिच वार्म लैदर, स्ट्रेट रेज़र शेव, आइस टॉवल और बाम।',
+    b4_name: 'बियर्ड स्पा & फॉलिकल थेरेपी',
+    b4_desc: 'डीप क्लींजिंग स्टीम, एक्सफ़ोलीएटिंग बियर्ड स्क्रब, सॉफ्ट टेक्सचर के लिए हाइड्रेशन सीरम।',
+
+    f1_name: 'रिज़ीना सिग्नेचर डीप क्लीन्ज़',
+    f1_desc: 'अल्ट्रासोनिक पोर क्लींजिंग, हर्बल स्टीम, कोमल एक्सफोलिएशन, फेस मास्क और मसाज।',
+    f2_name: 'हाइड्रा-इन्फ्यूजन ग्लो ट्रीटमेंट',
+    f2_desc: 'हयालूरोनिक एसिड हाइड्रेशन थेरेपी, कूलिंग जेड रोलर, चमकदार त्वचा फिनिश।',
+    f3_name: 'डी-टैन & स्किन ब्राइटनिंग थेरेपी',
+    f3_desc: 'टारगेटेड डी-टैनिंग मास्क, एक्टिव एंटीऑक्सीडेंट सीरम, और यूवी सुरक्षा बैरियर।',
+    f4_name: 'एंटी-पॉल्यूशन चारकोल डिटॉक्स',
+    f4_desc: 'एक्टिवेटेड चारकोल पील, सीबम कंट्रोल टोनिंग, पोर टाइटनिंग और रिफ्रेशिंग कोल्ड मिस्ट।',
+
+    c1_name: 'नेचुरल ग्रे ब्लेंडिंग कैमोफ्लेज',
+    c1_desc: 'बालों या दाढ़ी के लिए अमोनिया-मुक्त 10 मिनट का टोन एप्लीकेशन, युवा और प्राकृतिक लुक।',
+    c2_name: 'फुल लक्जरी हेयर कलरिंग',
+    c2_desc: 'कंडीशनिंग एजेंटों के साथ रिच मल्टीडायमेंशनल कलर, चमकदार चमक और स्कैल्प सुरक्षा।',
+    c3_name: 'केराटिन स्मूथ & रिपेयर थेरेपी',
+    c3_desc: 'फ्रिज़ को नियंत्रित करने, बालों को मजबूत करने और रेशमी बनावट देने के लिए प्रोटीन इन्फ्यूजन।',
+    c4_name: 'मोरक्कन ऑयल स्कैल्प & हेयर स्पा',
+    c4_desc: 'गर्म आर्गन तेल मालिश, स्टीम इन्फ्यूजन के साथ पौष्टिक क्रीम बाथ, गर्दन और कंधे की मालिश।',
+
+    // =========================================================================
+    // HAIRCUT & STYLING DESTINATION PAGE (/services/haircut-styling)
+    // =========================================================================
+    modern_grooming: 'आधुनिक ग्रूमिंग',
+    haircut_and: 'हेयरकट और',
+    styling: 'स्टाइलिंग',
+    haircut_hero_desc: 'सटीक कटिंग। आधुनिक शैलियाँ। हर बार एक नया आकर्षण।',
+    style_groom_confidence: 'स्टाइल ग्रूम आत्मविश्वास',
+    expert_stylists: 'विशेषज्ञ स्टाइलिस्ट',
+    premium_products: 'प्रीमियम उत्पाद',
+    hygienic_environment: 'स्वच्छ वातावरण',
+    relaxing_ambience: 'शांत वातावरण',
+    personalised_care: 'व्यक्तिगत देखभाल',
+    our_services: 'हमारी सेवाएं',
+    our_hair_services: 'हमारी हेयर सेवाएं',
+    hair_services_subtitle: 'आधुनिक पुरुषों के लिए प्रीमियम ग्रूमिंग समाधान।',
+    view_all_services: 'सभी सेवाएं देखें',
+    book: 'बुक करें',
+
+    s1_name: 'हेयरकट और स्टाइलिंग',
+    s1_desc: 'आपकी शैली के अनुरूप ट्रेंडी हेयरकट।',
+    s2_name: 'दाढ़ी ग्रूमिंग',
+    s2_desc: 'अपनी दाढ़ी को आकार, ट्रिम और स्टाइल दें।',
+    s3_name: 'फेशियल और त्वचा देखभाल',
+    s3_desc: 'अपनी त्वचा को तरोताजा करें।',
+    s4_name: 'हेड मसाज',
+    s4_desc: 'तनावमुक्त हों और तरोताजा महसूस करें।',
+    s5_name: 'हेयर कलरिंग',
+    s5_desc: 'एक साहसी नए रूप के लिए प्रीमियम रंग।',
+    s6_name: 'हेयर स्मूदनिंग',
+    s6_desc: 'मुलायम, संवरने योग्य बाल पाएं।',
+    s7_name: 'हेयर स्पा ट्रीटमेंट',
+    s7_desc: 'स्वस्थ बालों के लिए गहरा पोषण।',
+    s8_name: 'किड्स हेयरकट & स्टाइलिंग',
+    s8_desc: 'छोटे नवाबों के लिए स्टाइलिश कट।',
+
+    // =========================================================================
+    // PRODUCTS & SHOP (/shop)
+    // =========================================================================
+    shop_eyebrow: 'रिज़ीना प्रोफेशनल मेन्स पार्लर',
+    shop_hero_title: 'प्रोफेशनल ग्रूमिंग कैटलॉग',
+    shop_hero_subtitle: 'सीधे आपके घर पहुंचाए जाने वाले प्रामाणिक सैलून उत्पाद।',
+    cat_all: 'सभी उत्पाद',
+    cat_hair: 'बालों की देखभाल',
+    cat_face: 'चेहरे की देखभाल',
+    cat_beard: 'दाढ़ी की देखभाल',
+    cat_kits: 'प्रोफेशनल किट',
+    cat_special: 'विशेष देखभाल',
+    cat_gifts: 'गिफ्ट सेट',
+    add_to_cart: 'कार्ट में जोड़ें',
+    buy_now: 'अभी खरीदें',
+    in_stock: 'उपलब्ध है',
+    out_of_stock: 'उपलब्ध नहीं है',
+    price_label: 'मूल्य',
   },
+
   kn: {
     // Navigation & Header
     nav_home: 'ಮುಖಪುಟ',
@@ -257,5 +442,220 @@ export const translations: Record<Language, Translations> = {
     book_appointment: 'ಅಪಾಯಿಂಟ್ಮೆಂಟ್ ಬುಕ್ ಮಾಡಿ',
     view_details: 'ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ',
     close: 'ಮುಚ್ಚಿ',
+
+    // =========================================================================
+    // SALON SERVICES PAGE (/services)
+    // =========================================================================
+    salon_motto_good: 'ಉತ್ತಮ',
+    salon_motto_hair: 'ಕೂದಲು',
+    salon_motto_better: 'ಉತ್ತಮ',
+    salon_motto_mood: 'ಮೂಡ್',
+    salon_signature_services: 'ನಮ್ಮ ಸಿಗ್ನೇಚರ್ ಸೇವೆಗಳು',
+    salon_crafted_for_you: 'ನಿಮ್ಮ ಉತ್ತಮ ರೂಪಕ್ಕಾಗಿ ರೂಪಿಸಲಾಗಿದೆ',
+    salon_intro_desc: 'ಕ್ಲಾಸಿಕ್ ಕಟ್‌ಗಳಿಂದ ಹಿಡಿದು ಮುಂದುವರಿದ ಗ್ರೂಮಿಂಗ್‌ವರೆಗೆ, ನಿಮ್ಮನ್ನು ಅತ್ಯುತ್ತಮವಾಗಿಸುವ ಸೇವೆಗಳು.',
+    view_services: 'ಸೇವೆಗಳನ್ನು ನೋಡಿ',
+    book_service: 'ಸೇವೆಯನ್ನು ಬುಕ್ ಮಾಡಿ',
+    explore_all_menu: 'ಎಲ್ಲಾ ಸಿಗ್ನೇಚರ್ ಸೇವೆಗಳನ್ನು ಅನ್ವೇಷಿಸಿ',
+
+    // 4 Main Category Cards
+    cat_haircut_title: 'ಹೇರ್‌ಕಟ್ & ಸ್ಟೈಲಿಂಗ್',
+    cat_haircut_desc: 'ನಿಖರವಾದ ಕಟ್‌ಗಳು, ಆಧುನಿಕ ಶೈಲಿಗಳು ಮತ್ತು ತಜ್ಞ ಫಿನಿಶಿಂಗ್.',
+    cat_beard_title: 'ಗಡ್ಡ ಗ್ರೂಮಿಂಗ್',
+    cat_beard_desc: 'ಶಾರ್ಪ್. ಸ್ಪಷ್ಟ. ಯಾವಾಗಲೂ ಪರ್ಫೆಕ್ಟ್.',
+    cat_facial_title: 'ಫೇಶಿಯಲ್ & ಚರ್ಮದ ಆರೈಕೆ',
+    cat_facial_desc: 'ಚರ್ಮವನ್ನು ತಾಜಾಗೊಳಿಸಿ. ವ್ಯತ್ಯಾಸವನ್ನು ಅನುಭವಿಸಿ.',
+    cat_colour_title: 'ಹೇರ್ ಕಲರ್ & ಟ್ರೀಟ್‌ಮೆಂಟ್',
+    cat_colour_desc: 'ನಿಮ್ಮ ಶೈಲಿಯನ್ನು ವ್ಯಕ್ತಪಡಿಸಿ ಪರಿಣಿತ ಆರೈಕೆಯೊಂದಿಗೆ.',
+    salon_quote_1: 'ಸ್ವಯಂ ಆರೈಕೆಯೇ',
+    salon_quote_2: 'ಹೊಸ ಆತ್ಮವಿಶ್ವಾಸ.',
+    salon_brand_text: 'ರಿಝೀನಾ ವೃತ್ತಿಪರ',
+    est_duration: 'ಅಂದಾಜು ಸಮಯ:',
+    close_menu: 'ಮೆನು ಮುಚ್ಚಿ',
+    category_label: 'ವರ್ಗ',
+
+    // Modal Service Items
+    h1_name: 'ಸಿಗ್ನೇಚರ್ ರಾಯಲ್ ಹೇರ್‌ಕಟ್',
+    h1_desc: 'ಸಮಾಲೋಚನೆ, ನಿಖರವಾದ ಕತ್ತರಿ ಕಟ್, ಆರ್ಗ್ಯಾನಿಕ್ ಶಾಂಪೂ ವಾಶ್, ಬ್ಲೋ-ಡ್ರೈ ಮತ್ತು ಐಷಾರಾಮಿ ಸ್ಟೈಲಿಂಗ್.',
+    h2_name: 'ಎಕ್ಸಿಕ್ಯೂಟಿವ್ ಕತ್ತರಿ ಕಟ್ & ಫಿನಿಶ್',
+    h2_desc: 'ಕ್ಲಾಸಿಕ್ ಕತ್ತರಿ ಕಟ್, ಕ್ಲೀನ್ ಟೇಪರ್ ಅಥವಾ ಫೇಡ್, ಕೂಲಿಂಗ್ ಸ್ಕಲ್ಪ್ ಟಾನಿಕ್ ಮಸಾಜ್.',
+    h3_name: 'ಜೂನಿಯರ್ ಮಾಸ್ಟರ್ ಕಟ್ (12 ವರ್ಷದೊಳಗೆ)',
+    h3_desc: 'ತಾಳ್ಮೆ ಮತ್ತು ನಿಖರತೆಯೊಂದಿಗೆ ಯುವಕರಿಗಾಗಿ ಸೊಗಸಾದ ಹೇರ್‌ಕಟ್.',
+    h4_name: 'ಸ್ಕಲ್ಪ್ ಕ್ಲಾರಿಫೈಯಿಂಗ್ ವಾಶ್ & ಬ್ಲೋ-ಡ್ರೈ',
+    h4_desc: 'ಆಳವಾದ ಕ್ಲಾರಿಫೈಯಿಂಗ್ ವಾಶ್, ಸ್ಕಲ್ಪ್ ಮಸಾಜ್, ಬ್ಲೋ ಡ್ರೈ ಮತ್ತು ಐಷಾರಾಮಿ ಮ್ಯಾಟ್ ಪೇಸ್ಟ್ ಫಿನಿಶ್.',
+
+    b1_name: 'ರಾಯಲ್ ಹಾಟ್ ಟವಲ್ ಗಡ್ಡ ಶಿಲ್ಪ',
+    b1_desc: 'ಹಾಟ್ ಟವಲ್ ಇನ್ಫ್ಯೂಷನ್, ಪ್ರಿಸಿಷನ್ ರೇಜರ್ ಲೈನಿಂಗ್, ಗಡ್ಡದ ಶೇಪಿಂಗ್ ಮತ್ತು ಬೆಚ್ಚಗಿನ ಎಣ್ಣೆ ಕಂಡೀಷನಿಂಗ್.',
+    b2_name: 'ಕ್ಲಾಸಿಕ್ ಗಡ್ಡ ಟ್ರಿಮ್ & ಲೈನ್-ಅಪ್',
+    b2_desc: 'ಕ್ಲಿಪ್ಪರ್ ಮತ್ತು ಕತ್ತರಿ ಡೀಟೇಲಿಂಗ್, ಕೆನ್ನೆ ಮತ್ತು ನೆಕ್‌ಲೈನ್ ಡೆಫಿನಿಷನ್, ಪೌಷ್ಟಿಕ ಗಡ್ಡದ ಬೆಣ್ಣೆ.',
+    b3_name: 'ಸಾಂಪ್ರದಾಯಿಕ ಸ್ಟ್ರೈಟ್ ರೇಜರ್ ಶೇವ್',
+    b3_desc: 'ಪ್ರೀ-ಶೇವ್ ಬಟಾನಿಕಲ್ ಎಣ್ಣೆ, ಶ್ರೀಮಂತ ಬೆಚ್ಚಗಿನ ನೊರೆ, ಸ್ಟ್ರೈಟ್ ರೇಜರ್ ಶೇವ್, ಐಸ್ ಟವಲ್ ಮತ್ತು ಬಾಮ್.',
+    b4_name: 'ಗಡ್ಡ ಸ್ಪಾ & ಫಾಲಿಕಲ್ ಥೆರಪಿ',
+    b4_desc: 'ಡೀಪ್ ಕ್ಲೀನ್ಸಿಂಗ್ ಸ್ಟೀಮ್ ಟ್ರೀಟ್‌ಮೆಂಟ್, ಎಕ್ಸ್‌ಫೋಲಿಯೇಟಿಂಗ್ ಗಡ್ಡದ ಸ್ಕ್ರಬ್, ಮೃದುವಾದ ವಿನ್ಯಾಸಕ್ಕಾಗಿ ಸೀರಮ್.',
+
+    f1_name: 'ರಿಝೀನಾ ಸಿಗ್ನೇಚರ್ ಡೀಪ್ ಕ್ಲೀನ್ಸ್',
+    f1_desc: 'ಅಲ್ಟ್ರಾಸಾನಿಕ್ ಪೋರ್ ಕ್ಲೀನ್ಸಿಂಗ್, ಗಿಡಮೂಲಿಕೆಗಳ ಸ್ಟೀಮ್, ಸೌಮ್ಯ ಎಕ್ಸ್‌ಫೋಲಿಯೇಶನ್, ಫೇಸ್ ಮಾಸ್ಕ್ ಮತ್ತು ಮಸಾಜ್.',
+    f2_name: 'ಹೈಡ್ರಾ-ಇನ್‌ಫ್ಯೂಷನ್ ಗ್ಲೋ ಟ್ರೀಟ್‌ಮೆಂಟ್',
+    f2_desc: 'ಹೈಲುರಾನಿಕ್ ಆಮ್ಲ ಜಲಸಂಚಯನ ಚಿಕಿತ್ಸೆ, ಕೂಲಿಂಗ್ ಜೇಡ್ ರೋಲರ್ ಮತ್ತು ಹೊಳೆಯುವ ಚರ್ಮದ ಫಿನಿಶ್.',
+    f3_name: 'ಡಿ-ಟ್ಯಾನ್ & ಚರ್ಮದ ಹೊಳಪು ಥೆರಪಿ',
+    f3_desc: 'ಟಾರ್ಗೆಟೆಡ್ ಡಿ-ಟ್ಯಾನಿಂಗ್ ಮಾಸ್ಕ್, ಆ್ಯಂಟಿಆಕ್ಸಿಡೆಂಟ್ ಸೀರಮ್ ಮತ್ತು ಯುವಿ ಪ್ರೊಟೆಕ್ಷನ್ ಬ್ಯಾರಿಯರ್.',
+    f4_name: 'ಆಂಟಿ-ಪೊಲ್ಯೂಷನ್ ಚಾರ್ಕೋಲ್ ಡಿಟಾಕ್ಸ್',
+    f4_desc: 'ಆಕ್ಟಿವೇಟೆಡ್ ಚಾರ್ಕೋಲ್ ಪೀಲ್, ಸೀಬಮ್ ಕಂಟ್ರೋಲ್ ಟೋನಿಂಗ್, ಪೋರ್ ಬಿಗಿಗೊಳಿಸುವಿಕೆ ಮತ್ತು ಕೋಲ್ಡ್ ಮಿಸ್ಟ್.',
+
+    c1_name: 'ನೈಸರ್ಗಿಕ ಗ್ರೇ ಬ್ಲೆಂಡಿಂಗ್ ಕ್ಯಾಮೊಫ್ಲೇಜ್',
+    c1_desc: 'ಕೂದಲು ಅಥವಾ ಗಡ್ಡಕ್ಕೆ ಅಮೋನಿಯಾ ರಹಿತ 10 ನಿಮಿಷಗಳ ಟೋನ್ ಅಪ್ಲಿಕೇಶನ್, ಯೌವನದ ನೈಸರ್ಗಿಕ ಲುಕ್.',
+    c2_name: 'ಫುಲ್ ಲಕ್ಸುರಿ ಹೇರ್ ಕಲರಿಂಗ್',
+    c2_desc: 'ಕಂಡೀಷನಿಂಗ್ ಏಜೆಂಟ್‌ಗಳೊಂದಿಗೆ ಸಮೃದ್ಧ ಮಲ್ಟಿಡೈಮೆನ್ಷನಲ್ ಬಣ್ಣ, ಕಾಂತಿಯುತ ಹೊಳಪು ಮತ್ತು ಸ್ಕಲ್ಪ್ ರಕ್ಷಣೆ.',
+    c3_name: 'ಕೆರಾಟಿನ್ ಸ್ಮೂತ್ & ರಿಪೇರ್ ಥೆರಪಿ',
+    c3_desc: 'ಫ್ರಿಜ್ ನಿಯಂತ್ರಿಸಲು, ಕೂದಲನ್ನು ಬಲಪಡಿಸಲು ಮತ್ತು ರೇಷ್ಮೆಯಂತಹ ವಿನ್ಯಾಸವನ್ನು ನೀಡಲು ಪ್ರೋಟೀನ್ ಚಿಕಿತ್ಸೆ.',
+    c4_name: 'ಮೊರೊಕನ್ ಆಯಿಲ್ ಸ್ಕಲ್ಪ್ & ಹೇರ್ ಸ್ಪಾ',
+    c4_desc: 'ಬೆಚ್ಚಗಿನ ಅರ್ಗನ್ ಎಣ್ಣೆ ಮಸಾಜ್, ಸ್ಟೀಮ್ ಇನ್ಫ್ಯೂಷನ್ ಹೊಂದಿರುವ ಪೌಷ್ಟಿಕ ಕ್ರೀಮ್ ಬಾತ್, ಕುತ್ತಿಗೆ ಮತ್ತು ಭುಜದ ಮಸಾಜ್.',
+
+    // =========================================================================
+    // HAIRCUT & STYLING DESTINATION PAGE (/services/haircut-styling)
+    // =========================================================================
+    modern_grooming: 'ಆಧುನಿಕ ಗ್ರೂಮಿಂಗ್',
+    haircut_and: 'ಹೇರ್‌ಕಟ್ ಮತ್ತು',
+    styling: 'ಸ್ಟೈಲಿಂಗ್',
+    haircut_hero_desc: 'ನಿಖರವಾದ ಕಟ್‌ಗಳು. ಆಧುನಿಕ ಶೈಲಿಗಳು. ಪ್ರತಿ ಬಾರಿಯೂ ತೀಕ್ಷ್ಣವಾದ ನೀವು.',
+    style_groom_confidence: 'ಸ್ಟೈಲ್ ಗ್ರೂಮ್ ಆತ್ಮವಿಶ್ವಾಸ',
+    expert_stylists: 'ಪರಿಣಿತ ಸ್ಟೈಲಿಸ್ಟ್‌ಗಳು',
+    premium_products: 'ಪ್ರೀಮಿಯಂ ಉತ್ಪನ್ನಗಳು',
+    hygienic_environment: 'ನೈರ್ಮಲ್ಯ ವಾತಾವರಣ',
+    relaxing_ambience: 'ವಿಶ್ರಾಂತಿ ವಾತಾವರಣ',
+    personalised_care: 'ವೈಯಕ್ತಿಕ ಆರೈಕೆ',
+    our_services: 'ನಮ್ಮ ಸೇವೆಗಳು',
+    our_hair_services: 'ನಮ್ಮ ಹೇರ್ ಸೇವೆಗಳು',
+    hair_services_subtitle: 'ಆಧುನಿಕ ಪುರುಷರಿಗಾಗಿ ಪ್ರೀಮಿಯಂ ಗ್ರೂಮಿಂಗ್ ಪರಿಹಾರಗಳು.',
+    view_all_services: 'ಎಲ್ಲಾ ಸೇವೆಗಳನ್ನು ವೀಕ್ಷಿಸಿ',
+    book: 'ಬುಕ್ ಮಾಡಿ',
+
+    s1_name: 'ಹೇರ್‌ಕಟ್ & ಸ್ಟೈಲಿಂಗ್',
+    s1_desc: 'ನಿಮ್ಮ ಶೈಲಿಗೆ ತಕ್ಕಂತೆ ಟ್ರೆಂಡಿ ಕಟ್‌ಗಳು.',
+    s2_name: 'ಗಡ್ಡ ಗ್ರೂಮಿಂಗ್',
+    s2_desc: 'ನಿಮ್ಮ ಗಡ್ಡವನ್ನು ಟ್ರಿಮ್ ಮತ್ತು ಸ್ಟೈಲ್ ಮಾಡಿ.',
+    s3_name: 'ಫೇಶಿಯಲ್ & ಚರ್ಮದ ಆರೈಕೆ',
+    s3_desc: 'ನಿಮ್ಮ ಚರ್ಮವನ್ನು ಪುನರುಜ್ಜೀವನಗೊಳಿಸಿ.',
+    s4_name: 'ಹೆಡ್ ಮಸಾಜ್',
+    s4_desc: 'ವಿಶ್ರಾಂತಿ ಪಡೆಯಿರಿ ಮತ್ತು ರೀಚಾರ್ಜ್ ಮಾಡಿ.',
+    s5_name: 'ಹೇರ್ ಕಲರಿಂಗ್',
+    s5_desc: 'ಧೈರ್ಯಶಾಲಿ ಹೊಸ ರೂಪಕ್ಕಾಗಿ ಪ್ರೀಮಿಯಂ ಬಣ್ಣಗಳು.',
+    s6_name: 'ಹೇರ್ ಸ್ಮೂತನಿಂಗ್',
+    s6_desc: 'ಮೃದುವಾದ, ನಿರ್ವಹಿಸಬಹುದಾದ ಕೂದಲನ್ನು ಪಡೆಯಿರಿ.',
+    s7_name: 'ಹೇರ್ ಸ್ಪಾ ಟ್ರೀಟ್‌ಮೆಂಟ್',
+    s7_desc: 'ಆರೋಗ್ಯಕರ ಕೂದಲಿಗಾಗಿ ಆಳವಾದ ಪೋಷಣೆ.',
+    s8_name: 'ಕಿಡ್ಸ್ ಹೇರ್‌ಕಟ್ & ಸ್ಟೈಲಿಂಗ್',
+    s8_desc: 'ಚಿಕ್ಕ ಮಕ್ಕಳಿಗಾಗಿ ಸ್ಟೈಲಿಶ್ ಕಟ್‌ಗಳು.',
+
+    // =========================================================================
+    // PRODUCTS & SHOP (/shop)
+    // =========================================================================
+    shop_eyebrow: 'ರಿಝೀನಾ ವೃತ್ತಿಪರ ಪುರುಷರ ಪಾರ್ಲರ್',
+    shop_hero_title: 'ವೃತ್ತಿಪರ ಗ್ರೂಮಿಂಗ್ ಕ್ಯಾಟಲಾಗ್',
+    shop_hero_subtitle: 'ನಿಮ್ಮ ಮನೆ ಬಾಗಿಲಿಗೆ ತಲುಪಿಸುವ ಅಧಿಕೃತ ಸಲೂನ್ ಉತ್ಪನ್ನಗಳು.',
+    cat_all: 'ಎಲ್ಲಾ ಉತ್ಪನ್ನಗಳು',
+    cat_hair: 'ಕೂದಲಿನ ಆರೈಕೆ',
+    cat_face: 'ಮುಖದ ಆರೈಕೆ',
+    cat_beard: 'ಗಡ್ಡದ ಆರೈಕೆ',
+    cat_kits: 'ವೃತ್ತಿಪರ ಕಿಟ್‌ಗಳು',
+    cat_special: 'ವಿಶೇಷ ಕಾಳಜಿ',
+    cat_gifts: 'ಉಡುಗೊರೆ ಸೆಟ್‌ಗಳು',
+    add_to_cart: 'ಕಾರ್ಟ್‌ಗೆ ಸೇರಿಸಿ',
+    buy_now: 'ಈಗಲೇ ಖರೀದಿಸಿ',
+    in_stock: 'ಲಭ್ಯವಿದೆ',
+    out_of_stock: 'ಲಭ್ಯವಿಲ್ಲ',
+    price_label: 'ಬೆಲೆ',
+  },
+};
+
+// Comprehensive product & service text lookup dictionary for seamless automatic translation
+export const dynamicTextTranslations: Record<Language, Record<string, string>> = {
+  en: {},
+  hi: {
+    // Products
+    'Hair Shampoo Wash': 'हेयर शैम्पू वॉश',
+    'Hair Conditioner': 'हेयर कंडीशनर',
+    'Hair Oil Massage': 'हेयर ऑयल मसाज',
+    'Hair Gel': 'हेयर जेल',
+    'Hair Dye': 'हेयर डाई',
+    'Hair Coloring': 'हेयर कलरिंग',
+    'Hair Mehendi': 'हेयर मेहंदी',
+    'Hair Serum': 'हेयर सीरम',
+    'Beard Oil Growth': 'बियर्ड ग्रोथ ऑयल',
+    'Beard Wax': 'बियर्ड वैक्स',
+    'Beard Wash Shampoo': 'बियर्ड वॉश शैम्पू',
+    'Beard Softener Balm': 'बियर्ड सॉफ्टनर बाम',
+    'Shaving Cream Foam': 'शेविंग क्रीम फोम',
+    'After Shave Lotion': 'आफ्टर शेव लोशन',
+    'Face Wash Foam': 'फेस वॉश फोम',
+    'Face Scrub Exfoliator': 'फेस स्क्रब एक्सफोलिएटर',
+    'Face Cream Moisturizer': 'फेस क्रीम मॉइस्चराइज़र',
+    'Face Bleach Cream': 'फेस ब्लीच क्रीम',
+    'Face Pack Mask': 'फेस पैक मास्क',
+    'Charcoal Peel Off Mask': 'चारकोल पील ऑफ मास्क',
+    'Face D-Tan Cream': 'फेस डी-टैन क्रीम',
+    'Skin Toner Mist': 'स्किन टोनर मिस्ट',
+    'Complete Grooming Kit': 'कम्प्लीट ग्रूमिंग किट',
+    'Beard Care Kit': 'बियर्ड केयर किट',
+    'Hair Care Spa Kit': 'हेयर केयर स्पा किट',
+    'Facial Glow Kit': 'फेशियल ग्लो किट',
+    'Shaving Essentials Kit': 'शेविंग एसेंशियल्स किट',
+    'Hair Care': 'बालों की देखभाल',
+    'Beard Care': 'दाढ़ी की देखभाल',
+    'Face Care': 'चेहरे की देखभाल',
+    'Professional Kits': 'प्रोफेशनल किट',
+    'Special Care': 'विशेष देखभाल',
+    'Gift Sets': 'गिफ्ट सेट',
+    'All Products': 'सभी उत्पाद',
+    'Add to Cart': 'कार्ट में जोड़ें',
+    'Buy Now': 'अभी खरीदें',
+    'In Stock': 'उपलब्ध है',
+    'Book Now': 'अभी बुक करें',
+    'Book': 'बुक करें',
+    'VIEW SERVICES': 'सेवाएं देखें',
+    'View All Services': 'सभी सेवाएं देखें',
+  },
+  kn: {
+    // Products
+    'Hair Shampoo Wash': 'ಹೇರ್ ಶಾಂಪೂ ವಾಶ್',
+    'Hair Conditioner': 'ಹೇರ್ ಕಂಡೀಷನರ್',
+    'Hair Oil Massage': 'ಹೇರ್ ಆಯಿಲ್ ಮಸಾಜ್',
+    'Hair Gel': 'ಹೇರ್ ಜೆಲ್',
+    'Hair Dye': 'ಹೇರ್ ಡೈ',
+    'Hair Coloring': 'ಹೇರ್ ಕಲರಿಂಗ್',
+    'Hair Mehendi': 'ಹೇರ್ ಮೆಹಂದಿ',
+    'Hair Serum': 'ಹೇರ್ ಸೀರಮ್',
+    'Beard Oil Growth': 'ಗಡ್ಡದ ಗ್ರೋತ್ ಎಣ್ಣೆ',
+    'Beard Wax': 'ಗಡ್ಡದ ವ್ಯಾಕ್ಸ್',
+    'Beard Wash Shampoo': 'ಗಡ್ಡದ ವಾಶ್ ಶಾಂಪೂ',
+    'Beard Softener Balm': 'ಗಡ್ಡದ ಸಾಫ್ಟ್ನರ್ ಬಾಮ್',
+    'Shaving Cream Foam': 'ಶೇವಿಂಗ್ ಕ್ರೀಮ್ ಫೋಮ್',
+    'After Shave Lotion': 'ಆಫ್ಟರ್ ಶೇವ್ ಲೋಷನ್',
+    'Face Wash Foam': 'ಫೇಸ್ ವಾಶ್ ಫೋಮ್',
+    'Face Scrub Exfoliator': 'ಫೇಸ್ ಸ್ಕ್ರಬ್ ಎಕ್ಸ್‌ಫೋಲಿಯೇಟರ್',
+    'Face Cream Moisturizer': 'ಫೇಸ್ ಕ್ರೀಮ್ ಮಾಯಿಶ್ಚರೈಸರ್',
+    'Face Bleach Cream': 'ಫೇಸ್ ಬ್ಲೀಚ್ ಕ್ರೀಮ್',
+    'Face Pack Mask': 'ಫೇಸ್ ಪ್ಯಾಕ್ ಮಾಸ್ಕ್',
+    'Charcoal Peel Off Mask': 'ಚಾರ್ಕೋಲ್ ಪೀಲ್ ಆಫ್ ಮಾಸ್ಕ್',
+    'Face D-Tan Cream': 'ಫೇಸ್ ಡಿ-ಟ್ಯಾನ್ ಕ್ರೀಮ್',
+    'Skin Toner Mist': 'ಸ್ಕಿನ್ ಟೋನರ್ ಮಿಸ್ಟ್',
+    'Complete Grooming Kit': 'ಸಂಪೂರ್ಣ ಗ್ರೂಮಿಂಗ್ ಕಿಟ್',
+    'Beard Care Kit': 'ಗಡ್ಡದ ಆರೈಕೆ ಕಿಟ್',
+    'Hair Care Spa Kit': 'ಕೂದಲ ರಕ್ಷಣೆ ಸ್ಪಾ ಕಿಟ್',
+    'Facial Glow Kit': 'ಫೇಶಿಯಲ್ ಗ್ಲೋ ಕಿಟ್',
+    'Shaving Essentials Kit': 'ಶೇವಿಂಗ್ ಎಸೆನ್ಷಿಯಲ್ಸ್ ಕಿಟ್',
+    'Hair Care': 'ಕೂದಲಿನ ಆರೈಕೆ',
+    'Beard Care': 'ಗಡ್ಡದ ಆರೈಕೆ',
+    'Face Care': 'ಮುಖದ ಆರೈಕೆ',
+    'Professional Kits': 'ವೃತ್ತಿಪರ ಕಿಟ್‌ಗಳು',
+    'Special Care': 'ವಿಶೇಷ ಕಾಳಜಿ',
+    'Gift Sets': 'ಉಡುಗೊರೆ ಸೆಟ್‌ಗಳು',
+    'All Products': 'ಎಲ್ಲಾ ಉತ್ಪನ್ನಗಳು',
+    'Add to Cart': 'ಕಾರ್ಟ್‌ಗೆ ಸೇರಿಸಿ',
+    'Buy Now': 'ಈಗಲೇ ಖರೀದಿಸಿ',
+    'In Stock': 'ಲಭ್ಯವಿದೆ',
+    'Book Now': 'ಈಗಲೇ ಬುಕ್ ಮಾಡಿ',
+    'Book': 'ಬುಕ್ ಮಾಡಿ',
+    'VIEW SERVICES': 'ಸೇವೆಗಳನ್ನು ನೋಡಿ',
+    'View All Services': 'ಎಲ್ಲಾ ಸೇವೆಗಳನ್ನು ವೀಕ್ಷಿಸಿ',
   },
 };
