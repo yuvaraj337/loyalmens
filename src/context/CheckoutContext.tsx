@@ -182,72 +182,109 @@ export const CheckoutProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       const position = await new Promise<GeolocationPosition>((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject, {
           enableHighAccuracy: true,
-          timeout: 12000,
+          timeout: 15000,
           maximumAge: 0,
         });
       });
 
       const { latitude, longitude } = position.coords;
+      let formatted = '';
+      let houseFlat = '';
+      let streetArea = '';
+      let city = '';
+      let state = '';
+      let pincode = '';
 
-      // Reverse geocode via OpenStreetMap Nominatim
+      // 1. Try BigDataCloud reverse geocode client (open, fast, CORS-friendly, no API key)
       try {
-        const res = await fetch(
-          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`,
-          {
-            headers: {
-              'Accept-Language': 'en',
-            },
-          }
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 6000);
+        const bdcRes = await fetch(
+          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`,
+          { signal: controller.signal }
         );
+        clearTimeout(timeoutId);
 
-        if (!res.ok) throw new Error('Geocoding service unavailable');
+        if (bdcRes.ok) {
+          const bdcData = await bdcRes.json();
+          city = bdcData.city || bdcData.locality || bdcData.principalSubdivision || '';
+          state = bdcData.principalSubdivision || '';
+          pincode = bdcData.postcode || '';
+          streetArea = bdcData.locality || bdcData.localityInfo?.administrative?.[3]?.name || bdcData.localityInfo?.administrative?.[2]?.name || '';
+          houseFlat = bdcData.localityInfo?.administrative?.[4]?.name || '';
 
-        const data = await res.json();
-        const addr = data.address || {};
-
-        const houseFlat = addr.house_number || addr.building || addr.suburb || '';
-        const streetArea = addr.road || addr.neighbourhood || addr.residential || '';
-        const landmark = addr.attraction || addr.amenity || '';
-        const city = addr.city || addr.town || addr.village || addr.county || 'Moodbidri';
-        const state = addr.state || 'Karnataka';
-        const pincode = addr.postcode || '';
-        const formatted =
-          data.display_name ||
-          [houseFlat, streetArea, landmark, city, state, pincode].filter(Boolean).join(', ');
-
-        setAddress({
-          addressMode: 'detected',
-          houseFlat: houseFlat || 'Near Detected Location',
-          streetArea: streetArea || 'Moodbidri Road',
-          landmark,
-          city: city || 'Moodbidri',
-          state: state || 'Karnataka',
-          pincode: pincode || '574227',
-          formattedAddress: formatted,
-          latitude,
-          longitude,
-        });
+          const parts = [
+            houseFlat,
+            streetArea,
+            city,
+            state,
+            pincode,
+            bdcData.countryName,
+          ].filter(Boolean);
+          if (parts.length > 0) {
+            formatted = parts.join(', ');
+          }
+        }
       } catch {
-        // Fallback with coordinates if reverse geocode is blocked/slow
-        setAddress({
-          addressMode: 'detected',
-          houseFlat: 'Current Location',
-          streetArea: 'Kotebagilu, Moodbidri Road',
-          landmark: 'Moodbidri Taluk',
-          city: 'Moodbidri',
-          state: 'Karnataka',
-          pincode: '574227',
-          formattedAddress: `Kotebagilu, Moodbidri Road, Moodbidri, Karnataka - 574227 (GPS: ${latitude.toFixed(4)}, ${longitude.toFixed(4)})`,
-          latitude,
-          longitude,
-        });
+        // Fall through to Nominatim
       }
+
+      // 2. Fallback to OpenStreetMap Nominatim
+      if (!formatted) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 6000);
+          const nomRes = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}&addressdetails=1`,
+            {
+              signal: controller.signal,
+              headers: { 'Accept-Language': 'en' },
+            }
+          );
+          clearTimeout(timeoutId);
+
+          if (nomRes.ok) {
+            const nomData = await nomRes.json();
+            const addr = nomData.address || {};
+            houseFlat = addr.house_number || addr.building || addr.suburb || '';
+            streetArea = addr.road || addr.neighbourhood || addr.residential || '';
+            city = addr.city || addr.town || addr.village || addr.county || '';
+            state = addr.state || '';
+            pincode = addr.postcode || '';
+            formatted =
+              nomData.display_name ||
+              [houseFlat, streetArea, city, state, pincode].filter(Boolean).join(', ');
+          }
+        } catch {
+          // Fall through
+        }
+      }
+
+      // 3. Fallback to exact GPS coordinates if network reverse geocoding is unavailable
+      if (!formatted) {
+        formatted = `Detected Location (GPS: ${latitude.toFixed(5)}, ${longitude.toFixed(5)})`;
+        houseFlat = `GPS: ${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
+      }
+
+      setAddress({
+        addressMode: 'detected',
+        houseFlat: houseFlat || 'Detected Area',
+        streetArea: streetArea || 'Detected Location',
+        landmark: '',
+        city,
+        state,
+        pincode,
+        formattedAddress: formatted,
+        latitude,
+        longitude,
+      });
+      setAddressMode('detected');
     } catch (err: unknown) {
       const error = err as GeolocationPositionError;
       if (error && error.code === 1) {
         setLocationError('Location access was denied. Please enter your address manually.');
       } else {
-        setLocationError('Location detection is unavailable. Please enter your address manually.');
+        setLocationError('Could not retrieve your location. Please enter your address manually.');
       }
       setAddressMode('manual');
     } finally {

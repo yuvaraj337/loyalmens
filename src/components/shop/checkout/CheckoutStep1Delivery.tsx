@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useCheckout } from '../../../context/CheckoutContext';
 import { useCart } from '../../../context/CartContext';
 import { User, Phone, Mail, MapPin, Home, AlertCircle, Loader2 } from 'lucide-react';
-import { CheckoutOrderSummarySidebar } from './CheckoutOrderSummarySidebar';
 
 export const CheckoutStep1Delivery: React.FC = () => {
   const {
@@ -24,9 +23,8 @@ export const CheckoutStep1Delivery: React.FC = () => {
   const [isEditingDetected, setIsEditingDetected] = useState(false);
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let val = e.target.value;
-    // Allow digits, spaces, hyphens, and leading +
-    val = val.replace(/[^\d\s\+\-]/g, '');
+    let val = e.target.value.replace(/\D/g, '');
+    if (val.length > 10) val = val.slice(0, 10);
     setCustomer((prev) => ({ ...prev, phone: val }));
   };
 
@@ -49,9 +47,15 @@ export const CheckoutStep1Delivery: React.FC = () => {
       return;
     }
 
-    const cleanPhone = customer.phone.replace(/[\s\-\+]/g, '');
-    if (!cleanPhone || cleanPhone.length < 10) {
-      setFormError('Please enter a valid 10-digit phone number.');
+    const phoneDigits = customer.phone.replace(/\D/g, '');
+    const indianPhoneRegex = /^[6-9]\d{9}$/;
+    if (!indianPhoneRegex.test(phoneDigits)) {
+      setFormError('Please enter a valid 10-digit Indian mobile number.');
+      const phoneEl = document.getElementById('checkout-phone');
+      if (phoneEl) {
+        phoneEl.focus();
+        phoneEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
       return;
     }
 
@@ -107,8 +111,8 @@ export const CheckoutStep1Delivery: React.FC = () => {
   const formattedDetected = getFormattedAddress();
 
   return (
-    <div className="checkout-grid-layout">
-      {/* Left Column: Form & Inputs */}
+    <div className="checkout-delivery-layout">
+      {/* Form & Inputs */}
       <section className="checkout-main-form" aria-label="Customer & Delivery Details Form">
         <h1 className="checkout-page-title">Delivery Details</h1>
         <p className="checkout-page-subtitle">Tell us where to deliver your order.</p>
@@ -148,7 +152,9 @@ export const CheckoutStep1Delivery: React.FC = () => {
             <input
               id="checkout-phone"
               type="tel"
-              placeholder="+91 98765 43210"
+              inputMode="numeric"
+              maxLength={10}
+              placeholder="e.g. 9876543210"
               value={customer.phone}
               onChange={handlePhoneChange}
               autoComplete="tel"
@@ -327,9 +333,6 @@ export const CheckoutStep1Delivery: React.FC = () => {
           <span aria-hidden="true">&rarr;</span>
         </button>
       </section>
-
-      {/* Right Column: Order Summary */}
-      <CheckoutOrderSummarySidebar variant="delivery" />
     </div>
   );
 };

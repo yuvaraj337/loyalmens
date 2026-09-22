@@ -39,15 +39,6 @@ export const CartDrawer: React.FC = () => {
     }, 300);
   }, [closeDrawer]);
 
-  const handleViewCart = useCallback(() => {
-    handleClose();
-    setTimeout(() => {
-      window.history.pushState({}, '', '/shop/cart');
-      window.dispatchEvent(new PopStateEvent('popstate'));
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 320);
-  }, [handleClose]);
-
   const handleCheckout = useCallback(() => {
     handleClose();
     setTimeout(() => {
@@ -207,13 +198,6 @@ export const CartDrawer: React.FC = () => {
             </div>
 
             <div className="cart-drawer-footer-btns">
-              <button
-                type="button"
-                className="cart-drawer-view-btn"
-                onClick={handleViewCart}
-              >
-                View Cart
-              </button>
               <button
                 type="button"
                 className="cart-drawer-checkout-btn"

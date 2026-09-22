@@ -17,6 +17,17 @@ export const CheckoutPage: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [step]);
 
+  if (step === 3) {
+    return (
+      <div className="checkout-page-root checkout-page-root--confirmation">
+        <main className="checkout-main-content checkout-main-content--confirmation">
+          <CheckoutStep3Confirmation />
+        </main>
+        <CustomerOrdersModal />
+      </div>
+    );
+  }
+
   return (
     <div className="checkout-page-root">
       {/* ==================================================================
@@ -67,22 +78,24 @@ export const CheckoutPage: React.FC = () => {
       {/* ==================================================================
           SUBHEADER: BREADCRUMBS, PROGRESS INDICATOR & TAGLINE
           ================================================================== */}
-      <div className={`checkout-subheader ${step === 3 ? 'checkout-subheader--confirmed' : ''}`}>
-        <nav className="checkout-breadcrumbs" aria-label="Breadcrumb">
-          <a href="/">Home</a>
-          <span aria-hidden="true">&gt;</span>
-          <a href="/shop">Checkout</a>
-          <span aria-hidden="true">&gt;</span>
-          <span className="current">
-            {step === 1 && 'Delivery Details'}
-            {step === 2 && 'Review'}
-            {step === 3 && 'Order Submitted'}
-          </span>
-        </nav>
-
-        {step < 3 ? <CheckoutProgressBar /> : <div />}
-
-        <div className="checkout-tagline">Same Confidence at Home</div>
+      <div className={`checkout-subheader ${step === 2 ? 'checkout-subheader--review' : ''}`}>
+        {step === 1 ? (
+          <>
+            <nav className="checkout-breadcrumbs" aria-label="Breadcrumb">
+              <a href="/">Home</a>
+              <span aria-hidden="true">&gt;</span>
+              <a href="/shop">Checkout</a>
+              <span aria-hidden="true">&gt;</span>
+              <span className="current">Delivery Details</span>
+            </nav>
+            <div />
+            <div className="checkout-tagline">Same Confidence at Home</div>
+          </>
+        ) : (
+          <div className="checkout-review-progressbar-wrap">
+            <CheckoutProgressBar />
+          </div>
+        )}
       </div>
 
       {/* ==================================================================
@@ -91,7 +104,6 @@ export const CheckoutPage: React.FC = () => {
       <main className="checkout-main-content">
         {step === 1 && <CheckoutStep1Delivery />}
         {step === 2 && <CheckoutStep2Review />}
-        {step === 3 && <CheckoutStep3Confirmation />}
       </main>
 
       {/* Customer Orders History Modal */}

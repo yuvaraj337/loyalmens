@@ -319,6 +319,16 @@
   align-items: start;
 }
 
+.checkout-delivery-layout {
+  max-width: 680px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.checkout-delivery-layout .checkout-main-form {
+  width: 100%;
+}
+
 /* Page Titles */
 .checkout-page-title {
   font-family: 'Playfair Display', Georgia, serif;
@@ -1310,4 +1320,666 @@
   .checkout-review-product-price {
     align-self: flex-end;
   }
+}
+
+/* ======================================================================
+   REFERENCE IMAGE 1: FINAL REVIEW PAGE (SINGLE COMBINED IVORY CARD)
+   ====================================================================== */
+.checkout-subheader--review {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 20px;
+  background: var(--checkout-bg);
+  border-bottom: 1px solid var(--checkout-border);
+}
+
+.checkout-review-progressbar-wrap {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.review-container {
+  max-width: 520px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px 0 40px 0;
+}
+
+.review-main-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #1A1612;
+  line-height: 1.15;
+  margin: 0 0 6px 0;
+}
+
+.review-main-subtitle {
+  font-size: 14.5px;
+  color: var(--checkout-text-muted);
+  margin: 0 0 24px 0;
+}
+
+.review-single-card {
+  background: #FAF8F5;
+  border: 1px solid #EBE4DA;
+  border-radius: 20px;
+  padding: 22px 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.review-section {
+  width: 100%;
+}
+
+.review-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.review-section-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.review-icon-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #F4EDE3;
+  color: #7A6240;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.review-section-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 17.5px;
+  font-weight: 700;
+  color: #1A1816;
+  margin: 0;
+}
+
+.review-edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: #8C6834;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 0;
+  transition: opacity 0.15s ease;
+}
+
+.review-edit-btn:hover {
+  opacity: 0.8;
+}
+
+.review-section-body {
+  padding-left: 42px;
+}
+
+.review-customer-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1A1816;
+  margin-bottom: 3px;
+}
+
+.review-customer-phone {
+  font-size: 14px;
+  color: #4A433A;
+  margin-bottom: 2px;
+}
+
+.review-customer-email {
+  font-size: 13px;
+  color: #736C63;
+}
+
+.review-address-text {
+  font-size: 13.5px;
+  color: #4A433A;
+  line-height: 1.45;
+}
+
+.review-card-divider {
+  height: 1px;
+  background: #EFE9DF;
+  margin: 18px 0;
+}
+
+.review-items-count {
+  font-size: 13px;
+  color: #736C63;
+  font-weight: 500;
+}
+
+.review-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.review-item-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.review-item-thumb {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #ECE4DA;
+  background: #F5EFE6;
+  flex-shrink: 0;
+}
+
+.review-item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.review-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.review-item-name {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #1A1816;
+  line-height: 1.25;
+}
+
+.review-item-size {
+  font-size: 12.5px;
+  color: #736C63;
+  margin-top: 2px;
+}
+
+.review-item-qty {
+  font-size: 12.5px;
+  color: #736C63;
+  margin-top: 2px;
+}
+
+.review-item-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1A1816;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.review-inner-divider {
+  height: 1px;
+  background: #EFE9DF;
+  margin: 16px 0;
+}
+
+.review-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.review-breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13.5px;
+  color: #5A534B;
+}
+
+.review-breakdown-label {
+  font-weight: 400;
+}
+
+.review-breakdown-val {
+  font-weight: 600;
+  color: #1A1816;
+}
+
+.review-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1A1816;
+}
+
+.review-total-val {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1A1816;
+}
+
+.review-safety-box {
+  margin-top: 20px;
+  background: #F0EAE1;
+  border: 1px solid #E5DCD0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.review-safety-icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #E6DCCD;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8C6834;
+  flex-shrink: 0;
+}
+
+.review-safety-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1A1816;
+}
+
+.review-safety-sub {
+  font-size: 12px;
+  color: #6E675D;
+  margin-top: 2px;
+}
+
+.review-place-order-btn {
+  margin-top: 20px;
+  width: 100%;
+  height: 52px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #B58A4E 0%, #8C6630 100%);
+  color: #FFFFFF;
+  border: none;
+  font-size: 15.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(181, 138, 78, 0.35);
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.review-place-order-btn:hover:not(:disabled) {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+.review-place-order-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.review-btn-arrow {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* ======================================================================
+   REFERENCE IMAGE 2: ORDER CONFIRMATION PAGE (DISTRACTION-FREE)
+   ====================================================================== */
+.checkout-page-root--confirmation {
+  min-height: 100vh;
+  background: #FAF7F2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px 60px 16px;
+}
+
+.checkout-main-content--confirmation {
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.conf-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.conf-celebration-wrap {
+  position: relative;
+  width: 86px;
+  height: 86px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.conf-seal-circle {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: #FBF7F0;
+  border: 2.5px solid #C5A165;
+  color: #8C6834;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(197, 161, 101, 0.2);
+  z-index: 2;
+}
+
+.conf-check-icon {
+  width: 32px;
+  height: 32px;
+}
+
+/* Radiating Confetti Dots & Sparks */
+.conf-confetti-burst {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.conf-dot {
+  position: absolute;
+  border-radius: 50%;
+  background: #C5A165;
+}
+
+.dot-1 { width: 6px; height: 6px; top: 0; left: 30%; }
+.dot-2 { width: 5px; height: 5px; top: 6px; right: 22%; }
+.dot-3 { width: 4px; height: 4px; bottom: 8px; left: 14%; }
+.dot-4 { width: 5px; height: 5px; bottom: 4px; right: 26%; }
+.dot-5 { width: 4px; height: 4px; top: 38%; left: 0; }
+.dot-6 { width: 5px; height: 5px; top: 42%; right: 0; }
+
+.conf-spark {
+  position: absolute;
+  width: 8px;
+  height: 2px;
+  border-radius: 2px;
+  background: #D4B173;
+}
+
+.spark-1 { top: -2px; left: 52%; transform: rotate(-45deg); }
+.spark-2 { top: 12px; left: 10%; transform: rotate(35deg); }
+.spark-3 { top: 12px; right: 10%; transform: rotate(-35deg); }
+.spark-4 { bottom: 12px; right: 10%; transform: rotate(45deg); }
+
+.conf-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 29px;
+  font-weight: 700;
+  color: #1A1816;
+  margin: 0 0 10px 0;
+  line-height: 1.2;
+}
+
+.conf-message {
+  font-size: 13.5px;
+  color: #736C63;
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+
+.conf-message p {
+  margin: 0 0 3px 0;
+}
+
+.conf-reference-card {
+  width: 100%;
+  background: #F5EFE6;
+  border: 1px solid #EBE2D5;
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.conf-reference-top-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.conf-ref-box-icon {
+  color: #8C6834;
+}
+
+.conf-ref-divider {
+  width: 1px;
+  height: 38px;
+  background: #DFD5C5;
+}
+
+.conf-ref-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.conf-ref-label {
+  font-size: 10.5px;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+  color: #8C7E6E;
+  margin-bottom: 2px;
+}
+
+.conf-ref-number {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1A1816;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.conf-reference-bottom-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #5A5248;
+  border-top: 1px dashed #E2D7C7;
+  padding-top: 12px;
+}
+
+.conf-phone-icon {
+  color: #8C6834;
+  flex-shrink: 0;
+}
+
+.conf-phone-text {
+  line-height: 1.3;
+}
+
+.conf-phone-strong {
+  color: #1A1816;
+}
+
+.conf-summary-card {
+  width: 100%;
+  background: #FAF8F5;
+  border: 1px solid #EBE4DA;
+  border-radius: 18px;
+  padding: 20px 22px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.conf-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.conf-summary-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1A1816;
+  margin: 0;
+}
+
+.conf-summary-count {
+  font-size: 13px;
+  color: #736C63;
+}
+
+.conf-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.conf-item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.conf-item-thumb {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #ECE4DA;
+  background: #F5EFE6;
+  flex-shrink: 0;
+}
+
+.conf-item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.conf-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.conf-item-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1A1816;
+  line-height: 1.25;
+}
+
+.conf-item-size {
+  font-size: 12px;
+  color: #736C63;
+  margin-top: 2px;
+}
+
+.conf-item-qty {
+  font-size: 12px;
+  color: #736C63;
+  margin-top: 2px;
+}
+
+.conf-item-price {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #1A1816;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.conf-card-divider {
+  height: 1px;
+  background: #EFE9DF;
+  margin: 14px 0;
+}
+
+.conf-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.conf-breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13.5px;
+  color: #5A534B;
+}
+
+.conf-breakdown-label {
+  font-weight: 400;
+}
+
+.conf-breakdown-val {
+  font-weight: 600;
+  color: #1A1816;
+}
+
+.conf-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 17px;
+  font-weight: 700;
+  color: #1A1816;
+}
+
+.conf-total-val {
+  font-size: 21px;
+  font-weight: 800;
+  color: #1A1816;
+}
+
+.conf-back-home-btn {
+  width: 100%;
+  height: 50px;
+  border-radius: 9999px;
+  background: #141210;
+  color: #FFFFFF;
+  border: none;
+  font-size: 14.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: background 0.2s, transform 0.15s;
+}
+
+.conf-back-home-btn:hover {
+  background: #2B2620;
+  transform: translateY(-1px);
 }

@@ -23,6 +23,8 @@ interface BookingContextType {
   setSelectedDate: (d: Date) => void;
   selectedTime: string;
   setSelectedTime: (t: string) => void;
+  isTimeExplicitlySelected: boolean;
+  setIsTimeExplicitlySelected: (val: boolean) => void;
   customerDetails: CustomerDetails;
   setCustomerDetails: React.Dispatch<React.SetStateAction<CustomerDetails>>;
   specialRequest: string;
@@ -189,7 +191,13 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
     // Default to today
     return d;
   });
-  const [selectedTime, setSelectedTime] = useState<string>('11:30 AM');
+  const [selectedTime, setSelectedTimeState] = useState<string>('');
+  const [isTimeExplicitlySelected, setIsTimeExplicitlySelected] = useState<boolean>(false);
+
+  const setSelectedTime = useCallback((t: string) => {
+    setSelectedTimeState(t);
+    setIsTimeExplicitlySelected(Boolean(t));
+  }, []);
   const [customerDetails, setCustomerDetails] = useState<CustomerDetails>(INITIAL_DETAILS);
   const [specialRequest, setSpecialRequest] = useState<string>('');
   const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(1);
@@ -363,7 +371,8 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const resetBookingFlow = useCallback(() => {
     setStep(1);
-    setSelectedTime('11:30 AM');
+    setSelectedTimeState('');
+    setIsTimeExplicitlySelected(false);
     setCustomerDetails(INITIAL_DETAILS);
     setSpecialRequest('');
     setLatestBooking(null);
@@ -380,6 +389,8 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
         setSelectedDate,
         selectedTime,
         setSelectedTime,
+        isTimeExplicitlySelected,
+        setIsTimeExplicitlySelected,
         customerDetails,
         setCustomerDetails,
         specialRequest,

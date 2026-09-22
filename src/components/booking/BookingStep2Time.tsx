@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useBooking, formatHumanDate } from '../../context/BookingContext';
 import { BookingProgressBar } from './BookingProgressBar';
 import {
@@ -6,6 +6,7 @@ import {
   Sun,
   ArrowLeft,
   ArrowRight,
+  AlertCircle,
 } from 'lucide-react';
 
 export const BookingStep2Time: React.FC = () => {
@@ -13,9 +14,12 @@ export const BookingStep2Time: React.FC = () => {
     selectedDate,
     selectedTime,
     setSelectedTime,
+    isTimeExplicitlySelected,
     getTimeSlotsForDate,
     setStep,
   } = useBooking();
+
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const formattedDate = formatHumanDate(selectedDate);
   const slots = getTimeSlotsForDate(selectedDate);
@@ -27,10 +31,19 @@ export const BookingStep2Time: React.FC = () => {
   const handleSelectSlot = (time: string, isAvailable: boolean) => {
     if (!isAvailable) return;
     setSelectedTime(time);
+    setErrorMessage('');
   };
 
   const handleContinue = () => {
-    if (!selectedTime) return;
+    if (!isTimeExplicitlySelected || !selectedTime) {
+      setErrorMessage('Please choose a time to continue.');
+      const slotsElement = document.getElementById('available-time-slots');
+      if (slotsElement) {
+        slotsElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+    setErrorMessage('');
     setStep(3);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -69,8 +82,31 @@ export const BookingStep2Time: React.FC = () => {
         </div>
 
         {/* Available Time Slots Card */}
-        <div className="booking-card timeslots-card">
+        <div id="available-time-slots" className="booking-card timeslots-card">
           <h2 className="timeslots-section-title">Available Time Slots</h2>
+
+          {errorMessage && (
+            <div
+              className="time-slot-error-banner"
+              role="alert"
+              style={{
+                background: '#FEF2F2',
+                border: '1px solid #FCA5A5',
+                color: '#B91C1C',
+                padding: '10px 14px',
+                borderRadius: '8px',
+                fontSize: '14px',
+                fontWeight: 500,
+                marginBottom: '18px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+              }}
+            >
+              <AlertCircle size={18} color="#DC2626" style={{ flexShrink: 0 }} />
+              <span>{errorMessage}</span>
+            </div>
+          )}
 
           {/* Morning Group */}
           <div className="slot-group">

@@ -210,6 +210,19 @@ export const RizheenaShopPage: React.FC = () => {
     setSelectedCategory(cat);
   };
 
+  const handleScrollToCategories = () => {
+    const el = document.getElementById('shop-category-section');
+    if (el) {
+      const navOffset = 90;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   const handleOpenAllProducts = () => {
     window.history.pushState({}, '', '/shop/all-products');
     window.dispatchEvent(new PopStateEvent('popstate'));
@@ -249,8 +262,8 @@ export const RizheenaShopPage: React.FC = () => {
             <button
               type="button"
               className="shop-now-btn"
-              onClick={handleOpenAllProducts}
-              aria-label="Shop now - View all products"
+              onClick={handleScrollToCategories}
+              aria-label="Shop now - Scroll to categories"
             >
               <span>SHOP NOW</span>
               <span aria-hidden="true">→</span>
@@ -337,7 +350,7 @@ export const RizheenaShopPage: React.FC = () => {
         {/* ==================================================================
             2. SHOP BY CATEGORY SECTION
             ================================================================== */}
-        <section className="shop-category-section" aria-label="Shop by Category">
+        <section className="shop-category-section" id="shop-category-section" aria-label="Shop by Category">
           <div className="shop-category-header-row">
             <div className="shop-category-title-wrap">
               <h2 className="shop-category-heading">SHOP BY CATEGORY</h2>
