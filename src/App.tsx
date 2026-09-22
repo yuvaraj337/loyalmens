@@ -111,14 +111,14 @@ export function App() {
         window.history.pushState({}, '', href);
         setCurrentPath('/shop/all-products');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (href === '/shop/cart') {
+      } else if (href === '/shop/cart' || href === '/cart') {
         e.preventDefault();
-        window.history.pushState({}, '', href);
+        window.history.pushState({}, '', '/shop/cart');
         setCurrentPath('/shop/cart');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (href === '/shop/checkout') {
+      } else if (href === '/shop/checkout' || href === '/checkout') {
         e.preventDefault();
-        window.history.pushState({}, '', href);
+        window.history.pushState({}, '', '/shop/checkout');
         setCurrentPath('/shop/checkout');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (href === '/shop' || href.startsWith('/shop#')) {
@@ -165,8 +165,8 @@ export function App() {
   const isSpecialCareShop = currentPath === '/shop/special-care';
   const isGiftSetsShop = currentPath === '/shop/gift-sets';
   const isAllProductsShop = currentPath === '/shop/all-products';
-  const isCartPage = currentPath === '/shop/cart';
-  const isCheckoutPage = currentPath === '/shop/checkout';
+  const isCartPage = currentPath === '/shop/cart' || currentPath === '/cart';
+  const isCheckoutPage = currentPath === '/shop/checkout' || currentPath === '/checkout';
 
   const isBookingPage = currentPath === '/booking' || currentPath.startsWith('/booking');
   const isAdminPage = currentPath === '/admin' || currentPath.startsWith('/admin');

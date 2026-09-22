@@ -37,6 +37,14 @@ export const BookingStep4Review: React.FC = () => {
 
   const formattedDate = formatHumanDate(selectedDate);
 
+  const subtotal = (() => {
+    const match = service.price.replace(/,/g, '').match(/\d+/);
+    return match ? parseInt(match[0], 10) : 0;
+  })();
+  const gst = Math.round(subtotal * 0.12);
+  const deliveryCharge = 50;
+  const finalTotal = subtotal + gst + deliveryCharge;
+
   const handleBack = () => {
     setStep(3);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -175,14 +183,46 @@ export const BookingStep4Review: React.FC = () => {
               </div>
             </div>
 
-            {/* Price row */}
+            {/* Price breakdown */}
             <div className="review-detail-row">
               <div className="review-detail-left">
                 <Tag size={16} className="detail-icon" />
-                <span className="review-detail-label">Price</span>
+                <span className="review-detail-label">Subtotal</span>
               </div>
               <div className="review-detail-right">
-                <span className="review-detail-val">{service.price}</span>
+                <span className="review-detail-val">₹{subtotal.toLocaleString('en-IN')}</span>
+              </div>
+            </div>
+
+            <div className="review-detail-row">
+              <div className="review-detail-left">
+                <Receipt size={16} className="detail-icon" />
+                <span className="review-detail-label">GST (12%)</span>
+              </div>
+              <div className="review-detail-right">
+                <span className="review-detail-val">₹{gst.toLocaleString('en-IN')}</span>
+              </div>
+            </div>
+
+            <div className="review-detail-row">
+              <div className="review-detail-left">
+                <Truck size={16} className="detail-icon" />
+                <span className="review-detail-label">Delivery Charges</span>
+              </div>
+              <div className="review-detail-right">
+                <span className="review-detail-val">₹{deliveryCharge.toLocaleString('en-IN')}</span>
+              </div>
+            </div>
+
+            <div className="review-detail-row" style={{ borderTop: '1px dashed #E5E7EB', paddingTop: '8px', marginTop: '4px' }}>
+              <div className="review-detail-left">
+                <Tag size={16} className="detail-icon" />
+                <span className="review-detail-label" style={{ fontWeight: 700, color: '#111827' }}>Total</span>
+              </div>
+              <div className="review-detail-right">
+                <span className="review-detail-val" style={{ fontWeight: 700, color: '#111827', fontSize: '1.05rem' }}>
+                  ₹{finalTotal.toLocaleString('en-IN')}
+                </span>
               </div>
             </div>
 

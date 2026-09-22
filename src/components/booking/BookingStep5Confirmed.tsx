@@ -11,6 +11,8 @@ import {
   Scissors,
   Home,
   ArrowRight,
+  Receipt,
+  Truck,
 } from 'lucide-react';
 
 export const BookingStep5Confirmed: React.FC = () => {
@@ -45,6 +47,14 @@ export const BookingStep5Confirmed: React.FC = () => {
   const serviceDesc = service.desc;
   const serviceDuration = latestBooking?.duration || service.duration;
   const servicePrice = latestBooking?.service_price || service.price;
+
+  const subtotal = latestBooking?.subtotal ?? (() => {
+    const match = servicePrice.replace(/,/g, '').match(/\d+/);
+    return match ? parseInt(match[0], 10) : 0;
+  })();
+  const gst = latestBooking?.gst ?? Math.round(subtotal * 0.12);
+  const deliveryCharge = latestBooking?.delivery_charge ?? 50;
+  const totalAmount = latestBooking?.total_amount ?? (subtotal + gst + deliveryCharge);
 
   return (
     <div className="booking-container confirmation-page-container">
@@ -143,12 +153,39 @@ export const BookingStep5Confirmed: React.FC = () => {
               <div className="confirmation-detail-val">{serviceDuration}</div>
             </div>
 
+            {/* Price breakdown */}
             <div className="confirmation-detail-row">
               <div className="confirmation-detail-left">
                 <Tag size={16} className="detail-icon" />
-                <span>Price</span>
+                <span>Subtotal</span>
               </div>
-              <div className="confirmation-detail-val">{servicePrice}</div>
+              <div className="confirmation-detail-val">₹{subtotal.toLocaleString('en-IN')}</div>
+            </div>
+
+            <div className="confirmation-detail-row">
+              <div className="confirmation-detail-left">
+                <Receipt size={16} className="detail-icon" />
+                <span>GST (12%)</span>
+              </div>
+              <div className="confirmation-detail-val">₹{gst.toLocaleString('en-IN')}</div>
+            </div>
+
+            <div className="confirmation-detail-row">
+              <div className="confirmation-detail-left">
+                <Truck size={16} className="detail-icon" />
+                <span>Delivery Charges</span>
+              </div>
+              <div className="confirmation-detail-val">₹{deliveryCharge.toLocaleString('en-IN')}</div>
+            </div>
+
+            <div className="confirmation-detail-row" style={{ borderTop: '1px dashed #E5E7EB', paddingTop: '8px', marginTop: '4px' }}>
+              <div className="confirmation-detail-left">
+                <Tag size={16} className="detail-icon" />
+                <strong>Total Amount</strong>
+              </div>
+              <div className="confirmation-detail-val" style={{ fontWeight: 700, color: '#111827', fontSize: '1.05rem' }}>
+                ₹{totalAmount.toLocaleString('en-IN')}
+              </div>
             </div>
 
             {/* Branch or At Home Location */}
