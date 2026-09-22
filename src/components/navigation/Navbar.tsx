@@ -15,12 +15,13 @@ import {
 } from 'lucide-react';
 import { BrandLogo } from '../common/BrandLogo';
 import { useCart } from '../../context/CartContext';
+import { useLanguage } from '../../context/LanguageContext';
 import '../../styles/navbar.css';
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [selectedLang, setSelectedLang] = useState<'en' | 'hi' | 'kn'>('en');
+  const { language, setLanguage, t } = useLanguage();
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const { totalCount, openDrawer, badgeAnimating } = useCart();
   const langMenuRef = useRef<HTMLDivElement | null>(null);
@@ -88,7 +89,7 @@ export const Navbar: React.FC = () => {
   };
 
   const handleSelectLanguage = (lang: 'en' | 'hi' | 'kn') => {
-    setSelectedLang(lang);
+    setLanguage(lang);
     setIsLanguageOpen(false);
   };
 
@@ -104,22 +105,22 @@ export const Navbar: React.FC = () => {
           <ul className="nav-links">
             <li>
               <a href="/" className={`nav-link ${currentPath === '/' ? 'active' : ''}`}>
-                Home
+                {t('nav_home')}
               </a>
             </li>
             <li>
               <a href="/services" className={`nav-link ${currentPath.startsWith('/services') ? 'active' : ''}`}>
-                Services
+                {t('nav_services')}
               </a>
             </li>
             <li>
               <a href="/shop" className={`nav-link ${currentPath.startsWith('/shop') ? 'active' : ''}`}>
-                Shop
+                {t('nav_shop')}
               </a>
             </li>
             <li>
               <a href="/vip" className={`nav-link ${currentPath === '/vip' ? 'active' : ''}`}>
-                VIP
+                {t('nav_membership')}
               </a>
             </li>
             <li>
@@ -129,7 +130,7 @@ export const Navbar: React.FC = () => {
             </li>
             <li>
               <a href="/contact" className={`nav-link ${currentPath === '/contact' ? 'active' : ''}`}>
-                Contact
+                {t('nav_contact')}
               </a>
             </li>
           </ul>
@@ -137,79 +138,69 @@ export const Navbar: React.FC = () => {
 
         {/* Right Action Icons & Buttons */}
         <div className="nav-actions">
-          {/* STATE A: LANGUAGE OPEN (Reference 2) */}
-          {isLanguageOpen ? (
-            <div className="nav-lang-open-wrap" ref={langMenuRef}>
-              <button
-                type="button"
-                className="nav-lang-pill-btn active"
-                aria-label="Language selector open"
-                aria-expanded={true}
-                onClick={() => setIsLanguageOpen(false)}
-              >
-                <Globe size={14} className="lang-globe-icon" />
-                <span className="lang-code-text">{selectedLang.toUpperCase()}</span>
-                <ChevronUp size={12} className="lang-chevron-icon" />
-              </button>
+          {/* Search Button */}
+          <button
+            type="button"
+            className="nav-icon-btn nav-search-btn"
+            aria-label="Search services or products"
+            onClick={() => {
+              window.location.href = '/services';
+            }}
+          >
+            <Search size={18} strokeWidth={1.8} />
+          </button>
 
-              {/* Language Dropdown directly beneath pill */}
+          <div className="nav-divider" />
+
+          {/* Language Selector Pill + Dropdown */}
+          <div className="nav-lang-container" ref={langMenuRef}>
+            <button
+              type="button"
+              className={`nav-lang-pill-btn ${isLanguageOpen ? 'active' : ''}`}
+              aria-label="Language selector"
+              aria-expanded={isLanguageOpen}
+              onClick={() => setIsLanguageOpen((prev) => !prev)}
+            >
+              <Globe size={13} className="lang-globe-icon" />
+              <span className="lang-code-text">{language.toUpperCase()}</span>
+              {isLanguageOpen ? (
+                <ChevronUp size={11} className="lang-chevron-icon" />
+              ) : (
+                <ChevronDown size={11} className="lang-chevron-icon" />
+              )}
+            </button>
+
+            {isLanguageOpen && (
               <div className="lang-dropdown-menu" role="menu">
                 <button
                   type="button"
-                  className={`lang-option-row ${selectedLang === 'en' ? 'active' : ''}`}
+                  className={`lang-option-row ${language === 'en' ? 'active' : ''}`}
                   onClick={() => handleSelectLanguage('en')}
                 >
                   <span className="lang-name">English</span>
-                  {selectedLang === 'en' && <Check size={16} className="lang-check" />}
+                  {language === 'en' && <Check size={15} className="lang-check" />}
                 </button>
                 <button
                   type="button"
-                  className={`lang-option-row ${selectedLang === 'hi' ? 'active' : ''}`}
+                  className={`lang-option-row ${language === 'hi' ? 'active' : ''}`}
                   onClick={() => handleSelectLanguage('hi')}
                 >
                   <span className="lang-name">हिन्दी</span>
-                  {selectedLang === 'hi' && <Check size={16} className="lang-check" />}
+                  {language === 'hi' && <Check size={15} className="lang-check" />}
                 </button>
                 <button
                   type="button"
-                  className={`lang-option-row ${selectedLang === 'kn' ? 'active' : ''}`}
+                  className={`lang-option-row ${language === 'kn' ? 'active' : ''}`}
                   onClick={() => handleSelectLanguage('kn')}
                 >
                   <span className="lang-name">ಕನ್ನಡ</span>
-                  {selectedLang === 'kn' && <Check size={16} className="lang-check" />}
+                  {language === 'kn' && <Check size={15} className="lang-check" />}
                 </button>
               </div>
-            </div>
-          ) : (
-            /* STATE B: NORMAL CLOSED HEADER (Reference 1) */
-            <>
-              <button
-                type="button"
-                className="nav-icon-btn nav-search-btn"
-                aria-label="Search services or products"
-                onClick={() => {
-                  window.location.href = '/services';
-                }}
-              >
-                <Search size={18} strokeWidth={1.8} />
-              </button>
+            )}
+          </div>
 
-              {/* Subtle Language Trigger */}
-              <div className="nav-lang-trigger-wrap" ref={langMenuRef}>
-                <button
-                  type="button"
-                  className="nav-icon-btn nav-lang-trigger-btn"
-                  aria-label="Open language selector"
-                  title="Change Language"
-                  onClick={() => setIsLanguageOpen(true)}
-                >
-                  <Globe size={18} strokeWidth={1.8} />
-                </button>
-              </div>
-
-              <div className="nav-divider" />
-            </>
-          )}
+          <div className="nav-divider" />
 
           {/* Cart Bag Icon with Quantity Badge */}
           <button
@@ -228,15 +219,13 @@ export const Navbar: React.FC = () => {
             </span>
           </button>
 
-          {/* BOOK NOW button (visible in normal closed state) */}
-          {!isLanguageOpen && (
-            <a href="/booking" className="book-now-btn">
-              <span>BOOK NOW</span>
-              <ArrowRight size={13} strokeWidth={2.2} />
-            </a>
-          )}
+          {/* Desktop BOOK NOW button */}
+          <a href="/booking" className="book-now-btn">
+            <span>{t('nav_book_now')}</span>
+            <ArrowRight size={13} strokeWidth={2.2} />
+          </a>
 
-          {/* Mobile Hamburger Menu Toggle */}
+          {/* Mobile Hamburger Menu Toggle (hidden on mobile header per target design) */}
           <button
             type="button"
             className="mobile-menu-toggle-btn"
@@ -269,36 +258,36 @@ export const Navbar: React.FC = () => {
           <button
             type="button"
             className="mobile-nav-close-btn"
+            aria-label="Close menu"
             onClick={closeMobileMenu}
-            aria-label="Close navigation"
           >
             <X size={20} />
           </button>
         </div>
 
-        <nav className="mobile-nav-body" aria-label="Mobile Menu Links">
+        <nav className="mobile-nav-body">
           <ul className="mobile-nav-links">
             <li>
               <a href="/" className={`mobile-nav-link ${currentPath === '/' ? 'active' : ''}`} onClick={closeMobileMenu}>
-                <span>Home</span>
+                <span>{t('nav_home')}</span>
                 <ArrowRight size={14} className="mobile-nav-arrow" />
               </a>
             </li>
             <li>
               <a href="/services" className={`mobile-nav-link ${currentPath.startsWith('/services') ? 'active' : ''}`} onClick={closeMobileMenu}>
-                <span>Services</span>
+                <span>{t('nav_services')}</span>
                 <ArrowRight size={14} className="mobile-nav-arrow" />
               </a>
             </li>
             <li>
               <a href="/shop" className={`mobile-nav-link ${currentPath.startsWith('/shop') ? 'active' : ''}`} onClick={closeMobileMenu}>
-                <span>Shop</span>
+                <span>{t('nav_shop')}</span>
                 <ArrowRight size={14} className="mobile-nav-arrow" />
               </a>
             </li>
             <li>
               <a href="/vip" className={`mobile-nav-link ${currentPath === '/vip' ? 'active' : ''}`} onClick={closeMobileMenu}>
-                <span>VIP</span>
+                <span>{t('nav_membership')}</span>
                 <ArrowRight size={14} className="mobile-nav-arrow" />
               </a>
             </li>
@@ -310,7 +299,7 @@ export const Navbar: React.FC = () => {
             </li>
             <li>
               <a href="/contact" className={`mobile-nav-link ${currentPath === '/contact' ? 'active' : ''}`} onClick={closeMobileMenu}>
-                <span>Contact</span>
+                <span>{t('nav_contact')}</span>
                 <ArrowRight size={14} className="mobile-nav-arrow" />
               </a>
             </li>
@@ -319,7 +308,7 @@ export const Navbar: React.FC = () => {
           <div className="mobile-nav-cta-wrap">
             <a href="/booking" className="mobile-nav-book-btn" onClick={closeMobileMenu}>
               <Calendar size={16} />
-              <span>BOOK AN APPOINTMENT</span>
+              <span>{t('book_appointment')}</span>
               <ArrowRight size={16} />
             </a>
           </div>
@@ -333,9 +322,9 @@ export const Navbar: React.FC = () => {
             <div className="mobile-nav-lang-pills">
               <button
                 type="button"
-                className={`mobile-lang-pill ${selectedLang === 'en' ? 'active' : ''}`}
+                className={`mobile-lang-pill ${language === 'en' ? 'active' : ''}`}
                 onClick={() => {
-                  setSelectedLang('en');
+                  handleSelectLanguage('en');
                   closeMobileMenu();
                 }}
               >
@@ -343,9 +332,9 @@ export const Navbar: React.FC = () => {
               </button>
               <button
                 type="button"
-                className={`mobile-lang-pill ${selectedLang === 'hi' ? 'active' : ''}`}
+                className={`mobile-lang-pill ${language === 'hi' ? 'active' : ''}`}
                 onClick={() => {
-                  setSelectedLang('hi');
+                  handleSelectLanguage('hi');
                   closeMobileMenu();
                 }}
               >
@@ -353,9 +342,9 @@ export const Navbar: React.FC = () => {
               </button>
               <button
                 type="button"
-                className={`mobile-lang-pill ${selectedLang === 'kn' ? 'active' : ''}`}
+                className={`mobile-lang-pill ${language === 'kn' ? 'active' : ''}`}
                 onClick={() => {
-                  setSelectedLang('kn');
+                  handleSelectLanguage('kn');
                   closeMobileMenu();
                 }}
               >
@@ -379,3 +368,4 @@ export const Navbar: React.FC = () => {
     </>
   );
 };
+export default Navbar;

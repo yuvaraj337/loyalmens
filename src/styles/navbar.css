@@ -189,7 +189,8 @@
 /* ==========================================================================
    LANGUAGE SELECTOR & DROPDOWN (MATCHING REFERENCE 2)
    ========================================================================== */
-.nav-lang-open-wrap {
+.nav-lang-open-wrap,
+.nav-lang-container {
   position: relative;
   display: flex;
   align-items: center;
@@ -587,6 +588,15 @@
   }
 }
 
+@media (max-width: 768px) {
+  .book-now-btn {
+    display: none !important;
+  }
+  .mobile-menu-toggle-btn {
+    display: none !important;
+  }
+}
+
 @media (max-width: 480px) {
   .navbar-container {
     padding: 10px 14px;
@@ -613,25 +623,49 @@
     gap: 10px;
   }
   .nav-actions {
-    gap: 8px;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px;
   }
   .nav-divider {
-    display: block;
+    display: block !important;
     width: 1px;
     height: 16px;
-    background: rgba(255, 255, 255, 0.15);
-    margin: 0 2px;
+    background: rgba(255, 255, 255, 0.18);
+    margin: 0 1px;
   }
   .book-now-btn {
-    display: inline-flex;
-    padding: 6px 12px;
-    font-size: 10px;
-    gap: 5px;
+    display: none !important;
   }
   .mobile-menu-toggle-btn {
-    display: none;
-  }
-  .nav-lang-trigger-wrap {
     display: none !important;
+  }
+  .nav-lang-container {
+    display: flex !important;
+  }
+  .nav-lang-pill-btn {
+    padding: 4px 8px;
+    font-size: 10px;
+    gap: 4px;
+    border: 1px solid rgba(197, 161, 101, 0.5);
+    background: rgba(18, 16, 14, 0.85);
+  }
+  .lang-globe-icon {
+    width: 12px;
+    height: 12px;
+  }
+  .lang-chevron-icon {
+    width: 10px;
+    height: 10px;
+  }
+  .lang-dropdown-menu {
+    top: calc(100% + 6px);
+    right: -10px;
+    min-width: 140px;
+    padding: 4px;
+  }
+  .lang-option-row {
+    padding: 8px 10px;
+    font-size: 12px;
   }
 }

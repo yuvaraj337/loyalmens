@@ -28,6 +28,7 @@ import { AdminBookingsPage } from './components/booking/AdminBookingsPage';
 import { CheckoutPage } from './components/shop/checkout/CheckoutPage';
 import { CartToast } from './components/shop/CartToast';
 import { CartDrawer } from './components/shop/CartDrawer';
+import { LanguageProvider } from './context/LanguageContext';
 import './styles/variables.css';
 
 export function App() {
@@ -177,17 +178,19 @@ export function App() {
   const isServicesPage = !isBookingPage && !isAdminPage && !isHomeServicePage && !isHaircutPage && !isBeardPage && !isFacialPage && !isColourPage && (normalizedPath === '/services' || normalizedPath.startsWith('/services'));
   const isShopPage = !isBookingPage && !isAdminPage && !isHairCareShop && !isFaceCareShop && !isBeardCareShop && !isKitsShop && !isSpecialCareShop && !isGiftSetsShop && !isAllProductsShop && !isCartPage && !isCheckoutPage && (normalizedPath === '/shop' || normalizedPath.startsWith('/shop'));
 
-  // Helper to wrap content in CartProvider, BookingProvider & CheckoutProvider with global drawer/toast
+  // Helper to wrap content in LanguageProvider, CartProvider, BookingProvider & CheckoutProvider with global drawer/toast
   const wrapWithProviders = (content: React.ReactNode) => (
-    <CartProvider>
-      <BookingProvider>
-        <CheckoutProvider>
-          {content}
-          <CartToast />
-          <CartDrawer />
-        </CheckoutProvider>
-      </BookingProvider>
-    </CartProvider>
+    <LanguageProvider>
+      <CartProvider>
+        <BookingProvider>
+          <CheckoutProvider>
+            {content}
+            <CartToast />
+            <CartDrawer />
+          </CheckoutProvider>
+        </BookingProvider>
+      </CartProvider>
+    </LanguageProvider>
   );
 
   if (isBookingPage) {

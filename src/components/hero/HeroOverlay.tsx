@@ -1,35 +1,38 @@
 import React, { forwardRef } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface HeroOverlayProps {
   onStoryClick?: () => void;
 }
 
 export const HeroOverlay = forwardRef<HTMLDivElement, HeroOverlayProps>(({ onStoryClick }, ref) => {
+  const { t } = useLanguage();
+
   return (
     <div ref={ref} className="hero-overlay-container">
-      {/* Left Content Area — Exact Match to Reference 2 */}
+      {/* Left Content Area — Exact Match to Target Reference */}
       <div className="hero-left-content hero-overlay-interactive">
         {/* Eyebrow Label with Decorative Champagne Lines */}
         <div className="hero-eyebrow-wrapper">
           <span className="hero-eyebrow-line" />
-          <span className="hero-eyebrow">CONFIDENCE LOOKS GOOD ON YOU</span>
+          <span className="hero-eyebrow">{t('hero_eyebrow')}</span>
           <span className="hero-eyebrow-line" />
         </div>
 
         {/* Main Editorial Headline (Strict 2 Lines) */}
         <h1 className="hero-title">
-          <span>More</span>
-          <span>Than A Salon.</span>
+          <span>{t('hero_title_line1')}</span>
+          <span>{t('hero_title_line2')}</span>
         </h1>
 
         {/* Subheading */}
         <p className="hero-subtitle">
-          Precision. Style. Self-Care.
+          {t('hero_subtitle')}
         </p>
 
         {/* Book Now Pill CTA Button */}
         <a href="/booking" className="hero-cta-btn">
-          <span>Book Now</span>
+          <span>{t('hero_book_now')}</span>
           <span className="hero-cta-arrow" aria-hidden="true">&rarr;</span>
         </a>
 
@@ -45,7 +48,7 @@ export const HeroOverlay = forwardRef<HTMLDivElement, HeroOverlayProps>(({ onSto
           <div className="social-proof-divider" />
           <div className="social-proof-text">
             <span className="social-count">10K+</span>
-            <span className="social-label">Happy Clients</span>
+            <span className="social-label">{t('hero_stats_clients')}</span>
           </div>
         </div>
       </div>
@@ -69,3 +72,4 @@ export const HeroOverlay = forwardRef<HTMLDivElement, HeroOverlayProps>(({ onSto
 });
 
 HeroOverlay.displayName = 'HeroOverlay';
+export default HeroOverlay;

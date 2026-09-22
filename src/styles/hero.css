@@ -68,6 +68,24 @@
   margin-bottom: 30px;
 }
 
+.hero-eyebrow-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.hero-eyebrow-line {
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C5A165);
+}
+
+.hero-eyebrow-wrapper .hero-eyebrow-line:last-child {
+  background: linear-gradient(90deg, #C5A165, transparent);
+}
+
 .hero-eyebrow {
   display: inline-block;
   font-family: var(--font-sans);
@@ -76,7 +94,7 @@
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: #D4AF37;
-  margin-bottom: 18px;
+  margin-bottom: 0;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
 
@@ -101,8 +119,46 @@
   font-weight: 400;
   letter-spacing: 0.08em;
   color: rgba(247, 239, 230, 0.85);
-  margin-bottom: 32px;
+  margin-bottom: 28px;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Hero Book Now CTA Button */
+.hero-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #F4EDE4;
+  color: #161513;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+  text-decoration: none;
+  margin-bottom: 30px;
+  transition: all 0.25s ease;
+  pointer-events: auto;
+}
+
+.hero-cta-btn:hover {
+  background: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(244, 237, 228, 0.4);
+  color: #000000;
+}
+
+.hero-cta-arrow {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.hero-cta-btn:hover .hero-cta-arrow {
+  transform: translateX(4px);
 }
 
 /* Story Action */
@@ -159,6 +215,21 @@
 .avatar-stack {
   display: flex;
   align-items: center;
+}
+
+.social-proof-image {
+  height: 34px;
+  width: auto;
+  display: block;
+  border-radius: 9999px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.social-proof-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.22);
+  margin: 0 2px;
 }
 
 .avatar-item {
@@ -324,56 +395,92 @@
 /* Mobile responsive */
 @media (max-width: 768px) {
   .hero-overlay-container {
-    padding: 100px 24px 30px 24px;
+    padding: 90px 24px 30px 24px;
   }
   .hero-right-accents {
-    display: none;
+    display: none !important;
   }
   .hero-left-content {
     max-width: 100%;
   }
+  .hero-story-btn {
+    display: none !important;
+  }
   .hero-scroll-indicator {
-    left: 24px;
-    bottom: 24px;
+    display: none !important;
   }
 }
 
 @media (max-width: 480px) {
   .hero-overlay-container {
-    padding: 85px 18px 24px 18px;
+    padding: 72px 18px 22px 18px;
   }
-  .hero-title {
-    font-size: clamp(32px, 8.5vw, 44px);
-    margin-bottom: 12px;
-    line-height: 1.1;
+  .hero-eyebrow-wrapper {
+    margin-bottom: 8px;
+    gap: 8px;
+  }
+  .hero-eyebrow-line {
+    width: 18px;
   }
   .hero-eyebrow {
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    margin-bottom: 12px;
+    font-size: 9.5px;
+    letter-spacing: 0.2em;
+    margin-bottom: 0;
+  }
+  .hero-title {
+    font-size: clamp(36px, 10.2vw, 44px);
+    margin-bottom: 8px;
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+  }
+  .hero-title span {
+    display: block;
   }
   .hero-subtitle {
-    font-size: 13.5px;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    color: rgba(247, 239, 230, 0.9);
+  }
+  .hero-cta-btn {
+    padding: 11px 24px;
+    font-size: 13px;
     margin-bottom: 22px;
-    line-height: 1.5;
   }
   .hero-left-content {
-    margin-bottom: 16px;
+    margin-bottom: 6px;
+  }
+  .hero-social-proof {
+    gap: 10px;
+    margin-bottom: 0;
+  }
+  .social-proof-image {
+    height: 30px;
+  }
+  .social-proof-divider {
+    height: 20px;
+  }
+  .social-count {
+    font-size: 14px;
+  }
+  .social-label {
+    font-size: 10px;
   }
   .hero-scroll-indicator {
-    left: 18px;
-    bottom: 18px;
+    display: none !important;
   }
 }
 
 @media (max-width: 360px) {
   .hero-overlay-container {
-    padding: 80px 14px 20px 14px;
+    padding: 68px 14px 18px 14px;
   }
   .hero-title {
-    font-size: clamp(28px, 9vw, 36px);
+    font-size: clamp(30px, 9vw, 36px);
   }
-  .hero-scroll-indicator {
-    display: none;
+  .hero-cta-btn {
+    padding: 10px 20px;
+    font-size: 12px;
   }
 }
