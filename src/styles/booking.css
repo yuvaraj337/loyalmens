@@ -3160,3 +3160,792 @@
   }
 }
 
+/* ==========================================================================
+   LOYAL PROFESSIONAL MEN'S SALON — 5-STEP BOOKING FLOW REBUILD
+   Pixel-Accurate Recreation of Reference Image 4 & Reference Image 5
+   ========================================================================== */
+
+.booking-single-card-wrap {
+  max-width: 580px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.booking-step1-container,
+.booking-step2-container,
+.booking-step3-container,
+.booking-step4-container,
+.booking-step5-container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 24px 20px 60px 20px;
+}
+
+/* Clickable Timeline Steps */
+.booking-progress-step.clickable {
+  cursor: pointer;
+}
+
+.booking-progress-step.clickable:hover .booking-progress-circle {
+  background: #ECE5DB;
+  border-color: #443224;
+  transform: scale(1.06);
+}
+
+.booking-progress-step.clickable:hover .booking-progress-label {
+  color: #443224;
+}
+
+/* Selected Date in Calendar — Consistent Rich Gold/Champagne State */
+.calendar-day-cell.selected,
+.calendar-day-cell.selected:hover,
+.calendar-day-cell.selected:focus,
+.calendar-day-cell.selected:active {
+  background: #C09A6B !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(192, 154, 107, 0.45) !important;
+  border-radius: 50% !important;
+  outline: none !important;
+}
+
+.selected-date-notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 18px;
+  background: #F8F3EC;
+  border-radius: 12px;
+  margin-top: 18px;
+  font-size: 14px;
+  color: #443224;
+}
+
+.booking-step-action-wrap {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.booking-step-action-wrap .booking-primary-btn {
+  background: #C09A6B;
+  color: #FFFFFF;
+  border-radius: 28px;
+  font-size: 15.5px;
+  font-weight: 600;
+  padding: 15px 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 14px rgba(192, 154, 107, 0.35);
+  transition: all 0.25s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.booking-step-action-wrap .booking-primary-btn:hover {
+  background: #B38A56;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(192, 154, 107, 0.45);
+}
+
+.booking-back-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #8C7E72;
+  cursor: pointer;
+  padding: 8px 12px;
+  transition: color 0.2s;
+  margin-top: 4px;
+}
+
+.booking-back-link-btn:hover {
+  color: #3B2E24;
+}
+
+/* ==========================================================================
+   REFERENCE IMAGE 4: REVIEW YOUR APPOINTMENT (ONE COMBINED CARD)
+   ========================================================================== */
+
+.unified-review-card {
+  background: #FFFFFF;
+  border: 1px solid #EFE8DE;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(60, 45, 30, 0.05);
+  box-sizing: border-box;
+}
+
+.review-service-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-align: left;
+}
+
+.review-service-image {
+  width: 86px;
+  height: 86px;
+  border-radius: 14px;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.review-service-meta {
+  flex: 1;
+}
+
+.review-service-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #161513;
+  margin: 0 0 6px 0;
+  line-height: 1.25;
+}
+
+.review-service-desc {
+  font-size: 13px;
+  color: #6E665E;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.review-divider {
+  height: 1px;
+  background: #F0E9DF;
+  margin: 20px 0;
+}
+
+.review-rows-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.review-row-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding-bottom: 2px;
+}
+
+.review-row-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #666059;
+  font-weight: 500;
+  min-width: 140px;
+  flex-shrink: 0;
+}
+
+.review-row-icon {
+  color: #8C6E4E;
+  flex-shrink: 0;
+}
+
+.review-row-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: right;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.review-row-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #161513;
+  word-break: break-word;
+}
+
+.review-row-edit-btn {
+  background: none;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: #8C6E4E;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 2px 4px;
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+
+.review-row-edit-btn:hover {
+  color: #5A422D;
+}
+
+.review-branch-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.3;
+}
+
+.review-branch-sub {
+  font-size: 12px;
+  color: #887E74;
+  font-weight: 400;
+}
+
+.review-footer-action-block {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.review-terms-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 10px 0 18px 0;
+  cursor: pointer;
+  font-size: 13px;
+  color: #585047;
+  text-align: left;
+  line-height: 1.45;
+  width: 100%;
+}
+
+.review-terms-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #C09A6B;
+  cursor: pointer;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+.review-terms-link {
+  color: #332B24;
+  text-decoration: underline;
+}
+
+.review-confirm-btn {
+  background: #C09A6B !important;
+  color: #FFFFFF !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  padding: 16px 28px !important;
+  border-radius: 30px !important;
+  box-shadow: 0 4px 16px rgba(192, 154, 107, 0.35) !important;
+}
+
+.review-confirm-btn:hover:not(:disabled) {
+  background: #B38A56 !important;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   REFERENCE IMAGE 5: BOOKING CONFIRMED (EXACT MATCH)
+   ========================================================================== */
+
+.confirmation-brand-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  max-width: 580px;
+  margin: 0 auto 14px auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.confirmation-brand-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.confirmation-brand-crown {
+  width: 34px;
+  height: auto;
+  display: block;
+}
+
+.confirmation-brand-titles {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.confirmation-brand-main {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #161513;
+}
+
+.confirmation-brand-mid,
+.confirmation-brand-sub {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: #6E665E;
+  text-transform: uppercase;
+}
+
+.confirmation-brand-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #8C8074;
+  text-transform: uppercase;
+  line-height: 1.35;
+}
+
+/* Gold Checkmark with Radial Burst Lines */
+.confirmation-burst-badge-wrap {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 16px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirmation-check-circle-gold {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #FFFDF9;
+  border: 2px solid #C09A6B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(192, 154, 107, 0.25);
+  position: relative;
+  z-index: 2;
+}
+
+.check-gold-icon {
+  color: #C09A6B;
+}
+
+.burst-spoke {
+  position: absolute;
+  width: 2px;
+  height: 8px;
+  background: #C09A6B;
+  border-radius: 2px;
+  opacity: 0.75;
+}
+
+.burst-spoke.b1 { top: 2px; left: 50%; transform: translateX(-50%); }
+.burst-spoke.b2 { top: 12px; right: 12px; transform: rotate(45deg); }
+.burst-spoke.b3 { top: 50%; right: 2px; transform: translateY(-50%) rotate(90deg); }
+.burst-spoke.b4 { bottom: 12px; right: 12px; transform: rotate(135deg); }
+.burst-spoke.b5 { bottom: 2px; left: 50%; transform: translateX(-50%); }
+.burst-spoke.b6 { bottom: 12px; left: 12px; transform: rotate(-135deg); }
+.burst-spoke.b7 { top: 50%; left: 2px; transform: translateY(-50%) rotate(-90deg); }
+.burst-spoke.b8 { top: 12px; left: 12px; transform: rotate(-45deg); }
+
+/* Confirmation Details Card */
+.confirmation-details-card {
+  background: #FFFFFF;
+  border: 1px solid #EFE8DE;
+  border-radius: 20px;
+  padding: 22px 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(60, 45, 30, 0.05);
+  box-sizing: border-box;
+}
+
+.confirmation-details-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.confirmation-card-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #161513;
+  margin: 0;
+}
+
+.confirmation-id-pill {
+  background: #F8F3EB;
+  color: #8C6E4E;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+}
+
+.confirmation-service-preview {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+}
+
+.confirmation-service-thumb {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.confirmation-service-info {
+  flex: 1;
+}
+
+.confirmation-service-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #161513;
+  margin: 0 0 5px 0;
+  line-height: 1.25;
+}
+
+.confirmation-service-desc {
+  font-size: 13px;
+  color: #6E665E;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.confirmation-card-divider {
+  height: 1px;
+  background: #F0E9DF;
+  margin: 18px 0;
+}
+
+.confirmation-rows-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.confirmation-row-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.confirmation-row-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #666059;
+  font-weight: 500;
+  min-width: 140px;
+  flex-shrink: 0;
+}
+
+.conf-icon {
+  color: #8C6E4E;
+  flex-shrink: 0;
+}
+
+.confirmation-row-right {
+  text-align: right;
+  flex: 1;
+}
+
+.conf-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #161513;
+  word-break: break-word;
+}
+
+.conf-branch-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.3;
+}
+
+.conf-branch-sub {
+  font-size: 12px;
+  color: #887E74;
+  font-weight: 400;
+}
+
+/* Card 2: What's Next? */
+.whats-next-card {
+  background: #FFFFFF;
+  border: 1px solid #EFE8DE;
+  border-radius: 20px;
+  padding: 22px 24px;
+  margin-bottom: 22px;
+  box-shadow: 0 4px 20px rgba(60, 45, 30, 0.05);
+  box-sizing: border-box;
+}
+
+.whats-next-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #161513;
+  margin: 0 0 16px 0;
+  text-align: left;
+}
+
+.whats-next-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.whats-next-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  text-align: left;
+}
+
+.whats-next-icon-bubble {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #F8F3EC;
+  color: #8C6E4E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.whats-next-content {
+  flex: 1;
+}
+
+.whats-next-item-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #161513;
+  margin: 0 0 3px 0;
+}
+
+.whats-next-item-desc {
+  font-size: 13px;
+  color: #6E665E;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.confirmation-action-wrap {
+  width: 100%;
+}
+
+.back-home-btn {
+  background: #C09A6B !important;
+  color: #FFFFFF !important;
+  font-size: 15.5px !important;
+  font-weight: 600 !important;
+  padding: 15px 28px !important;
+  border-radius: 30px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  box-shadow: 0 4px 16px rgba(192, 154, 107, 0.35) !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+.back-home-btn:hover {
+  background: #B38A56 !important;
+  transform: translateY(-1px);
+}
+
+/* Mobile responsive fine-tuning */
+@media (max-width: 600px) {
+  .booking-step1-container,
+  .booking-step2-container,
+  .booking-step3-container,
+  .booking-step4-container,
+  .booking-step5-container {
+    padding: 16px 14px 48px 14px;
+  }
+
+  .unified-review-card,
+  .confirmation-details-card,
+  .whats-next-card {
+    padding: 18px 16px;
+  }
+
+  .review-service-image,
+  .confirmation-service-thumb {
+    width: 70px;
+    height: 70px;
+  }
+
+  .review-row-left,
+  .confirmation-row-left {
+    min-width: 110px;
+    font-size: 13px;
+  }
+
+  .review-row-value,
+  .conf-value {
+    font-size: 13px;
+  }
+}
+
+/* ==========================================================================
+   AT-HOME LOCATION SECTION STYLING (PART 23, 24, 25, 26)
+   ========================================================================== */
+
+.at-home-address-section {
+  background: #FCFAF6;
+  border: 1px solid #ECE3D6;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.section-title-with-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.at-home-badge {
+  background: #443224;
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.at-home-address-subtitle {
+  font-size: 13px;
+  color: #7A6F64;
+  margin: 0 0 14px 0;
+}
+
+.location-selection-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.detect-location-btn,
+.enter-manual-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #D8CFC2;
+  background: #FFFFFF;
+  color: #3B2E24;
+}
+
+.detect-location-btn {
+  background: #F4ECE1;
+  border-color: #C09A6B;
+  color: #3B2E24;
+}
+
+.detect-location-btn:hover {
+  background: #EFE4D4;
+}
+
+.enter-manual-btn:hover {
+  border-color: #C09A6B;
+}
+
+.detected-address-display-box {
+  background: #FFFFFF;
+  border: 1px solid #E2D7C7;
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.detected-address-content {
+  flex: 1;
+  text-align: left;
+}
+
+.address-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #E9F5EC;
+  color: #1F7A3E;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.detected-address-text {
+  font-size: 13.5px;
+  color: #1A1612;
+  font-weight: 500;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.address-edit-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #C09A6B;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+.address-edit-link:hover {
+  text-decoration: underline;
+}
+
+
+

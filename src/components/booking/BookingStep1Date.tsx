@@ -1,12 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { useBooking, formatHumanDate } from '../../context/BookingContext';
 import { BookingProgressBar } from './BookingProgressBar';
-import { SALON_BRANCH_INFO } from '../../data/services-catalog';
-import { Clock, Tag, MapPin, Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 
 export const BookingStep1Date: React.FC = () => {
   const {
-    service,
     selectedDate,
     setSelectedDate,
     setStep,
@@ -97,22 +95,10 @@ export const BookingStep1Date: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  return (
-    <div className="booking-container">
-      {/* Top Breadcrumbs */}
-      <div className="booking-breadcrumbs">
-        <div className="booking-breadcrumbs-left">
-          <a href="/" className="booking-breadcrumb-link">Home</a>
-          <span className="booking-breadcrumb-sep">&gt;</span>
-          <a href="/services" className="booking-breadcrumb-link">Services</a>
-          <span className="booking-breadcrumb-sep">&gt;</span>
-          <a href={`/services/${service.id}`} className="booking-breadcrumb-link">{service.name}</a>
-          <span className="booking-breadcrumb-sep">&gt;</span>
-          <span className="booking-breadcrumb-current">Select Date</span>
-        </div>
-        <div className="booking-tagline">SAME CONFIDENCE AT HOME</div>
-      </div>
+  const formattedSelectedDate = formatHumanDate(selectedDate);
 
+  return (
+    <div className="booking-container booking-step1-container">
       {/* Main Title & Subtitle */}
       <div className="booking-header-area">
         <h1 className="booking-main-title">Select Your Date</h1>
@@ -122,148 +108,92 @@ export const BookingStep1Date: React.FC = () => {
       {/* 5-Step Progress Indicator */}
       <BookingProgressBar currentStep={1} />
 
-      {/* Main 2-Column Layout */}
-      <div className="booking-content-grid">
-        {/* LEFT COLUMN: Large Calendar Card */}
-        <div className="booking-left-col">
-          <div className="booking-card calendar-card">
-            {/* Month & Year Navigation */}
-            <div className="calendar-header-nav">
-              <button
-                type="button"
-                className="calendar-nav-btn"
-                onClick={prevMonth}
-                aria-label="Previous Month"
-              >
-                <ChevronLeft size={18} />
-              </button>
-              <div className="calendar-month-year">
-                {monthNames[calendarViewDate.getMonth()]} {calendarViewDate.getFullYear()}
-              </div>
-              <button
-                type="button"
-                className="calendar-nav-btn"
-                onClick={nextMonth}
-                aria-label="Next Month"
-              >
-                <ChevronRight size={18} />
-              </button>
-            </div>
-
-            {/* Weekday Labels */}
-            <div className="calendar-weekdays-row">
-              <span>Sun</span>
-              <span>Mon</span>
-              <span>Tue</span>
-              <span>Wed</span>
-              <span>Thu</span>
-              <span>Fri</span>
-              <span>Sat</span>
-            </div>
-
-            {/* Calendar Days Grid */}
-            <div className="calendar-days-grid">
-              {daysInMonth.map((dayObj, i) => {
-                const dayDate = dayObj.date;
-                const isPast = dayDate < today;
-                const isSelected = isSameDay(dayDate, selectedDate);
-                const isCurrent = dayObj.isCurrentMonth;
-
-                return (
-                  <button
-                    type="button"
-                    key={i}
-                    onClick={() => handleSelectDate(dayDate)}
-                    disabled={isPast}
-                    className={`calendar-day-cell ${
-                      !isCurrent ? 'other-month' : ''
-                    } ${isPast ? 'disabled' : ''} ${isSelected ? 'selected' : ''}`}
-                    aria-label={formatHumanDate(dayDate)}
-                  >
-                    <span className="day-number">{dayDate.getDate()}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Bottom Status / Selection Notice */}
-            <div className="calendar-footer-note">
-              <CalendarIcon size={16} className="note-icon" />
-              <span>Select a date to continue.</span>
-            </div>
-          </div>
-
-          {/* Mobile Only Continue Button */}
-          <div className="booking-mobile-action-wrap">
+      {/* Single Unified Calendar Section (No duplicate Your Appointment card) */}
+      <div className="booking-single-card-wrap">
+        <div className="booking-card calendar-card">
+          {/* Month & Year Navigation */}
+          <div className="calendar-header-nav">
             <button
               type="button"
-              className="booking-primary-btn w-full"
-              onClick={handleContinue}
+              className="calendar-nav-btn"
+              onClick={prevMonth}
+              aria-label="Previous Month"
             >
-              <span>Continue</span>
-              <span aria-hidden="true">&rarr;</span>
+              <ChevronLeft size={18} />
             </button>
-            <div className="booking-btn-subtext">Choose your time in the next step.</div>
+            <div className="calendar-month-year">
+              {monthNames[calendarViewDate.getMonth()]} {calendarViewDate.getFullYear()}
+            </div>
+            <button
+              type="button"
+              className="calendar-nav-btn"
+              onClick={nextMonth}
+              aria-label="Next Month"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
+
+          {/* Weekday Labels */}
+          <div className="calendar-weekdays-row">
+            <span>Sun</span>
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+          </div>
+
+          {/* Calendar Days Grid */}
+          <div className="calendar-days-grid">
+            {daysInMonth.map((dayObj, i) => {
+              const dayDate = dayObj.date;
+              const isPast = dayDate < today;
+              const isSelected = isSameDay(dayDate, selectedDate);
+              const isCurrent = dayObj.isCurrentMonth;
+              const isTodayDate = isSameDay(dayDate, today);
+
+              return (
+                <button
+                  type="button"
+                  key={i}
+                  onClick={() => handleSelectDate(dayDate)}
+                  disabled={isPast}
+                  className={`calendar-day-cell ${
+                    !isCurrent ? 'other-month' : ''
+                  } ${isPast ? 'disabled' : ''} ${isSelected ? 'selected' : ''} ${
+                    isTodayDate && !isSelected ? 'today' : ''
+                  }`}
+                  aria-label={formatHumanDate(dayDate)}
+                >
+                  <span className="day-number">{dayDate.getDate()}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Selected Date Notice Banner */}
+          <div className="calendar-footer-note selected-date-notice">
+            <CalendarIcon size={16} className="note-icon" />
+            <span>
+              Selected Date: <strong>{formattedSelectedDate}</strong>
+            </span>
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Your Appointment Card (Desktop Only) */}
-        <aside className="booking-right-col">
-          <div className="booking-card appointment-summary-card">
-            <h2 className="appointment-card-title">Your Appointment</h2>
-
-            <div className="appointment-service-preview">
-              <img
-                src={service.thumb}
-                alt={service.name}
-                className="appointment-service-thumb"
-              />
-              <div className="appointment-service-info">
-                <h3 className="appointment-service-name">{service.name}</h3>
-                <p className="appointment-service-desc">{service.desc}</p>
-              </div>
-            </div>
-
-            <div className="appointment-details-list">
-              <div className="appointment-detail-row">
-                <div className="appointment-detail-left">
-                  <Clock size={16} className="detail-icon" />
-                  <span>Duration</span>
-                </div>
-                <div className="appointment-detail-val">{service.duration}</div>
-              </div>
-
-              <div className="appointment-detail-row">
-                <div className="appointment-detail-left">
-                  <Tag size={16} className="detail-icon" />
-                  <span>Price</span>
-                </div>
-                <div className="appointment-detail-val">{service.price}</div>
-              </div>
-
-              <div className="appointment-detail-row">
-                <div className="appointment-detail-left">
-                  <MapPin size={16} className="detail-icon" />
-                  <span>Branch</span>
-                </div>
-                <div className="appointment-detail-val branch-val">
-                  <strong>{SALON_BRANCH_INFO.shortName}</strong>
-                  <small>Moodbidri, Karnataka</small>
-                </div>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              className="booking-primary-btn w-full mt-6"
-              onClick={handleContinue}
-            >
-              <span>Continue</span>
-              <span aria-hidden="true">&rarr;</span>
-            </button>
-            <div className="booking-btn-subtext">Choose your time in the next step.</div>
-          </div>
-        </aside>
+        {/* Continue Button placed below the Calendar Card */}
+        <div className="booking-step-action-wrap">
+          <button
+            type="button"
+            className="booking-primary-btn w-full"
+            onClick={handleContinue}
+          >
+            <span>Continue</span>
+            <ArrowRight size={18} className="btn-arrow-icon" />
+          </button>
+          <div className="booking-btn-subtext">Choose your time in the next step.</div>
+        </div>
       </div>
     </div>
   );

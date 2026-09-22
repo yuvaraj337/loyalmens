@@ -10,7 +10,7 @@ import { BookingStep5Confirmed } from './BookingStep5Confirmed';
 import '../../styles/booking.css';
 
 export const BookingPage: React.FC = () => {
-  const { step, setService, setBookingType } = useBooking();
+  const { step, setService, setBookingType, bookingType } = useBooking();
   const { totalCount: cartCount, openDrawer } = useCart();
 
   // Detect service and type from URL search params (e.g. /booking?service=haircut-styling&type=home)
@@ -37,15 +37,20 @@ export const BookingPage: React.FC = () => {
   return (
     <div className="booking-page">
       {/* ==================================================================
-          TOP NAVIGATION HEADER (Exact reference styling)
+          TOP NAVIGATION HEADER (Exact reference styling for steps 1 to 4)
           ================================================================== */}
-      <header className="booking-header">
+      {step !== 5 && (
+        <header className="booking-header">
         {/* Brand */}
-        <a href="/" className="booking-brand" aria-label="Rizheena Home">
+        <a href="/" className="booking-brand" aria-label={bookingType === 'home' ? 'Rizheena Home' : 'Loyal Men\'s Salon'}>
           <img src="/images/crown_logo.png" alt="Crown Logo" className="booking-brand-crown" />
           <div className="booking-brand-text">
-            <span className="booking-brand-name">RIZHEENA</span>
-            <span className="booking-brand-sub">PROFESSIONAL MEN'S PARLOUR</span>
+            <span className="booking-brand-name">
+              {bookingType === 'home' ? 'RIZHEENA' : 'LOYAL'}
+            </span>
+            <span className="booking-brand-sub">
+              {bookingType === 'home' ? "PROFESSIONAL MEN'S PARLOUR" : "PROFESSIONAL MEN'S SALON"}
+            </span>
           </div>
         </a>
 
@@ -90,6 +95,7 @@ export const BookingPage: React.FC = () => {
           </a>
         </div>
       </header>
+      )}
 
       {/* ==================================================================
           STEP CONTENT (Sequential 5-step booking flow)
@@ -105,6 +111,7 @@ export const BookingPage: React.FC = () => {
       {/* ==================================================================
           SHARED FOOTER (Clean Ivory / Cream palette across all steps)
           ================================================================== */}
+      {step !== 5 && (
       <footer className="booking-footer">
         <div className="booking-footer-inner">
           {/* Brand Col */}
@@ -112,8 +119,12 @@ export const BookingPage: React.FC = () => {
             <div className="footer-brand-row">
               <img src="/images/crown_logo.png" alt="Crown" className="footer-crown" />
               <div>
-                <div className="footer-brand-name">RIZHEENA</div>
-                <div className="footer-brand-sub">PROFESSIONAL MEN'S PARLOUR</div>
+                <div className="footer-brand-name">
+                  {bookingType === 'home' ? 'RIZHEENA' : 'LOYAL'}
+                </div>
+                <div className="footer-brand-sub">
+                  {bookingType === 'home' ? "PROFESSIONAL MEN'S PARLOUR" : "PROFESSIONAL MEN'S SALON"}
+                </div>
               </div>
             </div>
           </div>
@@ -194,6 +205,7 @@ export const BookingPage: React.FC = () => {
           </div>
         </div>
       </footer>
+      )}
     </div>
   );
 };

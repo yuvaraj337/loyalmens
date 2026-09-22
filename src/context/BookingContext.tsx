@@ -270,8 +270,9 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const parsedDelivery = 50;
     const parsedTotal = parsedSubtotal + parsedGst + parsedDelivery;
 
+    const prefix = bookingType === 'home' ? 'RZP' : 'LYP';
     const newRecord: BookingRecord = {
-      booking_id: `RZP${new Date().getFullYear()}${String(new Date().getMonth() + 1).padStart(2, '0')}${String(new Date().getDate()).padStart(2, '0')}${randomSuffix}`,
+      booking_id: `${prefix}${new Date().getFullYear()}${String(new Date().getMonth() + 1).padStart(2, '0')}${String(new Date().getDate()).padStart(2, '0')}${randomSuffix}`,
       customer_id: `cust-${Date.now()}`,
       booking_type: bookingType,
       service_id: service.id,

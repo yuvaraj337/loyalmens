@@ -1,10 +1,13 @@
 import React from 'react';
+import { useBooking } from '../../context/BookingContext';
 
 interface BookingProgressBarProps {
   currentStep: 1 | 2 | 3 | 4 | 5;
 }
 
 export const BookingProgressBar: React.FC<BookingProgressBarProps> = ({ currentStep }) => {
+  const { setStep } = useBooking();
+
   const steps = [
     { num: 1, label: 'Date' },
     { num: 2, label: 'Time' },
@@ -13,19 +16,39 @@ export const BookingProgressBar: React.FC<BookingProgressBarProps> = ({ currentS
     { num: 5, label: 'Confirmation' },
   ];
 
+  const handleStepClick = (stepNum: number) => {
+    // Completed steps are clickable (can go backward, but cannot jump forward past current step)
+    if (stepNum < currentStep) {
+      setStep(stepNum as 1 | 2 | 3 | 4 | 5);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="booking-progress-wrap" aria-label="Booking Progress">
       <ol className="booking-progress-list">
         {steps.map((s, idx) => {
           const isActive = currentStep === s.num;
           const isCompleted = currentStep > s.num;
+          const isClickable = isCompleted;
 
           return (
             <React.Fragment key={s.num}>
               <li
                 className={`booking-progress-step ${
                   isActive ? 'active' : ''
-                } ${isCompleted ? 'completed' : ''}`}
+                } ${isCompleted ? 'completed' : ''} ${isClickable ? 'clickable' : ''}`}
+                onClick={() => isClickable && handleStepClick(s.num)}
+                role={isClickable ? 'button' : undefined}
+                tabIndex={isClickable ? 0 : undefined}
+                aria-current={isActive ? 'step' : undefined}
+                aria-label={`Step ${s.num}: ${s.label}${isClickable ? ' (Click to edit)' : ''}`}
+                onKeyDown={(e) => {
+                  if (isClickable && (e.key === 'Enter' || e.key === ' ')) {
+                    e.preventDefault();
+                    handleStepClick(s.num);
+                  }
+                }}
               >
                 <div className="booking-progress-circle">
                   {s.num}

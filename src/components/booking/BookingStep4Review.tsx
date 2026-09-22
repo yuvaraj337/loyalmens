@@ -3,21 +3,19 @@ import { useBooking, formatHumanDate } from '../../context/BookingContext';
 import { BookingProgressBar } from './BookingProgressBar';
 import { SALON_BRANCH_INFO } from '../../data/services-catalog';
 import {
-  Clock,
-  Tag,
-  MapPin,
   Calendar as CalendarIcon,
+  Clock,
   User,
   Phone,
   Mail,
   Users,
   FileText,
-  ShieldCheck,
-  ArrowLeft,
-  ArrowRight,
+  MapPin,
+  Home,
   AlertCircle,
-  Receipt,
-  Truck,
+  ArrowRight,
+  ArrowLeft,
+  Loader2,
 } from 'lucide-react';
 
 export const BookingStep4Review: React.FC = () => {
@@ -36,17 +34,10 @@ export const BookingStep4Review: React.FC = () => {
   const [submitError, setSubmitError] = useState<string>('');
 
   const formattedDate = formatHumanDate(selectedDate);
+  const isHome = bookingType === 'home';
 
-  const subtotal = (() => {
-    const match = service.price.replace(/,/g, '').match(/\d+/);
-    return match ? parseInt(match[0], 10) : 0;
-  })();
-  const gst = Math.round(subtotal * 0.12);
-  const deliveryCharge = 50;
-  const finalTotal = subtotal + gst + deliveryCharge;
-
-  const handleBack = () => {
-    setStep(3);
+  const handleEdit = (stepNumber: 1 | 2 | 3) => {
+    setStep(stepNumber);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -62,39 +53,22 @@ export const BookingStep4Review: React.FC = () => {
       await createBooking();
       // createBooking sets step to 5 automatically
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (err: any) {
-      setSubmitError(err?.message || 'Failed to confirm booking. Please try again.');
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Failed to confirm booking. Please try again.';
+      setSubmitError(msg);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="booking-container">
-      {/* Top Breadcrumbs */}
-      <div className="booking-breadcrumbs">
-        <div className="booking-breadcrumbs-left">
-          <a href="/" className="booking-breadcrumb-link">Home</a>
-          <span className="booking-breadcrumb-sep">&gt;</span>
-          <a href="/services" className="booking-breadcrumb-link">Services</a>
-          <span className="booking-breadcrumb-sep">&gt;</span>
-          <a href={`/services/${service.id}`} className="booking-breadcrumb-link">{service.name}</a>
-          <span className="booking-breadcrumb-sep">&gt;</span>
-          <button type="button" onClick={() => setStep(1)} className="booking-breadcrumb-link-btn">Select Date</button>
-          <span className="booking-breadcrumb-sep">&gt;</span>
-          <button type="button" onClick={() => setStep(2)} className="booking-breadcrumb-link-btn">Select Time</button>
-          <span className="booking-breadcrumb-sep">&gt;</span>
-          <button type="button" onClick={() => setStep(3)} className="booking-breadcrumb-link-btn">Your Details</button>
-          <span className="booking-breadcrumb-sep">&gt;</span>
-          <span className="booking-breadcrumb-current">Review</span>
-        </div>
-        <div className="booking-tagline">{bookingType === 'home' ? 'RIZHEENA AT HOME' : 'SAME CONFIDENCE AT HOME'}</div>
-      </div>
-
+    <div className="booking-container booking-step4-container">
       {/* Main Title & Subtitle */}
       <div className="booking-header-area">
-        <h1 className="booking-main-title">Review Your Booking</h1>
-        <p className="booking-main-subtitle">Please check your appointment details before confirming.</p>
+        <h1 className="booking-main-title">Review Your Appointment</h1>
+        <p className="booking-main-subtitle">
+          Please review your details below and confirm your appointment.
+        </p>
       </div>
 
       {/* 5-Step Progress Indicator: Step 4 active */}
@@ -108,320 +82,245 @@ export const BookingStep4Review: React.FC = () => {
         </div>
       )}
 
-      {/* Main 2-Column Side-by-Side Review Grid */}
-      <div className="review-cards-grid">
-        {/* CARD 1: Appointment Summary */}
-        <div className="booking-card review-card">
-          <div className="review-card-header">
-            <h2 className="review-card-title">Appointment Summary</h2>
-            <button
-              type="button"
-              className="review-card-edit-btn"
-              onClick={() => setStep(1)}
-            >
-              Edit
-            </button>
-          </div>
-
-          <div className="appointment-service-preview">
+      {/* ONE SINGLE COMBINED REVIEW CARD (Exact match to Reference Image 4) */}
+      <div className="booking-single-card-wrap">
+        <div className="booking-card unified-review-card">
+          {/* Top: Service Section */}
+          <div className="review-service-header">
             <img
               src={service.thumb}
               alt={service.name}
-              className="appointment-service-thumb"
+              className="review-service-image"
             />
-            <div className="appointment-service-info">
-              <h3 className="appointment-service-name">{service.name}</h3>
-              <p className="appointment-service-desc">{service.desc}</p>
+            <div className="review-service-meta">
+              <h2 className="review-service-title">{service.name}</h2>
+              <p className="review-service-desc">{service.desc}</p>
             </div>
           </div>
 
-          <div className="review-details-list">
-            {/* Date row */}
-            <div className="review-detail-row">
-              <div className="review-detail-left">
-                <CalendarIcon size={16} className="detail-icon" />
-                <span className="review-detail-label">Date</span>
+          <div className="review-divider" />
+
+          {/* Details Information Rows */}
+          <div className="review-rows-list">
+            {/* 1. Date */}
+            <div className="review-row-item">
+              <div className="review-row-left">
+                <CalendarIcon size={18} className="review-row-icon" />
+                <span className="review-row-label">Date</span>
               </div>
-              <div className="review-detail-right">
-                <span className="review-detail-val">{formattedDate}</span>
+              <div className="review-row-right">
+                <span className="review-row-value">{formattedDate}</span>
                 <button
                   type="button"
-                  className="review-row-edit-link"
-                  onClick={() => setStep(1)}
+                  className="review-row-edit-btn"
+                  onClick={() => handleEdit(1)}
+                  aria-label="Edit Date"
                 >
                   Edit
                 </button>
               </div>
             </div>
 
-            {/* Time row */}
-            <div className="review-detail-row">
-              <div className="review-detail-left">
-                <Clock size={16} className="detail-icon" />
-                <span className="review-detail-label">Time</span>
+            {/* 2. Time */}
+            <div className="review-row-item">
+              <div className="review-row-left">
+                <Clock size={18} className="review-row-icon" />
+                <span className="review-row-label">Time</span>
               </div>
-              <div className="review-detail-right">
-                <span className="review-detail-val">{selectedTime}</span>
+              <div className="review-row-right">
+                <span className="review-row-value">{selectedTime}</span>
                 <button
                   type="button"
-                  className="review-row-edit-link"
-                  onClick={() => setStep(2)}
+                  className="review-row-edit-btn"
+                  onClick={() => handleEdit(2)}
+                  aria-label="Edit Time"
                 >
                   Edit
                 </button>
               </div>
             </div>
 
-            {/* Duration row */}
-            <div className="review-detail-row">
-              <div className="review-detail-left">
-                <Clock size={16} className="detail-icon" />
-                <span className="review-detail-label">Duration</span>
+            {/* 3. Full Name */}
+            <div className="review-row-item">
+              <div className="review-row-left">
+                <User size={18} className="review-row-icon" />
+                <span className="review-row-label">Full Name</span>
               </div>
-              <div className="review-detail-right">
-                <span className="review-detail-val">{service.duration}</span>
-              </div>
-            </div>
-
-            {/* Price breakdown */}
-            <div className="review-detail-row">
-              <div className="review-detail-left">
-                <Tag size={16} className="detail-icon" />
-                <span className="review-detail-label">Subtotal</span>
-              </div>
-              <div className="review-detail-right">
-                <span className="review-detail-val">₹{subtotal.toLocaleString('en-IN')}</span>
-              </div>
-            </div>
-
-            <div className="review-detail-row">
-              <div className="review-detail-left">
-                <Receipt size={16} className="detail-icon" />
-                <span className="review-detail-label">GST (12%)</span>
-              </div>
-              <div className="review-detail-right">
-                <span className="review-detail-val">₹{gst.toLocaleString('en-IN')}</span>
-              </div>
-            </div>
-
-            <div className="review-detail-row">
-              <div className="review-detail-left">
-                <Truck size={16} className="detail-icon" />
-                <span className="review-detail-label">Delivery Charges</span>
-              </div>
-              <div className="review-detail-right">
-                <span className="review-detail-val">₹{deliveryCharge.toLocaleString('en-IN')}</span>
-              </div>
-            </div>
-
-            <div className="review-detail-row" style={{ borderTop: '1px dashed #E5E7EB', paddingTop: '8px', marginTop: '4px' }}>
-              <div className="review-detail-left">
-                <Tag size={16} className="detail-icon" />
-                <span className="review-detail-label" style={{ fontWeight: 700, color: '#111827' }}>Total</span>
-              </div>
-              <div className="review-detail-right">
-                <span className="review-detail-val" style={{ fontWeight: 700, color: '#111827', fontSize: '1.05rem' }}>
-                  ₹{finalTotal.toLocaleString('en-IN')}
+              <div className="review-row-right">
+                <span className="review-row-value">
+                  {customerDetails.fullName || 'Not provided'}
                 </span>
+                <button
+                  type="button"
+                  className="review-row-edit-btn"
+                  onClick={() => handleEdit(3)}
+                  aria-label="Edit Full Name"
+                >
+                  Edit
+                </button>
               </div>
             </div>
 
-            {/* Location / Branch row */}
-            {bookingType === 'home' ? (
-              <>
-                <div className="review-detail-row">
-                  <div className="review-detail-left">
-                    <MapPin size={16} className="detail-icon" />
-                    <span className="review-detail-label">Service Type</span>
-                  </div>
-                  <div className="review-detail-right">
-                    <div className="branch-val">
-                      <strong style={{ color: '#D4AF37' }}>RIZHEENA AT HOME</strong>
-                      <small>Doorstep Grooming Experience</small>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="review-detail-row">
-                  <div className="review-detail-left">
-                    <MapPin size={16} className="detail-icon" />
-                    <span className="review-detail-label">Delivery Address</span>
-                  </div>
-                  <div className="review-detail-right">
-                    <div className="branch-val" style={{ maxWidth: '240px', textAlign: 'right' }}>
-                      <span style={{ fontSize: '0.9rem', color: '#111827', fontWeight: 500, lineHeight: 1.4, display: 'block' }}>
-                        {customerDetails.deliveryAddress || 'Address not specified'}
-                      </span>
-                    </div>
-                    <button
-                      type="button"
-                      className="review-row-edit-link"
-                      onClick={() => setStep(3)}
-                    >
-                      Edit
-                    </button>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <div className="review-detail-row">
-                <div className="review-detail-left">
-                  <MapPin size={16} className="detail-icon" />
-                  <span className="review-detail-label">Branch</span>
-                </div>
-                <div className="review-detail-right">
-                  <div className="branch-val">
-                    <strong>{SALON_BRANCH_INFO.shortName}</strong>
-                    <small>Moodbidri, Karnataka</small>
-                  </div>
-                  <button
-                    type="button"
-                    className="review-row-edit-link"
-                    onClick={() => setStep(1)}
-                  >
-                    Edit
-                  </button>
-                </div>
+            {/* 4. Phone Number */}
+            <div className="review-row-item">
+              <div className="review-row-left">
+                <Phone size={18} className="review-row-icon" />
+                <span className="review-row-label">Phone Number</span>
               </div>
-            )}
-          </div>
-        </div>
-
-        {/* CARD 2: Customer Details */}
-        <div className="booking-card review-card">
-          <div className="review-card-header">
-            <h2 className="review-card-title">Customer Details</h2>
-            <button
-              type="button"
-              className="review-card-edit-btn"
-              onClick={() => setStep(3)}
-            >
-              Edit
-            </button>
-          </div>
-
-          <div className="review-details-list">
-            {/* Full Name */}
-            <div className="review-detail-row">
-              <div className="review-detail-left">
-                <User size={16} className="detail-icon" />
-                <span className="review-detail-label">Full Name</span>
-              </div>
-              <div className="review-detail-right">
-                <span className="review-detail-val font-semibold">
-                  {customerDetails.fullName || 'Valued Guest'}
-                </span>
+              <div className="review-row-right">
+                <span className="review-row-value">{customerDetails.phone || 'Not provided'}</span>
+                <button
+                  type="button"
+                  className="review-row-edit-btn"
+                  onClick={() => handleEdit(3)}
+                  aria-label="Edit Phone Number"
+                >
+                  Edit
+                </button>
               </div>
             </div>
 
-            {/* Phone */}
-            <div className="review-detail-row">
-              <div className="review-detail-left">
-                <Phone size={16} className="detail-icon" />
-                <span className="review-detail-label">Phone Number</span>
+            {/* 5. Email */}
+            <div className="review-row-item">
+              <div className="review-row-left">
+                <Mail size={18} className="review-row-icon" />
+                <span className="review-row-label">Email</span>
               </div>
-              <div className="review-detail-right">
-                <span className="review-detail-val">{customerDetails.phone || '—'}</span>
-              </div>
-            </div>
-
-            {/* Email */}
-            <div className="review-detail-row">
-              <div className="review-detail-left">
-                <Mail size={16} className="detail-icon" />
-                <span className="review-detail-label">Email</span>
-              </div>
-              <div className="review-detail-right">
-                <span className="review-detail-val">
-                  {customerDetails.email || 'Not provided'}
-                </span>
+              <div className="review-row-right">
+                <span className="review-row-value">{customerDetails.email || 'Not provided'}</span>
+                <button
+                  type="button"
+                  className="review-row-edit-btn"
+                  onClick={() => handleEdit(3)}
+                  aria-label="Edit Email"
+                >
+                  Edit
+                </button>
               </div>
             </div>
 
-            {/* Gender */}
-            <div className="review-detail-row">
-              <div className="review-detail-left">
-                <Users size={16} className="detail-icon" />
-                <span className="review-detail-label">Gender</span>
+            {/* 6. Gender */}
+            <div className="review-row-item">
+              <div className="review-row-left">
+                <Users size={18} className="review-row-icon" />
+                <span className="review-row-label">Gender</span>
               </div>
-              <div className="review-detail-right">
-                <span className="review-detail-val">{customerDetails.gender || 'Male'}</span>
+              <div className="review-row-right">
+                <span className="review-row-value">{customerDetails.gender || 'Male'}</span>
+                <button
+                  type="button"
+                  className="review-row-edit-btn"
+                  onClick={() => handleEdit(3)}
+                  aria-label="Edit Gender"
+                >
+                  Edit
+                </button>
               </div>
             </div>
 
-            {/* Delivery Address if At Home */}
-            {bookingType === 'home' && customerDetails.deliveryAddress && (
-              <div className="review-detail-row">
-                <div className="review-detail-left">
-                  <MapPin size={16} className="detail-icon" />
-                  <span className="review-detail-label">Delivery Address</span>
-                </div>
-                <div className="review-detail-right">
-                  <span className="review-detail-val" style={{ maxWidth: '240px', textAlign: 'right', fontSize: '0.85rem', lineHeight: 1.4 }}>
-                    {customerDetails.deliveryAddress}
-                  </span>
-                </div>
+            {/* 7. Special Requests */}
+            <div className="review-row-item">
+              <div className="review-row-left">
+                <FileText size={18} className="review-row-icon" />
+                <span className="review-row-label">Special Requests</span>
               </div>
-            )}
-
-            {/* Special Requests */}
-            <div className="review-detail-row">
-              <div className="review-detail-left">
-                <FileText size={16} className="detail-icon" />
-                <span className="review-detail-label">Special Requests</span>
-              </div>
-              <div className="review-detail-right">
-                <span className="review-detail-val">
+              <div className="review-row-right">
+                <span className="review-row-value">
                   {customerDetails.specialRequest ? customerDetails.specialRequest : 'None'}
                 </span>
+                <button
+                  type="button"
+                  className="review-row-edit-btn"
+                  onClick={() => handleEdit(3)}
+                  aria-label="Edit Special Requests"
+                >
+                  Edit
+                </button>
+              </div>
+            </div>
+
+            {/* 8. Branch (Salon) OR Address (Home) */}
+            <div className="review-row-item">
+              <div className="review-row-left">
+                {isHome ? (
+                  <Home size={18} className="review-row-icon" />
+                ) : (
+                  <MapPin size={18} className="review-row-icon" />
+                )}
+                <span className="review-row-label">{isHome ? 'Service Address' : 'Branch'}</span>
+              </div>
+              <div className="review-row-right branch-right-cell">
+                {isHome ? (
+                  <span className="review-row-value">
+                    {customerDetails.deliveryAddress || 'Not provided'}
+                  </span>
+                ) : (
+                  <div className="review-branch-block">
+                    <span className="review-row-value">{SALON_BRANCH_INFO.shortName}</span>
+                    <span className="review-branch-sub">Moodbidri, Karnataka</span>
+                  </div>
+                )}
+                <button
+                  type="button"
+                  className="review-row-edit-btn"
+                  onClick={() => handleEdit(3)}
+                  aria-label={isHome ? 'Edit Service Address' : 'Edit Branch'}
+                >
+                  Edit
+                </button>
               </div>
             </div>
           </div>
-
-          {/* Security Guarantee Box */}
-          <div className="details-security-notice mt-6">
-            <ShieldCheck size={20} className="security-icon" />
-            <div className="security-text">
-              <strong>Your information is safe with us</strong>
-              <p>We'll only use your details to confirm your appointment.</p>
-            </div>
-          </div>
         </div>
-      </div>
 
-      {/* Terms Agreement & Bottom Action Buttons */}
-      <div className="review-bottom-section">
-        <label className="terms-checkbox-label">
-          <input
-            type="checkbox"
-            checked={termsAgreed}
-            onChange={(e) => setTermsAgreed(e.target.checked)}
-            className="terms-checkbox-input"
-          />
-          <span className="terms-checkbox-text">
-            I agree to the <a href="/terms" className="terms-link">Terms &amp; Conditions</a> and{' '}
-            <a href="/refund-policy" className="terms-link">Cancellation Policy</a>.
-          </span>
-        </label>
+        {/* Below the Card: Terms Checkbox & Confirm Booking Button */}
+        <div className="review-footer-action-block">
+          <label className="review-terms-label">
+            <input
+              type="checkbox"
+              checked={termsAgreed}
+              onChange={(e) => setTermsAgreed(e.target.checked)}
+              className="review-terms-checkbox"
+            />
+            <span className="review-terms-text">
+              I agree to the{' '}
+              <a href="/terms" target="_blank" rel="noreferrer" className="review-terms-link">
+                Terms &amp; Conditions
+              </a>{' '}
+              and{' '}
+              <a href="/cancellation-policy" target="_blank" rel="noreferrer" className="review-terms-link">
+                Cancellation Policy
+              </a>
+              .
+            </span>
+          </label>
 
-        <div className="review-actions-row">
           <button
             type="button"
-            className="booking-secondary-btn"
-            onClick={handleBack}
+            className="booking-primary-btn review-confirm-btn w-full"
+            disabled={isSubmitting || !termsAgreed}
+            onClick={handleConfirm}
           >
-            <ArrowLeft size={16} />
-            <span>Back</span>
+            {isSubmitting ? (
+              <>
+                <Loader2 size={18} className="animate-spin" />
+                <span>Confirming Booking...</span>
+              </>
+            ) : (
+              <>
+                <span>Confirm Booking</span>
+                <ArrowRight size={18} className="btn-arrow-icon" />
+              </>
+            )}
           </button>
 
           <button
             type="button"
-            className="booking-primary-btn confirm-btn"
-            disabled={isSubmitting}
-            onClick={handleConfirm}
+            className="booking-back-link-btn"
+            onClick={() => handleEdit(3)}
           >
-            <span>{isSubmitting ? 'Confirming Appointment...' : 'Confirm Booking'}</span>
-            <span aria-hidden="true">&rarr;</span>
+            <ArrowLeft size={16} />
+            <span>Back to Your Details</span>
           </button>
         </div>
       </div>

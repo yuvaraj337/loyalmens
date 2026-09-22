@@ -1,31 +1,23 @@
 import React, { useState } from 'react';
-import { useBooking, formatHumanDate } from '../../context/BookingContext';
+import { useBooking } from '../../context/BookingContext';
 import { BookingProgressBar } from './BookingProgressBar';
-import { SALON_BRANCH_INFO } from '../../data/services-catalog';
 import {
-  Clock,
-  Tag,
-  MapPin,
-  Calendar as CalendarIcon,
   User,
   Phone,
   Mail,
   FileText,
-  ShieldCheck,
   ArrowLeft,
   ArrowRight,
-  Home,
-  Check,
-  Loader2,
-  Edit2,
   Navigation,
+  Loader2,
+  Check,
+  Edit2,
+  AlertCircle,
+  Home,
 } from 'lucide-react';
 
 export const BookingStep3Details: React.FC = () => {
   const {
-    service,
-    selectedDate,
-    selectedTime,
     customerDetails,
     setCustomerDetails,
     setStep,
@@ -38,8 +30,6 @@ export const BookingStep3Details: React.FC = () => {
   });
   const [manualAddress, setManualAddress] = useState<string>(customerDetails.deliveryAddress || '');
   const [isEditingAddress, setIsEditingAddress] = useState<boolean>(false);
-
-  const formattedDate = formatHumanDate(selectedDate);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -62,76 +52,108 @@ export const BookingStep3Details: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Real device Geolocation Detection + Reverse Geocoding (Part 24, 25, 26)
   const handleDetectLocation = () => {
+    if (typeof navigator === 'undefined' || !navigator.geolocation) {
+      setErrorMessage('Geolocation is not supported by your browser. Please enter your address manually.');
+      setLocationState('manual');
+      setIsEditingAddress(true);
+      return;
+    }
+
     setLocationState('detecting');
     setErrorMessage('');
 
-    let resolved = false;
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const { latitude, longitude } = pos.coords;
+        let formattedAddr = '';
 
-    const finalizeLocation = (formattedAddr: string, coords: { lat: number; lng: number }) => {
-      if (resolved) return;
-      resolved = true;
-      setCustomerDetails((prev) => ({
-        ...prev,
-        deliveryAddress: formattedAddr,
-        locationCoords: coords,
-        locationStatus: 'detected',
-      }));
-      setManualAddress(formattedAddr);
-      setIsEditingAddress(false);
-      setLocationState('detected');
-    };
+        // 1. Try BigDataCloud reverse geocode client (open, fast, CORS-friendly, no API key required)
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 6000);
+          const bdcRes = await fetch(
+            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`,
+            { signal: controller.signal }
+          );
+          clearTimeout(timeoutId);
 
-    // Smooth fallback timer if geolocation is blocked, denied, or headless
-    const fallbackTimer = setTimeout(() => {
-      finalizeLocation(
-        '123, 5th Cross, Moodbidri Main Road, Moodbidri, Karnataka - 574227',
-        { lat: 13.0699, lng: 74.9961 }
-      );
-    }, 1800);
+          if (bdcRes.ok) {
+            const bdcData = await bdcRes.json();
+            const parts = [
+              bdcData.locality,
+              bdcData.city || bdcData.principalSubdivision,
+              bdcData.postcode,
+              bdcData.countryName,
+            ].filter(Boolean);
+            if (parts.length > 0) {
+              formattedAddr = parts.join(', ');
+            }
+          }
+        } catch {
+          // Fall through to Nominatim
+        }
 
-    if (typeof navigator !== 'undefined' && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        async (pos) => {
-          clearTimeout(fallbackTimer);
-          const { latitude, longitude } = pos.coords;
-          let formattedAddr = '';
-
+        // 2. Fallback to OpenStreetMap Nominatim if needed
+        if (!formattedAddr) {
           try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 2500);
-            const res = await fetch(
-              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`,
-              { signal: controller.signal }
+            const timeoutId = setTimeout(() => controller.abort(), 6000);
+            const nomRes = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`,
+              {
+                signal: controller.signal,
+                headers: { 'Accept-Language': 'en' },
+              }
             );
             clearTimeout(timeoutId);
-            if (res.ok) {
-              const data = await res.json();
-              formattedAddr = data.display_name;
+
+            if (nomRes.ok) {
+              const nomData = await nomRes.json();
+              if (nomData.display_name) {
+                formattedAddr = nomData.display_name;
+              }
             }
           } catch {
-            // Network fallback
+            // Geocoder offline
           }
+        }
 
-          if (!formattedAddr) {
-            formattedAddr = '123, 5th Cross, Moodbidri Main Road, Moodbidri, Karnataka - 574227';
-          }
+        // 3. Fallback to exact GPS coordinates if network reverse geocoding is unavailable
+        if (!formattedAddr) {
+          formattedAddr = `Detected Location (GPS: ${latitude.toFixed(5)}, ${longitude.toFixed(5)})`;
+        }
 
-          finalizeLocation(formattedAddr, { lat: latitude, lng: longitude });
-        },
-        (err) => {
-          console.warn('Geolocation fallback:', err);
-          clearTimeout(fallbackTimer);
-          setTimeout(() => {
-            finalizeLocation(
-              '123, 5th Cross, Moodbidri Main Road, Moodbidri, Karnataka - 574227',
-              { lat: 13.0699, lng: 74.9961 }
-            );
-          }, 600);
-        },
-        { timeout: 2000, enableHighAccuracy: false }
-      );
-    }
+        setCustomerDetails((prev) => ({
+          ...prev,
+          deliveryAddress: formattedAddr,
+          locationCoords: { lat: latitude, lng: longitude },
+          locationStatus: 'detected',
+        }));
+        setManualAddress(formattedAddr);
+        setIsEditingAddress(false);
+        setLocationState('detected');
+      },
+      (err) => {
+        let msg = 'Could not retrieve your location. Please enter your address manually.';
+        if (err.code === 1) {
+          msg = 'Location permission was denied. Please allow location access or type your address manually.';
+        } else if (err.code === 2) {
+          msg = 'Location is unavailable. Please type your address manually.';
+        } else if (err.code === 3) {
+          msg = 'Location request timed out. Please try again or type your address manually.';
+        }
+        setErrorMessage(msg);
+        setLocationState('manual');
+        setIsEditingAddress(true);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 12000,
+        maximumAge: 0, // Never use cached stale coordinates
+      }
+    );
   };
 
   const handleEnterManually = () => {
@@ -172,13 +194,12 @@ export const BookingStep3Details: React.FC = () => {
       return;
     }
 
-    // Email is optional, but if provided must have basic email format
     if (customerDetails.email.trim() && !customerDetails.email.includes('@')) {
       setErrorMessage('Please enter a valid email address or leave it blank.');
       return;
     }
 
-    // When bookingType is home, delivery address is required
+    // For At-Home bookings, delivery address is required
     if (bookingType === 'home') {
       const activeAddress = (customerDetails.deliveryAddress || manualAddress || '').trim();
       if (!activeAddress) {
@@ -199,25 +220,7 @@ export const BookingStep3Details: React.FC = () => {
   };
 
   return (
-    <div className="booking-container">
-      {/* Top Breadcrumbs */}
-      <div className="booking-breadcrumbs">
-        <div className="booking-breadcrumbs-left">
-          <a href="/" className="booking-breadcrumb-link">Home</a>
-          <span className="booking-breadcrumb-sep">&gt;</span>
-          <a href="/services" className="booking-breadcrumb-link">Services</a>
-          <span className="booking-breadcrumb-sep">&gt;</span>
-          <a href={`/services/${service.id}`} className="booking-breadcrumb-link">{service.name}</a>
-          <span className="booking-breadcrumb-sep">&gt;</span>
-          <button type="button" onClick={() => setStep(1)} className="booking-breadcrumb-link-btn">Select Date</button>
-          <span className="booking-breadcrumb-sep">&gt;</span>
-          <button type="button" onClick={() => setStep(2)} className="booking-breadcrumb-link-btn">Select Time</button>
-          <span className="booking-breadcrumb-sep">&gt;</span>
-          <span className="booking-breadcrumb-current">Your Details</span>
-        </div>
-        <div className="booking-tagline">SAME CONFIDENCE AT HOME</div>
-      </div>
-
+    <div className="booking-container booking-step3-container">
       {/* Main Title & Subtitle */}
       <div className="booking-header-area">
         <h1 className="booking-main-title">Your Details</h1>
@@ -227,377 +230,258 @@ export const BookingStep3Details: React.FC = () => {
       {/* 5-Step Progress Indicator: Step 3 active */}
       <BookingProgressBar currentStep={3} />
 
-      {/* Main 2-Column Layout */}
-      <div className="booking-content-grid">
-        {/* LEFT COLUMN: Details Form */}
-        <div className="booking-left-col">
-          <form onSubmit={handleContinue} className="booking-card details-form-card">
-            {errorMessage && (
-              <div className="details-error-alert" role="alert">
-                {errorMessage}
+      {/* Single Unified Customer Details Wrap (Entire 'Your Appointment' Card is Completely Removed) */}
+      <div className="booking-single-card-wrap">
+        <form onSubmit={handleContinue} className="booking-card details-form-card">
+          {errorMessage && (
+            <div className="details-error-alert" role="alert">
+              <AlertCircle size={18} className="alert-icon" />
+              <span>{errorMessage}</span>
+            </div>
+          )}
+
+          {/* Section 1: Personal Information */}
+          <div className="details-section">
+            <h2 className="details-section-title">Personal Information</h2>
+
+            {/* Full Name */}
+            <div className="details-field-group">
+              <label htmlFor="details-fullname" className="details-field-label">
+                Full Name <span className="text-required">*</span>
+              </label>
+              <div className="details-input-wrapper">
+                <User size={18} className="details-input-icon" />
+                <input
+                  id="details-fullname"
+                  type="text"
+                  name="fullName"
+                  value={customerDetails.fullName}
+                  onChange={handleInputChange}
+                  placeholder="Arjun K"
+                  required
+                  className="details-input"
+                  autoComplete="name"
+                />
               </div>
-            )}
+            </div>
 
-            {/* Section 1: Personal Information */}
-            <div className="details-section">
-              <h2 className="details-section-title">Personal Information</h2>
-
-              {/* Full Name */}
+            {/* Phone & Email Row */}
+            <div className="details-row-2col">
+              {/* Phone Number */}
               <div className="details-field-group">
-                <label htmlFor="details-fullname" className="details-field-label">
-                  Full Name <span className="text-required">*</span>
+                <label htmlFor="details-phone" className="details-field-label">
+                  Phone Number <span className="text-required">*</span>
                 </label>
                 <div className="details-input-wrapper">
-                  <User size={18} className="details-input-icon" />
+                  <Phone size={18} className="details-input-icon" />
                   <input
-                    id="details-fullname"
-                    type="text"
-                    name="fullName"
-                    value={customerDetails.fullName}
+                    id="details-phone"
+                    type="tel"
+                    name="phone"
+                    value={customerDetails.phone}
                     onChange={handleInputChange}
-                    placeholder="Arjun K"
+                    placeholder="+91 98765 43210"
                     required
                     className="details-input"
+                    autoComplete="tel"
                   />
                 </div>
               </div>
 
-              {/* Phone & Email Row */}
-              <div className="details-row-2col">
-                {/* Phone Number */}
-                <div className="details-field-group">
-                  <label htmlFor="details-phone" className="details-field-label">
-                    Phone Number <span className="text-required">*</span>
-                  </label>
-                  <div className="details-input-wrapper">
-                    <Phone size={18} className="details-input-icon" />
-                    <input
-                      id="details-phone"
-                      type="tel"
-                      name="phone"
-                      value={customerDetails.phone}
-                      onChange={handleInputChange}
-                      placeholder="+91 98765 43210"
-                      required
-                      className="details-input"
-                    />
-                  </div>
-                </div>
-
-                {/* Email (Optional) */}
-                <div className="details-field-group">
-                  <label htmlFor="details-email" className="details-field-label">
-                    Email (Optional)
-                  </label>
-                  <div className="details-input-wrapper">
-                    <Mail size={18} className="details-input-icon" />
-                    <input
-                      id="details-email"
-                      type="email"
-                      name="email"
-                      value={customerDetails.email}
-                      onChange={handleInputChange}
-                      placeholder="arjun@gmail.com"
-                      className="details-input"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Section 2: Delivery Location (Only for RIZHEENA AT HOME) */}
-            {bookingType === 'home' && (
-              <div className="delivery-location-section" id="delivery-location-section">
-                <label className="delivery-location-label">
-                  Delivery Location <span className="text-required">*</span>
-                </label>
-
-                {/* State Buttons Row */}
-                <div className="delivery-buttons-row">
-                  {/* Button 1: Detect My Location */}
-                  <button
-                    type="button"
-                    onClick={handleDetectLocation}
-                    disabled={locationState === 'detecting'}
-                    className={`location-btn location-btn-detect ${
-                      locationState === 'detecting'
-                        ? 'detecting'
-                        : locationState === 'detected'
-                        ? 'success'
-                        : ''
-                    }`}
-                  >
-                    {locationState === 'detecting' ? (
-                      <>
-                        <Loader2 size={16} className="spin-loader" />
-                        <span>Detecting Location...</span>
-                      </>
-                    ) : locationState === 'detected' ? (
-                      <>
-                        <Navigation size={16} />
-                        <span>Location Detected ✓</span>
-                      </>
-                    ) : (
-                      <>
-                        <Navigation size={16} />
-                        <span>Detect My Location</span>
-                      </>
-                    )}
-                  </button>
-
-                  {/* Button 2: Enter Address Manually */}
-                  <button
-                    type="button"
-                    onClick={handleEnterManually}
-                    className={`location-btn location-btn-manual ${
-                      locationState === 'manual' || isEditingAddress ? 'active' : ''
-                    }`}
-                  >
-                    <Home size={16} />
-                    <span>Enter Address Manually</span>
-                  </button>
-                </div>
-
-                {/* State 1: Initial Hint */}
-                {locationState === 'idle' && !isEditingAddress && (
-                  <p className="location-hint-text">
-                    Allow location access to fetch your address using Google Maps.
-                  </p>
-                )}
-
-                {/* State 2: Detecting Status Panel */}
-                {locationState === 'detecting' && (
-                  <div className="location-detecting-panel">
-                    <div className="location-radar-wrap">
-                      <div className="location-radar-pulse" />
-                      <div className="location-radar-inner">
-                        <MapPin size={15} />
-                      </div>
-                    </div>
-                    <div className="location-detecting-text">
-                      <h4>Getting your location...</h4>
-                      <p>Please allow location access on your browser.</p>
-                    </div>
-                  </div>
-                )}
-
-                {/* State 3: Detected Address Card */}
-                {locationState === 'detected' && !isEditingAddress && customerDetails.deliveryAddress && (
-                  <div className="location-detected-card">
-                    <div className="location-detected-left">
-                      <MapPin size={18} className="location-detected-pin" />
-                      <span className="location-detected-address">
-                        {customerDetails.deliveryAddress}
-                      </span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={handleEditAddress}
-                      className="location-edit-btn"
-                    >
-                      <Edit2 size={14} />
-                      <span>Edit</span>
-                    </button>
-                  </div>
-                )}
-
-                {/* Manual Address Input Box */}
-                {isEditingAddress && (
-                  <div className="manual-address-box">
-                    <textarea
-                      value={manualAddress}
-                      onChange={(e) => setManualAddress(e.target.value)}
-                      placeholder="123, 5th Cross, Moodbidri Main Road, Moodbidri, Karnataka - 574227"
-                      className="manual-address-textarea"
-                      rows={2}
-                    />
-                    <div className="manual-address-actions">
-                      <button
-                        type="button"
-                        onClick={handleSaveManualAddress}
-                        className="manual-address-save-btn"
-                      >
-                        Save Address
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* Section 3: Additional Information */}
-            <div className="details-section">
-              <h2 className="details-section-title">Additional Information</h2>
-
-              {/* Select Gender */}
+              {/* Email (Optional) */}
               <div className="details-field-group">
-                <label className="details-field-label">Select Gender</label>
-                <div className="gender-pills-row">
-                  <button
-                    type="button"
-                    onClick={() => handleGenderSelect('Male')}
-                    className={`gender-pill-btn ${customerDetails.gender === 'Male' ? 'active' : ''}`}
-                  >
-                    <span className="gender-symbol">&#9794;</span>
-                    <span>Male</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => handleGenderSelect('Female')}
-                    className={`gender-pill-btn ${customerDetails.gender === 'Female' ? 'active' : ''}`}
-                  >
-                    <span className="gender-symbol">&#9792;</span>
-                    <span>Female</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => handleGenderSelect('Other')}
-                    className={`gender-pill-btn ${customerDetails.gender === 'Other' ? 'active' : ''}`}
-                  >
-                    <span className="gender-symbol">&#9893;</span>
-                    <span>Other</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Special Requests (Optional) */}
-              <div className="details-field-group">
-                <label htmlFor="details-requests" className="details-field-label">
-                  Special Requests (Optional)
+                <label htmlFor="details-email" className="details-field-label">
+                  Email (Optional)
                 </label>
-                <div className="details-textarea-wrapper">
-                  <FileText size={18} className="details-textarea-icon" />
-                  <textarea
-                    id="details-requests"
-                    name="specialRequest"
-                    value={customerDetails.specialRequest || ''}
+                <div className="details-input-wrapper">
+                  <Mail size={18} className="details-input-icon" />
+                  <input
+                    id="details-email"
+                    type="email"
+                    name="email"
+                    value={customerDetails.email}
                     onChange={handleInputChange}
-                    maxLength={200}
-                    rows={3}
-                    placeholder="e.g. Fade cut, beard styling, specific stylist, etc."
-                    className="details-textarea"
+                    placeholder="arjun@gmail.com"
+                    className="details-input"
+                    autoComplete="email"
                   />
-                  <div className="char-counter">
-                    {(customerDetails.specialRequest || '').length}/200
-                  </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Bottom Actions Row */}
-            <div className="details-action-buttons-row">
-              <button
-                type="button"
-                className="booking-secondary-btn"
-                onClick={handleBack}
-              >
-                <ArrowLeft size={16} />
-                <span>Back</span>
-              </button>
-
-              <button
-                type="submit"
-                className="booking-primary-btn"
-              >
-                <span>Continue</span>
-                <span aria-hidden="true">&rarr;</span>
-              </button>
-            </div>
-          </form>
-        </div>
-
-        {/* RIGHT COLUMN: Your Appointment Card (Desktop Only) */}
-        <aside className="booking-right-col">
-          <div className="booking-card appointment-summary-card">
-            <div className="appointment-card-top-row">
-              <h2 className="appointment-card-title">Your Appointment</h2>
-              <button
-                type="button"
-                className="appointment-edit-btn"
-                onClick={() => setStep(2)}
-              >
-                Edit
-              </button>
-            </div>
-
-            <div className="appointment-service-preview">
-              <img
-                src={service.thumb}
-                alt={service.name}
-                className="appointment-service-thumb"
-              />
-              <div className="appointment-service-info">
-                <h3 className="appointment-service-name">{service.name}</h3>
-                <p className="appointment-service-desc">{service.desc}</p>
-              </div>
-            </div>
-
-            <div className="appointment-details-list">
-              <div className="appointment-detail-row">
-                <div className="appointment-detail-left">
-                  <CalendarIcon size={16} className="detail-icon" />
-                  <span>Date</span>
-                </div>
-                <div className="appointment-detail-val">{formattedDate}</div>
-              </div>
-
-              <div className="appointment-detail-row">
-                <div className="appointment-detail-left">
-                  <Clock size={16} className="detail-icon" />
-                  <span>Time</span>
-                </div>
-                <div className="appointment-detail-val">{selectedTime}</div>
-              </div>
-
-              <div className="appointment-detail-row">
-                <div className="appointment-detail-left">
-                  <Clock size={16} className="detail-icon" />
-                  <span>Duration</span>
-                </div>
-                <div className="appointment-detail-val">{service.duration}</div>
-              </div>
-
-              <div className="appointment-detail-row">
-                <div className="appointment-detail-left">
-                  <Tag size={16} className="detail-icon" />
-                  <span>Price</span>
-                </div>
-                <div className="appointment-detail-val">{service.price}</div>
-              </div>
-
-              <div className="appointment-detail-row">
-                <div className="appointment-detail-left">
-                  <MapPin size={16} className="detail-icon" />
-                  <span>{bookingType === 'home' ? 'Location' : 'Branch'}</span>
-                </div>
-                <div className="appointment-detail-val branch-val">
-                  {bookingType === 'home' ? (
-                    <>
-                      <strong>RIZHEENA AT HOME</strong>
-                      <small>{customerDetails.deliveryAddress ? 'Doorstep Delivery' : 'Address Required'}</small>
-                    </>
-                  ) : (
-                    <>
-                      <strong>{SALON_BRANCH_INFO.shortName}</strong>
-                      <small>Moodbidri, Karnataka</small>
-                    </>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {/* Security Guarantee Box */}
-            <div className="details-security-notice mt-6">
-              <ShieldCheck size={20} className="security-icon" />
-              <div className="security-text">
-                <strong>Your information is safe with us</strong>
-                <p>We'll only use your details to confirm your appointment.</p>
               </div>
             </div>
           </div>
-        </aside>
+
+          {/* Section 2: RIZHEENA At Home Address (Only shown when bookingType === 'home') */}
+          {bookingType === 'home' && (
+            <div className="details-section at-home-address-section">
+              <div className="section-title-with-badge">
+                <h2 className="details-section-title">Home Service Address</h2>
+                <span className="at-home-badge">RIZHEENA AT HOME</span>
+              </div>
+              <p className="at-home-address-subtitle">
+                Where would you like our professional stylist to visit?
+              </p>
+
+              {/* Location Action Buttons */}
+              <div className="location-selection-buttons">
+                <button
+                  type="button"
+                  onClick={handleDetectLocation}
+                  disabled={locationState === 'detecting'}
+                  className={`detect-location-btn ${locationState === 'detecting' ? 'loading' : ''}`}
+                >
+                  {locationState === 'detecting' ? (
+                    <>
+                      <Loader2 size={16} className="btn-spinner animate-spin" />
+                      <span>Detecting location...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Navigation size={16} />
+                      <span>Detect My Location</span>
+                    </>
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleEnterManually}
+                  className={`enter-manual-btn ${locationState === 'manual' ? 'active' : ''}`}
+                >
+                  <Home size={16} />
+                  <span>Enter Address Manually</span>
+                </button>
+              </div>
+
+              {/* Detected Address Display Box */}
+              {customerDetails.deliveryAddress && !isEditingAddress && (
+                <div className="detected-address-display-box">
+                  <div className="detected-address-content">
+                    <div className="detected-address-header">
+                      <span className="address-status-pill">
+                        <Check size={13} />
+                        Service Location
+                      </span>
+                    </div>
+                    <p className="detected-address-text">{customerDetails.deliveryAddress}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleEditAddress}
+                    className="address-edit-link"
+                    aria-label="Edit detected address"
+                  >
+                    <Edit2 size={14} />
+                    <span>Edit</span>
+                  </button>
+                </div>
+              )}
+
+              {/* Manual Address Input Box */}
+              {isEditingAddress && (
+                <div className="manual-address-box">
+                  <textarea
+                    value={manualAddress}
+                    onChange={(e) => setManualAddress(e.target.value)}
+                    placeholder="Flat No, Building, Street, Area, City, Pincode"
+                    className="manual-address-textarea"
+                    rows={3}
+                  />
+                  <div className="manual-address-actions">
+                    <button
+                      type="button"
+                      onClick={handleSaveManualAddress}
+                      className="manual-address-save-btn"
+                    >
+                      Save Address
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Section 3: Additional Information */}
+          <div className="details-section">
+            <h2 className="details-section-title">Additional Information</h2>
+
+            {/* Select Gender */}
+            <div className="details-field-group">
+              <label className="details-field-label">Select Gender</label>
+              <div className="gender-pills-row">
+                <button
+                  type="button"
+                  onClick={() => handleGenderSelect('Male')}
+                  className={`gender-pill-btn ${customerDetails.gender === 'Male' ? 'active' : ''}`}
+                >
+                  <span className="gender-symbol">&#9794;</span>
+                  <span>Male</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleGenderSelect('Female')}
+                  className={`gender-pill-btn ${customerDetails.gender === 'Female' ? 'active' : ''}`}
+                >
+                  <span className="gender-symbol">&#9792;</span>
+                  <span>Female</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleGenderSelect('Other')}
+                  className={`gender-pill-btn ${customerDetails.gender === 'Other' ? 'active' : ''}`}
+                >
+                  <span className="gender-symbol">&#9893;</span>
+                  <span>Other</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Special Requests (Optional) */}
+            <div className="details-field-group">
+              <label htmlFor="details-requests" className="details-field-label">
+                Special Requests (Optional)
+              </label>
+              <div className="details-textarea-wrapper">
+                <FileText size={18} className="details-textarea-icon" />
+                <textarea
+                  id="details-requests"
+                  name="specialRequest"
+                  value={customerDetails.specialRequest || ''}
+                  onChange={handleInputChange}
+                  maxLength={200}
+                  rows={3}
+                  placeholder="e.g. Fade cut, beard styling, specific stylist, etc."
+                  className="details-textarea"
+                />
+                <div className="char-counter">
+                  {(customerDetails.specialRequest || '').length}/200
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Actions Row placed below Customer Details */}
+          <div className="booking-step-action-wrap">
+            <button
+              type="submit"
+              className="booking-primary-btn w-full"
+            >
+              <span>Continue</span>
+              <ArrowRight size={18} className="btn-arrow-icon" />
+            </button>
+            <div className="booking-btn-subtext">Review your appointment in the next step.</div>
+
+            <button
+              type="button"
+              className="booking-back-link-btn"
+              onClick={handleBack}
+            >
+              <ArrowLeft size={16} />
+              <span>Back to Time Selection</span>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
