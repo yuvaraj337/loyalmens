@@ -43,7 +43,7 @@ const SETTINGS_STORAGE_KEY = 'rizheena_store_settings';
 
 const DEFAULT_SETTINGS: StoreSettings = {
   deliveryCharge: 50,
-  taxRate: 0, // Configurable GST / tax
+  taxRate: 0.12, // 12% GST
 };
 
 const INITIAL_CUSTOMER: CustomerDeliveryDetails = {
@@ -86,7 +86,14 @@ export const CheckoutProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [storeSettings, setStoreSettings] = useState<StoreSettings>(() => {
     try {
       const stored = localStorage.getItem(SETTINGS_STORAGE_KEY);
-      if (stored) return JSON.parse(stored);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        return {
+          ...parsed,
+          deliveryCharge: 50,
+          taxRate: 0.12,
+        };
+      }
     } catch {
       // ignore
     }
@@ -130,14 +137,14 @@ export const CheckoutProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   }, [orders]);
 
-  // Pricing calculations
+  // Pricing calculations: Subtotal + 12% GST + ₹50 Delivery Charges (added once)
   const subtotal = items.reduce(
     (sum, item) => sum + parsePrice(item.price) * item.quantity,
     0
   );
-  const deliveryCharge = storeSettings.deliveryCharge;
+  const deliveryCharge = items.length > 0 ? storeSettings.deliveryCharge : 0;
   const tax = Math.round(subtotal * storeSettings.taxRate);
-  const finalTotal = subtotal + deliveryCharge + tax;
+  const finalTotal = items.length > 0 ? subtotal + deliveryCharge + tax : 0;
 
   const goToStep = useCallback((newStep: 1 | 2 | 3) => {
     setStep(newStep);

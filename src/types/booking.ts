@@ -42,6 +42,10 @@ export interface BookingRecord {
   service_id: string;
   service_name: string;
   service_price: string;
+  subtotal?: number;
+  gst?: number;
+  delivery_charge?: number;
+  total_amount?: number;
   duration: string;
   service_image: string;
   date: string; // Formatted date string, e.g. "Mon, Sep 21, 2026"

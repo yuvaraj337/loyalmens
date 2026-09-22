@@ -7,6 +7,10 @@ export const CartDrawer: React.FC = () => {
     items,
     totalCount,
     totalPrice,
+    subtotal,
+    gst,
+    deliveryCharge,
+    finalTotal,
     isDrawerOpen,
     closeDrawer,
     updateQuantity,
@@ -182,9 +186,24 @@ export const CartDrawer: React.FC = () => {
         {/* Footer: Total and Action buttons */}
         {items.length > 0 && (
           <div className="cart-drawer-footer">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '14px', fontSize: '13px', color: '#666' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>Subtotal</span>
+                <span style={{ fontWeight: 600, color: '#1A1816' }}>₹{subtotal.toLocaleString('en-IN')}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>GST (12%)</span>
+                <span style={{ fontWeight: 600, color: '#1A1816' }}>₹{gst.toLocaleString('en-IN')}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>Delivery Charges</span>
+                <span style={{ fontWeight: 600, color: '#1A1816' }}>₹{deliveryCharge.toLocaleString('en-IN')}</span>
+              </div>
+            </div>
+
             <div className="cart-drawer-total-row">
               <span className="cart-drawer-total-label">Total</span>
-              <span className="cart-drawer-total-value">₹{totalPrice.toLocaleString('en-IN')}</span>
+              <span className="cart-drawer-total-value">₹{finalTotal.toLocaleString('en-IN')}</span>
             </div>
 
             <div className="cart-drawer-footer-btns">

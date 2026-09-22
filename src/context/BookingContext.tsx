@@ -260,6 +260,14 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }
 
     const randomSuffix = Math.floor(100 + Math.random() * 900);
+    const parsedSubtotal = (() => {
+      const match = service.price.replace(/,/g, '').match(/\d+/);
+      return match ? parseInt(match[0], 10) : 0;
+    })();
+    const parsedGst = Math.round(parsedSubtotal * 0.12);
+    const parsedDelivery = 50;
+    const parsedTotal = parsedSubtotal + parsedGst + parsedDelivery;
+
     const newRecord: BookingRecord = {
       booking_id: `RZP${new Date().getFullYear()}${String(new Date().getMonth() + 1).padStart(2, '0')}${String(new Date().getDate()).padStart(2, '0')}${randomSuffix}`,
       customer_id: `cust-${Date.now()}`,
@@ -267,6 +275,10 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
       service_id: service.id,
       service_name: service.name,
       service_price: service.price,
+      subtotal: parsedSubtotal,
+      gst: parsedGst,
+      delivery_charge: parsedDelivery,
+      total_amount: parsedTotal,
       duration: service.duration,
       service_image: service.thumb,
       date: humanDate,

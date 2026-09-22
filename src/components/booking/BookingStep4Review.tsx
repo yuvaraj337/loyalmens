@@ -16,6 +16,8 @@ import {
   ArrowLeft,
   ArrowRight,
   AlertCircle,
+  Receipt,
+  Truck,
 } from 'lucide-react';
 
 export const BookingStep4Review: React.FC = () => {

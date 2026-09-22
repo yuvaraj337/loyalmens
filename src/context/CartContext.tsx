@@ -24,6 +24,10 @@ interface CartContextType {
   items: CartItem[];
   totalCount: number;
   totalPrice: number;
+  subtotal: number;
+  gst: number;
+  deliveryCharge: number;
+  finalTotal: number;
   addItem: (product: Omit<CartItem, 'quantity'>, quantity: number) => Promise<void>;
   updateQuantity: (id: string, quantity: number) => void;
   removeItem: (id: string) => void;
@@ -119,7 +123,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Computed values
   const totalCount = items.reduce((sum, item) => sum + item.quantity, 0);
-  const totalPrice = items.reduce((sum, item) => sum + parsePrice(item.price) * item.quantity, 0);
+  const subtotal = items.reduce((sum, item) => sum + parsePrice(item.price) * item.quantity, 0);
+  const totalPrice = subtotal;
+  const gst = Math.round(subtotal * 0.12);
+  const deliveryCharge = items.length > 0 ? 50 : 0;
+  const finalTotal = items.length > 0 ? subtotal + gst + deliveryCharge : 0;
 
   // Add item — returns a promise so the button can await the "processing" phase
   const addItem = useCallback(async (product: Omit<CartItem, 'quantity'>, quantity: number): Promise<void> => {
@@ -178,6 +186,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         items,
         totalCount,
         totalPrice,
+        subtotal,
+        gst,
+        deliveryCharge,
+        finalTotal,
         addItem,
         updateQuantity,
         removeItem,

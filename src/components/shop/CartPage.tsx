@@ -3,7 +3,7 @@ import { useCart } from '../../context/CartContext';
 import '../../styles/cart-page.css';
 
 export const CartPage: React.FC = () => {
-  const { items, totalCount, totalPrice, updateQuantity, removeItem } = useCart();
+  const { items, totalCount, subtotal, gst, deliveryCharge, finalTotal, updateQuantity, removeItem } = useCart();
 
   const parsePrice = (priceStr: string): number => {
     const match = priceStr.replace(/,/g, '').match(/\d+/);
@@ -64,7 +64,7 @@ export const CartPage: React.FC = () => {
             <div className="cart-page-items">
               {items.map((item) => {
                 const unitPrice = parsePrice(item.price);
-                const subtotal = unitPrice * item.quantity;
+                const lineTotal = unitPrice * item.quantity;
                 return (
                   <div key={item.id} className="cart-page-item">
                     <div className="cart-page-item-img">
@@ -111,7 +111,7 @@ export const CartPage: React.FC = () => {
 
                     <div className="cart-page-item-subtotal">
                       <span className="cart-page-item-subtotal-value">
-                        ₹{subtotal.toLocaleString('en-IN')}
+                        ₹{lineTotal.toLocaleString('en-IN')}
                       </span>
                     </div>
                   </div>
@@ -122,17 +122,21 @@ export const CartPage: React.FC = () => {
             {/* Summary */}
             <div className="cart-page-summary">
               <div className="cart-page-summary-row">
-                <span className="cart-page-summary-label">Subtotal ({totalCount} items)</span>
-                <span className="cart-page-summary-value">₹{totalPrice.toLocaleString('en-IN')}</span>
+                <span className="cart-page-summary-label">Subtotal</span>
+                <span className="cart-page-summary-value">₹{subtotal.toLocaleString('en-IN')}</span>
               </div>
               <div className="cart-page-summary-row">
-                <span className="cart-page-summary-label">Delivery</span>
-                <span className="cart-page-summary-value" style={{ color: '#22A55B' }}>Free</span>
+                <span className="cart-page-summary-label">GST (12%)</span>
+                <span className="cart-page-summary-value">₹{gst.toLocaleString('en-IN')}</span>
+              </div>
+              <div className="cart-page-summary-row">
+                <span className="cart-page-summary-label">Delivery Charges</span>
+                <span className="cart-page-summary-value">₹{deliveryCharge.toLocaleString('en-IN')}</span>
               </div>
               <div className="cart-page-summary-row cart-page-summary-row--total">
                 <span className="cart-page-summary-label cart-page-summary-label--total">Total</span>
                 <span className="cart-page-summary-value cart-page-summary-value--total">
-                  ₹{totalPrice.toLocaleString('en-IN')}
+                  ₹{finalTotal.toLocaleString('en-IN')}
                 </span>
               </div>
 

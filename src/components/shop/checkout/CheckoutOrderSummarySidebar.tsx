@@ -60,18 +60,14 @@ export const CheckoutOrderSummarySidebar: React.FC<Props> = ({ variant = 'delive
       </div>
 
       <div className="checkout-summary-row">
-        <span>{variant === 'review' ? 'Shipping' : 'Delivery Charge'}</span>
-        <span>
-          {deliveryCharge === 0 ? 'Free' : `₹${deliveryCharge.toLocaleString('en-IN')}`}
-        </span>
+        <span>GST (12%)</span>
+        <span>₹{tax.toLocaleString('en-IN')}</span>
       </div>
 
-      {tax > 0 && (
-        <div className="checkout-summary-row">
-          <span>Tax / GST</span>
-          <span>₹{tax.toLocaleString('en-IN')}</span>
-        </div>
-      )}
+      <div className="checkout-summary-row">
+        <span>Delivery Charges</span>
+        <span>₹{deliveryCharge.toLocaleString('en-IN')}</span>
+      </div>
 
       <div className="checkout-summary-total-row">
         <span>Total</span>
