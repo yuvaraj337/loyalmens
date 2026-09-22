@@ -517,7 +517,7 @@
 }
 
 /* ======================================================
-   MOBILE-ONLY RESPONSIVE REDESIGN (EXACT MATCH TO REFERENCE 1)
+   MOBILE-ONLY RESPONSIVE REDESIGN — CURVED IMAGE CARDS
    Desktop layout is 100% preserved and untouched above 768px
    ====================================================== */
 @media (max-width: 768px) {
@@ -581,22 +581,42 @@
     overflow: visible !important;
   }
 
-  /* Individual Mobile Card */
+  /* ====================================================
+     Individual Mobile Card — Image + curved boundary + black content
+     ==================================================== */
   .experience-card {
     position: relative !important;
     width: 100% !important;
     min-width: 0 !important;
-    aspect-ratio: 16 / 8.5 !important;
-    min-height: 180px !important;
-    border-radius: 24px !important;
+    aspect-ratio: unset !important;
+    height: auto !important;
+    min-height: 0 !important;
+    border-radius: 20px !important;
     overflow: hidden !important;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
     transform: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    background: #0A0908 !important;
   }
 
   .experience-card:hover {
     transform: none !important;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+  }
+
+  /* ====================================================
+     Image — full width, fixed height, sits in document flow
+     ==================================================== */
+  .card-bg-img {
+    position: relative !important;
+    inset: unset !important;
+    width: 100% !important;
+    height: 210px !important;
+    object-fit: cover !important;
+    display: block !important;
+    z-index: 1 !important;
   }
 
   .experience-card:nth-child(1) .card-bg-img {
@@ -611,29 +631,71 @@
     object-position: center 25% !important;
   }
 
-  /* Dark gradient overlay toward bottom */
+  /* ====================================================
+     Curved black overlay — sits on top of lower portion of image
+     Creates the concave bottom-edge illusion.
+     The SVG has a convex-upward shape filled with the card BG color,
+     so image shows through above, black fills below.
+     ==================================================== */
   .card-overlay-gradient {
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      transparent 30%,
-      rgba(10, 9, 8, 0.45) 55%,
-      rgba(10, 9, 8, 0.88) 80%,
-      rgba(10, 9, 8, 0.98) 100%
-    ) !important;
+    position: absolute !important;
+    inset: unset !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 160px !important;
+    height: 55px !important;
+    z-index: 3 !important;
+    pointer-events: none !important;
+    background: none !important;
+    border-radius: 0 !important;
+    /* SVG: a convex upward curve. The top is transparent (shows image),
+       below the curve is filled with #0A0908 (card bg color) */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 55' preserveAspectRatio='none'%3E%3Cpath d='M0,55 L0,15 Q200,55 400,15 L400,55 Z' fill='%230A0908'/%3E%3C/svg%3E") !important;
+    background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
   }
 
-  /* Card Number at Top Left */
+  /* ====================================================
+     Gold curved line — SVG stroke following the same curve path
+     Positioned at the exact curve transition
+     ==================================================== */
+  .experience-card::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 159px !important;
+    height: 55px !important;
+    z-index: 6 !important;
+    pointer-events: none !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 55' preserveAspectRatio='none'%3E%3Cpath d='M0,15 Q200,55 400,15' fill='none' stroke='%23C5A165' stroke-width='2.2'/%3E%3C/svg%3E") !important;
+    background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+  }
+
+  /* Hide the ::after pseudo-element on mobile (not used) */
+  .experience-card::after {
+    display: none !important;
+  }
+
+  /* ====================================================
+     Card Number at Top Left
+     ==================================================== */
   .card-number-badge {
-    top: 18px !important;
-    left: 20px !important;
+    position: absolute !important;
+    top: 16px !important;
+    left: 18px !important;
     font-size: 15px !important;
     font-weight: 500 !important;
     letter-spacing: 0.04em !important;
     color: #FFFFFF !important;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;
+    z-index: 7 !important;
   }
 
+  /* ====================================================
+     Black content area — sits below the curved image
+     ==================================================== */
   /* Hide Desktop Content on Mobile */
   .card-desktop-content {
     display: none !important;
@@ -641,14 +703,16 @@
 
   /* Show Mobile Content Row on Mobile */
   .card-mobile-content {
-    position: absolute !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
+    position: relative !important;
+    bottom: unset !important;
+    left: unset !important;
+    right: unset !important;
     z-index: 4 !important;
     display: flex !important;
     align-items: center !important;
-    padding: 14px 18px !important;
+    padding: 14px 18px 16px 18px !important;
+    background: #0A0908 !important;
+    margin-top: -5px !important;
   }
 
   /* Gold Circular Icon on Left */
@@ -691,7 +755,6 @@
     color: #FFFFFF !important;
     line-height: 1.15 !important;
     margin: 0 !important;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7) !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
@@ -734,17 +797,29 @@
     height: 18px !important;
   }
 
-  /* Hide Feature Strip & Lifestyle Preview on Mobile (Section ends cleanly at Card 03) */
+  /* Hide Feature Strip & Lifestyle Preview on Mobile */
   .experience-feature-strip,
   .trust-strip-wrapper,
   .lifestyle-peek-section {
     display: none !important;
   }
+
+  /* Hover border — ensure proper z-index on mobile */
+  .card-hover-border {
+    z-index: 8 !important;
+  }
 }
 
+/* Small mobile adjustments */
 @media (max-width: 375px) {
-  .experience-card {
-    min-height: 165px !important;
+  .card-bg-img {
+    height: 185px !important;
+  }
+  .card-overlay-gradient {
+    top: 138px !important;
+  }
+  .experience-card::before {
+    top: 137px !important;
   }
   .card-mobile-icon-circle {
     width: 42px !important;
@@ -761,3 +836,4 @@
     font-size: 11px !important;
   }
 }
+
