@@ -10,23 +10,29 @@ import { BookingStep5Confirmed } from './BookingStep5Confirmed';
 import '../../styles/booking.css';
 
 export const BookingPage: React.FC = () => {
-  const { step, setService } = useBooking();
+  const { step, setService, setBookingType } = useBooking();
   const { totalCount: cartCount, openDrawer } = useCart();
 
-  // Detect service from URL search params (e.g. /booking?service=haircut-styling)
+  // Detect service and type from URL search params (e.g. /booking?service=haircut-styling&type=home)
   useEffect(() => {
-    const syncService = () => {
+    const syncServiceAndType = () => {
       const params = new URLSearchParams(window.location.search);
       const serviceParam = params.get('service');
       if (serviceParam) {
         const resolved = findServiceByNameOrId(serviceParam);
         setService(resolved);
       }
+      const typeParam = params.get('type');
+      if (typeParam === 'home') {
+        setBookingType('home');
+      } else if (typeParam === 'salon') {
+        setBookingType('salon');
+      }
     };
-    syncService();
-    window.addEventListener('popstate', syncService);
-    return () => window.removeEventListener('popstate', syncService);
-  }, [setService]);
+    syncServiceAndType();
+    window.addEventListener('popstate', syncServiceAndType);
+    return () => window.removeEventListener('popstate', syncServiceAndType);
+  }, [setService, setBookingType]);
 
   return (
     <div className="booking-page">

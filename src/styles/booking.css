@@ -2787,3 +2787,289 @@
   }
 }
 
+/* ==========================================================================
+   AT HOME — SMART LOCATION DETECTION STYLES (REFERENCE IMAGE 1)
+   ========================================================================== */
+
+.delivery-location-section {
+  margin-top: 18px;
+  margin-bottom: 24px;
+}
+
+.delivery-location-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #1A1612;
+  margin-bottom: 10px;
+}
+
+.delivery-buttons-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.location-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: 1px solid transparent;
+  outline: none;
+  font-family: inherit;
+}
+
+/* State 1: Normal black button */
+.location-btn-detect {
+  background: #111111;
+  color: #FFFFFF;
+  border-color: #111111;
+}
+
+.location-btn-detect:hover:not(:disabled) {
+  background: #2A2520;
+  transform: translateY(-1px);
+}
+
+/* State 2: Detecting state */
+.location-btn-detect.detecting {
+  background: #1A1612;
+  color: #F5EFE7;
+  cursor: wait;
+}
+
+/* State 3: Success state - Rich Green */
+.location-btn-detect.success {
+  background: #1B7A43;
+  color: #FFFFFF;
+  border-color: #1B7A43;
+}
+
+.location-btn-detect.success:hover {
+  background: #166536;
+}
+
+/* Manual Address Button */
+.location-btn-manual {
+  background: #FFFFFF;
+  color: #1A1612;
+  border: 1px solid #DDD3C5;
+}
+
+.location-btn-manual:hover {
+  background: #FAF6F0;
+  border-color: #C8A366;
+}
+
+.location-btn-manual.active {
+  background: #FAF3E6;
+  border-color: #C8A366;
+  font-weight: 700;
+}
+
+/* Subtext hint under buttons */
+.location-hint-text {
+  font-size: 12px;
+  color: #7A6E63;
+  margin: 4px 0 0 0;
+  line-height: 1.4;
+}
+
+/* State 2: Detecting Status Panel */
+.location-detecting-panel {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #EEF7F2;
+  border: 1px solid #CDE7D7;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-top: 12px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Radar pulse animation for detecting */
+.location-radar-wrap {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.location-radar-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(27, 122, 67, 0.25);
+  animation: radarPulse 1.6s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.location-radar-inner {
+  position: relative;
+  z-index: 2;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #1B7A43;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+}
+
+@keyframes radarPulse {
+  0% { transform: scale(0.7); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.location-detecting-text h4 {
+  margin: 0 0 2px 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1A1612;
+}
+
+.location-detecting-text p {
+  margin: 0;
+  font-size: 12px;
+  color: #5C5247;
+}
+
+/* State 3: Detected Address Card */
+.location-detected-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #FFFFFF;
+  border: 1.5px solid #CDE7D7;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-top: 12px;
+  box-shadow: 0 2px 8px rgba(27, 122, 67, 0.06);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.location-detected-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex: 1;
+}
+
+.location-detected-pin {
+  color: #1B7A43;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.location-detected-address {
+  font-size: 13px;
+  color: #1A1612;
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.location-edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  color: #1A1612;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.location-edit-btn:hover {
+  background: #F5EFE7;
+  color: #8C6E4E;
+}
+
+/* Manual Address Form Box */
+.manual-address-box {
+  background: #FFFFFF;
+  border: 1px solid #DDD3C5;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 12px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.manual-address-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 13.5px;
+  color: #1A1612;
+  background: #FDFBF8;
+  border: 1px solid #DDD3C5;
+  border-radius: 8px;
+  font-family: inherit;
+  outline: none;
+  resize: vertical;
+  min-height: 64px;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.manual-address-textarea:focus {
+  border-color: #C8A366;
+  background: #FFFFFF;
+}
+
+.manual-address-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.manual-address-save-btn {
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #111111;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.manual-address-save-btn:hover {
+  background: #C8A366;
+}
+
+/* Spinner */
+.spin-loader {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 600px) {
+  .delivery-buttons-row {
+    flex-direction: column;
+  }
+}
+

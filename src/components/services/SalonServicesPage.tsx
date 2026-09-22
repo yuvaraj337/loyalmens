@@ -188,14 +188,18 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
   },
 ];
 
-export const SalonServicesPage: React.FC = () => {
+interface SalonServicesPageProps {
+  isHomeService?: boolean;
+}
+
+export const SalonServicesPage: React.FC<SalonServicesPageProps> = ({ isHomeService = false }) => {
   const [selectedCategory, setSelectedCategory] = useState<ServiceCategory | null>(null);
 
-  // Check URL hash on load for deep linking (e.g. /services#haircut)
+  // Auto-open modal if URL has hash (e.g. /services#haircut)
   useEffect(() => {
     const hash = window.location.hash.replace('#', '');
     if (hash) {
-      const match = SERVICE_CATEGORIES.find((cat) => cat.id === hash);
+      const match = SERVICE_CATEGORIES.find((c) => c.id === hash);
       if (match) {
         setSelectedCategory(match);
       }
@@ -204,10 +208,11 @@ export const SalonServicesPage: React.FC = () => {
 
   const handleCardClick = (cat: ServiceCategory) => {
     let route = '';
-    if (cat.id === 'haircut') route = '/services/haircut-styling';
-    else if (cat.id === 'beard') route = '/services/beard-grooming';
-    else if (cat.id === 'facial') route = '/services/facial-skin-care';
-    else if (cat.id === 'colour') route = '/services/hair-colour-treatment';
+    const typeSuffix = isHomeService ? '?type=home' : '';
+    if (cat.id === 'haircut') route = `/services/haircut-styling${typeSuffix}`;
+    else if (cat.id === 'beard') route = `/services/beard-grooming${typeSuffix}`;
+    else if (cat.id === 'facial') route = `/services/facial-skin-care${typeSuffix}`;
+    else if (cat.id === 'colour') route = `/services/hair-colour-treatment${typeSuffix}`;
 
     if (route) {
       window.history.pushState({}, '', route);
@@ -418,7 +423,7 @@ export const SalonServicesPage: React.FC = () => {
                     <span className="salon-modal-service-duration">Estimated Duration: {svc.duration}</span>
                   </div>
                   <a
-                    href={`/booking?service=${encodeURIComponent(svc.name)}`}
+                    href={`/booking?service=${encodeURIComponent(svc.name)}${isHomeService ? '&type=home' : ''}`}
                     className="salon-modal-book-btn"
                   >
                     Book Now

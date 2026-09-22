@@ -30,11 +30,15 @@ export interface CustomerDetails {
   gender?: string;
   specialRequest?: string;
   whatsappConsent: boolean;
+  deliveryAddress?: string;
+  locationCoords?: { lat: number; lng: number };
+  locationStatus?: 'idle' | 'detecting' | 'detected' | 'manual';
 }
 
 export interface BookingRecord {
   booking_id: string;
   customer_id: string;
+  booking_type?: 'salon' | 'home';
   service_id: string;
   service_name: string;
   service_price: string;
@@ -45,6 +49,8 @@ export interface BookingRecord {
   time: string; // e.g. "01:30 PM"
   branch: string;
   branch_address: string;
+  delivery_address?: string;
+  location_coords?: { lat: number; lng: number };
   customer_name: string;
   phone: string;
   email: string;

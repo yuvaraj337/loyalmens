@@ -41,6 +41,9 @@ const BEARD_SERVICES: ServiceItem[] = [
 ];
 
 export const BeardGroomingPage: React.FC = () => {
+  const isHome = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('type') === 'home';
+  const typeParam = isHome ? '&type=home' : '';
+
   return (
     <div className="haircut-page" id="beard-grooming-page">
       {/* ==================================================================
@@ -83,7 +86,7 @@ export const BeardGroomingPage: React.FC = () => {
             <span className="haircut-cart-badge">0</span>
           </a>
 
-          <a href="/booking?service=Beard%20Grooming" className="haircut-header-book-btn">
+          <a href={`/booking?service=Beard%20Grooming${typeParam}`} className="haircut-header-book-btn">
             <span>Book Now</span>
             <span aria-hidden="true">→</span>
           </a>
@@ -236,7 +239,7 @@ export const BeardGroomingPage: React.FC = () => {
                 <div className="haircut-service-right-group">
                   <span className="haircut-service-price">{svc.price}</span>
                   <a
-                    href={`/booking?service=${encodeURIComponent(svc.name)}`}
+                    href={`/booking?service=${encodeURIComponent(svc.name)}${typeParam}`}
                     className="haircut-service-book-btn"
                     aria-label={`Book ${svc.name}`}
                   >

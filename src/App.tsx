@@ -46,25 +46,30 @@ export function App() {
       if (!href) return;
 
       // Handle internal routes
-      if (href === '/services/haircut-styling' || href === '/services/haircut') {
+      if (href.startsWith('/services/haircut-styling') || href.startsWith('/services/haircut')) {
         e.preventDefault();
         window.history.pushState({}, '', href);
         setCurrentPath('/services/haircut-styling');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (href === '/services/beard-grooming' || href === '/services/beard') {
+      } else if (href.startsWith('/services/beard-grooming') || href.startsWith('/services/beard')) {
         e.preventDefault();
         window.history.pushState({}, '', href);
         setCurrentPath('/services/beard-grooming');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (href === '/services/facial-skin-care' || href === '/services/facial') {
+      } else if (href.startsWith('/services/facial-skin-care') || href.startsWith('/services/facial')) {
         e.preventDefault();
         window.history.pushState({}, '', href);
         setCurrentPath('/services/facial-skin-care');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (href === '/services/hair-colour-treatment' || href === '/services/colour' || href === '/services/color') {
+      } else if (href.startsWith('/services/hair-colour-treatment') || href.startsWith('/services/colour') || href.startsWith('/services/color')) {
         e.preventDefault();
         window.history.pushState({}, '', href);
         setCurrentPath('/services/hair-colour-treatment');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (href === '/home-service' || href.startsWith('/home-service')) {
+        e.preventDefault();
+        window.history.pushState({}, '', href);
+        setCurrentPath('/home-service');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (href === '/services' || href.startsWith('/services#')) {
         e.preventDefault();
@@ -165,8 +170,9 @@ export function App() {
 
   const isBookingPage = currentPath === '/booking' || currentPath.startsWith('/booking');
   const isAdminPage = currentPath === '/admin' || currentPath.startsWith('/admin');
+  const isHomeServicePage = currentPath === '/home-service' || currentPath.startsWith('/home-service');
 
-  const isServicesPage = !isBookingPage && !isAdminPage && !isHaircutPage && !isBeardPage && !isFacialPage && !isColourPage && (currentPath === '/services' || currentPath.startsWith('/services'));
+  const isServicesPage = !isBookingPage && !isAdminPage && !isHomeServicePage && !isHaircutPage && !isBeardPage && !isFacialPage && !isColourPage && (currentPath === '/services' || currentPath.startsWith('/services'));
   const isShopPage = !isBookingPage && !isAdminPage && !isHairCareShop && !isFaceCareShop && !isBeardCareShop && !isKitsShop && !isSpecialCareShop && !isGiftSetsShop && !isAllProductsShop && !isCartPage && !isCheckoutPage && (currentPath === '/shop' || currentPath.startsWith('/shop'));
 
   // Helper to wrap content in CartProvider, BookingProvider & CheckoutProvider with global drawer/toast
@@ -298,6 +304,14 @@ export function App() {
     return wrapWithProviders(
       <div className="app-root checkout-route-active">
         <CheckoutPage />
+      </div>
+    );
+  }
+
+  if (isHomeServicePage) {
+    return wrapWithProviders(
+      <div className="app-root services-route-active">
+        <SalonServicesPage isHomeService={true} />
       </div>
     );
   }

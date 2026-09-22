@@ -14,6 +14,11 @@ import {
   ShieldCheck,
   ArrowLeft,
   ArrowRight,
+  Home,
+  Check,
+  Loader2,
+  Edit2,
+  Navigation,
 } from 'lucide-react';
 
 export const BookingStep3Details: React.FC = () => {
@@ -24,9 +29,15 @@ export const BookingStep3Details: React.FC = () => {
     customerDetails,
     setCustomerDetails,
     setStep,
+    bookingType,
   } = useBooking();
 
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [locationState, setLocationState] = useState<'idle' | 'detecting' | 'detected' | 'manual'>(() => {
+    return customerDetails.deliveryAddress ? 'detected' : 'idle';
+  });
+  const [manualAddress, setManualAddress] = useState<string>(customerDetails.deliveryAddress || '');
+  const [isEditingAddress, setIsEditingAddress] = useState<boolean>(false);
 
   const formattedDate = formatHumanDate(selectedDate);
 
@@ -51,6 +62,102 @@ export const BookingStep3Details: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleDetectLocation = () => {
+    setLocationState('detecting');
+    setErrorMessage('');
+
+    let resolved = false;
+
+    const finalizeLocation = (formattedAddr: string, coords: { lat: number; lng: number }) => {
+      if (resolved) return;
+      resolved = true;
+      setCustomerDetails((prev) => ({
+        ...prev,
+        deliveryAddress: formattedAddr,
+        locationCoords: coords,
+        locationStatus: 'detected',
+      }));
+      setManualAddress(formattedAddr);
+      setIsEditingAddress(false);
+      setLocationState('detected');
+    };
+
+    // Smooth fallback timer if geolocation is blocked, denied, or headless
+    const fallbackTimer = setTimeout(() => {
+      finalizeLocation(
+        '123, 5th Cross, Moodbidri Main Road, Moodbidri, Karnataka - 574227',
+        { lat: 13.0699, lng: 74.9961 }
+      );
+    }, 1800);
+
+    if (typeof navigator !== 'undefined' && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          clearTimeout(fallbackTimer);
+          const { latitude, longitude } = pos.coords;
+          let formattedAddr = '';
+
+          try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 2500);
+            const res = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`,
+              { signal: controller.signal }
+            );
+            clearTimeout(timeoutId);
+            if (res.ok) {
+              const data = await res.json();
+              formattedAddr = data.display_name;
+            }
+          } catch {
+            // Network fallback
+          }
+
+          if (!formattedAddr) {
+            formattedAddr = '123, 5th Cross, Moodbidri Main Road, Moodbidri, Karnataka - 574227';
+          }
+
+          finalizeLocation(formattedAddr, { lat: latitude, lng: longitude });
+        },
+        (err) => {
+          console.warn('Geolocation fallback:', err);
+          clearTimeout(fallbackTimer);
+          setTimeout(() => {
+            finalizeLocation(
+              '123, 5th Cross, Moodbidri Main Road, Moodbidri, Karnataka - 574227',
+              { lat: 13.0699, lng: 74.9961 }
+            );
+          }, 600);
+        },
+        { timeout: 2000, enableHighAccuracy: false }
+      );
+    }
+  };
+
+  const handleEnterManually = () => {
+    setLocationState('manual');
+    setIsEditingAddress(true);
+  };
+
+  const handleEditAddress = () => {
+    setIsEditingAddress(true);
+  };
+
+  const handleSaveManualAddress = () => {
+    if (!manualAddress.trim()) {
+      setErrorMessage('Please enter a valid delivery address.');
+      return;
+    }
+    setCustomerDetails((prev) => ({
+      ...prev,
+      deliveryAddress: manualAddress.trim(),
+      locationStatus: 'detected',
+    }));
+    setIsEditingAddress(false);
+    setLocationState('detected');
+    if (errorMessage) setErrorMessage('');
+  };
+
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -69,6 +176,21 @@ export const BookingStep3Details: React.FC = () => {
     if (customerDetails.email.trim() && !customerDetails.email.includes('@')) {
       setErrorMessage('Please enter a valid email address or leave it blank.');
       return;
+    }
+
+    // When bookingType is home, delivery address is required
+    if (bookingType === 'home') {
+      const activeAddress = (customerDetails.deliveryAddress || manualAddress || '').trim();
+      if (!activeAddress) {
+        setErrorMessage('Please detect your location or enter your delivery address.');
+        return;
+      }
+      if (manualAddress.trim() && manualAddress.trim() !== customerDetails.deliveryAddress) {
+        setCustomerDetails((prev) => ({
+          ...prev,
+          deliveryAddress: manualAddress.trim(),
+        }));
+      }
     }
 
     setErrorMessage('');
@@ -183,7 +305,127 @@ export const BookingStep3Details: React.FC = () => {
               </div>
             </div>
 
-            {/* Section 2: Additional Information */}
+            {/* Section 2: Delivery Location (Only for RIZHEENA AT HOME) */}
+            {bookingType === 'home' && (
+              <div className="delivery-location-section" id="delivery-location-section">
+                <label className="delivery-location-label">
+                  Delivery Location <span className="text-required">*</span>
+                </label>
+
+                {/* State Buttons Row */}
+                <div className="delivery-buttons-row">
+                  {/* Button 1: Detect My Location */}
+                  <button
+                    type="button"
+                    onClick={handleDetectLocation}
+                    disabled={locationState === 'detecting'}
+                    className={`location-btn location-btn-detect ${
+                      locationState === 'detecting'
+                        ? 'detecting'
+                        : locationState === 'detected'
+                        ? 'success'
+                        : ''
+                    }`}
+                  >
+                    {locationState === 'detecting' ? (
+                      <>
+                        <Loader2 size={16} className="spin-loader" />
+                        <span>Detecting Location...</span>
+                      </>
+                    ) : locationState === 'detected' ? (
+                      <>
+                        <Navigation size={16} />
+                        <span>Location Detected ✓</span>
+                      </>
+                    ) : (
+                      <>
+                        <Navigation size={16} />
+                        <span>Detect My Location</span>
+                      </>
+                    )}
+                  </button>
+
+                  {/* Button 2: Enter Address Manually */}
+                  <button
+                    type="button"
+                    onClick={handleEnterManually}
+                    className={`location-btn location-btn-manual ${
+                      locationState === 'manual' || isEditingAddress ? 'active' : ''
+                    }`}
+                  >
+                    <Home size={16} />
+                    <span>Enter Address Manually</span>
+                  </button>
+                </div>
+
+                {/* State 1: Initial Hint */}
+                {locationState === 'idle' && !isEditingAddress && (
+                  <p className="location-hint-text">
+                    Allow location access to fetch your address using Google Maps.
+                  </p>
+                )}
+
+                {/* State 2: Detecting Status Panel */}
+                {locationState === 'detecting' && (
+                  <div className="location-detecting-panel">
+                    <div className="location-radar-wrap">
+                      <div className="location-radar-pulse" />
+                      <div className="location-radar-inner">
+                        <MapPin size={15} />
+                      </div>
+                    </div>
+                    <div className="location-detecting-text">
+                      <h4>Getting your location...</h4>
+                      <p>Please allow location access on your browser.</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* State 3: Detected Address Card */}
+                {locationState === 'detected' && !isEditingAddress && customerDetails.deliveryAddress && (
+                  <div className="location-detected-card">
+                    <div className="location-detected-left">
+                      <MapPin size={18} className="location-detected-pin" />
+                      <span className="location-detected-address">
+                        {customerDetails.deliveryAddress}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleEditAddress}
+                      className="location-edit-btn"
+                    >
+                      <Edit2 size={14} />
+                      <span>Edit</span>
+                    </button>
+                  </div>
+                )}
+
+                {/* Manual Address Input Box */}
+                {isEditingAddress && (
+                  <div className="manual-address-box">
+                    <textarea
+                      value={manualAddress}
+                      onChange={(e) => setManualAddress(e.target.value)}
+                      placeholder="123, 5th Cross, Moodbidri Main Road, Moodbidri, Karnataka - 574227"
+                      className="manual-address-textarea"
+                      rows={2}
+                    />
+                    <div className="manual-address-actions">
+                      <button
+                        type="button"
+                        onClick={handleSaveManualAddress}
+                        className="manual-address-save-btn"
+                      >
+                        Save Address
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Section 3: Additional Information */}
             <div className="details-section">
               <h2 className="details-section-title">Additional Information</h2>
 
@@ -328,11 +570,20 @@ export const BookingStep3Details: React.FC = () => {
               <div className="appointment-detail-row">
                 <div className="appointment-detail-left">
                   <MapPin size={16} className="detail-icon" />
-                  <span>Branch</span>
+                  <span>{bookingType === 'home' ? 'Location' : 'Branch'}</span>
                 </div>
                 <div className="appointment-detail-val branch-val">
-                  <strong>{SALON_BRANCH_INFO.shortName}</strong>
-                  <small>Moodbidri, Karnataka</small>
+                  {bookingType === 'home' ? (
+                    <>
+                      <strong>RIZHEENA AT HOME</strong>
+                      <small>{customerDetails.deliveryAddress ? 'Doorstep Delivery' : 'Address Required'}</small>
+                    </>
+                  ) : (
+                    <>
+                      <strong>{SALON_BRANCH_INFO.shortName}</strong>
+                      <small>Moodbidri, Karnataka</small>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

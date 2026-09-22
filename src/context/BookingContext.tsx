@@ -15,6 +15,8 @@ import {
 
 interface BookingContextType {
   // Current in-progress booking state
+  bookingType: 'salon' | 'home';
+  setBookingType: (t: 'salon' | 'home') => void;
   service: ServiceBookingItem;
   setService: (svc: ServiceBookingItem) => void;
   selectedDate: Date;
@@ -51,6 +53,8 @@ const INITIAL_DETAILS: CustomerDetails = {
   specialRequest: '',
   branch: SALON_BRANCH_INFO.name,
   whatsappConsent: true,
+  deliveryAddress: '',
+  locationStatus: 'idle',
 };
 
 // Standard Salon Slot Generator (9:00 AM to 7:30 PM, 30m steps)
@@ -167,6 +171,16 @@ function getInitialBookings(): BookingRecord[] {
 const BookingContext = createContext<BookingContextType | undefined>(undefined);
 
 export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [bookingType, setBookingType] = useState<'salon' | 'home'>(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('type') === 'home' || window.location.pathname === '/home-service') {
+        return 'home';
+      }
+    }
+    return 'salon';
+  });
+
   const [service, setService] = useState<ServiceBookingItem>(() => BASE_SERVICES_CATALOG[0]);
   const [selectedDate, setSelectedDate] = useState<Date>(() => {
     const d = new Date();
@@ -180,6 +194,21 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const [bookings, setBookings] = useState<BookingRecord[]>(() => getInitialBookings());
   const [latestBooking, setLatestBooking] = useState<BookingRecord | null>(null);
+
+  // Sync bookingType on popstate / search changes
+  useEffect(() => {
+    const checkType = () => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('type') === 'home' || window.location.pathname === '/home-service') {
+        setBookingType('home');
+      } else if (params.get('type') === 'salon') {
+        setBookingType('salon');
+      }
+    };
+    checkType();
+    window.addEventListener('popstate', checkType);
+    return () => window.removeEventListener('popstate', checkType);
+  }, []);
 
   // Sync bookings to localStorage
   useEffect(() => {
@@ -234,6 +263,7 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const newRecord: BookingRecord = {
       booking_id: `RZP${new Date().getFullYear()}${String(new Date().getMonth() + 1).padStart(2, '0')}${String(new Date().getDate()).padStart(2, '0')}${randomSuffix}`,
       customer_id: `cust-${Date.now()}`,
+      booking_type: bookingType,
       service_id: service.id,
       service_name: service.name,
       service_price: service.price,
@@ -244,6 +274,8 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
       time: selectedTime,
       branch: customerDetails.branch || SALON_BRANCH_INFO.name,
       branch_address: SALON_BRANCH_INFO.address,
+      delivery_address: bookingType === 'home' ? (customerDetails.deliveryAddress || '').trim() : undefined,
+      location_coords: bookingType === 'home' ? customerDetails.locationCoords : undefined,
       customer_name: customerDetails.fullName.trim() || 'Valued Guest',
       phone: customerDetails.phone.trim(),
       email: customerDetails.email.trim(),
@@ -258,7 +290,7 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setLatestBooking(newRecord);
     setStep(5);
     return newRecord;
-  }, [selectedDate, selectedTime, isSlotBooked, service, customerDetails, specialRequest]);
+  }, [selectedDate, selectedTime, isSlotBooked, service, customerDetails, specialRequest, bookingType]);
 
   const updateBookingStatus = useCallback(
     (id: string, status: BookingStatus, paymentStatus?: PaymentStatus) => {
@@ -303,6 +335,8 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
   return (
     <BookingContext.Provider
       value={{
+        bookingType,
+        setBookingType,
         service,
         setService,
         selectedDate,

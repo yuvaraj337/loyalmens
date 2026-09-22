@@ -34,6 +34,9 @@ const FACIAL_SERVICES: FacialCardItem[] = [
 ];
 
 export const FacialSkinCarePage: React.FC = () => {
+  const isHome = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('type') === 'home';
+  const typeParam = isHome ? '&type=home' : '';
+
   return (
     <div className="haircut-page" id="facial-skin-care-page">
       {/* ==================================================================
@@ -76,7 +79,7 @@ export const FacialSkinCarePage: React.FC = () => {
             <span className="haircut-cart-badge">0</span>
           </a>
 
-          <a href="/booking?service=Facial%20%26%20Skin%20Care" className="haircut-header-book-btn">
+          <a href={`/booking?service=Facial%20%26%20Skin%20Care${typeParam}`} className="haircut-header-book-btn">
             <span>Book Now</span>
             <span aria-hidden="true">→</span>
           </a>
@@ -230,7 +233,7 @@ export const FacialSkinCarePage: React.FC = () => {
                 </div>
 
                 <a
-                  href={`/booking?service=${encodeURIComponent(svc.name)}`}
+                  href={`/booking?service=${encodeURIComponent(svc.name)}${typeParam}`}
                   className="facial-card-btn"
                   aria-label={`Book ${svc.name}`}
                 >

@@ -26,6 +26,7 @@ export const BookingStep4Review: React.FC = () => {
     customerDetails,
     createBooking,
     setStep,
+    bookingType,
   } = useBooking();
 
   const [termsAgreed, setTermsAgreed] = useState<boolean>(true);
@@ -77,7 +78,7 @@ export const BookingStep4Review: React.FC = () => {
           <span className="booking-breadcrumb-sep">&gt;</span>
           <span className="booking-breadcrumb-current">Review</span>
         </div>
-        <div className="booking-tagline">SAME CONFIDENCE AT HOME</div>
+        <div className="booking-tagline">{bookingType === 'home' ? 'RIZHEENA AT HOME' : 'SAME CONFIDENCE AT HOME'}</div>
       </div>
 
       {/* Main Title & Subtitle */}
@@ -183,26 +184,64 @@ export const BookingStep4Review: React.FC = () => {
               </div>
             </div>
 
-            {/* Branch row */}
-            <div className="review-detail-row">
-              <div className="review-detail-left">
-                <MapPin size={16} className="detail-icon" />
-                <span className="review-detail-label">Branch</span>
-              </div>
-              <div className="review-detail-right">
-                <div className="branch-val">
-                  <strong>{SALON_BRANCH_INFO.shortName}</strong>
-                  <small>Moodbidri, Karnataka</small>
+            {/* Location / Branch row */}
+            {bookingType === 'home' ? (
+              <>
+                <div className="review-detail-row">
+                  <div className="review-detail-left">
+                    <MapPin size={16} className="detail-icon" />
+                    <span className="review-detail-label">Service Type</span>
+                  </div>
+                  <div className="review-detail-right">
+                    <div className="branch-val">
+                      <strong style={{ color: '#D4AF37' }}>RIZHEENA AT HOME</strong>
+                      <small>Doorstep Grooming Experience</small>
+                    </div>
+                  </div>
                 </div>
-                <button
-                  type="button"
-                  className="review-row-edit-link"
-                  onClick={() => setStep(1)}
-                >
-                  Edit
-                </button>
+
+                <div className="review-detail-row">
+                  <div className="review-detail-left">
+                    <MapPin size={16} className="detail-icon" />
+                    <span className="review-detail-label">Delivery Address</span>
+                  </div>
+                  <div className="review-detail-right">
+                    <div className="branch-val" style={{ maxWidth: '240px', textAlign: 'right' }}>
+                      <span style={{ fontSize: '0.9rem', color: '#111827', fontWeight: 500, lineHeight: 1.4, display: 'block' }}>
+                        {customerDetails.deliveryAddress || 'Address not specified'}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      className="review-row-edit-link"
+                      onClick={() => setStep(3)}
+                    >
+                      Edit
+                    </button>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="review-detail-row">
+                <div className="review-detail-left">
+                  <MapPin size={16} className="detail-icon" />
+                  <span className="review-detail-label">Branch</span>
+                </div>
+                <div className="review-detail-right">
+                  <div className="branch-val">
+                    <strong>{SALON_BRANCH_INFO.shortName}</strong>
+                    <small>Moodbidri, Karnataka</small>
+                  </div>
+                  <button
+                    type="button"
+                    className="review-row-edit-link"
+                    onClick={() => setStep(1)}
+                  >
+                    Edit
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
 
@@ -267,6 +306,21 @@ export const BookingStep4Review: React.FC = () => {
                 <span className="review-detail-val">{customerDetails.gender || 'Male'}</span>
               </div>
             </div>
+
+            {/* Delivery Address if At Home */}
+            {bookingType === 'home' && customerDetails.deliveryAddress && (
+              <div className="review-detail-row">
+                <div className="review-detail-left">
+                  <MapPin size={16} className="detail-icon" />
+                  <span className="review-detail-label">Delivery Address</span>
+                </div>
+                <div className="review-detail-right">
+                  <span className="review-detail-val" style={{ maxWidth: '240px', textAlign: 'right', fontSize: '0.85rem', lineHeight: 1.4 }}>
+                    {customerDetails.deliveryAddress}
+                  </span>
+                </div>
+              </div>
+            )}
 
             {/* Special Requests */}
             <div className="review-detail-row">

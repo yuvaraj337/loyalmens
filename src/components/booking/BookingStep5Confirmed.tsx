@@ -19,8 +19,13 @@ export const BookingStep5Confirmed: React.FC = () => {
     selectedDate,
     selectedTime,
     latestBooking,
+    customerDetails,
+    bookingType,
     resetBookingFlow,
   } = useBooking();
+
+  const isHome = latestBooking?.booking_type === 'home' || bookingType === 'home';
+  const deliveryAddress = latestBooking?.delivery_address || customerDetails.deliveryAddress;
 
   const handleBackToHome = () => {
     resetBookingFlow();
@@ -62,7 +67,7 @@ export const BookingStep5Confirmed: React.FC = () => {
           <span className="booking-breadcrumb-sep">&gt;</span>
           <span className="booking-breadcrumb-current">Confirmation</span>
         </div>
-        <div className="booking-tagline">SAME CONFIDENCE AT HOME</div>
+        <div className="booking-tagline">{isHome ? 'RIZHEENA AT HOME' : 'SAME CONFIDENCE AT HOME'}</div>
       </div>
 
       {/* 5-Step Progress Indicator: Step 5 active */}
@@ -146,16 +151,43 @@ export const BookingStep5Confirmed: React.FC = () => {
               <div className="confirmation-detail-val">{servicePrice}</div>
             </div>
 
-            <div className="confirmation-detail-row">
-              <div className="confirmation-detail-left">
-                <MapPin size={16} className="detail-icon" />
-                <span>Branch</span>
+            {/* Branch or At Home Location */}
+            {isHome ? (
+              <>
+                <div className="confirmation-detail-row">
+                  <div className="confirmation-detail-left">
+                    <MapPin size={16} className="detail-icon" />
+                    <span>Service</span>
+                  </div>
+                  <div className="confirmation-detail-val">
+                    <strong style={{ color: '#D4AF37' }}>RIZHEENA AT HOME</strong>
+                  </div>
+                </div>
+
+                <div className="confirmation-detail-row">
+                  <div className="confirmation-detail-left">
+                    <MapPin size={16} className="detail-icon" />
+                    <span>Address</span>
+                  </div>
+                  <div className="confirmation-detail-val branch-val" style={{ maxWidth: '240px', textAlign: 'right' }}>
+                    <span style={{ fontSize: '0.9rem', color: '#111827', fontWeight: 500, lineHeight: 1.4, display: 'block' }}>
+                      {deliveryAddress || 'Doorstep Concierge Location'}
+                    </span>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="confirmation-detail-row">
+                <div className="confirmation-detail-left">
+                  <MapPin size={16} className="detail-icon" />
+                  <span>Branch</span>
+                </div>
+                <div className="confirmation-detail-val branch-val">
+                  <strong>{SALON_BRANCH_INFO.shortName}</strong>
+                  <small>Moodbidri, Karnataka</small>
+                </div>
               </div>
-              <div className="confirmation-detail-val branch-val">
-                <strong>{SALON_BRANCH_INFO.shortName}</strong>
-                <small>Moodbidri, Karnataka</small>
-              </div>
-            </div>
+            )}
           </div>
         </div>
 
@@ -164,35 +196,71 @@ export const BookingStep5Confirmed: React.FC = () => {
           <h2 className="confirmation-card-title">What's Next?</h2>
 
           <div className="whats-next-list">
-            <div className="whats-next-item">
-              <div className="whats-next-icon-box">
-                <CalendarIcon size={18} />
-              </div>
-              <div className="whats-next-item-text">
-                <h3 className="whats-next-item-title">You'll receive a reminder</h3>
-                <p className="whats-next-item-desc">We'll send a reminder before your appointment.</p>
-              </div>
-            </div>
+            {isHome ? (
+              <>
+                <div className="whats-next-item">
+                  <div className="whats-next-icon-box">
+                    <CalendarIcon size={18} />
+                  </div>
+                  <div className="whats-next-item-text">
+                    <h3 className="whats-next-item-title">You'll receive a reminder</h3>
+                    <p className="whats-next-item-desc">We'll send a reminder before your appointment.</p>
+                  </div>
+                </div>
 
-            <div className="whats-next-item">
-              <div className="whats-next-icon-box">
-                <Clock size={18} />
-              </div>
-              <div className="whats-next-item-text">
-                <h3 className="whats-next-item-title">Be on time</h3>
-                <p className="whats-next-item-desc">Please arrive 5–10 minutes early.</p>
-              </div>
-            </div>
+                <div className="whats-next-item">
+                  <div className="whats-next-icon-box">
+                    <Clock size={18} />
+                  </div>
+                  <div className="whats-next-item-text">
+                    <h3 className="whats-next-item-title">Doorstep Arrival</h3>
+                    <p className="whats-next-item-desc">Our professional stylist will arrive 5–10 minutes early at your location.</p>
+                  </div>
+                </div>
 
-            <div className="whats-next-item">
-              <div className="whats-next-icon-box">
-                <Scissors size={18} />
-              </div>
-              <div className="whats-next-item-text">
-                <h3 className="whats-next-item-title">Get ready for a great experience</h3>
-                <p className="whats-next-item-desc">Our team will take care of the rest.</p>
-              </div>
-            </div>
+                <div className="whats-next-item">
+                  <div className="whats-next-icon-box">
+                    <Scissors size={18} />
+                  </div>
+                  <div className="whats-next-item-text">
+                    <h3 className="whats-next-item-title">Sanitized &amp; Prepared</h3>
+                    <p className="whats-next-item-desc">Our team brings all luxury tools, fresh towels and organic products.</p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="whats-next-item">
+                  <div className="whats-next-icon-box">
+                    <CalendarIcon size={18} />
+                  </div>
+                  <div className="whats-next-item-text">
+                    <h3 className="whats-next-item-title">You'll receive a reminder</h3>
+                    <p className="whats-next-item-desc">We'll send a reminder before your appointment.</p>
+                  </div>
+                </div>
+
+                <div className="whats-next-item">
+                  <div className="whats-next-icon-box">
+                    <Clock size={18} />
+                  </div>
+                  <div className="whats-next-item-text">
+                    <h3 className="whats-next-item-title">Be on time</h3>
+                    <p className="whats-next-item-desc">Please arrive 5–10 minutes early.</p>
+                  </div>
+                </div>
+
+                <div className="whats-next-item">
+                  <div className="whats-next-icon-box">
+                    <Scissors size={18} />
+                  </div>
+                  <div className="whats-next-item-text">
+                    <h3 className="whats-next-item-title">Get ready for a great experience</h3>
+                    <p className="whats-next-item-desc">Our team will take care of the rest.</p>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
 
           {/* Single Action Button: Back to Home -> */}
