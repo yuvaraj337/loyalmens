@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import { ExperienceEditorialContent } from './ExperienceEditorialContent';
 import { ExperienceMainImage } from './ExperienceMainImage';
 import { ExperienceQuote } from './ExperienceQuote';
@@ -9,6 +10,7 @@ import { ExperienceFooterLine } from './ExperienceFooterLine';
 import '../../styles/space-experience.css';
 
 export const LoyalExperienceSection: React.FC = () => {
+  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -96,20 +98,19 @@ export const LoyalExperienceSection: React.FC = () => {
       <div className="space-mobile-view" role="region" aria-label="The Loyal Experience Mobile">
         {/* 1. Top Eyebrow with horizontal line */}
         <div className="space-mobile-eyebrow-row">
-          <span className="space-mobile-eyebrow">THE LOYAL EXPERIENCE</span>
+          <span className="space-mobile-eyebrow">{t('space_eyebrow')}</span>
           <div className="space-mobile-eyebrow-line" />
         </div>
 
         {/* 2. Main Heading: A Space Designed Around You */}
         <h2 className="space-mobile-heading">
-          <span>A Space</span>
-          <span>Designed Around</span>
-          <span className="space-mobile-gold-accent">You</span>
+          <span>{t('space_title_line1')}</span>
+          <span className="space-mobile-gold-accent">{t('space_title_line2')}</span>
         </h2>
 
         {/* 3. Description Paragraph */}
         <p className="space-mobile-desc">
-          More than a salon, it's an experience — where exquisitely, comfort and modern style come together to bring out the best in you.
+          {t('space_desc')}
         </p>
 
         {/* 4. Full-width Salon Interior Image with Rounded Corners */}
@@ -135,7 +136,7 @@ export const LoyalExperienceSection: React.FC = () => {
               </svg>
             </div>
             <div className="space-mobile-stat-val">10K+</div>
-            <div className="space-mobile-stat-lbl">Happy Clients</div>
+            <div className="space-mobile-stat-lbl">{t('space_stat_clients')}</div>
           </div>
 
           <div className="space-mobile-stat-col">
@@ -150,7 +151,7 @@ export const LoyalExperienceSection: React.FC = () => {
               </svg>
             </div>
             <div className="space-mobile-stat-val">5+</div>
-            <div className="space-mobile-stat-lbl">Years of<br />Excellence</div>
+            <div className="space-mobile-stat-lbl">{t('space_stat_years')}</div>
           </div>
 
           <div className="space-mobile-stat-col">
@@ -160,7 +161,7 @@ export const LoyalExperienceSection: React.FC = () => {
               </svg>
             </div>
             <div className="space-mobile-stat-val">4.9</div>
-            <div className="space-mobile-stat-lbl">Client Rating</div>
+            <div className="space-mobile-stat-lbl">{t('space_stat_rating')}</div>
           </div>
 
           <div className="space-mobile-stat-col">
@@ -171,7 +172,7 @@ export const LoyalExperienceSection: React.FC = () => {
               </svg>
             </div>
             <div className="space-mobile-stat-val">Premium</div>
-            <div className="space-mobile-stat-lbl">Hygiene<br />Standards</div>
+            <div className="space-mobile-stat-lbl">{t('space_stat_hygiene')}</div>
           </div>
         </div>
 

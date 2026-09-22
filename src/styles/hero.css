@@ -221,8 +221,6 @@
   height: 34px;
   width: auto;
   display: block;
-  border-radius: 9999px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
 .social-proof-divider {
@@ -265,8 +263,9 @@
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 500;
-  color: var(--text-muted);
+  color: rgba(247, 239, 230, 0.85);
   letter-spacing: 0.02em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 /* Bottom Left Scroll Indicator */

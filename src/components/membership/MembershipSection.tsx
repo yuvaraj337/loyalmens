@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import '../../styles/membership.css';
 
 export interface MembershipPlan {
@@ -107,6 +108,7 @@ const BENEFIT_STRIP = [
 ];
 
 export function MembershipSection() {
+  const { t } = useLanguage();
   const [activePlan, setActivePlan] = useState<MembershipPlan | null>(null);
   const [formData, setFormData] = useState({ name: '', phone: '', email: '' });
   const [submitted, setSubmitted] = useState(false);
@@ -138,12 +140,12 @@ export function MembershipSection() {
       const inquiry = {
         id: 'mem_' + Date.now(),
         planId: activePlan.id,
-        planName: `${activePlan.name} Membership`,
-        price: `${activePlan.price} ${activePlan.duration}`,
-        fullName: formData.name.trim(),
-        phone: formData.phone.trim(),
-        email: formData.email.trim(),
-        createdAt: new Date().toISOString(),
+        planName: activePlan.name,
+        price: activePlan.price,
+        customerName: formData.name.trim(),
+        customerPhone: formData.phone.trim(),
+        customerEmail: formData.email.trim(),
+        submittedAt: new Date().toISOString(),
         status: 'pending',
       };
 
@@ -167,8 +169,8 @@ export function MembershipSection() {
             <span className="mem-eyebrow-line" />
           </div>
 
-          <h2 className="mem-heading">Choose Your Membership</h2>
-          <p className="mem-subtitle">Exclusive plans. Greater value. A more confident you.</p>
+          <h2 className="mem-heading">{t('mem_title')}</h2>
+          <p className="mem-subtitle">{t('mem_subtitle')}</p>
 
           {/* Top-Right Navigation Arrows */}
           <div className="mem-nav-arrows">
@@ -215,7 +217,7 @@ export function MembershipSection() {
                 <div className="mem-card-content">
                   {/* Badge */}
                   {plan.badge ? (
-                    <span className="mem-popular-badge">{plan.badge}</span>
+                    <span className="mem-popular-badge">{t('mem_popular')}</span>
                   ) : (
                     <div className="mem-badge-spacer" />
                   )}
@@ -223,7 +225,7 @@ export function MembershipSection() {
                   {/* Title & Sublabel */}
                   <h3 className="mem-card-title">{plan.name}</h3>
                   <div className="mem-card-sublabel">{plan.sublabel}</div>
-                  <p className="mem-card-tagline">{plan.tagline}</p>
+                  <p className="mem-card-tagline">{isVip ? t('mem_vip_desc') : t('mem_vvip_desc')}</p>
 
                   {/* Price */}
                   <div className="mem-card-price-row">
@@ -251,7 +253,7 @@ export function MembershipSection() {
                     className="mem-card-btn"
                     onClick={() => handleOpenModal(plan)}
                   >
-                    <span>{plan.btnText}</span>
+                    <span>{isVip ? t('mem_join_vip') : t('mem_join_vvip')}</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                       <line x1="5" y1="12" x2="19" y2="12" />
                       <polyline points="12 5 19 12 12 19" />

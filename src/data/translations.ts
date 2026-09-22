@@ -44,6 +44,17 @@ export interface Translations {
   space_crafted: string;
   space_quote: string;
 
+  // Membership Section
+  mem_title: string;
+  mem_subtitle: string;
+  mem_popular: string;
+  mem_vip_title: string;
+  mem_vip_desc: string;
+  mem_vvip_title: string;
+  mem_vvip_desc: string;
+  mem_join_vip: string;
+  mem_join_vvip: string;
+
   // Common & Footer
   footer_tagline: string;
   footer_quick_links: string;
@@ -99,6 +110,17 @@ export const translations: Record<Language, Translations> = {
     space_crafted: 'CRAFTED FOR A BETTER YOU',
     space_quote: 'It\'s not just a haircut, it\'s how you feel tomorrow.',
 
+    // Membership Section
+    mem_title: 'Choose Your Membership',
+    mem_subtitle: 'Exclusive plans. Greater value. A more confident you.',
+    mem_popular: 'MOST POPULAR',
+    mem_vip_title: 'VIP',
+    mem_vip_desc: 'Essential grooming. Exclusive benefits.',
+    mem_vvip_title: 'VVIP',
+    mem_vvip_desc: 'The ultimate grooming experience.',
+    mem_join_vip: 'Join VIP',
+    mem_join_vvip: 'Join VVIP',
+
     // Common & Footer
     footer_tagline: 'Precision grooming for the modern gentleman.',
     footer_quick_links: 'Quick Links',
@@ -152,6 +174,17 @@ export const translations: Record<Language, Translations> = {
     space_crafted: 'आपके बेहतर रूप के लिए',
     space_quote: 'यह केवल बाल काटना नहीं, बल्कि यह है कि आप कल कैसा महसूस करते हैं।',
 
+    // Membership Section
+    mem_title: 'अपनी मेंबरशिप चुनें',
+    mem_subtitle: 'विशेष योजनाएं. अधिक मूल्य. एक अधिक आत्मविश्वासी आप.',
+    mem_popular: 'सबसे लोकप्रिय',
+    mem_vip_title: 'वीआईपी',
+    mem_vip_desc: 'आवश्यक ग्रूमिंग. विशेष लाभ.',
+    mem_vvip_title: 'वीवीआईपी',
+    mem_vvip_desc: 'परम ग्रूमिंग अनुभव.',
+    mem_join_vip: 'VIP में शामिल हों',
+    mem_join_vvip: 'VVIP में शामिल हों',
+
     // Common & Footer
     footer_tagline: 'आधुनिक पुरुषों के लिए सटीक ग्रूमिंग।',
     footer_quick_links: 'त्वरित लिंक',
@@ -204,6 +237,17 @@ export const translations: Record<Language, Translations> = {
     space_step_inside: 'ನಮ್ಮ ಜಗತ್ತಿಗೆ ಕಾಲಿಡಿ',
     space_crafted: 'ನಿಮ್ಮ ಉತ್ತಮ ರೂಪಕ್ಕಾಗಿ',
     space_quote: 'ಇದು ಕೇವಲ ಕೇಶವಿನ್ಯಾಸವಲ್ಲ, ನಾಳೆ ನೀವು ಹೇಗೆ ಅನುಭವಿಸುತ್ತೀರಿ ಎಂಬುದು.',
+
+    // Membership Section
+    mem_title: 'ನಿಮ್ಮ ಮೆಂಬರ್‌ಶಿಪ್ ಆರಿಸಿ',
+    mem_subtitle: 'ವಿಶೇಷ ಯೋಜನೆಗಳು. ಹೆಚ್ಚಿನ ಮೌಲ್ಯ. ಹೆಚ್ಚು ಆತ್ಮವಿಶ್ವಾಸದ ನೀವು.',
+    mem_popular: 'ಅತ್ಯಂತ ಜನಪ್ರಿಯ',
+    mem_vip_title: 'ವಿಐಪಿ',
+    mem_vip_desc: 'ಅಗತ್ಯ ಗ್ರೂಮಿಂಗ್. ವಿಶೇಷ ಪ್ರಯೋಜನಗಳು.',
+    mem_vvip_title: 'ವಿವಿಐಪಿ',
+    mem_vvip_desc: 'ಅಂತಿಮ ಗ್ರೂಮಿಂಗ್ ಅನುಭವ.',
+    mem_join_vip: 'VIP ಸೇರಿ',
+    mem_join_vvip: 'VVIP ಸೇರಿ',
 
     // Common & Footer
     footer_tagline: 'ಆಧುನಿಕ ಪುರುಷರಿಗಾಗಿ ನಿಖರವಾದ ಗ್ರೂಮಿಂಗ್.',

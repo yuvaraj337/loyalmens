@@ -2,8 +2,8 @@ import React from 'react';
 
 export interface ExperienceCardData {
   number: string;
-  titleLines: [string, string];
-  descriptionLines: [string, string];
+  titleLines: string[];
+  descriptionLines: string[];
   href: string;
   image: string;
   ctaLabel: string;

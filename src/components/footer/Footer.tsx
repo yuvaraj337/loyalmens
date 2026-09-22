@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import '../../styles/footer.css';
 
 export interface FooterProps {
@@ -6,6 +7,7 @@ export interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ email: propEmail }) => {
+  const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [agreed, setAgreed] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
@@ -99,16 +101,16 @@ export const Footer: React.FC<FooterProps> = ({ email: propEmail }) => {
 
           {/* Column 2: Quick Links */}
           <div className="footer-col-nav">
-            <h3 className="footer-col-title">Quick Links</h3>
+            <h3 className="footer-col-title">{t('footer_quick_links')}</h3>
             <div className="footer-col-title-line" />
             <ul className="footer-link-list">
               {[
-                { label: 'Home', href: '/' },
-                { label: 'Services', href: '/services' },
-                { label: 'Shop', href: '/shop' },
-                { label: 'VIP', href: '/vip' },
+                { label: t('nav_home'), href: '/' },
+                { label: t('nav_services'), href: '/services' },
+                { label: t('nav_shop'), href: '/shop' },
+                { label: t('nav_membership'), href: '/vip' },
                 { label: 'Gallery', href: '/gallery' },
-                { label: 'Contact', href: '#location-section' },
+                { label: t('nav_contact'), href: '#location-section' },
               ].map((link, idx) => (
                 <li key={idx}>
                   <a href={link.href} className="footer-nav-link">

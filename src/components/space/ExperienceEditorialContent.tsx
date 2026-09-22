@@ -1,28 +1,30 @@
 import React from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface ExperienceEditorialContentProps {
   onPlayClick?: () => void;
 }
 
 export const ExperienceEditorialContent: React.FC<ExperienceEditorialContentProps> = ({ onPlayClick }) => {
+  const { t } = useLanguage();
+
   return (
     <div className="editorial-left-content">
       {/* Eyebrow with horizontal line */}
       <div className="editorial-eyebrow-wrapper">
-        <span className="editorial-eyebrow">THE LOYAL EXPERIENCE</span>
+        <span className="editorial-eyebrow">{t('space_eyebrow')}</span>
         <div className="editorial-eyebrow-line" />
       </div>
 
       {/* Main Display Heading */}
       <h2 className="editorial-heading">
-        <span className="heading-line line-1">A Space</span>
-        <span className="heading-line line-2">Designed Around</span>
-        <span className="heading-line line-3 editorial-gold-accent">You</span>
+        <span className="heading-line line-1">{t('space_title_line1')}</span>
+        <span className="heading-line line-2">{t('space_title_line2')}</span>
       </h2>
 
       {/* Body Copy */}
       <p className="editorial-body">
-        More than a salon, it's an experience — where expertise, comfort and modern style come together to bring out the best in you.
+        {t('space_desc')}
       </p>
 
       {/* Circular Play CTA */}
@@ -38,8 +40,7 @@ export const ExperienceEditorialContent: React.FC<ExperienceEditorialContentProp
           </svg>
         </button>
         <div className="editorial-cta-text">
-          <span className="cta-line-1">STEP INSIDE</span>
-          <span className="cta-line-2">OUR WORLD</span>
+          <span className="cta-line-1">{t('space_step_inside')}</span>
         </div>
       </div>
 
