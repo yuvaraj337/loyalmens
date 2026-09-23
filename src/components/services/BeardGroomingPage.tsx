@@ -15,28 +15,28 @@ const BEARD_SERVICES: ServiceItem[] = [
     name: 'Beard Trimming',
     desc: 'Neat and defined, always on point.',
     price: '₹99',
-    thumb: '/images/beard/thumb_01.jpg',
+    thumb: '/images/services/beard/beard-trimming.jpeg',
   },
   {
     id: 'b2',
     name: 'Beard Styling',
     desc: 'Shape your beard to match your look.',
     price: '₹199',
-    thumb: '/images/beard/thumb_02.jpg',
+    thumb: '/images/services/beard/beard-styling.jpeg',
   },
   {
     id: 'b3',
     name: 'Beard Spa',
     desc: 'Deep care for a healthier, stronger beard.',
     price: '₹299',
-    thumb: '/images/beard/thumb_03.jpg',
+    thumb: '/images/services/beard/beard-spa.jpeg',
   },
   {
     id: 'b4',
     name: 'Beard Lining',
     desc: 'Clean edges for a sharp, clean look.',
     price: '₹149',
-    thumb: '/images/beard/thumb_04.jpg',
+    thumb: '/images/services/beard/beard-lining.jpeg',
   },
 ];
 
@@ -70,13 +70,6 @@ export const BeardGroomingPage: React.FC = () => {
         </nav>
 
         <div className="haircut-header-actions">
-          <button type="button" className="haircut-header-icon-btn" aria-label="Search services">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-          </button>
-
           <a href="/shop" className="haircut-header-icon-btn" aria-label="Cart (0 items)">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="9" cy="21" r="1" />

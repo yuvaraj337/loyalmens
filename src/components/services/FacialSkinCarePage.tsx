@@ -15,21 +15,21 @@ const FACIAL_SERVICES: FacialCardItem[] = [
     name: 'Basic Facial',
     desc: 'Deep cleanse and refresh.',
     price: '₹250 – ₹500',
-    thumb: '/images/facial/card_01.jpg',
+    thumb: '/images/services/facial/basic-facial.jpeg',
   },
   {
     id: 'f2',
     name: 'Advanced Facial',
     desc: 'Intense care for healthy skin.',
     price: '₹600 – ₹800',
-    thumb: '/images/facial/card_02.jpg',
+    thumb: '/images/services/facial/advanced-facial.jpeg',
   },
   {
     id: 'f3',
     name: 'Premium Facial',
     desc: 'Complete skin rejuvenation.',
     price: '₹1000 – ₹1200',
-    thumb: '/images/facial/card_03.jpg',
+    thumb: '/images/services/facial/premium-facial.jpeg',
   },
 ];
 
@@ -63,13 +63,6 @@ export const FacialSkinCarePage: React.FC = () => {
         </nav>
 
         <div className="haircut-header-actions">
-          <button type="button" className="haircut-header-icon-btn" aria-label="Search services">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-          </button>
-
           <a href="/shop" className="haircut-header-icon-btn" aria-label="Cart (0 items)">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="9" cy="21" r="1" />

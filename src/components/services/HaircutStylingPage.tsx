@@ -22,56 +22,56 @@ export const HaircutStylingPage: React.FC = () => {
       name: t('s1_name'),
       desc: t('s1_desc'),
       price: '₹299 – ₹499',
-      thumb: '/images/haircut/thumb_01.jpg',
+      thumb: '/images/services/haircut/haircut-styling.jpeg',
     },
     {
       id: 's2',
       name: t('s2_name'),
       desc: t('s2_desc'),
       price: '₹199 – ₹399',
-      thumb: '/images/haircut/thumb_02.jpg',
+      thumb: '/images/services/beard/beard-styling.jpeg',
     },
     {
       id: 's3',
       name: t('s3_name'),
       desc: t('s3_desc'),
       price: '₹599',
-      thumb: '/images/haircut/thumb_03.jpg',
+      thumb: '/images/services/facial/facial-skincare-serum.jpeg',
     },
     {
       id: 's4',
       name: t('s4_name'),
       desc: t('s4_desc'),
       price: '₹399',
-      thumb: '/images/haircut/thumb_04.jpg',
+      thumb: '/images/services/haircut/head-massage.jpeg',
     },
     {
       id: 's5',
       name: t('s5_name'),
       desc: t('s5_desc'),
       price: '₹999',
-      thumb: '/images/haircut/thumb_05.jpg',
+      thumb: '/images/services/hair-treatments/hair-colouring.jpeg',
     },
     {
       id: 's6',
       name: t('s6_name'),
       desc: t('s6_desc'),
       price: '₹1,999',
-      thumb: '/images/haircut/thumb_06.jpg',
+      thumb: '/images/services/hair-treatments/hair-smoothening.jpeg',
     },
     {
       id: 's7',
       name: t('s7_name'),
       desc: t('s7_desc'),
       price: '₹799',
-      thumb: '/images/haircut/thumb_07.jpg',
+      thumb: '/images/services/hair-treatments/hair-spa.jpeg',
     },
     {
       id: 's8',
       name: t('s8_name'),
       desc: t('s8_desc'),
       price: '₹199',
-      thumb: '/images/haircut/thumb_08.jpg',
+      thumb: '/images/services/haircut/kids-haircut.jpeg',
     },
   ], [t]);
 
@@ -101,13 +101,6 @@ export const HaircutStylingPage: React.FC = () => {
 
         <div className="haircut-header-actions">
           <LanguageSelector theme="light" />
-
-          <button type="button" className="haircut-header-icon-btn" aria-label={t('nav_search')}>
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-          </button>
 
           <a href="/shop" className="haircut-header-icon-btn" aria-label={t('nav_cart')}>
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

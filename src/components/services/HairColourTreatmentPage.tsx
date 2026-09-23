@@ -15,42 +15,42 @@ const COLOUR_SERVICES: ServiceItem[] = [
     name: 'Hair Dye',
     desc: 'Rich colour, bold look.',
     price: '₹350 – ₹700',
-    thumb: '/images/colour/thumb_01.jpg',
+    thumb: '/images/services/hair-treatments/hair-dye.jpeg',
   },
   {
     id: 'c2',
     name: 'Hair Highlighting',
     desc: 'Add dimension to your style.',
     price: '₹1,000 – ₹1,800',
-    thumb: '/images/colour/thumb_04.jpg',
+    thumb: '/images/services/hair-treatments/hair-highlighting.jpeg',
   },
   {
     id: 'c3',
     name: 'Hair Straightening',
     desc: 'Sleek and smooth for a fresh look.',
     price: '₹1,500 – ₹3,000',
-    thumb: '/images/colour/thumb_02.jpg',
+    thumb: '/images/services/hair-treatments/hair-straightening.jpeg',
   },
   {
     id: 'c4',
     name: 'Hair Spa',
     desc: 'Nourish and revive your hair.',
     price: '₹799 – ₹1,200',
-    thumb: '/images/colour/thumb_05.jpg',
+    thumb: '/images/services/hair-treatments/hair-spa.jpeg',
   },
   {
     id: 'c5',
     name: 'Hair Smoothening',
     desc: 'Frizz-free, effortless style.',
     price: '₹1,500 – ₹3,000',
-    thumb: '/images/colour/thumb_03.jpg',
+    thumb: '/images/services/hair-treatments/hair-smoothening.jpeg',
   },
   {
     id: 'c6',
     name: 'Hair Keratin Treatment',
     desc: 'Long-lasting smoothness.',
     price: '₹2,000 – ₹4,000',
-    thumb: '/images/colour/thumb_06.jpg',
+    thumb: '/images/services/hair-treatments/hair-keratin.jpeg',
   },
 ];
 
@@ -84,13 +84,6 @@ export const HairColourTreatmentPage: React.FC = () => {
         </nav>
 
         <div className="haircut-header-actions">
-          <button type="button" className="haircut-header-icon-btn" aria-label="Search services">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-          </button>
-
           <a href="/shop" className="haircut-header-icon-btn" aria-label="Cart (0 items)">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="9" cy="21" r="1" />
