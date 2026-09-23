@@ -126,7 +126,10 @@ export const HaircutStylingPage: React.FC = () => {
           <div className="haircut-hero-grid">
             {/* Left Hero Column */}
             <div className="haircut-hero-left">
-              <span className="haircut-hero-eyebrow">{t('modern_grooming')}</span>
+              <div className="haircut-section-eyebrow-row">
+                <span className="haircut-hero-eyebrow">{t('modern_grooming')}</span>
+                <span className="haircut-gold-dash" aria-hidden="true" />
+              </div>
               <h1 className="haircut-hero-heading">
                 <span className="haircut-heading-line">{t('haircut_and')} </span>
                 <span className="haircut-heading-line haircut-heading-accent">{t('styling')}</span>
@@ -134,18 +137,14 @@ export const HaircutStylingPage: React.FC = () => {
               <p className="haircut-hero-desc">
                 {t('haircut_hero_desc')}
               </p>
-              <a href={`/booking?service=Haircut%20%26%20Styling${typeParam}`} className="haircut-book-cta-btn">
-                <span>{t('hero_book_now')}</span>
-                <span aria-hidden="true">→</span>
-              </a>
             </div>
 
             {/* Right Hero Column */}
             <div className="haircut-hero-right">
               <div className="haircut-hero-img-wrap">
                 <img
-                  src="/images/haircut/hero_haircut_photo.jpg"
-                  alt="Modern Haircut and Styling Experience at Rizheena"
+                  src="/images/haircut/hero_haircut_photo.png"
+                  alt="More Than A Haircut - Rizheena Modern Grooming"
                   className="haircut-hero-photo"
                   loading="eager"
                 />
@@ -158,68 +157,77 @@ export const HaircutStylingPage: React.FC = () => {
             3. BENEFIT STRIP
             ================================================================== */}
         <section className="haircut-benefit-strip" aria-label="Brand Benefits">
-          <div className="haircut-tagline-motto">
-            {t('style_groom_confidence')}
+          <div className="haircut-section-eyebrow-row haircut-tagline-motto-row">
+            <span className="haircut-tagline-motto">{t('style_groom_confidence')}</span>
+            <span className="haircut-gold-dash" aria-hidden="true" />
           </div>
 
           <div className="haircut-benefit-items-row">
             {/* 1. Crown - Expert Stylists */}
             <div className="haircut-benefit-item">
               <span className="haircut-benefit-icon">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M4 19h16v2H4zM4 16l3-9 5 5 5-5 3 9H4z" />
                 </svg>
               </span>
               <span className="haircut-benefit-text">
-                <span>{t('expert_stylists')}</span>
+                {t('expert_stylists').split(' ').map((word, i) => (
+                  <span key={i}>{word}</span>
+                ))}
               </span>
             </div>
 
             {/* 2. Shield - Premium Products */}
             <div className="haircut-benefit-item">
               <span className="haircut-benefit-icon">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                   <polyline points="9 12 11 14 15 10" />
                 </svg>
               </span>
               <span className="haircut-benefit-text">
-                <span>{t('premium_products')}</span>
+                {t('premium_products').split(' ').map((word, i) => (
+                  <span key={i}>{word}</span>
+                ))}
               </span>
             </div>
 
             {/* 3. Diamond - Hygienic Environment */}
             <div className="haircut-benefit-item">
               <span className="haircut-benefit-icon">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M6 3h12l4 7-10 11L2 10l4-7z" />
                   <path d="M2 10h20" />
                   <path d="M12 21L8 10l4-7 4 7-4 11z" />
                 </svg>
               </span>
               <span className="haircut-benefit-text">
-                <span>{t('hygienic_environment')}</span>
+                {t('hygienic_environment').split(' ').map((word, i) => (
+                  <span key={i}>{word}</span>
+                ))}
               </span>
             </div>
 
             {/* 4. Armchair - Relaxing Ambience */}
             <div className="haircut-benefit-item">
               <span className="haircut-benefit-icon">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M7 19v2M17 19v2M4 10a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v6H4v-6z" />
                   <path d="M6 8V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2" />
                   <path d="M3 14h2M19 14h2" />
                 </svg>
               </span>
               <span className="haircut-benefit-text">
-                <span>{t('relaxing_ambience')}</span>
+                {t('relaxing_ambience').split(' ').map((word, i) => (
+                  <span key={i}>{word}</span>
+                ))}
               </span>
             </div>
 
             {/* 5. Personalised Care */}
             <div className="haircut-benefit-item">
               <span className="haircut-benefit-icon">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                   <circle cx="9" cy="7" r="4" />
                   <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
@@ -227,7 +235,9 @@ export const HaircutStylingPage: React.FC = () => {
                 </svg>
               </span>
               <span className="haircut-benefit-text">
-                <span>{t('personalised_care')}</span>
+                {t('personalised_care').split(' ').map((word, i) => (
+                  <span key={i}>{word}</span>
+                ))}
               </span>
             </div>
           </div>
@@ -239,31 +249,16 @@ export const HaircutStylingPage: React.FC = () => {
         <section className="haircut-services-section" aria-label="Our Hair Services Menu">
           <div className="haircut-services-header">
             <div className="haircut-services-title-col">
-              <span className="haircut-services-eyebrow">{t('our_services')}</span>
-              <div className="haircut-services-heading-row">
-                <h2 className="haircut-services-heading">
-                  <span className="haircut-heading-line-1">{t('our_hair_services')} </span>
-                  <span className="haircut-heading-line-2">
-                    <span className="haircut-services-heading-line" />
-                  </span>
-                </h2>
+              <div className="haircut-section-eyebrow-row">
+                <span className="haircut-services-eyebrow">{t('our_services')}</span>
+                <span className="haircut-gold-dash" aria-hidden="true" />
               </div>
-              <p className="haircut-services-subtitle haircut-desktop-subtitle">
+              <h2 className="haircut-services-heading">
+                <span className="haircut-heading-line-1">{t('our_hair_services')}</span>
+              </h2>
+              <p className="haircut-services-subtitle">
                 {t('hair_services_subtitle')}
               </p>
-            </div>
-
-            <div className="haircut-services-meta-row">
-              <p className="haircut-services-subtitle haircut-mobile-subtitle">
-                {t('hair_services_subtitle')}
-              </p>
-
-              <a href="/services" className="haircut-view-all-link">
-                <span className="haircut-view-all-text">
-                  <span>{t('view_all_services')}</span>
-                </span>
-                <span className="haircut-view-all-arrow" aria-hidden="true">→</span>
-              </a>
             </div>
           </div>
 

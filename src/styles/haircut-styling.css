@@ -8,7 +8,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background-color: #FAF5EE;
+  background-color: #F7F2EA;
   color: #161513;
   font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
   overflow-x: hidden;
@@ -31,7 +31,7 @@
   top: 0;
   z-index: 100;
   width: 100%;
-  background: #FAF5EE;
+  background: #F7F2EA;
   border-bottom: 1px solid rgba(216, 206, 194, 0.45);
   padding: 16px 44px;
   display: flex;
@@ -226,14 +226,28 @@
   max-width: 480px;
 }
 
+.haircut-section-eyebrow-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.haircut-gold-dash {
+  display: inline-block;
+  width: 38px;
+  height: 1.5px;
+  background-color: #B58A43;
+  flex-shrink: 0;
+}
+
 .haircut-hero-eyebrow {
   font-family: var(--font-sans);
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.32em;
-  color: #8C8276;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: #7E7468;
   text-transform: uppercase;
-  margin-bottom: 14px;
 }
 
 .haircut-hero-heading {
@@ -368,41 +382,52 @@
 
 .haircut-tagline-motto {
   font-family: var(--font-sans);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.26em;
-  color: #8C8276;
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: #7E7468;
   text-transform: uppercase;
 }
 
 .haircut-benefit-items-row {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 32px;
 }
 
 .haircut-benefit-item {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .haircut-benefit-icon {
-  color: #8C8276;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid #B58A43;
+  color: #B58A43;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  background: transparent;
+}
+
+.haircut-benefit-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: #B58A43;
 }
 
 .haircut-benefit-text {
   display: flex;
   flex-direction: column;
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: 13.5px;
   font-weight: 500;
   line-height: 1.25;
-  color: #4A443D;
+  color: #1A1612;
 }
 
 /* ==========================================================================
@@ -913,28 +938,31 @@
 }
 
 /* ==========================================================================
-   MOBILE EXACT REBUILD — MATCHING IMAGE 3 (HERO) AND IMAGE 2 (SERVICES)
+   MOBILE EXACT REBUILD — MATCHING TARGET REFERENCE (IMAGE 2)
    ========================================================================== */
 @media (max-width: 768px) {
-  /* 1. Remove Entire Mobile Header Row (Image 3) */
+  /* 1. Remove Mobile Header Row */
   .haircut-header {
     display: none !important;
   }
 
   /* 2. Page & Container */
   .haircut-page {
-    background-color: #FAF5EE !important;
+    background-color: #F7F2EA !important;
     padding-top: 0 !important;
+    overflow-x: hidden !important;
   }
 
   .haircut-container {
-    padding: 0 20px !important;
+    padding: 0 clamp(16px, 5.5vw, 24px) !important;
     max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
-  /* 3. Section 1: Hero Section (Image 3) */
+  /* 3. Section 1: Hero Section */
   .haircut-hero-section {
-    padding: 28px 0 0 0 !important;
+    padding: 26px 0 0 0 !important;
+    margin-bottom: 34px !important;
   }
 
   .haircut-hero-grid {
@@ -949,23 +977,39 @@
     align-items: flex-start !important;
   }
 
+  .haircut-section-eyebrow-row {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .haircut-gold-dash {
+    display: inline-block !important;
+    width: 38px !important;
+    height: 1.5px !important;
+    background-color: #B58A43 !important;
+    flex-shrink: 0 !important;
+  }
+
   .haircut-hero-eyebrow {
     font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
-    font-size: 10.5px !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.28em !important;
-    color: #8C8276 !important;
+    font-size: 13.5px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.2em !important;
+    color: #7E7468 !important;
     text-transform: uppercase !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 0 !important;
   }
 
   .haircut-hero-heading {
     font-family: var(--font-serif, "Playfair Display", Georgia, serif) !important;
-    font-size: clamp(40px, 12vw, 48px) !important;
+    font-size: clamp(54px, 15vw, 62px) !important;
     font-weight: 500 !important;
-    line-height: 1.05 !important;
-    color: #161513 !important;
-    margin-bottom: 16px !important;
+    line-height: 0.94 !important;
+    letter-spacing: -0.02em !important;
+    color: #1A1612 !important;
+    margin: 12px 0 24px 0 !important;
   }
 
   .haircut-heading-line {
@@ -973,24 +1017,24 @@
   }
 
   .haircut-heading-accent {
-    color: #B3874B !important;
+    color: #B58A43 !important;
   }
 
   .haircut-hero-desc {
     font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
-    font-size: 14px !important;
+    font-size: 18px !important;
     font-weight: 400 !important;
-    line-height: 1.55 !important;
-    color: #58514A !important;
-    margin-bottom: 24px !important;
+    line-height: 1.45 !important;
+    color: #4A443D !important;
+    margin-bottom: 30px !important;
+    max-width: 330px !important;
   }
 
-  /* 4. Remove Book Your Appointment CTA button completely (Image 3) */
   .haircut-book-cta-btn {
     display: none !important;
   }
 
-  /* 5. Wide Hero Image (Image 3) */
+  /* 4. Wide Hero Image Card */
   .haircut-hero-right {
     width: 100% !important;
     margin-bottom: 0 !important;
@@ -998,83 +1042,101 @@
 
   .haircut-hero-img-wrap {
     width: 100% !important;
-    border-radius: 26px !important;
+    aspect-ratio: 804 / 279 !important;
+    border-radius: 28px !important;
     overflow: hidden !important;
-    box-shadow: 0 10px 28px -6px rgba(45, 30, 15, 0.12) !important;
+    border: 1px solid rgba(181, 138, 67, 0.45) !important;
+    box-shadow: 0 8px 24px -6px rgba(35, 25, 15, 0.12) !important;
+    background-color: #12100E !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
   }
 
   .haircut-hero-photo {
     width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
     display: block !important;
     object-fit: cover !important;
+    object-position: center !important;
   }
 
-  /* 6. STYLE GROOM CONFIDENCE & Feature Grid (Image 3) */
+  /* 5. STYLE GROOM CONFIDENCE & Feature Grid */
   .haircut-benefit-strip {
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
-    padding: 26px 0 28px 0 !important;
-    border-bottom: 1px solid rgba(216, 206, 194, 0.6) !important;
-    margin-bottom: 32px !important;
+    padding: 0 0 34px 0 !important;
+    border-bottom: 1px solid rgba(216, 206, 194, 0.7) !important;
+    margin-bottom: 36px !important;
     gap: 0 !important;
+  }
+
+  .haircut-tagline-motto-row {
+    margin-bottom: 22px !important;
   }
 
   .haircut-tagline-motto {
     font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
-    font-size: 10.5px !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.25em !important;
-    color: #8C8276 !important;
+    font-size: 13.5px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.2em !important;
+    color: #7E7468 !important;
     text-transform: uppercase !important;
-    margin-bottom: 18px !important;
+    margin-bottom: 0 !important;
     text-align: left !important;
     align-self: flex-start !important;
   }
 
   .haircut-benefit-items-row {
     display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    row-gap: 18px !important;
-    column-gap: 8px !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    row-gap: 20px !important;
+    column-gap: clamp(4px, 1.8vw, 10px) !important;
     width: 100% !important;
-    align-items: flex-start !important;
+    align-items: center !important;
   }
 
   .haircut-benefit-item {
     display: flex !important;
     align-items: center !important;
-    gap: 8px !important;
+    gap: clamp(4px, 1.6vw, 8px) !important;
+    min-width: 0 !important;
   }
 
   .haircut-benefit-icon {
-    color: #8C8276 !important;
+    width: clamp(36px, 9.5vw, 48px) !important;
+    height: clamp(36px, 9.5vw, 48px) !important;
+    border-radius: 50% !important;
+    border: 1px solid #B58A43 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    color: #B58A43 !important;
     flex-shrink: 0 !important;
-    width: 18px !important;
-    height: 18px !important;
+    background: transparent !important;
   }
 
   .haircut-benefit-icon svg {
-    width: 18px !important;
-    height: 18px !important;
-    stroke-width: 1.6 !important;
+    width: clamp(16px, 4.4vw, 20px) !important;
+    height: clamp(16px, 4.4vw, 20px) !important;
+    stroke: #B58A43 !important;
+    stroke-width: 1.8 !important;
   }
 
   .haircut-benefit-text {
     display: flex !important;
     flex-direction: column !important;
     font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
-    font-size: 11px !important;
+    font-size: clamp(10.5px, 2.8vw, 13px) !important;
     font-weight: 500 !important;
-    line-height: 1.25 !important;
-    color: #38332D !important;
+    line-height: 1.15 !important;
+    color: #1A1612 !important;
+    min-width: 0 !important;
+    white-space: nowrap !important;
   }
 
-  /* 7. Section 2: "Our Hair Services" (Image 2) */
+  /* 6. Section 2: "Our Hair Services" (Reflowed cleanly without View All Services) */
   .haircut-services-section {
     position: relative !important;
     margin-bottom: 40px !important;
@@ -1083,106 +1145,44 @@
   .haircut-services-header {
     display: flex !important;
     flex-direction: column !important;
-    align-items: stretch !important;
-    margin-bottom: 20px !important;
+    align-items: flex-start !important;
+    margin-bottom: 22px !important;
     width: 100% !important;
   }
 
   .haircut-services-title-col {
     display: flex !important;
     flex-direction: column !important;
+    align-items: flex-start !important;
     width: 100% !important;
   }
 
   .haircut-services-eyebrow {
     font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
-    font-size: 10px !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.28em !important;
-    color: #8C8276 !important;
+    font-size: 13.5px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.2em !important;
+    color: #7E7468 !important;
     text-transform: uppercase !important;
-    margin-bottom: 8px !important;
-  }
-
-  .haircut-services-heading-row {
-    margin-bottom: 4px !important;
+    margin-bottom: 0 !important;
   }
 
   .haircut-services-heading {
     font-family: var(--font-serif, "Playfair Display", Georgia, serif) !important;
-    font-size: 32px !important;
+    font-size: clamp(34px, 9vw, 42px) !important;
     font-weight: 600 !important;
-    color: #161513 !important;
+    color: #1A1612 !important;
     line-height: 1.15 !important;
-  }
-
-  .haircut-heading-line-1 {
-    display: block !important;
-  }
-
-  .haircut-heading-line-2 {
-    display: flex !important;
-    align-items: center !important;
-    gap: 16px !important;
-  }
-
-  .haircut-services-heading-line {
-    display: inline-block !important;
-    width: 65px !important;
-    height: 1px !important;
-    background: rgba(168, 155, 142, 0.6) !important;
-  }
-
-  .haircut-desktop-subtitle {
-    display: none !important;
-  }
-
-  .haircut-mobile-subtitle {
-    display: block !important;
-  }
-
-  .haircut-services-meta-row {
-    display: flex !important;
-    align-items: flex-start !important;
-    justify-content: space-between !important;
-    gap: 12px !important;
-    margin-top: 6px !important;
-    width: 100% !important;
+    margin: 10px 0 10px 0 !important;
   }
 
   .haircut-services-subtitle {
     font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
-    font-size: 13.5px !important;
-    color: #665F57 !important;
-    line-height: 1.45 !important;
-    max-width: 240px !important;
-    margin: 0 !important;
-  }
-
-  .haircut-view-all-link {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    text-decoration: none !important;
-    color: #161513 !important;
-    font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
-    font-size: 12px !important;
-    font-weight: 600 !important;
-    line-height: 1.25 !important;
-    padding-top: 2px !important;
-  }
-
-  .haircut-view-all-text {
-    display: flex !important;
-    flex-direction: column !important;
-    border-bottom: 1.2px solid #161513 !important;
-    padding-bottom: 1px !important;
-  }
-
-  .haircut-view-all-arrow {
     font-size: 15px !important;
-    color: #161513 !important;
-    margin-left: 2px !important;
+    color: #58514A !important;
+    line-height: 1.45 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
   }
 
   /* 8. Service Cards (Image 2) */
@@ -1296,19 +1296,37 @@
 
 @media (max-width: 360px) {
   .haircut-container {
-    padding: 0 14px !important;
+    padding: 0 16px !important;
+  }
+  .haircut-hero-heading {
+    font-size: 50px !important;
+  }
+  .haircut-hero-desc {
+    font-size: 16px !important;
   }
   .haircut-benefit-items-row {
     column-gap: 4px !important;
+    row-gap: 16px !important;
+  }
+  .haircut-benefit-item {
+    gap: 5px !important;
+  }
+  .haircut-benefit-icon {
+    width: 38px !important;
+    height: 38px !important;
+  }
+  .haircut-benefit-icon svg {
+    width: 16px !important;
+    height: 16px !important;
   }
   .haircut-benefit-text {
-    font-size: 10px !important;
+    font-size: 10.5px !important;
   }
   .haircut-services-heading {
-    font-size: 28px !important;
+    font-size: 30px !important;
   }
   .haircut-services-subtitle {
-    font-size: 12.5px !important;
-    max-width: 180px !important;
+    font-size: 13.5px !important;
+    max-width: 100% !important;
   }
 }
