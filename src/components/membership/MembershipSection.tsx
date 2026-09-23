@@ -397,35 +397,11 @@ export function MembershipSection() {
 
   return (
     <section className="mem-luxury-section" id="vip">
-      {/* Decorative Corner Tags */}
-      <div className="mem-corner-tag-left">
-        <span>MORE</span>
-        <span>THAN A</span>
-        <span>GROOMING</span>
-        <span>EXPERIENCE</span>
-      </div>
-
-      <div className="mem-corner-tag-right">
-        <span className="mem-cursive-script">Look Good</span>
-        <span className="mem-cursive-script">Feel Greater</span>
-        <div className="mem-cursive-strokes">
-          <span className="stroke stroke-1" />
-          <span className="stroke stroke-2" />
-        </div>
-      </div>
-
       <div className="mem-luxury-container">
         {/* ==================================================================
             1. SECTION HEADER
             ================================================================== */}
         <div className="mem-luxury-header">
-          {/* Mobile-only brand badge */}
-          <div className="mem-mobile-top-brand">
-            <span className="mem-gold-dash">—</span>
-            <span className="mem-mobile-brand-title">RIZHEENA</span>
-            <span className="mem-gold-dash">—</span>
-            <span className="mem-mobile-brand-sub">MEN'S PARLOUR</span>
-          </div>
 
           <div className="mem-eyebrow-row">
             <span className="mem-gold-line" />

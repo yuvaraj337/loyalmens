@@ -27,66 +27,6 @@
 
 /* ==========================================================================
    CORNER DECORATIVE TAGS
-   ========================================================================== */
-.mem-corner-tag-left {
-  position: absolute;
-  top: 45px;
-  left: 36px;
-  display: flex;
-  flex-direction: column;
-  font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  color: #8C7D6F;
-  line-height: 1.45;
-  text-transform: uppercase;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.mem-corner-tag-right {
-  position: absolute;
-  top: 36px;
-  right: 42px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  z-index: 2;
-  pointer-events: none;
-  transform: rotate(-5deg);
-}
-
-.mem-cursive-script {
-  font-family: 'Alex Brush', 'Great Vibes', cursive;
-  font-size: 34px;
-  color: #8A6D3A;
-  line-height: 1.05;
-  letter-spacing: 0.02em;
-}
-
-.mem-cursive-strokes {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  width: 55px;
-  margin-top: 6px;
-}
-
-.mem-cursive-strokes .stroke {
-  height: 1px;
-  background-color: #BFA063;
-  display: block;
-}
-
-.mem-cursive-strokes .stroke-1 {
-  width: 100%;
-}
-
-.mem-cursive-strokes .stroke-2 {
-  width: 65%;
-  align-self: flex-end;
-}
-
 /* ==========================================================================
    HEADER
    ========================================================================== */
@@ -94,35 +34,6 @@
   text-align: center;
   position: relative;
   margin-bottom: 40px;
-}
-
-.mem-mobile-top-brand {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 6px;
-}
-
-.mem-mobile-brand-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 19px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  color: #171310;
-}
-
-.mem-mobile-brand-sub {
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.25em;
-  color: #6B5E50;
-  text-transform: uppercase;
-}
-
-.mem-gold-dash {
-  color: #BFA063;
-  font-weight: 300;
 }
 
 .mem-eyebrow-row {
@@ -784,24 +695,7 @@
     padding: 0 16px;
   }
 
-  .mem-corner-tag-left {
-    top: 25px;
-    left: 18px;
-    font-size: 8px;
-  }
 
-  .mem-corner-tag-right {
-    top: 20px;
-    right: 18px;
-  }
-
-  .mem-cursive-script {
-    font-size: 26px;
-  }
-
-  .mem-mobile-top-brand {
-    display: flex;
-  }
 
   .mem-header-benefits-row {
     gap: 16px;
